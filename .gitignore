@@ -1,12 +1,5 @@
 # macOS
 .DS_Store
 
-# Original source photo (already embedded into index.html + icons; kept locally, not published)
+# Original source photo — already embedded into index.html + icons; kept locally, not published
 TclWtzv-mount-rainier-wallpaper.jpg
-
-# Local build/scratch artifacts
-.sections.json
-rainier.b64
-build.py
-seattle-2026.html
-*.html.png
