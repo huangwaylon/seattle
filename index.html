@@ -51,12 +51,10 @@
   .view{display:block;}
   .js-tabs .view{display:none;}
   .js-tabs #tab-itinerary:checked ~ .views #view-itinerary,
-  .js-tabs #tab-hikes:checked     ~ .views #view-hikes,
-  .js-tabs #tab-packing:checked   ~ .views #view-packing,
-  .js-tabs #tab-todo:checked      ~ .views #view-todo{display:block;animation:fade .25s ease;}
+  .js-tabs #tab-packing:checked   ~ .views #view-packing{display:block;animation:fade .25s ease;}
   .nojs .tabbar{display:none;}
   .nojs .views{padding-bottom:24px;}
-  .nojs #view-hikes,.nojs #view-packing,.nojs #view-todo{margin-top:18px;border-top:1px solid var(--line);}
+  .nojs #view-packing{margin-top:18px;border-top:1px solid var(--line);}
   @keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
 
   h2.section{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--moss);margin:22px 16px 10px;font-weight:700;}
@@ -69,12 +67,6 @@
   .hero .htext{position:relative;padding:0 18px 20px;z-index:2;}
   .hero h1{margin:0;font-size:34px;font-weight:800;letter-spacing:-.5px;text-shadow:0 2px 16px rgba(0,0,0,.5);}
   .hero .sub{margin:4px 0 0;color:#d9ecdf;font-size:15px;font-weight:600;text-shadow:0 1px 8px rgba(0,0,0,.6);}
-
-  /* ---- countdown ---- */
-  .count{display:flex;gap:10px;margin:14px 16px 4px;}
-  .count .pill{flex:1;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:11px 12px;text-align:center;}
-  .count .pill b{display:block;font-size:22px;font-weight:800;color:var(--moss);line-height:1.1;}
-  .count .pill span{font-size:11px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;}
 
   .toolbar{display:flex;justify-content:flex-end;padding:8px 16px 0;}
   .btn-sm{background:var(--card2);border:1px solid var(--line);color:var(--moss);font-size:13px;font-weight:600;padding:7px 13px;border-radius:11px;cursor:pointer;}
@@ -162,9 +154,7 @@
   .tabbtn .lb{font-size:10.5px;font-weight:700;letter-spacing:.02em;}
   .tabbtn:active{opacity:.7;}
   #tab-itinerary:checked ~ .tabbar .tabbtn[for="tab-itinerary"],
-  #tab-hikes:checked     ~ .tabbar .tabbtn[for="tab-hikes"],
-  #tab-packing:checked   ~ .tabbar .tabbtn[for="tab-packing"],
-  #tab-todo:checked      ~ .tabbar .tabbtn[for="tab-todo"]{color:var(--moss);}
+  #tab-packing:checked   ~ .tabbar .tabbtn[for="tab-packing"]{color:var(--moss);}
 
   .footer{text-align:center;color:var(--faint);font-size:12px;padding:24px 16px 8px;}
 </style>
@@ -172,9 +162,7 @@
 <body>
 
 <input class="tabradio" type="radio" name="tab" id="tab-itinerary" checked>
-<input class="tabradio" type="radio" name="tab" id="tab-hikes">
 <input class="tabradio" type="radio" name="tab" id="tab-packing">
-<input class="tabradio" type="radio" name="tab" id="tab-todo">
 
 <div class="views">
 
@@ -183,11 +171,6 @@
       <div class="hero-bg"></div>
       <div class="scrim"></div>
       <div class="htext"><h1>Seattle 2026</h1><p class="sub">Jul 2 &ndash; Jul 19 &middot; 18 days &middot; WA, USA</p></div>
-    </div>
-    <div class="count" id="countdown">
-      <div class="pill"><b>18</b><span>days total</span></div>
-      <div class="pill"><b>8</b><span>hikes</span></div>
-      <div class="pill"><b>Jul 2</b><span>start date</span></div>
     </div>
     <div class="toolbar jsonly"><button class="btn-sm" id="toggleAll">Expand all</button></div>
     <div id="days"><details class="card">
@@ -449,191 +432,6 @@
       </summary>
       <div class="content"><ul class="tl"><li><span class="time">7:30</span><span class="dot"></span><span class="txt">Depart from home</span></li><li><span class="time">8:30</span><span class="dot"></span><span class="txt">Arrive at airport<small>Arrive 3 h before</small></span></li><li><span class="time">11:50</span><span class="dot"></span><span class="txt">Departure</span></li></ul></div>
     </details></div>
-    <div class="footer">Tap any day to expand &middot; &#129406; = hike day</div>
-  </section>
-
-  <section class="view" id="view-hikes">
-    <h2 class="section">&#129406; Hikes &mdash; 8 trails</h2>
-    <p class="intro">Official WTA stats, photos &amp; trail notes. Difficulty by distance + elevation gain.</p>
-    <div class="unit-toggle jsonly" id="unitToggle" role="group" aria-label="Distance units"><button type="button" data-unit="km" class="active">km</button><button type="button" data-unit="mi">mi</button></div>
-    <div id="hikes"><details class="card">
-      <div class="stripe" style="background:var(--mod);"></div>
-      <summary class="head">
-        <div class="date-chip" style="width:46px;"><div class="m" style="font-size:12px;color:var(--moss);">Jul 3</div></div>
-        <span class="emoji">🥾</span>
-        <div class="ttl"><div class="t">Lake 22</div><div class="sub"><span class="u" data-km="8.7 km" data-mi="5.4 mi">8.7 km</span> · <span class="u" data-km="411 m" data-mi="1,350 ft">411 m</span> gain · 3.5–4 h</div></div>
-        <span class="chev">▸</span>
-      </summary>
-      <div class="content"><div class="hike-thumb lake22"><span class="thumb-area">North Cascades</span></div><div style="margin-top:13px;display:flex;align-items:center;gap:10px;">
-        <span class="diff mod">Moderate</span>
-        <span style="color:var(--muted);font-size:13px;">North Cascades · Jul 3</span>
-      </div>
-      <p class="hike-desc">A well-built rainforest trail climbs through old-growth to a glittering cirque lake beneath the cliffs of Mt Pilchuck.</p>
-      <div class="stat-grid">
-        <div class="stat"><div class="k">Distance</div><div class="v"><span class="u" data-km="8.7 km" data-mi="5.4 mi">8.7 km</span></div></div>
-        <div class="stat"><div class="k">Elevation gain</div><div class="v"><span class="u" data-km="411 m" data-mi="1,350 ft">411 m</span></div></div>
-        <div class="stat"><div class="k">Highest point</div><div class="v"><span class="u" data-km="732 m" data-mi="2,400 ft">732 m</span></div></div>
-        <div class="stat"><div class="k">Drive time</div><div class="v">1h 30m</div></div>
-        <div class="stat"><div class="k">Hike time</div><div class="v">3.5–4 h</div></div>
-        <div class="stat"><div class="k">Pass required</div><div class="v">NW Forest Pass</div></div>
-      </div>
-      <a class="wta" href="https://www.wta.org/go-hiking/hikes/lake-22-lake-twenty-two" target="_blank" rel="noopener">View on WTA ↗</a></div>
-    </details><details class="card">
-      <div class="stripe" style="background:var(--mod);"></div>
-      <summary class="head">
-        <div class="date-chip" style="width:46px;"><div class="m" style="font-size:12px;color:var(--moss);">Jul 6</div></div>
-        <span class="emoji">🥾</span>
-        <div class="ttl"><div class="t">Snow Lake</div><div class="sub"><span class="u" data-km="11.6 km" data-mi="7.2 mi">11.6 km</span> · <span class="u" data-km="549 m" data-mi="1,800 ft">549 m</span> gain · 3.5–4.5 h</div></div>
-        <span class="chev">▸</span>
-      </summary>
-      <div class="content"><div class="hike-thumb snow"><span class="thumb-area">Snoqualmie</span></div><div style="margin-top:13px;display:flex;align-items:center;gap:10px;">
-        <span class="diff mod">Moderate</span>
-        <span style="color:var(--muted);font-size:13px;">Snoqualmie · Jul 6</span>
-      </div>
-      <p class="hike-desc">The most popular trail in the Alpine Lakes Wilderness — a rocky, exposed climb over a saddle to a big lake under Chair Peak.</p>
-      <div class="stat-grid">
-        <div class="stat"><div class="k">Distance</div><div class="v"><span class="u" data-km="11.6 km" data-mi="7.2 mi">11.6 km</span></div></div>
-        <div class="stat"><div class="k">Elevation gain</div><div class="v"><span class="u" data-km="549 m" data-mi="1,800 ft">549 m</span></div></div>
-        <div class="stat"><div class="k">Highest point</div><div class="v"><span class="u" data-km="1,341 m" data-mi="4,400 ft">1,341 m</span></div></div>
-        <div class="stat"><div class="k">Drive time</div><div class="v">1h 10m</div></div>
-        <div class="stat"><div class="k">Hike time</div><div class="v">3.5–4.5 h</div></div>
-        <div class="stat"><div class="k">Pass required</div><div class="v">NW Forest Pass</div></div>
-      </div>
-      <a class="wta" href="https://www.wta.org/go-hiking/hikes/snow-lake" target="_blank" rel="noopener">View on WTA ↗</a></div>
-    </details><details class="card">
-      <div class="stripe" style="background:var(--mod);"></div>
-      <summary class="head">
-        <div class="date-chip" style="width:46px;"><div class="m" style="font-size:12px;color:var(--moss);">Jul 8</div></div>
-        <span class="emoji">🥾</span>
-        <div class="ttl"><div class="t">Skyline Trail Loop</div><div class="sub"><span class="u" data-km="8.9 km" data-mi="5.5 mi">8.9 km</span> · <span class="u" data-km="442 m" data-mi="1,450 ft">442 m</span> gain · 3–5 h</div></div>
-        <span class="chev">▸</span>
-      </summary>
-      <div class="content"><div class="hike-thumb skyline"><span class="thumb-area">Mt Rainier NP</span></div><div style="margin-top:13px;display:flex;align-items:center;gap:10px;">
-        <span class="diff mod">Moderate</span>
-        <span style="color:var(--muted);font-size:13px;">Mt Rainier NP · Jul 8</span>
-      </div>
-      <p class="hike-desc">Paradise's premier loop: wildflower meadows, waterfalls and glaciers with Mt Rainier looming the entire way.</p>
-      <div class="stat-grid">
-        <div class="stat"><div class="k">Distance</div><div class="v"><span class="u" data-km="8.9 km" data-mi="5.5 mi">8.9 km</span></div></div>
-        <div class="stat"><div class="k">Elevation gain</div><div class="v"><span class="u" data-km="442 m" data-mi="1,450 ft">442 m</span></div></div>
-        <div class="stat"><div class="k">Highest point</div><div class="v"><span class="u" data-km="2,073 m" data-mi="6,800 ft">2,073 m</span></div></div>
-        <div class="stat"><div class="k">Drive time</div><div class="v">3h</div></div>
-        <div class="stat"><div class="k">Hike time</div><div class="v">3–5 h</div></div>
-        <div class="stat"><div class="k">Pass required</div><div class="v">National Park Pass</div></div>
-      </div>
-      <a class="wta" href="https://www.wta.org/go-hiking/hikes/skyline-trail-loop" target="_blank" rel="noopener">View on WTA ↗</a></div>
-    </details><details class="card">
-      <div class="stripe" style="background:var(--epic);"></div>
-      <summary class="head">
-        <div class="date-chip" style="width:46px;"><div class="m" style="font-size:12px;color:var(--moss);">Jul 11</div></div>
-        <span class="emoji">🥾</span>
-        <div class="ttl"><div class="t">The Enchantments</div><div class="sub"><span class="u" data-km="29 km" data-mi="18 mi">29 km</span> · <span class="u" data-km="1,372 m" data-mi="4,500 ft">1,372 m</span> gain · 12–16 h</div></div>
-        <span class="chev">▸</span>
-      </summary>
-      <div class="content"><div class="hike-thumb ench"><span class="thumb-area">Alpine Lakes Wild.</span></div><div style="margin-top:13px;display:flex;align-items:center;gap:10px;">
-        <span class="diff epic">Epic</span>
-        <span style="color:var(--muted);font-size:13px;">Alpine Lakes Wild. · Jul 11</span>
-      </div>
-      <p class="hike-desc">An alpine paradise of glacier-polished granite, larches and crystal-blue lakes — a bucket-list thru-hike best done in one big day.</p>
-      <div class="stat-grid">
-        <div class="stat"><div class="k">Distance</div><div class="v"><span class="u" data-km="29 km" data-mi="18 mi">29 km</span></div></div>
-        <div class="stat"><div class="k">Elevation gain</div><div class="v"><span class="u" data-km="1,372 m" data-mi="4,500 ft">1,372 m</span></div></div>
-        <div class="stat"><div class="k">Highest point</div><div class="v"><span class="u" data-km="2,377 m" data-mi="7,800 ft">2,377 m</span></div></div>
-        <div class="stat"><div class="k">Drive time</div><div class="v">2h 40m</div></div>
-        <div class="stat"><div class="k">Hike time</div><div class="v">12–16 h</div></div>
-        <div class="stat"><div class="k">Pass required</div><div class="v">NW Forest Pass</div></div>
-      </div>
-      <a class="wta" href="https://www.wta.org/go-hiking/hikes/enchantment-lakes" target="_blank" rel="noopener">View on WTA ↗</a></div>
-    </details><details class="card">
-      <div class="stripe" style="background:var(--hard);"></div>
-      <summary class="head">
-        <div class="date-chip" style="width:46px;"><div class="m" style="font-size:12px;color:var(--moss);">Jul 13</div></div>
-        <span class="emoji">🥾</span>
-        <div class="ttl"><div class="t">Lake Serene</div><div class="sub"><span class="u" data-km="13.2 km" data-mi="8.2 mi">13.2 km</span> · <span class="u" data-km="610 m" data-mi="2,000 ft">610 m</span> gain · 4–6 h</div></div>
-        <span class="chev">▸</span>
-      </summary>
-      <div class="content"><div class="hike-thumb serene"><span class="thumb-area">Stevens Pass</span></div><div style="margin-top:13px;display:flex;align-items:center;gap:10px;">
-        <span class="diff hard">Hard</span>
-        <span style="color:var(--muted);font-size:13px;">Stevens Pass · Jul 13</span>
-      </div>
-      <p class="hike-desc">A steep climb past thundering Bridal Veil Falls to a deep lake cradled beneath the sheer north face of Mt Index.</p>
-      <div class="stat-grid">
-        <div class="stat"><div class="k">Distance</div><div class="v"><span class="u" data-km="13.2 km" data-mi="8.2 mi">13.2 km</span></div></div>
-        <div class="stat"><div class="k">Elevation gain</div><div class="v"><span class="u" data-km="610 m" data-mi="2,000 ft">610 m</span></div></div>
-        <div class="stat"><div class="k">Highest point</div><div class="v"><span class="u" data-km="768 m" data-mi="2,521 ft">768 m</span></div></div>
-        <div class="stat"><div class="k">Drive time</div><div class="v">1h</div></div>
-        <div class="stat"><div class="k">Hike time</div><div class="v">4–6 h</div></div>
-        <div class="stat"><div class="k">Pass required</div><div class="v">NW Forest Pass</div></div>
-      </div>
-      <a class="wta" href="https://www.wta.org/go-hiking/hikes/lake-serene" target="_blank" rel="noopener">View on WTA ↗</a></div>
-    </details><details class="card">
-      <div class="stripe" style="background:var(--hard);"></div>
-      <summary class="head">
-        <div class="date-chip" style="width:46px;"><div class="m" style="font-size:12px;color:var(--moss);">Jul 14</div></div>
-        <span class="emoji">🥾</span>
-        <div class="ttl"><div class="t">Mt Pilchuck</div><div class="sub"><span class="u" data-km="8.7 km" data-mi="5.4 mi">8.7 km</span> · <span class="u" data-km="701 m" data-mi="2,300 ft">701 m</span> gain · 3.5–5 h</div></div>
-        <span class="chev">▸</span>
-      </summary>
-      <div class="content"><div class="hike-thumb pilchuck"><span class="thumb-area">Mountain Loop</span></div><div style="margin-top:13px;display:flex;align-items:center;gap:10px;">
-        <span class="diff hard">Hard</span>
-        <span style="color:var(--muted);font-size:13px;">Mountain Loop · Jul 14</span>
-      </div>
-      <p class="hike-desc">A short, steep scramble to a restored fire lookout with 360° views of Baker, Rainier and the Olympics.</p>
-      <div class="stat-grid">
-        <div class="stat"><div class="k">Distance</div><div class="v"><span class="u" data-km="8.7 km" data-mi="5.4 mi">8.7 km</span></div></div>
-        <div class="stat"><div class="k">Elevation gain</div><div class="v"><span class="u" data-km="701 m" data-mi="2,300 ft">701 m</span></div></div>
-        <div class="stat"><div class="k">Highest point</div><div class="v"><span class="u" data-km="1,624 m" data-mi="5,327 ft">1,624 m</span></div></div>
-        <div class="stat"><div class="k">Drive time</div><div class="v">1h 45m</div></div>
-        <div class="stat"><div class="k">Hike time</div><div class="v">3.5–5 h</div></div>
-        <div class="stat"><div class="k">Pass required</div><div class="v">NW Forest Pass</div></div>
-      </div>
-      <a class="wta" href="https://www.wta.org/go-hiking/hikes/mount-pilchuck" target="_blank" rel="noopener">View on WTA ↗</a></div>
-    </details><details class="card">
-      <div class="stripe" style="background:var(--mod);"></div>
-      <summary class="head">
-        <div class="date-chip" style="width:46px;"><div class="m" style="font-size:12px;color:var(--moss);">Jul 16</div></div>
-        <span class="emoji">🥾</span>
-        <div class="ttl"><div class="t">Lake Valhalla</div><div class="sub"><span class="u" data-km="11.3 km" data-mi="7.0 mi">11.3 km</span> · <span class="u" data-km="457 m" data-mi="1,500 ft">457 m</span> gain · 3.5–4.5 h</div></div>
-        <span class="chev">▸</span>
-      </summary>
-      <div class="content"><div class="hike-thumb valhalla"><span class="thumb-area">Stevens Pass</span></div><div style="margin-top:13px;display:flex;align-items:center;gap:10px;">
-        <span class="diff mod">Moderate</span>
-        <span style="color:var(--muted);font-size:13px;">Stevens Pass · Jul 16</span>
-      </div>
-      <p class="hike-desc">A gentle PCT grade through forest and summer wildflowers to a gem of a lake under Lichtenberg Mountain.</p>
-      <div class="stat-grid">
-        <div class="stat"><div class="k">Distance</div><div class="v"><span class="u" data-km="11.3 km" data-mi="7.0 mi">11.3 km</span></div></div>
-        <div class="stat"><div class="k">Elevation gain</div><div class="v"><span class="u" data-km="457 m" data-mi="1,500 ft">457 m</span></div></div>
-        <div class="stat"><div class="k">Highest point</div><div class="v"><span class="u" data-km="1,539 m" data-mi="5,050 ft">1,539 m</span></div></div>
-        <div class="stat"><div class="k">Drive time</div><div class="v">1h 30m</div></div>
-        <div class="stat"><div class="k">Hike time</div><div class="v">3.5–4.5 h</div></div>
-        <div class="stat"><div class="k">Pass required</div><div class="v">None required</div></div>
-      </div>
-      <a class="wta" href="https://www.wta.org/go-hiking/hikes/lake-valhalla" target="_blank" rel="noopener">View on WTA ↗</a></div>
-    </details><details class="card">
-      <div class="stripe" style="background:var(--easy);"></div>
-      <summary class="head">
-        <div class="date-chip" style="width:46px;"><div class="m" style="font-size:12px;color:var(--moss);">Jul 18</div></div>
-        <span class="emoji">🥾</span>
-        <div class="ttl"><div class="t">Lake Talapus</div><div class="sub"><span class="u" data-km="10 km" data-mi="6.2 mi">10 km</span> · <span class="u" data-km="372 m" data-mi="1,220 ft">372 m</span> gain · 1.5–2 h</div></div>
-        <span class="chev">▸</span>
-      </summary>
-      <div class="content"><div class="hike-thumb talapus"><span class="thumb-area">Snoqualmie</span></div><div style="margin-top:13px;display:flex;align-items:center;gap:10px;">
-        <span class="diff easy">Easy</span>
-        <span style="color:var(--muted);font-size:13px;">Snoqualmie · Jul 18</span>
-      </div>
-      <p class="hike-desc">A moderate, wide-trail walk to two forested lakes — the perfect easy introduction to the Cascades.</p>
-      <div class="stat-grid">
-        <div class="stat"><div class="k">Distance</div><div class="v"><span class="u" data-km="10 km" data-mi="6.2 mi">10 km</span></div></div>
-        <div class="stat"><div class="k">Elevation gain</div><div class="v"><span class="u" data-km="372 m" data-mi="1,220 ft">372 m</span></div></div>
-        <div class="stat"><div class="k">Highest point</div><div class="v"><span class="u" data-km="1,152 m" data-mi="3,780 ft">1,152 m</span></div></div>
-        <div class="stat"><div class="k">Drive time</div><div class="v">1h 10m</div></div>
-        <div class="stat"><div class="k">Hike time</div><div class="v">1.5–2 h</div></div>
-        <div class="stat"><div class="k">Pass required</div><div class="v">NW Forest Pass</div></div>
-      </div>
-      <a class="wta" href="https://www.wta.org/go-hiking/hikes/talapus-and-olallie-lakes" target="_blank" rel="noopener">View on WTA ↗</a></div>
-    </details></div>
-    <div class="footer">Passes: bring a Northwest Forest Pass day-pass &middot; wta.org/go-outside/passes</div>
   </section>
 
   <section class="view" id="view-packing">
@@ -641,8 +439,8 @@
     <p class="intro">Tap a row to check. Checks save on your phone (in Safari).</p>
     <div class="toolbar jsonly"><button class="btn-sm" id="resetPacking">Reset packing</button></div>
     <div id="packing"><div class="group">
-        <div class="glabel"><span>📌</span><span>Must Bring</span><span class="ct jsonly" id="ct-packing-0" data-total="8"></span></div>
-        <input type="checkbox" class="cb" id="packing-0-0" data-store="packing" data-gi="0"><label class="checkrow" for="packing-0-0"><span class="box"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#0c1a12" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="ctxt">Passport</span></label><input type="checkbox" class="cb" id="packing-0-1" data-store="packing" data-gi="0"><label class="checkrow" for="packing-0-1"><span class="box"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#0c1a12" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="ctxt">VISA registration (Umechan)</span></label><input type="checkbox" class="cb" id="packing-0-2" data-store="packing" data-gi="0"><label class="checkrow" for="packing-0-2"><span class="box"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#0c1a12" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="ctxt">Driver's license (Waylon)</span></label><input type="checkbox" class="cb" id="packing-0-3" data-store="packing" data-gi="0"><label class="checkrow" for="packing-0-3"><span class="box"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#0c1a12" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="ctxt">Phone</span></label><input type="checkbox" class="cb" id="packing-0-4" data-store="packing" data-gi="0"><label class="checkrow" for="packing-0-4"><span class="box"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#0c1a12" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="ctxt">Phone charger</span></label><input type="checkbox" class="cb" id="packing-0-5" data-store="packing" data-gi="0"><label class="checkrow" for="packing-0-5"><span class="box"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#0c1a12" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="ctxt">Clothes<small>A few days' worth — wash every few days</small></span></label><input type="checkbox" class="cb" id="packing-0-6" data-store="packing" data-gi="0"><label class="checkrow" for="packing-0-6"><span class="box"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#0c1a12" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="ctxt">Camera</span></label><input type="checkbox" class="cb" id="packing-0-7" data-store="packing" data-gi="0"><label class="checkrow" for="packing-0-7"><span class="box"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#0c1a12" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="ctxt">Tripod</span></label>
+        <div class="glabel"><span>📌</span><span>Must Bring</span><span class="ct jsonly" id="ct-packing-0" data-total="9"></span></div>
+        <input type="checkbox" class="cb" id="packing-0-0" data-store="packing" data-gi="0"><label class="checkrow" for="packing-0-0"><span class="box"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#0c1a12" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="ctxt">Passport</span></label><input type="checkbox" class="cb" id="packing-0-1" data-store="packing" data-gi="0"><label class="checkrow" for="packing-0-1"><span class="box"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#0c1a12" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="ctxt">VISA registration (Umechan)</span></label><input type="checkbox" class="cb" id="packing-0-2" data-store="packing" data-gi="0"><label class="checkrow" for="packing-0-2"><span class="box"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#0c1a12" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="ctxt">Driver's license (Waylon)</span></label><input type="checkbox" class="cb" id="packing-0-3" data-store="packing" data-gi="0"><label class="checkrow" for="packing-0-3"><span class="box"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#0c1a12" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="ctxt">Phone</span></label><input type="checkbox" class="cb" id="packing-0-4" data-store="packing" data-gi="0"><label class="checkrow" for="packing-0-4"><span class="box"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#0c1a12" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="ctxt">Phone charger</span></label><input type="checkbox" class="cb" id="packing-0-5" data-store="packing" data-gi="0"><label class="checkrow" for="packing-0-5"><span class="box"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#0c1a12" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="ctxt">Clothes<small>A few days' worth — wash every few days</small></span></label><input type="checkbox" class="cb" id="packing-0-6" data-store="packing" data-gi="0"><label class="checkrow" for="packing-0-6"><span class="box"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#0c1a12" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="ctxt">Camera</span></label><input type="checkbox" class="cb" id="packing-0-7" data-store="packing" data-gi="0"><label class="checkrow" for="packing-0-7"><span class="box"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#0c1a12" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="ctxt">Tripod</span></label><input type="checkbox" class="cb" id="packing-0-8" data-store="packing" data-gi="0"><label class="checkrow" for="packing-0-8"><span class="box"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#0c1a12" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="ctxt">Mt Rainier empty coffee cup</span></label>
       </div><div class="group">
         <div class="glabel"><span>🛶</span><span>SUP &amp; Swim</span><span class="ct jsonly" id="ct-packing-1" data-total="2"></span></div>
         <input type="checkbox" class="cb" id="packing-1-0" data-store="packing" data-gi="1"><label class="checkrow" for="packing-1-0"><span class="box"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#0c1a12" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="ctxt">Swimsuit</span></label><input type="checkbox" class="cb" id="packing-1-1" data-store="packing" data-gi="1"><label class="checkrow" for="packing-1-1"><span class="box"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#0c1a12" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="ctxt">Waterproof phone case</span></label>
@@ -650,22 +448,8 @@
         <div class="glabel"><span>🥾</span><span>Hiking</span><span class="ct jsonly" id="ct-packing-2" data-total="6"></span></div>
         <input type="checkbox" class="cb" id="packing-2-0" data-store="packing" data-gi="2"><label class="checkrow" for="packing-2-0"><span class="box"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#0c1a12" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="ctxt">Hiking shoes</span></label><input type="checkbox" class="cb" id="packing-2-1" data-store="packing" data-gi="2"><label class="checkrow" for="packing-2-1"><span class="box"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#0c1a12" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="ctxt">Gas burner</span></label><input type="checkbox" class="cb" id="packing-2-2" data-store="packing" data-gi="2"><label class="checkrow" for="packing-2-2"><span class="box"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#0c1a12" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="ctxt">Hat</span></label><input type="checkbox" class="cb" id="packing-2-3" data-store="packing" data-gi="2"><label class="checkrow" for="packing-2-3"><span class="box"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#0c1a12" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="ctxt">Sunscreen</span></label><input type="checkbox" class="cb" id="packing-2-4" data-store="packing" data-gi="2"><label class="checkrow" for="packing-2-4"><span class="box"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#0c1a12" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="ctxt">Water filter<small>For the Enchantments</small></span></label><input type="checkbox" class="cb" id="packing-2-5" data-store="packing" data-gi="2"><label class="checkrow" for="packing-2-5"><span class="box"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#0c1a12" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="ctxt">Northwest Forest Pass<small>Day pass — wta.org/go-outside/passes</small></span></label>
       </div><div class="group">
-        <div class="glabel"><span>🎁</span><span>Souvenirs</span><span class="ct jsonly" id="ct-packing-3" data-total="3"></span></div>
-        <input type="checkbox" class="cb" id="packing-3-0" data-store="packing" data-gi="3"><label class="checkrow" for="packing-3-0"><span class="box"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#0c1a12" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="ctxt">Postcards</span></label><input type="checkbox" class="cb" id="packing-3-1" data-store="packing" data-gi="3"><label class="checkrow" for="packing-3-1"><span class="box"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#0c1a12" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="ctxt">Souvenir requests<small>Ian · Brittany · Sonia (check requests)</small></span></label><input type="checkbox" class="cb" id="packing-3-2" data-store="packing" data-gi="3"><label class="checkrow" for="packing-3-2"><span class="box"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#0c1a12" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="ctxt">Mt Rainier empty coffee cup</span></label>
-      </div></div>
-    <div class="footer"></div>
-  </section>
-
-  <section class="view" id="view-todo">
-    <h2 class="section">&#9989; To-do &amp; Links</h2>
-    <p class="intro">Planning checklist + reference links.</p>
-    <div class="toolbar jsonly"><button class="btn-sm" id="resetTodo">Reset to-do</button></div>
-    <div id="todo"><div class="group">
-        <div class="glabel"><span>🗒️</span><span>To research / book</span><span class="ct jsonly" id="ct-todo-0" data-total="4"></span></div>
-        <input type="checkbox" class="cb" id="todo-0-0" data-store="todo" data-gi="0"><label class="checkrow" for="todo-0-0"><span class="box"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#0c1a12" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="ctxt">Northwest Forest Pass (day pass)<small>wta.org/go-outside/passes</small></span></label><input type="checkbox" class="cb" id="todo-0-1" data-store="todo" data-gi="0"><label class="checkrow" for="todo-0-1"><span class="box"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#0c1a12" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="ctxt">Perseids meteor shower / stargazing<small>Mt Rainier — parentmap.com</small></span></label><input type="checkbox" class="cb" id="todo-0-2" data-store="todo" data-gi="0"><label class="checkrow" for="todo-0-2"><span class="box"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#0c1a12" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="ctxt">Bellevue 4th of July plan<small>visitbellevuewa.com</small></span></label><input type="checkbox" class="cb" id="todo-0-3" data-store="todo" data-gi="0"><label class="checkrow" for="todo-0-3"><span class="box"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#0c1a12" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="ctxt">Seafair 4th of July plan<small>seafair.org/4th-of-july</small></span></label>
-      </div><div class="group">
-        <div class="glabel"><span>🥾</span><span>Hike research (WTA)</span><span class="ct jsonly" id="ct-todo-1" data-total="9"></span></div>
-        <input type="checkbox" class="cb" id="todo-1-0" data-store="todo" data-gi="1"><label class="checkrow" for="todo-1-0"><span class="box"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#0c1a12" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="ctxt">Lake 22</span></label><input type="checkbox" class="cb" id="todo-1-1" data-store="todo" data-gi="1"><label class="checkrow" for="todo-1-1"><span class="box"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#0c1a12" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="ctxt">Mt Pilchuck</span></label><input type="checkbox" class="cb" id="todo-1-2" data-store="todo" data-gi="1"><label class="checkrow" for="todo-1-2"><span class="box"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#0c1a12" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="ctxt">Mailbox Peak</span></label><input type="checkbox" class="cb" id="todo-1-3" data-store="todo" data-gi="1"><label class="checkrow" for="todo-1-3"><span class="box"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#0c1a12" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="ctxt">Lake Colchuck</span></label><input type="checkbox" class="cb" id="todo-1-4" data-store="todo" data-gi="1"><label class="checkrow" for="todo-1-4"><span class="box"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#0c1a12" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="ctxt">Mt Si</span></label><input type="checkbox" class="cb" id="todo-1-5" data-store="todo" data-gi="1"><label class="checkrow" for="todo-1-5"><span class="box"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#0c1a12" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="ctxt">Snow Lake</span></label><input type="checkbox" class="cb" id="todo-1-6" data-store="todo" data-gi="1"><label class="checkrow" for="todo-1-6"><span class="box"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#0c1a12" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="ctxt">Snoqualmie Falls</span></label><input type="checkbox" class="cb" id="todo-1-7" data-store="todo" data-gi="1"><label class="checkrow" for="todo-1-7"><span class="box"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#0c1a12" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="ctxt">Lake Talapus</span></label><input type="checkbox" class="cb" id="todo-1-8" data-store="todo" data-gi="1"><label class="checkrow" for="todo-1-8"><span class="box"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#0c1a12" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="ctxt">The Enchantments</span></label>
+        <div class="glabel"><span>🎁</span><span>Souvenirs</span><span class="ct jsonly" id="ct-packing-3" data-total="2"></span></div>
+        <input type="checkbox" class="cb" id="packing-3-0" data-store="packing" data-gi="3"><label class="checkrow" for="packing-3-0"><span class="box"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#0c1a12" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="ctxt">Postcards</span></label><input type="checkbox" class="cb" id="packing-3-1" data-store="packing" data-gi="3"><label class="checkrow" for="packing-3-1"><span class="box"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#0c1a12" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="ctxt">Souvenir requests<small>Ian · Brittany · Sonia (check requests)</small></span></label>
       </div></div>
     <div class="footer"></div>
   </section>
@@ -675,9 +459,7 @@
 <nav class="tabbar">
   <div class="tabbar-inner">
     <label class="tabbtn" for="tab-itinerary"><span class="ic">&#128197;</span><span class="lb">Itinerary</span></label>
-    <label class="tabbtn" for="tab-hikes"><span class="ic">&#129406;</span><span class="lb">Hikes</span></label>
     <label class="tabbtn" for="tab-packing"><span class="ic">&#127890;</span><span class="lb">Packing</span></label>
-    <label class="tabbtn" for="tab-todo"><span class="ic">&#9989;</span><span class="lb">To-do</span></label>
   </div>
 </nav>
 
@@ -696,7 +478,7 @@
       ct.textContent=done+'/'+total;
     });
   }
-  ['packing','todo'].forEach(function(store){
+  ['packing'].forEach(function(store){
     var st=load(store);
     document.querySelectorAll('.cb[data-store="'+store+'"]').forEach(function(cb){
       if(st[cb.id]) cb.checked=true;
@@ -716,7 +498,6 @@
     }
   }
   var rp=document.getElementById('resetPacking'); if(rp) rp.onclick=function(){reset('packing');};
-  var rt=document.getElementById('resetTodo');   if(rt) rt.onclick=function(){reset('todo');};
 
   var ta=document.getElementById('toggleAll');
   if(ta){var open=false;ta.addEventListener('click',function(){
@@ -729,17 +510,6 @@
     r.addEventListener('change',function(){window.scrollTo(0,0);});
   });
 
-  (function(){
-    var el=document.getElementById('countdown'); if(!el) return;
-    var start=new Date(2026,6,2), end=new Date(2026,6,19), now=new Date();
-    var today=new Date(now.getFullYear(),now.getMonth(),now.getDate()), dayMs=86400000, html;
-    if(today<start){var d=Math.round((start-today)/dayMs);
-      html='<div class="pill"><b>'+d+'</b><span>days to go</span></div><div class="pill"><b>18</b><span>days total</span></div><div class="pill"><b>8</b><span>hikes</span></div>';}
-    else if(today<=end){var n=Math.round((today-start)/dayMs)+1;
-      html='<div class="pill"><b>'+n+'</b><span>day of 18</span></div><div class="pill"><b>'+Math.round((end-today)/dayMs)+'</b><span>days left</span></div><div class="pill"><b>8</b><span>hikes</span></div>';}
-    else{html='<div class="pill"><b>&#127968;</b><span>trip complete</span></div><div class="pill"><b>18</b><span>days</span></div><div class="pill"><b>8</b><span>hikes</span></div>';}
-    el.innerHTML=html;
-  })();
 })();
 </script>
 <script>
