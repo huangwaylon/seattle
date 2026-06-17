@@ -14,27 +14,29 @@ Live site: https://huangwaylon.github.io/seattle/
 
 | File | Role |
 |------|------|
-| `index.html` | The entire app. Static HTML content + inline `<style>` + inline `<script>`. The Mt. Rainier photo is base64-embedded **once** as a CSS variable. **Source of truth — edit directly.** |
-| `sw.js` | Service worker. Cache-first; caches the app shell for offline use. |
+| `index.html` | The entire app. Static HTML content + inline `<style>` + inline `<script>`. **Source of truth — edit directly.** |
+| `images/` | Real image files (Mt Rainier hero + 8 hike photos). Linked via `<img>` tags / CSS, not base64-embedded. Precached by the service worker for offline use. |
+| `sw.js` | Service worker. Cache-first; precaches the app shell **and `images/*`** for offline use. |
 | `manifest.webmanifest` | PWA manifest (name, icons, `standalone` display, theme colors). |
 | `icon-180.png` | iOS `apple-touch-icon` (Home Screen). |
 | `icon-512.png` | Manifest/PWA install icon (also `maskable`). |
 | `README.md` | User-facing description + install steps. |
-| `TclWtzv-mount-rainier-wallpaper.jpg` | Original source photo. **gitignored** — already embedded into `index.html` + icons. Only kept locally; not deployed. |
 
 There is no build step or framework. No dependencies. No bundler.
 
 ## Core architecture & conventions
 
-- **Self-contained:** no external CSS/JS/fonts/images. Only outbound links are WTA/event
-  hyperlinks (open externally, fail gracefully offline). System font stack only.
-- **Photo embedding:** every photo is a base64 data URI assigned to a CSS variable in `:root`,
-  then reused via `background:var(--…)`. `--rainier` is the hero (`.hero-bg`). Each of the 8
-  hikes has its own `--ph-<key>` var (e.g. `--ph-lake22`, `--ph-ench`) shown via
-  `.hike-thumb.<key>` in **both** the day card and the Hikes tab — so the bytes live in the file
-  exactly once even though each photo appears twice. Do not duplicate a data URI. Hike photos are
-  WTA lead images, recompressed to 640px-wide JPEG (q≈45) before embedding; see the recompress
-  recipe below.
+- **Self-contained:** no external CSS/JS/fonts/CDN assets. Only outbound links are WTA/event
+  hyperlinks (open externally, fail gracefully offline). System font stack only. All images
+  are local files in `images/`.
+- **Photo strategy:** real image files in `images/` — `mount-rainier.jpg` is the hero (loaded
+  via `<img class="hero-img">` with `fetchpriority="high"` and a matching `<link rel="preload">`),
+  and each of the 8 hikes uses a `.webp` (`lake-22.webp`, `snow-lake.webp`, `skyline-loop.webp`,
+  `enchantments.webp`, `bridal-veil.webp`, `mount-pilchuck.webp`, `lake-valhalla.webp`,
+  `talapus-lake.webp`) inside `<figure class="hike-thumb">` with `loading="lazy"` +
+  `decoding="async"`. Same image appears once on disk. The service worker precaches all of them
+  on install so the PWA stays fully offline-capable. To swap a photo: drop a same-named file
+  into `images/`, then bump the SW cache.
 - **Units (km / mi):** every distance/elevation is wrapped in
   `<span class="u" data-km="8.7 km" data-mi="5.4 mi">8.7 km</span>`. The default text is metric
   (so the no-JS path shows km/m). The `#unitToggle` segmented control (`.jsonly`) swaps every
@@ -63,8 +65,10 @@ There is no build step or framework. No dependencies. No bundler.
   runs, via `.nojs .jsonly{display:none}`.
 - **Responsive:** content is a centered `max-width:var(--maxw)` (720px) column; the hero height
   is `clamp(...)`. Works phone portrait/landscape, tablet, desktop. Respects safe-area insets.
-- **Theme:** Pacific-NW evergreen palette, all via CSS custom properties in `:root`. Keep the
-  variable set tight — there were unused vars before; don't reintroduce dead ones.
+- **Theme:** light "Alpine Field Guide" palette (paper-cool neutrals, deep-spruce ink, pine
+  green + warm ember accents), all via CSS custom properties in `:root` — kept in sync with the
+  sibling `gpx/` app's light theme. Keep the variable set tight — there were unused vars before;
+  don't reintroduce dead ones.
 
 ## Editing content
 
@@ -80,15 +84,17 @@ There is no build step or framework. No dependencies. No bundler.
 
 ### Replacing / adding the photo
 
-The 1200×900 JPEG is base64-encoded into `--rainier`. To swap it:
+The hero is `images/mount-rainier.jpg`; hike photos are `images/<key>.webp`. To swap:
 ```bash
-# recompress for retina width, then base64 (one line, no newlines)
-sips --resampleHeightWidthMax 1200 NEW.jpg --out /tmp/r.jpg
-sips -s format jpeg -s formatOptions 70 /tmp/r.jpg --out /tmp/rf.jpg
-base64 -i /tmp/rf.jpg | tr -d '\n' > /tmp/r.b64
+# Hero — recompress for retina width:
+sips --resampleHeightWidthMax 1600 NEW.jpg --out images/mount-rainier.jpg
+sips -s format jpeg -s formatOptions 70 images/mount-rainier.jpg --out images/mount-rainier.jpg
+
+# Hike — convert to webp (cwebp, q≈70 keeps under ~300 KB):
+cwebp -q 70 NEW.jpg -o images/<key>.webp
 ```
-Then replace the base64 inside `--rainier:url("data:image/jpeg;base64,...")` in `index.html`,
-and regenerate icons: `sips -c 900 900 NEW.jpg --out /tmp/sq.jpg` then export 180px + 512px PNGs.
+Then **bump `CACHE` in `sw.js`** so installed PWAs pick up the new bytes. Regenerate icons
+from a new hero with: `sips -c 900 900 NEW.jpg --out /tmp/sq.jpg` then export 180px + 512px PNGs.
 
 ## Testing locally
 
@@ -131,5 +137,6 @@ After bumping the SW cache, an installed app updates on its next **online** laun
   before adding more sensitive detail.
 - **iOS storage:** installed Home-Screen PWAs are exempt from Safari's 7-day script-storage cap,
   so saved checkmarks persist — but only if opened occasionally. Install a week or two pre-trip.
-- **Don't** add a runtime build/render step, external CDN assets, or duplicate the photo bytes —
-  each breaks one of: offline, no-JS fallback, or file size.
+- **Don't** add a runtime build/render step or external CDN assets. Don't re-base64 the photos —
+  real files in `images/` are smaller (webp), keep the HTML editable, and are still offline-safe
+  via the service worker precache.
