@@ -19,7 +19,7 @@
     --line:rgba(22,35,29,.10); --line-2:rgba(22,35,29,.055); --line-strong:rgba(22,35,29,.16);
     --ink:#16231d; --ink-2:#41504a; --muted:#5f6a63; --faint:#869089;
     --pine:#1f6f5c; --pine-d:#175949; --pine-soft:rgba(31,111,92,.10); --pine-ring:rgba(31,111,92,.30);
-    --ember:#d4662b; --ember-d:#a8531f; --ember-soft:rgba(212,102,43,.12); --ember-ring:rgba(212,102,43,.34); --rose:#c0392b;
+    --ember:#d4662b; --ember-soft:rgba(212,102,43,.12); --ember-ring:rgba(212,102,43,.34);
     --easy:#1f7a4d; --mod:#8a5410; --hard:#c0392b; --epic:#8e3bb0;
 
     --sh-card:0 1px 2px rgba(22,35,29,.05), 0 7px 22px rgba(22,35,29,.085);
@@ -82,19 +82,12 @@
   .hero{position:relative;height:clamp(280px,56vh,460px);overflow:hidden;
     display:flex;flex-direction:column;justify-content:flex-end;isolation:isolate;}
   .hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
-    object-position:50% 38%;z-index:0;
-    -webkit-mask-image:linear-gradient(180deg, #000 0%, #000 46%, rgba(0,0,0,0) 100%);
-    mask-image:linear-gradient(180deg, #000 0%, #000 46%, rgba(0,0,0,0) 100%);}
-  .hero::before{content:"";position:absolute;top:0;left:0;right:0;height:46%;
-    background:linear-gradient(180deg, rgba(255,158,94,.46) 0%, rgba(232,96,122,.18) 38%, transparent 100%);
-    z-index:1;pointer-events:none;mix-blend-mode:screen;}
+    object-position:50% 38%;z-index:0;}
   .hero .scrim{position:absolute;inset:0;z-index:1;
     background:linear-gradient(180deg,
-      rgba(20,28,22,0) 22%,
-      rgba(20,28,22,.5) 50%,
-      rgba(20,28,22,.46) 68%,
-      rgba(20,28,22,0) 88%);}
-  .hero .htext{position:relative;padding:0 var(--gutter) 118px;z-index:2;}
+      rgba(20,28,22,0) 30%,
+      rgba(20,28,22,.58) 100%);}
+  .hero .htext{position:relative;padding:0 var(--gutter) 40px;z-index:2;}
   .hero .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;
     letter-spacing:.18em;text-transform:uppercase;color:var(--ember);
     text-shadow:0 1px 8px rgba(0,0,0,.65);margin-bottom:8px;}
@@ -126,19 +119,14 @@
   #days{position:relative;padding:8px 0 4px;}
   /* Continuous spine — runs through every node */
   #days::before{content:"";position:absolute;left:42px;top:34px;bottom:34px;width:2px;
-    background:linear-gradient(180deg, var(--ember-ring) 0%, var(--pine-ring) 18%, var(--line-strong) 100%);
+    background:var(--line-strong);
     border-radius:1px;z-index:0;pointer-events:none;}
 
   /* ---- cards ---- */
   details.card{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);
     margin:0 var(--gutter) 12px;overflow:hidden;box-shadow:var(--sh-card),var(--lift);
     transition:border-color .18s, transform .18s, box-shadow .18s;}
-  details.card.hike::before{content:"";position:absolute;top:0;bottom:0;left:0;width:3px;
-    background:var(--diff-color,var(--mod));opacity:.85;border-radius:3px 0 0 3px;z-index:2;}
-  details.card[data-diff="easy"]{--diff-color:var(--easy);}
-  details.card[data-diff="mod"]{--diff-color:var(--mod);}
-  details.card[data-diff="hard"]{--diff-color:var(--hard);}
-  details.card[data-diff="epic"]{--diff-color:var(--epic);}
+  details.card.hike::before{content:none;}
   details.card[open]{border-color:var(--line-strong);}
 
   summary.head{display:flex;align-items:center;gap:14px;padding:14px 18px 14px 48px;cursor:pointer;
@@ -151,8 +139,8 @@
     background:var(--surface);border:2px solid var(--muted);
     transform:translate(-50%,-50%);
     box-shadow:0 0 0 4px var(--bg);z-index:1;}
-  details.card.hike .node{background:var(--diff-color);border-color:var(--diff-color);
-    box-shadow:0 0 0 4px var(--bg), 0 0 0 5px var(--diff-color), 0 1px 5px rgba(22,35,29,.18);}
+  details.card.hike .node{background:var(--pine);border-color:var(--pine);
+    box-shadow:0 0 0 4px var(--bg);}
   details.card.travel .node{background:var(--surface);border-color:var(--ember);
     box-shadow:0 0 0 4px var(--bg), 0 0 0 5px var(--ember-ring);}
 
@@ -175,7 +163,7 @@
   .head .gly{flex:0 0 auto;width:36px;height:36px;border-radius:11px;background:var(--surface-2);
     border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--muted);
     box-shadow:var(--lift);}
-  details.card.hike .head .gly{color:var(--diff-color);border-color:var(--line-strong);}
+  details.card.hike .head .gly{color:var(--pine);border-color:var(--line-strong);}
   details.card.travel .head .gly{color:var(--ember);}
   .head .gly .ic{width:18px;height:18px;}
   .head .ttl{flex:1;min-width:0;}
