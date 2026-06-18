@@ -171,8 +171,6 @@
   .head .ttl{flex:1;min-width:0;}
   .head .ttl .t{font-family:var(--font-display);font-weight:600;font-size:18.5px;letter-spacing:-.25px;color:var(--ink);
     line-height:1.2;}
-  .head .ttl .sub{font-size:12.5px;color:var(--muted);margin-top:3px;font-weight:500;
-    font-variant-numeric:tabular-nums;letter-spacing:.005em;}
   .chev{flex:0 0 auto;color:var(--faint);transition:transform .25s ease, color .15s;
     width:20px;height:20px;display:flex;align-items:center;justify-content:center;}
   .chev .ic{width:18px;height:18px;}
@@ -240,13 +238,13 @@
     display:flex;align-items:center;gap:7px;}
   figure.hike-thumb figcaption .ic{width:13px;height:13px;opacity:.92;}
 
-  a.wta{display:inline-flex;align-items:center;gap:8px;margin-top:18px;background:var(--surface-2);
+  a.traillink{display:inline-flex;align-items:center;gap:8px;margin-top:18px;background:var(--surface-2);
     color:var(--ink);text-decoration:none;font-weight:700;font-size:14px;padding:11px 16px;
     border-radius:var(--r-chip);border:1px solid var(--line-strong);
     transition:background .15s, transform .1s, border-color .15s;}
-  a.wta .ic{width:14px;height:14px;color:var(--pine);}
-  a.wta:hover{background:var(--surface-3);border-color:var(--pine-ring);}
-  a.wta:active{transform:scale(.97);}
+  a.traillink .ic{width:14px;height:14px;color:var(--pine);}
+  a.traillink:hover{background:var(--surface-3);border-color:var(--pine-ring);}
+  a.traillink:active{transform:scale(.97);}
 
   /* ---- checklists ---- */
   .group{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);
@@ -375,7 +373,7 @@
           <span class="node"></span>
           <div class="date-chip"><div class="d">2</div><div class="m">JUL</div><div class="wd">Thu</div></div>
           <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-plane-landing"/></svg></span>
-          <div class="ttl"><div class="t">Arrival &amp; Errands</div><div class="sub">Land 9:36 AM · settle in</div></div>
+          <div class="ttl"><div class="t">Arrival &amp; Errands</div></div>
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
@@ -401,7 +399,7 @@
           <span class="node"></span>
           <div class="date-chip"><div class="d">3</div><div class="m">JUL</div><div class="wd">Fri</div></div>
           <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-waves"/></svg></span>
-          <div class="ttl"><div class="t">Lake 22</div><div class="sub">North Cascades · <span class="u" data-km="8.7 km" data-mi="5.4 mi">8.7 km</span></div></div>
+          <div class="ttl"><div class="t">Lake 22</div></div>
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
@@ -416,21 +414,21 @@
           <div class="subhead">Hike details</div>
           <figure class="hike-thumb">
             <img src="images/lake-22.webp" alt="Lake 22 in the North Cascades" loading="lazy" decoding="async" width="1200" height="675">
-            <figcaption><svg class="ic" aria-hidden="true"><use href="#i-pin"/></svg>North Cascades</figcaption>
+            <figcaption><svg class="ic" aria-hidden="true"><use href="#i-pin"/></svg>Granite Falls, WA</figcaption>
           </figure>
           <div class="diff-row">
             <span class="diff mod">Moderate</span>
-            <span class="where">North Cascades · Jul 3</span>
+            <span class="where">Granite Falls, WA · Jul 3</span>
           </div>
           <div class="stat-grid">
-            <div class="stat"><div class="k">Distance</div><div class="v"><span class="u" data-km="8.7 km" data-mi="5.4 mi">8.7 km</span></div></div>
-            <div class="stat"><div class="k">Elevation gain</div><div class="v"><span class="u" data-km="411 m" data-mi="1,350 ft">411 m</span></div></div>
-            <div class="stat"><div class="k">Highest point</div><div class="v"><span class="u" data-km="732 m" data-mi="2,400 ft">732 m</span></div></div>
+            <div class="stat"><div class="k">Distance</div><div class="v"><span class="u" data-km="9.8 km" data-mi="6.1 mi">9.8 km</span></div></div>
+            <div class="stat"><div class="k">Elevation gain</div><div class="v"><span class="u" data-km="444 m" data-mi="1,456 ft">444 m</span></div></div>
+            <div class="stat"><div class="k">Route</div><div class="v">Out &amp; back</div></div>
             <div class="stat"><div class="k">Drive time</div><div class="v">1h 30m</div></div>
-            <div class="stat"><div class="k">Hike time</div><div class="v">3.5–4 h</div></div>
-            <div class="stat"><div class="k">Pass required</div><div class="v">NW Forest Pass</div></div>
+            <div class="stat"><div class="k">Hike time</div><div class="v">3 h 17 min</div></div>
+            <div class="stat"><div class="k">Pass required</div><div class="v">NW Forest Pass or day-use fee</div></div>
           </div>
-          <a class="wta" href="https://www.wta.org/go-hiking/hikes/lake-22-lake-twenty-two" target="_blank" rel="noopener">View on WTA <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+          <a class="traillink" href="https://huangwaylon.github.io/gpx/#/trail/lake-22" target="_blank" rel="noopener">View trail map <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
       </details>
 
@@ -439,7 +437,7 @@
           <span class="node"></span>
           <div class="date-chip"><div class="d">4</div><div class="m">JUL</div><div class="wd">Sat</div></div>
           <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-sparkles"/></svg></span>
-          <div class="ttl"><div class="t">4th of July</div><div class="sub">Fireworks &amp; festivities</div></div>
+          <div class="ttl"><div class="t">4th of July</div></div>
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
@@ -457,7 +455,7 @@
           <span class="node"></span>
           <div class="date-chip"><div class="d">5</div><div class="m">JUL</div><div class="wd">Sun</div></div>
           <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-building"/></svg></span>
-          <div class="ttl"><div class="t">Seattle City Day</div><div class="sub">UW · Pike Place · SUP · sunset</div></div>
+          <div class="ttl"><div class="t">Seattle City Day</div></div>
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
@@ -488,7 +486,7 @@
           <span class="node"></span>
           <div class="date-chip"><div class="d">6</div><div class="m">JUL</div><div class="wd">Mon</div></div>
           <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-waves"/></svg></span>
-          <div class="ttl"><div class="t">Snow Lake</div><div class="sub">Snoqualmie · <span class="u" data-km="11.6 km" data-mi="7.2 mi">11.6 km</span></div></div>
+          <div class="ttl"><div class="t">Snow Lake</div></div>
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
@@ -502,21 +500,21 @@
           <div class="subhead">Hike details</div>
           <figure class="hike-thumb">
             <img src="images/snow-lake.webp" alt="Snow Lake near Snoqualmie Pass" loading="lazy" decoding="async" width="1200" height="675">
-            <figcaption><svg class="ic" aria-hidden="true"><use href="#i-pin"/></svg>Snoqualmie</figcaption>
+            <figcaption><svg class="ic" aria-hidden="true"><use href="#i-pin"/></svg>Snoqualmie Pass, WA</figcaption>
           </figure>
           <div class="diff-row">
             <span class="diff mod">Moderate</span>
-            <span class="where">Snoqualmie · Jul 6</span>
+            <span class="where">Snoqualmie Pass, WA · Jul 6</span>
           </div>
           <div class="stat-grid">
-            <div class="stat"><div class="k">Distance</div><div class="v"><span class="u" data-km="11.6 km" data-mi="7.2 mi">11.6 km</span></div></div>
-            <div class="stat"><div class="k">Elevation gain</div><div class="v"><span class="u" data-km="549 m" data-mi="1,800 ft">549 m</span></div></div>
-            <div class="stat"><div class="k">Highest point</div><div class="v"><span class="u" data-km="1,341 m" data-mi="4,400 ft">1,341 m</span></div></div>
+            <div class="stat"><div class="k">Distance</div><div class="v"><span class="u" data-km="10.8 km" data-mi="6.7 mi">10.8 km</span></div></div>
+            <div class="stat"><div class="k">Elevation gain</div><div class="v"><span class="u" data-km="514 m" data-mi="1,686 ft">514 m</span></div></div>
+            <div class="stat"><div class="k">Route</div><div class="v">Out &amp; back</div></div>
             <div class="stat"><div class="k">Drive time</div><div class="v">1h 10m</div></div>
-            <div class="stat"><div class="k">Hike time</div><div class="v">3.5–4.5 h</div></div>
-            <div class="stat"><div class="k">Pass required</div><div class="v">NW Forest Pass</div></div>
+            <div class="stat"><div class="k">Hike time</div><div class="v">3 h 40 min</div></div>
+            <div class="stat"><div class="k">Pass required</div><div class="v">NW Forest Pass or day-use fee</div></div>
           </div>
-          <a class="wta" href="https://www.wta.org/go-hiking/hikes/snow-lake" target="_blank" rel="noopener">View on WTA <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+          <a class="traillink" href="https://huangwaylon.github.io/gpx/#/trail/snow-lake" target="_blank" rel="noopener">View trail map <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
       </details>
 
@@ -525,7 +523,7 @@
           <span class="node"></span>
           <div class="date-chip"><div class="d">7</div><div class="m">JUL</div><div class="wd">Tue</div></div>
           <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-sprout"/></svg></span>
-          <div class="ttl"><div class="t">Farms &amp; Alpacas</div><div class="sub">U-pick &amp; farm visits</div></div>
+          <div class="ttl"><div class="t">Farms &amp; Alpacas</div></div>
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
@@ -538,12 +536,12 @@
         </div>
       </details>
 
-      <details class="card hike" data-diff="mod">
+      <details class="card hike" data-diff="hard">
         <summary class="head">
           <span class="node"></span>
           <div class="date-chip"><div class="d">8</div><div class="m">JUL</div><div class="wd">Wed</div></div>
           <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-mountain-snow"/></svg></span>
-          <div class="ttl"><div class="t">Skyline Trail Loop</div><div class="sub">Mt Rainier NP · <span class="u" data-km="8.9 km" data-mi="5.5 mi">8.9 km</span></div></div>
+          <div class="ttl"><div class="t">Skyline Trail Loop</div></div>
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
@@ -557,21 +555,21 @@
           <div class="subhead">Hike details</div>
           <figure class="hike-thumb">
             <img src="images/skyline-loop.webp" alt="Skyline Loop on Mount Rainier" loading="lazy" decoding="async" width="1200" height="675">
-            <figcaption><svg class="ic" aria-hidden="true"><use href="#i-pin"/></svg>Mt Rainier NP</figcaption>
+            <figcaption><svg class="ic" aria-hidden="true"><use href="#i-pin"/></svg>Paradise, Mt. Rainier NP</figcaption>
           </figure>
           <div class="diff-row">
-            <span class="diff mod">Moderate</span>
-            <span class="where">Mt Rainier NP · Jul 8</span>
+            <span class="diff hard">Hard</span>
+            <span class="where">Paradise, Mt. Rainier NP · Jul 8</span>
           </div>
           <div class="stat-grid">
-            <div class="stat"><div class="k">Distance</div><div class="v"><span class="u" data-km="8.9 km" data-mi="5.5 mi">8.9 km</span></div></div>
-            <div class="stat"><div class="k">Elevation gain</div><div class="v"><span class="u" data-km="442 m" data-mi="1,450 ft">442 m</span></div></div>
-            <div class="stat"><div class="k">Highest point</div><div class="v"><span class="u" data-km="2,073 m" data-mi="6,800 ft">2,073 m</span></div></div>
+            <div class="stat"><div class="k">Distance</div><div class="v"><span class="u" data-km="9.2 km" data-mi="5.7 mi">9.2 km</span></div></div>
+            <div class="stat"><div class="k">Elevation gain</div><div class="v"><span class="u" data-km="543 m" data-mi="1,781 ft">543 m</span></div></div>
+            <div class="stat"><div class="k">Route</div><div class="v">Loop</div></div>
             <div class="stat"><div class="k">Drive time</div><div class="v">3h</div></div>
-            <div class="stat"><div class="k">Hike time</div><div class="v">3–5 h</div></div>
-            <div class="stat"><div class="k">Pass required</div><div class="v">National Park Pass</div></div>
+            <div class="stat"><div class="k">Hike time</div><div class="v">~3 h 30 min</div></div>
+            <div class="stat"><div class="k">Pass required</div><div class="v">Mount Rainier NP entrance fee</div></div>
           </div>
-          <a class="wta" href="https://www.wta.org/go-hiking/hikes/skyline-trail-loop" target="_blank" rel="noopener">View on WTA <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+          <a class="traillink" href="https://huangwaylon.github.io/gpx/#/trail/skyline-loop" target="_blank" rel="noopener">View trail map <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
       </details>
 
@@ -580,7 +578,7 @@
           <span class="node"></span>
           <div class="date-chip"><div class="d">9</div><div class="m">JUL</div><div class="wd">Thu</div></div>
           <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-droplets"/></svg></span>
-          <div class="ttl"><div class="t">Snoqualmie Falls</div><div class="sub">With Mom &amp; Dad</div></div>
+          <div class="ttl"><div class="t">Snoqualmie Falls</div></div>
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
@@ -596,7 +594,7 @@
           <span class="node"></span>
           <div class="date-chip"><div class="d">10</div><div class="m">JUL</div><div class="wd">Fri</div></div>
           <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-tent"/></svg></span>
-          <div class="ttl"><div class="t">Leavenworth</div><div class="sub">Bavarian village · car camp</div></div>
+          <div class="ttl"><div class="t">Leavenworth</div></div>
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
@@ -612,33 +610,33 @@
           <span class="node"></span>
           <div class="date-chip"><div class="d">11</div><div class="m">JUL</div><div class="wd">Sat</div></div>
           <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-mountain-snow"/></svg></span>
-          <div class="ttl"><div class="t">The Enchantments</div><div class="sub">Alpine Lakes Wild. · <span class="u" data-km="29 km" data-mi="18 mi">29 km</span></div></div>
+          <div class="ttl"><div class="t">The Enchantments</div></div>
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
           <ul class="tl">
             <li><span class="time">5:00</span><span class="dot"></span><span class="txt">Start hike (with Chris)</span></li>
-            <li><span class="time"></span><span class="dot"></span><span class="txt"><span class="u" data-km="29 km" data-mi="18 mi">29 km</span> · <span class="u" data-km="1,372 m" data-mi="4,500 ft">1,372 m</span> gain · 12–16 h</span></li>
+            <li><span class="time"></span><span class="dot"></span><span class="txt"><span class="u" data-km="30.7 km" data-mi="19.1 mi">30.7 km</span> · <span class="u" data-km="1,477 m" data-mi="4,845 ft">1,477 m</span> gain · 10–13 h</span></li>
             <li><span class="time">&lt;21:00</span><span class="dot"></span><span class="txt">Finish before sunset<small>Bring the water filter!</small></span></li>
           </ul>
           <div class="subhead">Hike details</div>
           <figure class="hike-thumb">
             <img src="images/enchantments.webp" alt="The Enchantments alpine lakes" loading="lazy" decoding="async" width="1200" height="675">
-            <figcaption><svg class="ic" aria-hidden="true"><use href="#i-pin"/></svg>Alpine Lakes Wild.</figcaption>
+            <figcaption><svg class="ic" aria-hidden="true"><use href="#i-pin"/></svg>Leavenworth, WA</figcaption>
           </figure>
           <div class="diff-row">
-            <span class="diff epic">Epic</span>
-            <span class="where">Alpine Lakes Wild. · Jul 11</span>
+            <span class="diff epic">Very Hard</span>
+            <span class="where">Leavenworth, WA · Jul 11</span>
           </div>
           <div class="stat-grid">
-            <div class="stat"><div class="k">Distance</div><div class="v"><span class="u" data-km="29 km" data-mi="18 mi">29 km</span></div></div>
-            <div class="stat"><div class="k">Elevation gain</div><div class="v"><span class="u" data-km="1,372 m" data-mi="4,500 ft">1,372 m</span></div></div>
-            <div class="stat"><div class="k">Highest point</div><div class="v"><span class="u" data-km="2,377 m" data-mi="7,800 ft">2,377 m</span></div></div>
+            <div class="stat"><div class="k">Distance</div><div class="v"><span class="u" data-km="30.7 km" data-mi="19.1 mi">30.7 km</span></div></div>
+            <div class="stat"><div class="k">Elevation gain</div><div class="v"><span class="u" data-km="1,477 m" data-mi="4,845 ft">1,477 m</span></div></div>
+            <div class="stat"><div class="k">Route</div><div class="v">Point to point</div></div>
             <div class="stat"><div class="k">Drive time</div><div class="v">2h 40m</div></div>
-            <div class="stat"><div class="k">Hike time</div><div class="v">12–16 h</div></div>
-            <div class="stat"><div class="k">Pass required</div><div class="v">NW Forest Pass</div></div>
+            <div class="stat"><div class="k">Hike time</div><div class="v">10–13 h</div></div>
+            <div class="stat"><div class="k">Pass required</div><div class="v">Overnight permit (lottery)</div></div>
           </div>
-          <a class="wta" href="https://www.wta.org/go-hiking/hikes/enchantment-lakes" target="_blank" rel="noopener">View on WTA <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+          <a class="traillink" href="https://huangwaylon.github.io/gpx/#/trail/enchantments" target="_blank" rel="noopener">View trail map <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
       </details>
 
@@ -647,7 +645,7 @@
           <span class="node"></span>
           <div class="date-chip"><div class="d">12</div><div class="m">JUL</div><div class="wd">Sun</div></div>
           <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-teacup"/></svg></span>
-          <div class="ttl"><div class="t">Bro Day</div><div class="sub">Cooking class · Bellevue · games</div></div>
+          <div class="ttl"><div class="t">Bro Day</div></div>
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
@@ -667,7 +665,7 @@
           <span class="node"></span>
           <div class="date-chip"><div class="d">13</div><div class="m">JUL</div><div class="wd">Mon</div></div>
           <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-waves"/></svg></span>
-          <div class="ttl"><div class="t">Lake Serene</div><div class="sub">Stevens Pass · <span class="u" data-km="13.2 km" data-mi="8.2 mi">13.2 km</span></div></div>
+          <div class="ttl"><div class="t">Lake Serene</div></div>
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
@@ -681,21 +679,21 @@
           <div class="subhead">Hike details</div>
           <figure class="hike-thumb">
             <img src="images/bridal-veil.webp" alt="Bridal Veil Falls and Lake Serene" loading="lazy" decoding="async" width="1200" height="675">
-            <figcaption><svg class="ic" aria-hidden="true"><use href="#i-pin"/></svg>Stevens Pass</figcaption>
+            <figcaption><svg class="ic" aria-hidden="true"><use href="#i-pin"/></svg>Gold Bar, WA</figcaption>
           </figure>
           <div class="diff-row">
             <span class="diff hard">Hard</span>
-            <span class="where">Stevens Pass · Jul 13</span>
+            <span class="where">Gold Bar, WA · Jul 13</span>
           </div>
           <div class="stat-grid">
-            <div class="stat"><div class="k">Distance</div><div class="v"><span class="u" data-km="13.2 km" data-mi="8.2 mi">13.2 km</span></div></div>
-            <div class="stat"><div class="k">Elevation gain</div><div class="v"><span class="u" data-km="610 m" data-mi="2,000 ft">610 m</span></div></div>
-            <div class="stat"><div class="k">Highest point</div><div class="v"><span class="u" data-km="768 m" data-mi="2,521 ft">768 m</span></div></div>
+            <div class="stat"><div class="k">Distance</div><div class="v"><span class="u" data-km="12.9 km" data-mi="8.0 mi">12.9 km</span></div></div>
+            <div class="stat"><div class="k">Elevation gain</div><div class="v"><span class="u" data-km="828 m" data-mi="2,716 ft">828 m</span></div></div>
+            <div class="stat"><div class="k">Route</div><div class="v">Out &amp; back</div></div>
             <div class="stat"><div class="k">Drive time</div><div class="v">1h</div></div>
-            <div class="stat"><div class="k">Hike time</div><div class="v">4–6 h</div></div>
+            <div class="stat"><div class="k">Hike time</div><div class="v">5 h 10 min</div></div>
             <div class="stat"><div class="k">Pass required</div><div class="v">NW Forest Pass</div></div>
           </div>
-          <a class="wta" href="https://www.wta.org/go-hiking/hikes/lake-serene" target="_blank" rel="noopener">View on WTA <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+          <a class="traillink" href="https://huangwaylon.github.io/gpx/#/trail/bridal-veil" target="_blank" rel="noopener">View trail map <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
       </details>
 
@@ -704,7 +702,7 @@
           <span class="node"></span>
           <div class="date-chip"><div class="d">14</div><div class="m">JUL</div><div class="wd">Tue</div></div>
           <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-mountain"/></svg></span>
-          <div class="ttl"><div class="t">Mt Pilchuck</div><div class="sub">Mountain Loop · <span class="u" data-km="8.7 km" data-mi="5.4 mi">8.7 km</span></div></div>
+          <div class="ttl"><div class="t">Mt Pilchuck</div></div>
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
@@ -718,21 +716,21 @@
           <div class="subhead">Hike details</div>
           <figure class="hike-thumb">
             <img src="images/mount-pilchuck.webp" alt="Mt Pilchuck summit lookout" loading="lazy" decoding="async" width="1200" height="675">
-            <figcaption><svg class="ic" aria-hidden="true"><use href="#i-pin"/></svg>Mountain Loop</figcaption>
+            <figcaption><svg class="ic" aria-hidden="true"><use href="#i-pin"/></svg>Granite Falls, WA</figcaption>
           </figure>
           <div class="diff-row">
             <span class="diff hard">Hard</span>
-            <span class="where">Mountain Loop · Jul 14</span>
+            <span class="where">Granite Falls, WA · Jul 14</span>
           </div>
           <div class="stat-grid">
             <div class="stat"><div class="k">Distance</div><div class="v"><span class="u" data-km="8.7 km" data-mi="5.4 mi">8.7 km</span></div></div>
-            <div class="stat"><div class="k">Elevation gain</div><div class="v"><span class="u" data-km="701 m" data-mi="2,300 ft">701 m</span></div></div>
-            <div class="stat"><div class="k">Highest point</div><div class="v"><span class="u" data-km="1,624 m" data-mi="5,327 ft">1,624 m</span></div></div>
+            <div class="stat"><div class="k">Elevation gain</div><div class="v"><span class="u" data-km="653 m" data-mi="2,142 ft">653 m</span></div></div>
+            <div class="stat"><div class="k">Route</div><div class="v">Out &amp; back</div></div>
             <div class="stat"><div class="k">Drive time</div><div class="v">1h 45m</div></div>
-            <div class="stat"><div class="k">Hike time</div><div class="v">3.5–5 h</div></div>
+            <div class="stat"><div class="k">Hike time</div><div class="v">~3 h 30 min</div></div>
             <div class="stat"><div class="k">Pass required</div><div class="v">NW Forest Pass</div></div>
           </div>
-          <a class="wta" href="https://www.wta.org/go-hiking/hikes/mount-pilchuck" target="_blank" rel="noopener">View on WTA <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+          <a class="traillink" href="https://huangwaylon.github.io/gpx/#/trail/mount-pilchuck" target="_blank" rel="noopener">View trail map <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
       </details>
 
@@ -741,7 +739,7 @@
           <span class="node"></span>
           <div class="date-chip"><div class="d">15</div><div class="m">JUL</div><div class="wd">Wed</div></div>
           <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-sailboat"/></svg></span>
-          <div class="ttl"><div class="t">SUP Day</div><div class="sub">Lake Sammamish · Kirkland</div></div>
+          <div class="ttl"><div class="t">SUP Day</div></div>
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
@@ -758,7 +756,7 @@
           <span class="node"></span>
           <div class="date-chip"><div class="d">16</div><div class="m">JUL</div><div class="wd">Thu</div></div>
           <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-waves"/></svg></span>
-          <div class="ttl"><div class="t">Lake Valhalla</div><div class="sub">Stevens Pass · <span class="u" data-km="11.3 km" data-mi="7.0 mi">11.3 km</span></div></div>
+          <div class="ttl"><div class="t">Lake Valhalla</div></div>
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
@@ -772,21 +770,21 @@
           <div class="subhead">Hike details</div>
           <figure class="hike-thumb">
             <img src="images/lake-valhalla.webp" alt="Lake Valhalla on the Pacific Crest Trail" loading="lazy" decoding="async" width="1200" height="675">
-            <figcaption><svg class="ic" aria-hidden="true"><use href="#i-pin"/></svg>Stevens Pass</figcaption>
+            <figcaption><svg class="ic" aria-hidden="true"><use href="#i-pin"/></svg>Leavenworth, WA</figcaption>
           </figure>
           <div class="diff-row">
             <span class="diff mod">Moderate</span>
-            <span class="where">Stevens Pass · Jul 16</span>
+            <span class="where">Leavenworth, WA · Jul 16</span>
           </div>
           <div class="stat-grid">
-            <div class="stat"><div class="k">Distance</div><div class="v"><span class="u" data-km="11.3 km" data-mi="7.0 mi">11.3 km</span></div></div>
-            <div class="stat"><div class="k">Elevation gain</div><div class="v"><span class="u" data-km="457 m" data-mi="1,500 ft">457 m</span></div></div>
-            <div class="stat"><div class="k">Highest point</div><div class="v"><span class="u" data-km="1,539 m" data-mi="5,050 ft">1,539 m</span></div></div>
+            <div class="stat"><div class="k">Distance</div><div class="v"><span class="u" data-km="10.3 km" data-mi="6.4 mi">10.3 km</span></div></div>
+            <div class="stat"><div class="k">Elevation gain</div><div class="v"><span class="u" data-km="418 m" data-mi="1,371 ft">418 m</span></div></div>
+            <div class="stat"><div class="k">Route</div><div class="v">Out &amp; back</div></div>
             <div class="stat"><div class="k">Drive time</div><div class="v">1h 30m</div></div>
-            <div class="stat"><div class="k">Hike time</div><div class="v">3.5–4.5 h</div></div>
-            <div class="stat"><div class="k">Pass required</div><div class="v">None required</div></div>
+            <div class="stat"><div class="k">Hike time</div><div class="v">3 h 16 min</div></div>
+            <div class="stat"><div class="k">Pass required</div><div class="v">NW Forest Pass or parking fee</div></div>
           </div>
-          <a class="wta" href="https://www.wta.org/go-hiking/hikes/lake-valhalla" target="_blank" rel="noopener">View on WTA <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+          <a class="traillink" href="https://huangwaylon.github.io/gpx/#/trail/lake-valhalla" target="_blank" rel="noopener">View trail map <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
       </details>
 
@@ -795,7 +793,7 @@
           <span class="node"></span>
           <div class="date-chip"><div class="d">17</div><div class="m">JUL</div><div class="wd">Fri</div></div>
           <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-shopping-bag"/></svg></span>
-          <div class="ttl"><div class="t">Souvenirs &amp; Ballard</div><div class="sub">Shopping · locks · Gas Works</div></div>
+          <div class="ttl"><div class="t">Souvenirs &amp; Ballard</div></div>
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
@@ -810,12 +808,12 @@
         </div>
       </details>
 
-      <details class="card hike" data-diff="easy">
+      <details class="card hike" data-diff="mod">
         <summary class="head">
           <span class="node"></span>
           <div class="date-chip"><div class="d">18</div><div class="m">JUL</div><div class="wd">Sat</div></div>
           <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-waves"/></svg></span>
-          <div class="ttl"><div class="t">Lake Talapus</div><div class="sub">Snoqualmie · <span class="u" data-km="10 km" data-mi="6.2 mi">10 km</span></div></div>
+          <div class="ttl"><div class="t">Lake Talapus</div></div>
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
@@ -829,21 +827,21 @@
           <div class="subhead">Hike details</div>
           <figure class="hike-thumb">
             <img src="images/talapus-lake.webp" alt="Talapus and Olallie lakes" loading="lazy" decoding="async" width="1200" height="675">
-            <figcaption><svg class="ic" aria-hidden="true"><use href="#i-pin"/></svg>Snoqualmie</figcaption>
+            <figcaption><svg class="ic" aria-hidden="true"><use href="#i-pin"/></svg>Snoqualmie Pass, WA</figcaption>
           </figure>
           <div class="diff-row">
-            <span class="diff easy">Easy</span>
-            <span class="where">Snoqualmie · Jul 18</span>
+            <span class="diff mod">Moderate</span>
+            <span class="where">Snoqualmie Pass, WA · Jul 18</span>
           </div>
           <div class="stat-grid">
-            <div class="stat"><div class="k">Distance</div><div class="v"><span class="u" data-km="10 km" data-mi="6.2 mi">10 km</span></div></div>
-            <div class="stat"><div class="k">Elevation gain</div><div class="v"><span class="u" data-km="372 m" data-mi="1,220 ft">372 m</span></div></div>
-            <div class="stat"><div class="k">Highest point</div><div class="v"><span class="u" data-km="1,152 m" data-mi="3,780 ft">1,152 m</span></div></div>
+            <div class="stat"><div class="k">Distance</div><div class="v"><span class="u" data-km="5.6 km" data-mi="3.5 mi">5.6 km</span></div></div>
+            <div class="stat"><div class="k">Elevation gain</div><div class="v"><span class="u" data-km="200 m" data-mi="656 ft">200 m</span></div></div>
+            <div class="stat"><div class="k">Route</div><div class="v">Out &amp; back</div></div>
             <div class="stat"><div class="k">Drive time</div><div class="v">1h 10m</div></div>
-            <div class="stat"><div class="k">Hike time</div><div class="v">1.5–2 h</div></div>
+            <div class="stat"><div class="k">Hike time</div><div class="v">1 h 42 min</div></div>
             <div class="stat"><div class="k">Pass required</div><div class="v">NW Forest Pass</div></div>
           </div>
-          <a class="wta" href="https://www.wta.org/go-hiking/hikes/talapus-and-olallie-lakes" target="_blank" rel="noopener">View on WTA <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+          <a class="traillink" href="https://huangwaylon.github.io/gpx/#/trail/talapus-lake" target="_blank" rel="noopener">View trail map <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
       </details>
 
@@ -852,7 +850,7 @@
           <span class="node"></span>
           <div class="date-chip"><div class="d">19</div><div class="m">JUL</div><div class="wd">Sun</div></div>
           <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-plane-takeoff"/></svg></span>
-          <div class="ttl"><div class="t">Fly Home to Japan</div><div class="sub">Early flight · bro drives</div></div>
+          <div class="ttl"><div class="t">Fly Home to Japan</div></div>
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
