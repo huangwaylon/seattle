@@ -71,6 +71,8 @@
   .nojs .tabbar{display:none;}
   .nojs .views{padding-bottom:24px;}
   .nojs #view-packing{margin-top:24px;border-top:1px solid var(--line);}
+  /* Packing has no full-bleed hero, so pad its top past the status bar / Dynamic Island in standalone. */
+  #view-packing{padding-top:var(--safe-t);}
   @keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
 
   h2.section{display:flex;align-items:center;gap:10px;font-family:var(--font-display);font-size:24px;
@@ -110,7 +112,7 @@
   .unit-toggle{display:inline-flex;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-chip);
     padding:3px;gap:2px;}
   .unit-toggle button{border:0;background:none;color:var(--muted);font-family:inherit;font-weight:700;font-size:12px;
-    letter-spacing:.04em;padding:6px 13px;border-radius:var(--r-chip);cursor:pointer;font-variant-numeric:tabular-nums;
+    letter-spacing:.04em;padding:9px 15px;border-radius:var(--r-chip);cursor:pointer;font-variant-numeric:tabular-nums;
     transition:background .15s, color .15s, transform .1s;}
   .unit-toggle button.active{background:var(--pine);color:#fff;}
   .unit-toggle button:active{transform:scale(.94);}

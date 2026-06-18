@@ -1,4 +1,4 @@
-const CACHE = 'seattle-2026-v10';
+const CACHE = 'seattle-2026-v11';
 const ASSETS = [
   './', './index.html', './manifest.webmanifest', './icon-180.png', './icon-512.png',
   './images/mount-rainier.jpg',
