@@ -276,6 +276,33 @@
     text-decoration-color:var(--line-strong);}
   .cb:focus-visible + .checkrow .box{box-shadow:0 0 0 3px var(--pine-ring);}
 
+  /* ---- editable list (edit mode) ---- */
+  .gname-input{flex:1;min-width:0;font-family:var(--font-display);font-weight:600;font-size:17px;letter-spacing:-.2px;
+    color:var(--ink);background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:8px 11px;}
+  .edit-row{display:flex;align-items:center;gap:10px;padding:9px 18px;border-bottom:1px solid var(--line-2);}
+  .edit-row:last-of-type{border-bottom:none;}
+  .item-input{flex:1;min-width:0;font-family:inherit;font-size:15px;color:var(--ink);
+    background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:10px 12px;}
+  .gname-input:focus,.item-input:focus{outline:none;border-color:var(--pine-ring);box-shadow:0 0 0 3px var(--pine-soft);}
+  .icon-btn{flex:0 0 auto;width:34px;height:34px;border-radius:10px;border:1px solid var(--line);background:var(--surface-2);
+    color:var(--muted);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:transform .1s,background .15s;}
+  .icon-btn .ic{width:16px;height:16px;}
+  .icon-btn:active{transform:scale(.92);}
+  .icon-btn.danger{color:var(--hard);border-color:var(--ember-ring);background:var(--ember-soft);}
+  .add-row{display:flex;align-items:center;gap:9px;width:100%;padding:13px 18px;border:0;border-top:1px dashed var(--line-strong);
+    background:none;color:var(--pine-d);font-family:inherit;font-weight:700;font-size:14px;cursor:pointer;}
+  .add-row .ic{width:16px;height:16px;color:var(--pine);}
+  .add-row:active{background:var(--surface-2);}
+  .add-cat{display:flex;align-items:center;justify-content:center;gap:9px;width:calc(100% - 2*var(--gutter));
+    margin:0 var(--gutter) 14px;padding:15px;border:1.5px dashed var(--line-strong);border-radius:var(--r);
+    background:var(--surface);color:var(--pine-d);font-family:inherit;font-weight:700;font-size:14.5px;cursor:pointer;
+    transition:transform .1s,background .15s;}
+  .add-cat .ic{width:17px;height:17px;color:var(--pine);}
+  .add-cat:active{transform:scale(.99);background:var(--surface-2);}
+  .btn-sm.on{background:var(--pine);border-color:var(--pine);color:#fff;}
+  .btn-sm.on .ic{color:#fff;}
+  .empty-note{color:var(--muted);font-size:13.5px;text-align:center;margin:6px var(--gutter) 18px;line-height:1.5;}
+
   /* ---- bottom tab bar ---- */
   .tabbar{position:fixed;left:0;right:0;bottom:0;z-index:50;
     background:rgba(248,250,246,.82);
@@ -335,6 +362,9 @@
     <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M12 17v5"/><path d="M9 10.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24V16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V7a1 1 0 0 1 1-1 2 2 0 0 0 0-4H8a2 2 0 0 0 0 4 1 1 0 0 1 1 1z"/></symbol>
     <symbol id="i-footprints" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16v-2.38C4 11.5 2.97 10.5 3 8c.03-2.72 1.49-6 4.5-6C9.37 2 10 3.8 10 5.5c0 3.11-2 5.66-2 8.68V16a2 2 0 1 1-4 0Z"/><path d="M20 20v-2.38c0-2.12 1.03-3.12 1-5.62-.03-2.72-1.49-6-4.5-6C14.63 6 14 7.8 14 9.5c0 3.11 2 5.66 2 8.68V20a2 2 0 1 0 4 0Z"/><path d="M16 17h4"/><path d="M4 13h4"/></symbol>
     <symbol id="i-gift" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M10 11v6"/><path d="M14 11v6"/></symbol>
+    <symbol id="i-pencil" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/><path d="m15 5 4 4"/></symbol>
   </defs>
 </svg>
 
@@ -867,8 +897,12 @@
 
   <section class="view" id="view-packing">
     <h2 class="section"><svg class="ic" aria-hidden="true"><use href="#i-backpack"/></svg>Packing</h2>
-    <p class="intro">Tap a row to check. Checks save on your phone (in Safari).</p>
-    <div class="toolbar jsonly"><button class="btn-sm" id="resetPacking">Reset packing</button></div>
+    <p class="intro">Tap a row to check it off. Tap <strong>Edit list</strong> to add, rename, or remove items and categories. Everything saves on your phone (in Safari).</p>
+    <div class="toolbar jsonly">
+      <button class="btn-sm" id="editPacking" type="button"><svg class="ic" aria-hidden="true"><use href="#i-pencil"/></svg><span>Edit list</span></button>
+      <div class="spacer"></div>
+      <button class="btn-sm" id="resetPacking" type="button">Reset checks</button>
+    </div>
     <div id="packing">
       <div class="group">
         <div class="glabel"><span class="gicon"><svg class="ic" aria-hidden="true"><use href="#i-pin"/></svg></span><span>Must Bring</span><span class="ct jsonly" id="ct-packing-0" data-total="9"></span></div>
@@ -920,36 +954,6 @@
   document.documentElement.classList.remove('nojs');
   document.documentElement.classList.add('js-tabs');
 
-  function load(k){try{return JSON.parse(localStorage.getItem(k)||'{}');}catch(e){return {};}}
-  function save(k,o){try{localStorage.setItem(k,JSON.stringify(o));}catch(e){}}
-  function updateCounts(store){
-    document.querySelectorAll('.ct[id^="ct-'+store+'-"]').forEach(function(ct){
-      var gi=ct.id.split('-')[2], total=+ct.dataset.total, done=0;
-      document.querySelectorAll('.cb[data-store="'+store+'"][data-gi="'+gi+'"]').forEach(function(cb){if(cb.checked)done++;});
-      ct.textContent=done+'/'+total;
-    });
-  }
-  ['packing'].forEach(function(store){
-    var st=load(store);
-    document.querySelectorAll('.cb[data-store="'+store+'"]').forEach(function(cb){
-      if(st[cb.id]) cb.checked=true;
-      cb.addEventListener('change',function(){
-        var s=load(store);
-        if(cb.checked) s[cb.id]=1; else delete s[cb.id];
-        save(store,s); updateCounts(store);
-      });
-    });
-    updateCounts(store);
-  });
-  function reset(store){
-    if(confirm('Reset these checks?')){
-      save(store,{});
-      document.querySelectorAll('.cb[data-store="'+store+'"]').forEach(function(cb){cb.checked=false;});
-      updateCounts(store);
-    }
-  }
-  var rp=document.getElementById('resetPacking'); if(rp) rp.onclick=function(){reset('packing');};
-
   var ta=document.getElementById('toggleAll');
   if(ta){var open=false;ta.addEventListener('click',function(){
     open=!open;
@@ -974,6 +978,143 @@
     r.addEventListener('change',function(){window.scrollTo(0,0);});
   });
 
+})();
+</script>
+<script>
+/* PACKING LIST — data-driven, editable, persisted.
+   The static .group markup in #packing is the no-JS fallback AND the one-time seed.
+   On load we build a model from it (or restore the saved one), then render from the model.
+   All edits mutate the model and save to localStorage['packingData']. */
+(function(){
+  var KEY='packingData';
+  var box=document.getElementById('packing');
+  if(!box) return;
+  var editing=false, data=null, seq=0;
+
+  function uid(){return 'p'+Date.now().toString(36)+(seq++).toString(36);}
+  function loadData(){try{var d=JSON.parse(localStorage.getItem(KEY));return (d&&d.cats)?d:null;}catch(e){return null;}}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(data));}catch(e){}}
+  function esc(s){return (s||'').replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function findCat(id){for(var i=0;i<data.cats.length;i++)if(data.cats[i].id===id)return data.cats[i];return null;}
+  function findItem(cat,id){for(var i=0;i<cat.items.length;i++)if(cat.items[i].id===id)return cat.items[i];return null;}
+
+  /* Build the model from the static fallback DOM, migrating any old per-checkbox saved checks. */
+  function seedFromDOM(){
+    var old; try{old=JSON.parse(localStorage.getItem('packing')||'{}');}catch(e){old={};}
+    var cats=[];
+    box.querySelectorAll('.group').forEach(function(g,gi){
+      var nameEl=g.querySelector('.glabel > span:not(.gicon):not(.ct)');
+      var use=g.querySelector('.gicon use');
+      var items=[];
+      g.querySelectorAll('.checkrow').forEach(function(row,idx){
+        var ctxt=row.querySelector('.ctxt'), small=ctxt.querySelector('small');
+        items.push({
+          id:uid(),
+          text:((ctxt.firstChild&&ctxt.firstChild.nodeValue)||'').trim(),
+          note:small?small.textContent.trim():'',
+          done:!!old['packing-'+gi+'-'+idx]
+        });
+      });
+      cats.push({id:uid(),name:nameEl?nameEl.textContent.trim():'List',
+        icon:use?use.getAttribute('href'):'#i-pin',items:items});
+    });
+    return {v:1,cats:cats};
+  }
+
+  function render(){
+    var h='';
+    data.cats.forEach(function(cat){
+      h+='<div class="group'+(editing?' editing':'')+'" data-cat="'+cat.id+'">';
+      h+='<div class="glabel"><span class="gicon"><svg class="ic" aria-hidden="true"><use href="'+esc(cat.icon)+'"/></svg></span>';
+      if(editing){
+        h+='<input class="gname-input" data-cat="'+cat.id+'" value="'+esc(cat.name)+'" placeholder="Category name" aria-label="Category name">';
+        h+='<button type="button" class="icon-btn danger" data-act="del-cat" data-cat="'+cat.id+'" aria-label="Delete category"><svg class="ic" aria-hidden="true"><use href="#i-trash"/></svg></button>';
+      }else{
+        var done=cat.items.filter(function(i){return i.done;}).length;
+        h+='<span class="gname">'+esc(cat.name)+'</span><span class="ct">'+done+'/'+cat.items.length+'</span>';
+      }
+      h+='</div>';
+      cat.items.forEach(function(it){
+        if(editing){
+          h+='<div class="edit-row"><input class="item-input" data-cat="'+cat.id+'" data-item="'+it.id+'" value="'+esc(it.text)+'" placeholder="Item" aria-label="Item">'
+            +'<button type="button" class="icon-btn danger" data-act="del-item" data-cat="'+cat.id+'" data-item="'+it.id+'" aria-label="Delete item"><svg class="ic" aria-hidden="true"><use href="#i-trash"/></svg></button></div>';
+        }else{
+          h+='<input type="checkbox" class="cb" id="it-'+it.id+'" data-cat="'+cat.id+'" data-item="'+it.id+'"'+(it.done?' checked':'')+'>'
+            +'<label class="checkrow" for="it-'+it.id+'"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span>'
+            +'<span class="ctxt">'+esc(it.text)+(it.note?'<small>'+esc(it.note)+'</small>':'')+'</span></label>';
+        }
+      });
+      if(editing) h+='<button type="button" class="add-row" data-act="add-item" data-cat="'+cat.id+'"><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg>Add item</button>';
+      h+='</div>';
+    });
+    if(editing) h+='<button type="button" class="add-cat" data-act="add-cat"><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg>Add category</button>';
+    else if(!data.cats.length) h+='<p class="empty-note">No items yet. Tap <strong>Edit list</strong> to add some.</p>';
+    box.innerHTML=h;
+  }
+
+  /* toggle a check (no re-render needed — just update the model + count) */
+  box.addEventListener('change',function(e){
+    var cb=e.target.closest('.cb'); if(!cb) return;
+    var cat=findCat(cb.dataset.cat); if(!cat) return;
+    var it=findItem(cat,cb.dataset.item); if(!it) return;
+    it.done=cb.checked; save();
+    var ct=cb.closest('.group').querySelector('.ct');
+    if(ct) ct.textContent=cat.items.filter(function(i){return i.done;}).length+'/'+cat.items.length;
+  });
+
+  /* live-edit category names / item text */
+  box.addEventListener('input',function(e){
+    var t=e.target, cat=t.dataset.cat&&findCat(t.dataset.cat); if(!cat) return;
+    if(t.classList.contains('gname-input')){cat.name=t.value;save();}
+    else if(t.classList.contains('item-input')){var it=findItem(cat,t.dataset.item);if(it){it.text=t.value;save();}}
+  });
+
+  /* add / delete buttons */
+  box.addEventListener('click',function(e){
+    var btn=e.target.closest('[data-act]'); if(!btn) return;
+    var act=btn.dataset.act, cat=btn.dataset.cat&&findCat(btn.dataset.cat);
+    if(act==='del-cat'){
+      if(cat&&confirm('Delete "'+(cat.name||'this category')+'" and its items?')){
+        data.cats=data.cats.filter(function(c){return c!==cat;}); save(); render();
+      }
+    }else if(act==='del-item'&&cat){
+      cat.items=cat.items.filter(function(i){return i.id!==btn.dataset.item;}); save(); render();
+    }else if(act==='add-item'&&cat){
+      var it={id:uid(),text:'',note:'',done:false}; cat.items.push(it); save(); render();
+      focus('.item-input[data-item="'+it.id+'"]');
+    }else if(act==='add-cat'){
+      var nc={id:uid(),name:'',icon:'#i-backpack',items:[]}; data.cats.push(nc); save(); render();
+      focus('.gname-input[data-cat="'+nc.id+'"]');
+    }
+  });
+  function focus(sel){var el=box.querySelector(sel); if(el) el.focus();}
+
+  /* edit-mode toggle */
+  var editBtn=document.getElementById('editPacking');
+  var resetBtn=document.getElementById('resetPacking');
+  if(editBtn) editBtn.addEventListener('click',function(){
+    editing=!editing;
+    if(!editing){ /* leaving edit mode — drop blank rows so no ghost items linger */
+      data.cats.forEach(function(c){c.items=c.items.filter(function(i){return i.text.trim()!=='';});});
+      save();
+    }
+    editBtn.classList.toggle('on',editing);
+    var lb=editBtn.querySelector('span'); if(lb) lb.textContent=editing?'Done':'Edit list';
+    if(resetBtn) resetBtn.style.display=editing?'none':'';
+    render();
+  });
+
+  /* reset = uncheck everything (keeps the list itself) */
+  if(resetBtn) resetBtn.addEventListener('click',function(){
+    if(confirm('Uncheck all packing items?')){
+      data.cats.forEach(function(c){c.items.forEach(function(i){i.done=false;});});
+      save(); render();
+    }
+  });
+
+  data=loadData()||seedFromDOM();
+  save();
+  render();
 })();
 </script>
 <script>

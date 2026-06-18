@@ -7,7 +7,7 @@ A self-contained, offline-first travel itinerary for a July 2026 trip to Seattle
 ## Features
 - 18-day itinerary, 8 hikes with stats, packing list, and to-do — all in one file.
 - Works **fully offline** once installed (service worker caches everything).
-- **Tabs + expanding cards**; checklists **save** to `localStorage`.
+- **Tabs + expanding cards**; the **packing list is fully editable** — add, rename, and remove categories and items — and everything **saves** to `localStorage`.
 - Degrades gracefully: with JavaScript off (e.g. a plain file preview) all content still shows, just stacked instead of tabbed.
 
 ## Files

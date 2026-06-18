@@ -60,10 +60,19 @@ There is no build step or framework. No dependencies. No bundler.
 - **Accordions = native `<details>/<summary>`.** No JS for expand/collapse. The chevron rotates
   via `details[open] > summary .chev`.
 - **Checklists = native `<input type="checkbox" class="cb">` + `<label class="checkrow">`.**
-  Checked styling is pure CSS (`.cb:checked + .checkrow ...`). JS only adds persistence + counts.
-- **Persistence:** packing/to-do checkbox state saves to `localStorage` (keys `packing`/`todo`,
-  objects keyed by checkbox id like `packing-0-2`). Only persists in a real browser context
-  (Safari / installed PWA), not in ephemeral Quick Look.
+  Checked styling is pure CSS (`.cb:checked + .checkrow ...`).
+- **The packing list is data-driven & user-editable** (the one exception to "static markup").
+  The static `.group` blocks inside `#packing` are BOTH the no-JS fallback AND the one-time seed:
+  on load the packing script builds a model from that DOM (migrating any old per-checkbox checks),
+  or restores the saved model, then re-renders `#packing` from the model. An **Edit list** toggle
+  swaps each row into inline inputs with controls to create / rename / delete categories and
+  create / edit / delete items; blank rows are pruned on exit. Everything (structure + checks)
+  persists. The itinerary stays 100% static HTML — not user-editable.
+- **Persistence:** the whole packing model saves to `localStorage['packingData']` as
+  `{v, cats:[{id, name, icon, items:[{id, text, note, done}]}]}`, written on every edit/check.
+  Item/category ids are generated at runtime (`uid()`), so they're stable per device but differ
+  across installs — never hard-code them. Only persists in a real browser context (Safari /
+  installed PWA), not in ephemeral Quick Look.
 - **`.jsonly` elements** (e.g. "Expand all", "Reset" buttons, group counts) are hidden unless JS
   runs, via `.nojs .jsonly{display:none}`.
 - **Responsive:** content is a centered `max-width:var(--maxw)` (720px) column; the hero height
@@ -84,7 +93,9 @@ There is no build step or framework. No dependencies. No bundler.
      trip-specific and not in `gpx`. Each hike's "View trail map" link (`a.traillink`) deep-links
      to that trail in the `gpx/` app via `huangwaylon.github.io/gpx/#/trail/<slug>`.
    - Checklist items: an `<input class="cb" id="<store>-<group>-<index>">` immediately followed by
-     its `<label class="checkrow" for="...">`. Keep ids stable so saved checks survive.
+     its `<label class="checkrow" for="...">`. These static rows are the packing list's **seed +
+     no-JS fallback** — editing them changes the defaults a *fresh* install starts from. Once a
+     device has saved its own `packingData`, that model wins and the static seed is ignored there.
 2. Keep markup static — do not move content rendering into JS.
 3. **After ANY change to `index.html` (or other cached assets): bump the cache name in `sw.js`**
    (`seattle-2026-v2` → `v3`). Otherwise installed phones keep serving the old cached copy.
