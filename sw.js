@@ -1,4 +1,4 @@
-const CACHE = 'seattle-2026-v13';
+const CACHE = 'seattle-2026-v14';
 const ASSETS = [
   './', './index.html', './manifest.webmanifest', './icon-180.png', './icon-512.png',
   './images/mount-rainier.jpg',
@@ -24,10 +24,18 @@ self.addEventListener('fetch', function(e){
   e.respondWith(
     caches.match(e.request).then(function(r){
       return r || fetch(e.request).then(function(resp){
-        var copy = resp.clone();
-        caches.open(CACHE).then(function(c){c.put(e.request, copy);});
+        // Only cache our own complete, successful responses — never opaque
+        // cross-origin, 4xx/5xx, or 206 partial responses (they'd poison the cache).
+        if(resp && resp.ok && resp.type==='basic'){
+          var copy = resp.clone();
+          caches.open(CACHE).then(function(c){c.put(e.request, copy);});
+        }
         return resp;
-      }).catch(function(){ return caches.match('./index.html'); });
+      }).catch(function(){
+        // Offline + uncached: fall back to the app shell only for page navigations.
+        // For other requests (images, etc.) fail honestly rather than returning HTML.
+        return e.request.mode==='navigation' ? caches.match('./index.html') : Response.error();
+      });
     })
   );
 });

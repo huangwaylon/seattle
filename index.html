@@ -992,7 +992,7 @@
   var editing=false, data=null, seq=0;
 
   function uid(){return 'p'+Date.now().toString(36)+(seq++).toString(36);}
-  function loadData(){try{var d=JSON.parse(localStorage.getItem(KEY));return (d&&d.cats)?d:null;}catch(e){return null;}}
+  function loadData(){try{var d=JSON.parse(localStorage.getItem(KEY));return (d&&d.v===1&&Array.isArray(d.cats))?d:null;}catch(e){return null;}}
   function save(){try{localStorage.setItem(KEY,JSON.stringify(data));}catch(e){}}
   function esc(s){return (s||'').replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
   function findCat(id){for(var i=0;i<data.cats.length;i++)if(data.cats[i].id===id)return data.cats[i];return null;}
@@ -1141,7 +1141,7 @@
 })();
 </script>
 <script>
-if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){});});}
+if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).catch(function(){});});}
 </script>
 </body>
 </html>
