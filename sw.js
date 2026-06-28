@@ -1,4 +1,4 @@
-const CACHE = 'seattle-2026-v14';
+const CACHE = 'seattle-2026-v15';
 const ASSETS = [
   './', './index.html', './manifest.webmanifest', './icon-180.png', './icon-512.png',
   './images/mount-rainier.jpg',
@@ -12,7 +12,13 @@ const ASSETS = [
   './images/talapus-lake.webp',
 ];
 self.addEventListener('install', function(e){
-  e.waitUntil(caches.open(CACHE).then(function(c){return c.addAll(ASSETS);}).then(function(){return self.skipWaiting();}));
+  // Precache the shell, but DON'T skipWaiting automatically — the page surfaces a
+  // "New version available" banner and only this newer worker takes over when the
+  // user taps Refresh (it still activates on its own once the app is fully closed).
+  e.waitUntil(caches.open(CACHE).then(function(c){return c.addAll(ASSETS);}));
+});
+self.addEventListener('message', function(e){
+  if(e.data && e.data.type==='SKIP_WAITING') self.skipWaiting();
 });
 self.addEventListener('activate', function(e){
   e.waitUntil(caches.keys().then(function(ks){

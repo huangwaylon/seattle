@@ -17,7 +17,7 @@ Live site: https://huangwaylon.github.io/seattle/
 |------|------|
 | `index.html` | The entire app. Static HTML content + inline `<style>` + inline `<script>`. **Source of truth — edit directly.** |
 | `images/` | Real image files (Mt Rainier hero + 8 hike photos). Linked via `<img>` tags / CSS, not base64-embedded. Precached by the service worker for offline use. |
-| `sw.js` | Service worker. Cache-first; precaches the app shell **and `images/*`** for offline use. |
+| `sw.js` | Service worker. Cache-first; precaches the app shell **and `images/*`** for offline use. Update is **message-driven**: a freshly-installed worker waits (no auto-skipWaiting) until the page tells it to `SKIP_WAITING` via the refresh banner — or until the app is fully closed, when it activates on its own. |
 | `manifest.webmanifest` | PWA manifest (name, icons, `standalone` display, theme colors). |
 | `icon-180.png` | iOS `apple-touch-icon` (Home Screen). |
 | `icon-512.png` | Manifest/PWA install icon (also `maskable`). |
@@ -68,7 +68,9 @@ There is no build step or framework. No dependencies. No bundler.
   on load the packing script builds a model from that DOM (migrating any old per-checkbox checks),
   or restores the saved model, then re-renders `#packing` from the model. An **Edit list** toggle
   swaps each row into inline inputs with controls to create / rename / delete categories and
-  create / edit / delete items; blank rows are pruned on exit. Everything (structure + checks)
+  create / edit / delete items, plus **up/down buttons to reorder the top-level categories**
+  (reordering just permutes the `cats` array, so it's automatically compatible with older saved
+  data); blank rows are pruned on exit. Everything (structure + order + checks)
   persists. The itinerary stays 100% static HTML — not user-editable.
 - **Persistence:** the whole packing model saves to `localStorage['packingData']` as
   `{v, cats:[{id, name, icon, items:[{id, text, note, done}]}]}`, written on every edit/check.
@@ -149,7 +151,10 @@ GitHub Pages auto-rebuilds from `main` (~1 min). Check the **Actions** tab for t
 
 **Installing on iPhone (after a deploy):** open the live URL in **Safari on Wi-Fi**, let it fully
 load (caches it), then **Share → Add to Home Screen**, and open once from the icon while online.
-After bumping the SW cache, an installed app updates on its next **online** launch.
+After bumping the SW cache, an installed app shows a **"New version available" refresh banner**
+on its next **online** launch (or when it returns to the foreground and re-checks); tapping
+**Refresh** activates the new worker and reloads. If the app is fully closed and reopened, the
+new version activates on its own.
 
 ## Gotchas & notes
 
