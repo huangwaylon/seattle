@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Seattle 2026 — Itinerary</title>
+<style>
+  :root{
+    --bg:#f3f5f1; --surface:#ffffff; --surface-2:#f3f6f1;
+    --line:rgba(22,35,29,.14); --line-2:rgba(22,35,29,.08);
+    --ink:#16231d; --ink-2:#41504a; --muted:#5f6a63; --faint:#869089;
+    --pine:#1f6f5c; --pine-d:#175949; --pine-soft:rgba(31,111,92,.10);
+    --ember:#d4662b; --ember-soft:rgba(212,102,43,.12);
+    --easy:#1f7a4d; --mod:#8a5410; --hard:#c0392b; --epic:#8e3bb0;
+    --font-sans:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --font-display:"New York","Iowan Old Style","Palatino Linotype",Palatino,Georgia,ui-serif,serif;
+  }
+  @page{ size:Letter; margin:6mm 10mm; }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{background:#fff;color:var(--ink);font-family:var(--font-sans);
+    -webkit-font-smoothing:antialiased;line-height:1.32;font-size:9px;}
+
+  /* ---- header band ---- */
+  .masthead{display:flex;align-items:flex-end;justify-content:space-between;
+    border-bottom:2.5px solid var(--pine);padding-bottom:4px;margin-bottom:6px;}
+  .masthead .eyebrow{font-size:7.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--ember);margin-bottom:3px;}
+  .masthead h1{font-family:var(--font-display);font-size:26px;font-weight:600;letter-spacing:-.8px;
+    line-height:.92;color:var(--ink);}
+  .masthead .meta{text-align:right;font-size:9px;color:var(--muted);font-weight:600;line-height:1.5;}
+  .masthead .meta .big{font-family:var(--font-display);font-size:14px;color:var(--ink);font-weight:600;}
+
+  .sectitle{font-family:var(--font-display);font-size:13px;font-weight:600;color:var(--pine-d);
+    letter-spacing:-.2px;margin:0 0 6px;display:flex;align-items:center;gap:7px;}
+  .sectitle::after{content:"";flex:1;height:1px;background:var(--line);}
+
+  /* ---- itinerary columns ---- */
+  .cols{column-count:3;column-gap:10px;}
+  .day{break-inside:avoid;border:1px solid var(--line);border-radius:8px;overflow:hidden;
+    margin-bottom:4px;background:var(--surface);}
+  .day .dhead{display:flex;align-items:center;gap:7px;padding:4px 7px;background:var(--surface-2);
+    border-bottom:1px solid var(--line-2);border-left:3px solid var(--muted);}
+  .day.hike .dhead{border-left-color:var(--pine);}
+  .day.travel .dhead{border-left-color:var(--ember);}
+  .day .dchip{flex:0 0 auto;text-align:center;min-width:21px;}
+  .day .dchip .dd{font-family:var(--font-display);font-size:16px;font-weight:600;line-height:.9;
+    letter-spacing:-.5px;}
+  .day .dchip .ww{font-size:6px;font-weight:700;letter-spacing:.10em;text-transform:uppercase;
+    color:var(--faint);margin-top:1px;}
+  .day.travel .dchip .dd{color:var(--ember);}
+  .day .dttl{font-family:var(--font-display);font-size:11px;font-weight:600;line-height:1.05;
+    letter-spacing:-.2px;flex:1;}
+  .day .dbody{padding:3px 8px 4px;}
+
+  .tl{list-style:none;}
+  .tl li{display:flex;gap:6px;padding:0.5px 0;}
+  .tl li .tm{flex:0 0 30px;text-align:right;font-variant-numeric:tabular-nums;font-weight:700;
+    color:var(--pine-d);font-size:8px;padding-top:.5px;}
+  .tl li .tx{flex:1;color:var(--ink-2);font-size:8.5px;line-height:1.28;}
+  .tl li .tx i{display:block;color:var(--muted);font-size:7.5px;font-style:normal;}
+
+  .bul{list-style:none;}
+  .bul li{position:relative;padding:0.5px 0 0.5px 9px;color:var(--ink-2);font-size:8.5px;line-height:1.28;}
+  .bul li::before{content:"";position:absolute;left:1px;top:5px;width:3px;height:3px;border-radius:50%;
+    background:var(--pine);}
+  .bul li i{display:block;color:var(--muted);font-size:7.5px;font-style:normal;}
+
+  .subh{font-size:6.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    margin:4px 0 2px;}
+
+  .diffrow{display:flex;align-items:center;gap:5px;margin:4px 0 3px;flex-wrap:wrap;}
+  .diff{font-size:6.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+    padding:2px 6px;border-radius:999px;border:1px solid var(--line);background:var(--surface-2);}
+  .diff.easy{color:var(--easy);} .diff.mod{color:var(--mod);}
+  .diff.hard{color:var(--hard);} .diff.epic{color:var(--epic);}
+  .where{font-size:7.5px;color:var(--muted);}
+
+  .stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2.5px;margin-top:3px;}
+  .st{background:var(--surface-2);border:1px solid var(--line-2);border-radius:5px;padding:2.5px 4px;}
+  .st .k{font-size:5.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);}
+  .st .v{font-size:7.5px;font-weight:700;color:var(--ink);margin-top:1px;font-variant-numeric:tabular-nums;line-height:1.1;}
+  .units{color:var(--faint);font-weight:600;display:block;font-size:6.5px;}
+
+  /* ---- packing ---- */
+  .pcols{column-count:2;column-gap:11px;}
+  .pgroup{break-inside:avoid;border:1px solid var(--line);border-radius:8px;overflow:hidden;
+    margin-bottom:8px;background:var(--surface);}
+  .pgroup .ph{display:flex;align-items:center;justify-content:space-between;padding:5px 8px;
+    background:var(--surface-2);border-bottom:1px solid var(--line-2);}
+  .pgroup .ph .pn{font-family:var(--font-display);font-size:11px;font-weight:600;color:var(--ink);}
+  .pgroup .ph .pc{font-size:7px;font-weight:700;color:var(--pine);background:var(--pine-soft);
+    padding:1.5px 7px;border-radius:999px;}
+  .pgroup ul{list-style:none;padding:4px 8px 5px;}
+  .pgroup li{display:flex;gap:7px;align-items:flex-start;padding:2px 0;font-size:9px;color:var(--ink);}
+  .pgroup li .ck{flex:0 0 auto;width:9px;height:9px;border:1.3px solid var(--muted);border-radius:2.5px;
+    margin-top:1.5px;}
+  .pgroup li i{display:block;color:var(--muted);font-size:7.5px;font-style:normal;}
+
+  .foot{margin-top:9px;padding-top:6px;border-top:1px solid var(--line);text-align:center;
+    color:var(--faint);font-size:7.5px;letter-spacing:.04em;}
+  .page2-top{margin-top:2px;}
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 : ITINERARY ============ -->
+<div class="masthead">
+  <div>
+    <div class="eyebrow">Pacific Northwest · 18 days</div>
+    <h1>Seattle 2026</h1>
+  </div>
+  <div class="meta">
+    <div class="big">Jul 2 – Jul 19</div>
+    <div>Washington, USA</div>
+    <div>8 hikes · family trip</div>
+  </div>
+</div>
+
+<div class="sectitle">Itinerary</div>
+<div class="cols">
+
+  <div class="day travel">
+    <div class="dhead"><div class="dchip"><div class="dd">2</div><div class="ww">Thu Jul</div></div><div class="dttl">Arrival &amp; Errands</div></div>
+    <div class="dbody">
+      <ul class="tl">
+        <li><span class="tm">9:36</span><span class="tx">Land — Flight DL166</span></li>
+        <li><span class="tm"></span><span class="tx">Picked up by parents</span></li>
+        <li><span class="tm">~12:00</span><span class="tx">Arrive back home</span></li>
+      </ul>
+      <div class="subh">Afternoon errands</div>
+      <ul class="bul">
+        <li>Walmart<i>BIMBO crispy wheels · strawberry shortcake ice cream</i></li>
+        <li>H-Mart<i>Gas canisters</i></li>
+        <li>Trader Joe's<i>Rainier cherries</i></li>
+        <li>Target</li>
+        <li>Downtown Redmond &amp; Marymoor Park</li>
+        <li>Bro makes ice cream</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="day hike">
+    <div class="dhead"><div class="dchip"><div class="dd">3</div><div class="ww">Fri Jul</div></div><div class="dttl">Lake 22</div></div>
+    <div class="dbody">
+      <ul class="tl">
+        <li><span class="tm">7:00</span><span class="tx">Leave house</span></li>
+        <li><span class="tm">8:30</span><span class="tx">Start hike</span></li>
+        <li><span class="tm">10:30</span><span class="tx">Brunch</span></li>
+        <li><span class="tm">11:30</span><span class="tx">Continue hike</span></li>
+        <li><span class="tm">13:00</span><span class="tx">Go home</span></li>
+        <li><span class="tm"></span><span class="tx">Chipotle dinner</span></li>
+      </ul>
+      <div class="diffrow"><span class="diff mod">Moderate</span><span class="where">Granite Falls, WA</span></div>
+      <div class="stats">
+        <div class="st"><div class="k">Distance</div><div class="v">9.8 km <span class="units">/ 6.1 mi</span></div></div>
+        <div class="st"><div class="k">Elev. gain</div><div class="v">444 m <span class="units">/ 1,456 ft</span></div></div>
+        <div class="st"><div class="k">Route</div><div class="v">Out &amp; back</div></div>
+        <div class="st"><div class="k">Hike time</div><div class="v">3 h 17 m</div></div>
+        <div class="st"><div class="k">Drive</div><div class="v">1 h 30 m</div></div>
+        <div class="st"><div class="k">Pass</div><div class="v">NW Forest Pass</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="day">
+    <div class="dhead"><div class="dchip"><div class="dd">4</div><div class="ww">Sat Jul</div></div><div class="dttl">4th of July</div></div>
+    <div class="dbody">
+      <ul class="bul">
+        <li>Visit bro at Makistand</li>
+        <li>Burgers or hotdogs for lunch</li>
+        <li>Seafair or Bellevue 4th of July event<i>visitbellevuewa.com · seafair.org</i></li>
+        <li>Watch fireworks</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="day">
+    <div class="dhead"><div class="dchip"><div class="dd">5</div><div class="ww">Sun Jul</div></div><div class="dttl">Seattle City Day</div></div>
+    <div class="dbody">
+      <ul class="tl">
+        <li><span class="tm">9:30</span><span class="tx">Depart from house</span></li>
+        <li><span class="tm">10:30</span><span class="tx">Arrive at UW</span></li>
+        <li><span class="tm">11:30</span><span class="tx">Depart UW</span></li>
+        <li><span class="tm">12:00</span><span class="tx">Lunch at Pike Place</span></li>
+      </ul>
+      <div class="subh">Downtown Seattle</div>
+      <ul class="bul">
+        <li>Pike Place Market<i>Original Starbucks · Pike Place Chowder</i></li>
+        <li>Kerry Park</li>
+        <li>Suzzallo &amp; Allen Libraries</li>
+        <li>Waterfront area</li>
+      </ul>
+      <div class="subh">Evening</div>
+      <ul class="bul">
+        <li>Cousin's house for SUP · dinner with cousins</li>
+        <li>Kirkland in the evening</li>
+        <li>Watch sunset — 9:02 PM</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="day hike">
+    <div class="dhead"><div class="dchip"><div class="dd">6</div><div class="ww">Mon Jul</div></div><div class="dttl">Snow Lake</div></div>
+    <div class="dbody">
+      <ul class="tl">
+        <li><span class="tm">8:30</span><span class="tx">Leave house (~1 h drive)</span></li>
+        <li><span class="tm">9:30</span><span class="tx">Arrive &amp; start hike<i>~2.5 h up</i></span></li>
+        <li><span class="tm">12:00</span><span class="tx">Reach Snow Lake — lunch</span></li>
+        <li><span class="tm">13:00</span><span class="tx">Descend</span></li>
+        <li><span class="tm">15:00</span><span class="tx">Go home</span></li>
+      </ul>
+      <div class="diffrow"><span class="diff mod">Moderate</span><span class="where">Snoqualmie Pass, WA</span></div>
+      <div class="stats">
+        <div class="st"><div class="k">Distance</div><div class="v">10.8 km <span class="units">/ 6.7 mi</span></div></div>
+        <div class="st"><div class="k">Elev. gain</div><div class="v">514 m <span class="units">/ 1,686 ft</span></div></div>
+        <div class="st"><div class="k">Route</div><div class="v">Out &amp; back</div></div>
+        <div class="st"><div class="k">Hike time</div><div class="v">3 h 40 m</div></div>
+        <div class="st"><div class="k">Drive</div><div class="v">1 h 10 m</div></div>
+        <div class="st"><div class="k">Pass</div><div class="v">NW Forest Pass</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="day">
+    <div class="dhead"><div class="dchip"><div class="dd">7</div><div class="ww">Tue Jul</div></div><div class="dttl">Farms &amp; Alpacas</div></div>
+    <div class="dbody">
+      <ul class="tl">
+        <li><span class="tm">9:00</span><span class="tx">Farrel-McWhirter Park</span></li>
+        <li><span class="tm">11:00</span><span class="tx">Carnation Farms</span></li>
+        <li><span class="tm">13:00</span><span class="tx">Harvold Berry Farm — raspberry U-pick<i>harvoldberryfarm.com</i></span></li>
+        <li><span class="tm">15:00</span><span class="tx">Cascade Rose Alpacas</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="day hike">
+    <div class="dhead"><div class="dchip"><div class="dd">8</div><div class="ww">Wed Jul</div></div><div class="dttl">Skyline Trail Loop</div></div>
+    <div class="dbody">
+      <ul class="tl">
+        <li><span class="tm">6:00</span><span class="tx">Depart (3 h drive)</span></li>
+        <li><span class="tm">9:30</span><span class="tx">Start hike</span></li>
+        <li><span class="tm">12:00</span><span class="tx">Lunch</span></li>
+        <li><span class="tm">13:00</span><span class="tx">Descend</span></li>
+        <li><span class="tm">15:30</span><span class="tx">Go home</span></li>
+      </ul>
+      <div class="diffrow"><span class="diff hard">Hard</span><span class="where">Paradise, Mt. Rainier NP</span></div>
+      <div class="stats">
+        <div class="st"><div class="k">Distance</div><div class="v">9.2 km <span class="units">/ 5.7 mi</span></div></div>
+        <div class="st"><div class="k">Elev. gain</div><div class="v">543 m <span class="units">/ 1,781 ft</span></div></div>
+        <div class="st"><div class="k">Route</div><div class="v">Loop</div></div>
+        <div class="st"><div class="k">Hike time</div><div class="v">~3 h 30 m</div></div>
+        <div class="st"><div class="k">Drive</div><div class="v">3 h</div></div>
+        <div class="st"><div class="k">Pass</div><div class="v">Rainier NP fee</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="day">
+    <div class="dhead"><div class="dchip"><div class="dd">9</div><div class="ww">Thu Jul</div></div><div class="dttl">Snoqualmie Falls</div></div>
+    <div class="dbody">
+      <ul class="bul">
+        <li>Snoqualmie Falls with Mom &amp; Dad</li>
+        <li>Souvenir shopping in the afternoon</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="day">
+    <div class="dhead"><div class="dchip"><div class="dd">10</div><div class="ww">Fri Jul</div></div><div class="dttl">Leavenworth</div></div>
+    <div class="dbody">
+      <ul class="bul">
+        <li>Drive to Leavenworth (afternoon/evening)</li>
+        <li>Camp out in the car</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="day hike">
+    <div class="dhead"><div class="dchip"><div class="dd">11</div><div class="ww">Sat Jul</div></div><div class="dttl">The Enchantments</div></div>
+    <div class="dbody">
+      <ul class="tl">
+        <li><span class="tm">5:00</span><span class="tx">Start hike (with Chris)</span></li>
+        <li><span class="tm"></span><span class="tx">30.7 km · 1,477 m gain · 10–13 h</span></li>
+        <li><span class="tm">&lt;21:00</span><span class="tx">Finish before sunset<i>Bring the water filter!</i></span></li>
+      </ul>
+      <div class="diffrow"><span class="diff epic">Very Hard</span><span class="where">Leavenworth, WA</span></div>
+      <div class="stats">
+        <div class="st"><div class="k">Distance</div><div class="v">30.7 km <span class="units">/ 19.1 mi</span></div></div>
+        <div class="st"><div class="k">Elev. gain</div><div class="v">1,477 m <span class="units">/ 4,845 ft</span></div></div>
+        <div class="st"><div class="k">Route</div><div class="v">Point to point</div></div>
+        <div class="st"><div class="k">Hike time</div><div class="v">10–13 h</div></div>
+        <div class="st"><div class="k">Drive</div><div class="v">2 h 40 m</div></div>
+        <div class="st"><div class="k">Pass</div><div class="v">Permit (lottery)</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="day">
+    <div class="dhead"><div class="dchip"><div class="dd">12</div><div class="ww">Sun Jul</div></div><div class="dttl">Bro Day</div></div>
+    <div class="dbody">
+      <ul class="bul">
+        <li>Hang out with bro · shop for ingredients</li>
+        <li>Downtown Redmond<i>Movie-theater butter popcorn</i></li>
+        <li>Cooking class — make matcha tart</li>
+        <li>Shopping: Bellevue Square &amp; Downtown Park</li>
+        <li>Läderach chocolate · HeyTea boba</li>
+        <li>Board games · watch a movie</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="day hike">
+    <div class="dhead"><div class="dchip"><div class="dd">13</div><div class="ww">Mon Jul</div></div><div class="dttl">Lake Serene</div></div>
+    <div class="dbody">
+      <ul class="tl">
+        <li><span class="tm">8:00</span><span class="tx">Depart (1 h drive)</span></li>
+        <li><span class="tm">9:00</span><span class="tx">Start hike</span></li>
+        <li><span class="tm">12:00</span><span class="tx">Lunch</span></li>
+        <li><span class="tm">13:00</span><span class="tx">Descend</span></li>
+        <li><span class="tm">16:00</span><span class="tx">Go home</span></li>
+      </ul>
+      <div class="diffrow"><span class="diff hard">Hard</span><span class="where">Gold Bar, WA</span></div>
+      <div class="stats">
+        <div class="st"><div class="k">Distance</div><div class="v">12.9 km <span class="units">/ 8.0 mi</span></div></div>
+        <div class="st"><div class="k">Elev. gain</div><div class="v">828 m <span class="units">/ 2,716 ft</span></div></div>
+        <div class="st"><div class="k">Route</div><div class="v">Out &amp; back</div></div>
+        <div class="st"><div class="k">Hike time</div><div class="v">5 h 10 m</div></div>
+        <div class="st"><div class="k">Drive</div><div class="v">1 h</div></div>
+        <div class="st"><div class="k">Pass</div><div class="v">NW Forest Pass</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="day hike">
+    <div class="dhead"><div class="dchip"><div class="dd">14</div><div class="ww">Tue Jul</div></div><div class="dttl">Mt Pilchuck</div></div>
+    <div class="dbody">
+      <ul class="tl">
+        <li><span class="tm">8:00</span><span class="tx">Depart</span></li>
+        <li><span class="tm">9:45</span><span class="tx">Start hike</span></li>
+        <li><span class="tm">12:00</span><span class="tx">Lunch</span></li>
+        <li><span class="tm">13:00</span><span class="tx">Descend</span></li>
+        <li><span class="tm">14:30</span><span class="tx">Go home</span></li>
+      </ul>
+      <div class="diffrow"><span class="diff hard">Hard</span><span class="where">Granite Falls, WA</span></div>
+      <div class="stats">
+        <div class="st"><div class="k">Distance</div><div class="v">8.7 km <span class="units">/ 5.4 mi</span></div></div>
+        <div class="st"><div class="k">Elev. gain</div><div class="v">653 m <span class="units">/ 2,142 ft</span></div></div>
+        <div class="st"><div class="k">Route</div><div class="v">Out &amp; back</div></div>
+        <div class="st"><div class="k">Hike time</div><div class="v">~3 h 30 m</div></div>
+        <div class="st"><div class="k">Drive</div><div class="v">1 h 45 m</div></div>
+        <div class="st"><div class="k">Pass</div><div class="v">NW Forest Pass</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="day">
+    <div class="dhead"><div class="dchip"><div class="dd">15</div><div class="ww">Wed Jul</div></div><div class="dttl">SUP Day</div></div>
+    <div class="dbody">
+      <ul class="bul">
+        <li>Lake Sammamish — Pine Lake Dock</li>
+        <li>Downtown Kirkland</li>
+        <li>Watch sunset</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="day hike">
+    <div class="dhead"><div class="dchip"><div class="dd">16</div><div class="ww">Thu Jul</div></div><div class="dttl">Lake Valhalla</div></div>
+    <div class="dbody">
+      <ul class="tl">
+        <li><span class="tm">7:30</span><span class="tx">Depart</span></li>
+        <li><span class="tm">9:00</span><span class="tx">Start hike</span></li>
+        <li><span class="tm">11:30</span><span class="tx">Lunch</span></li>
+        <li><span class="tm">12:30</span><span class="tx">Descend</span></li>
+        <li><span class="tm">15:00</span><span class="tx">Go home</span></li>
+      </ul>
+      <div class="diffrow"><span class="diff mod">Moderate</span><span class="where">Leavenworth, WA</span></div>
+      <div class="stats">
+        <div class="st"><div class="k">Distance</div><div class="v">10.3 km <span class="units">/ 6.4 mi</span></div></div>
+        <div class="st"><div class="k">Elev. gain</div><div class="v">418 m <span class="units">/ 1,371 ft</span></div></div>
+        <div class="st"><div class="k">Route</div><div class="v">Out &amp; back</div></div>
+        <div class="st"><div class="k">Hike time</div><div class="v">3 h 16 m</div></div>
+        <div class="st"><div class="k">Drive</div><div class="v">1 h 30 m</div></div>
+        <div class="st"><div class="k">Pass</div><div class="v">NW Forest Pass</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="day">
+    <div class="dhead"><div class="dchip"><div class="dd">17</div><div class="ww">Fri Jul</div></div><div class="dttl">Souvenirs &amp; Ballard</div></div>
+    <div class="dbody">
+      <ul class="bul">
+        <li>Trader Joe's · World Market<i>Souvenir shopping</i></li>
+        <li>Ballard Locks Fish Ladder</li>
+        <li>Gas Works Park</li>
+        <li>Ivars</li>
+        <li>Evan's Creek Preserve</li>
+        <li>Return SUP</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="day hike">
+    <div class="dhead"><div class="dchip"><div class="dd">18</div><div class="ww">Sat Jul</div></div><div class="dttl">Lake Talapus</div></div>
+    <div class="dbody">
+      <ul class="tl">
+        <li><span class="tm">7:00</span><span class="tx">Depart</span></li>
+        <li><span class="tm">8:30</span><span class="tx">Start hike</span></li>
+        <li><span class="tm">10:00</span><span class="tx">Brunch</span></li>
+        <li><span class="tm">11:00</span><span class="tx">Descend</span></li>
+        <li><span class="tm">12:00</span><span class="tx">Go home</span></li>
+      </ul>
+      <div class="diffrow"><span class="diff mod">Moderate</span><span class="where">Snoqualmie Pass, WA</span></div>
+      <div class="stats">
+        <div class="st"><div class="k">Distance</div><div class="v">5.6 km <span class="units">/ 3.5 mi</span></div></div>
+        <div class="st"><div class="k">Elev. gain</div><div class="v">200 m <span class="units">/ 656 ft</span></div></div>
+        <div class="st"><div class="k">Route</div><div class="v">Out &amp; back</div></div>
+        <div class="st"><div class="k">Hike time</div><div class="v">1 h 42 m</div></div>
+        <div class="st"><div class="k">Drive</div><div class="v">1 h 10 m</div></div>
+        <div class="st"><div class="k">Pass</div><div class="v">NW Forest Pass</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="day travel">
+    <div class="dhead"><div class="dchip"><div class="dd">19</div><div class="ww">Sun Jul</div></div><div class="dttl">Fly Home to Japan</div></div>
+    <div class="dbody">
+      <ul class="tl">
+        <li><span class="tm">7:30</span><span class="tx">Depart from home</span></li>
+        <li><span class="tm">8:30</span><span class="tx">Arrive at airport<i>Arrive 3 h before</i></span></li>
+        <li><span class="tm">11:50</span><span class="tx">Departure</span></li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<!-- ============ PAGE 2 : PACKING + HIKE SUMMARY ============ -->
+<div style="break-before:page;"></div>
+
+<div class="masthead page2-top">
+  <div>
+    <div class="eyebrow">Seattle 2026 · Checklist</div>
+    <h1>Packing List</h1>
+  </div>
+  <div class="meta">
+    <div class="big">19 items</div>
+    <div>4 categories</div>
+    <div>Tap to check in the app</div>
+  </div>
+</div>
+
+<div class="sectitle">What to bring</div>
+<div class="pcols">
+
+  <div class="pgroup">
+    <div class="ph"><span class="pn">Must Bring</span><span class="pc">9 items</span></div>
+    <ul>
+      <li><span class="ck"></span>Passport</li>
+      <li><span class="ck"></span>VISA registration (Umechan)</li>
+      <li><span class="ck"></span>Driver's license (Waylon)</li>
+      <li><span class="ck"></span>Phone</li>
+      <li><span class="ck"></span>Phone charger</li>
+      <li><span class="ck"></span><span>Clothes<i>A few days' worth — wash every few days</i></span></li>
+      <li><span class="ck"></span>Camera</li>
+      <li><span class="ck"></span>Tripod</li>
+      <li><span class="ck"></span>Mt Rainier empty coffee cup</li>
+    </ul>
+  </div>
+
+  <div class="pgroup">
+    <div class="ph"><span class="pn">SUP &amp; Swim</span><span class="pc">2 items</span></div>
+    <ul>
+      <li><span class="ck"></span>Swimsuit</li>
+      <li><span class="ck"></span>Waterproof phone case</li>
+    </ul>
+  </div>
+
+  <div class="pgroup">
+    <div class="ph"><span class="pn">Hiking</span><span class="pc">6 items</span></div>
+    <ul>
+      <li><span class="ck"></span>Hiking shoes</li>
+      <li><span class="ck"></span>Gas burner</li>
+      <li><span class="ck"></span>Hat</li>
+      <li><span class="ck"></span>Sunscreen</li>
+      <li><span class="ck"></span><span>Water filter<i>For the Enchantments</i></span></li>
+      <li><span class="ck"></span><span>Northwest Forest Pass<i>Day pass — wta.org/go-outside/passes</i></span></li>
+    </ul>
+  </div>
+
+  <div class="pgroup">
+    <div class="ph"><span class="pn">Souvenirs</span><span class="pc">2 items</span></div>
+    <ul>
+      <li><span class="ck"></span>Postcards</li>
+      <li><span class="ck"></span><span>Souvenir requests<i>Ian · Brittany · Sonia (check requests)</i></span></li>
+    </ul>
+  </div>
+
+</div>
+
+<div class="sectitle" style="margin-top:6px;">Hikes at a glance</div>
+<table style="width:100%;border-collapse:collapse;font-size:8.5px;">
+  <thead>
+    <tr style="text-align:left;color:var(--muted);border-bottom:1.5px solid var(--line);">
+      <th style="padding:4px 6px;font-size:6.5px;letter-spacing:.1em;text-transform:uppercase;">Date</th>
+      <th style="padding:4px 6px;font-size:6.5px;letter-spacing:.1em;text-transform:uppercase;">Hike</th>
+      <th style="padding:4px 6px;font-size:6.5px;letter-spacing:.1em;text-transform:uppercase;">Difficulty</th>
+      <th style="padding:4px 6px;font-size:6.5px;letter-spacing:.1em;text-transform:uppercase;">Distance</th>
+      <th style="padding:4px 6px;font-size:6.5px;letter-spacing:.1em;text-transform:uppercase;">Elev. gain</th>
+      <th style="padding:4px 6px;font-size:6.5px;letter-spacing:.1em;text-transform:uppercase;">Location</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="border-bottom:1px solid var(--line-2);"><td style="padding:3.5px 6px;font-weight:700;">Jul 3</td><td style="padding:3.5px 6px;">Lake 22</td><td style="padding:3.5px 6px;color:var(--mod);font-weight:700;">Moderate</td><td style="padding:3.5px 6px;">9.8 km / 6.1 mi</td><td style="padding:3.5px 6px;">444 m / 1,456 ft</td><td style="padding:3.5px 6px;color:var(--muted);">Granite Falls</td></tr>
+    <tr style="border-bottom:1px solid var(--line-2);"><td style="padding:3.5px 6px;font-weight:700;">Jul 6</td><td style="padding:3.5px 6px;">Snow Lake</td><td style="padding:3.5px 6px;color:var(--mod);font-weight:700;">Moderate</td><td style="padding:3.5px 6px;">10.8 km / 6.7 mi</td><td style="padding:3.5px 6px;">514 m / 1,686 ft</td><td style="padding:3.5px 6px;color:var(--muted);">Snoqualmie Pass</td></tr>
+    <tr style="border-bottom:1px solid var(--line-2);"><td style="padding:3.5px 6px;font-weight:700;">Jul 8</td><td style="padding:3.5px 6px;">Skyline Trail Loop</td><td style="padding:3.5px 6px;color:var(--hard);font-weight:700;">Hard</td><td style="padding:3.5px 6px;">9.2 km / 5.7 mi</td><td style="padding:3.5px 6px;">543 m / 1,781 ft</td><td style="padding:3.5px 6px;color:var(--muted);">Mt. Rainier NP</td></tr>
+    <tr style="border-bottom:1px solid var(--line-2);"><td style="padding:3.5px 6px;font-weight:700;">Jul 11</td><td style="padding:3.5px 6px;">The Enchantments</td><td style="padding:3.5px 6px;color:var(--epic);font-weight:700;">Very Hard</td><td style="padding:3.5px 6px;">30.7 km / 19.1 mi</td><td style="padding:3.5px 6px;">1,477 m / 4,845 ft</td><td style="padding:3.5px 6px;color:var(--muted);">Leavenworth</td></tr>
+    <tr style="border-bottom:1px solid var(--line-2);"><td style="padding:3.5px 6px;font-weight:700;">Jul 13</td><td style="padding:3.5px 6px;">Lake Serene</td><td style="padding:3.5px 6px;color:var(--hard);font-weight:700;">Hard</td><td style="padding:3.5px 6px;">12.9 km / 8.0 mi</td><td style="padding:3.5px 6px;">828 m / 2,716 ft</td><td style="padding:3.5px 6px;color:var(--muted);">Gold Bar</td></tr>
+    <tr style="border-bottom:1px solid var(--line-2);"><td style="padding:3.5px 6px;font-weight:700;">Jul 14</td><td style="padding:3.5px 6px;">Mt Pilchuck</td><td style="padding:3.5px 6px;color:var(--hard);font-weight:700;">Hard</td><td style="padding:3.5px 6px;">8.7 km / 5.4 mi</td><td style="padding:3.5px 6px;">653 m / 2,142 ft</td><td style="padding:3.5px 6px;color:var(--muted);">Granite Falls</td></tr>
+    <tr style="border-bottom:1px solid var(--line-2);"><td style="padding:3.5px 6px;font-weight:700;">Jul 16</td><td style="padding:3.5px 6px;">Lake Valhalla</td><td style="padding:3.5px 6px;color:var(--mod);font-weight:700;">Moderate</td><td style="padding:3.5px 6px;">10.3 km / 6.4 mi</td><td style="padding:3.5px 6px;">418 m / 1,371 ft</td><td style="padding:3.5px 6px;color:var(--muted);">Leavenworth</td></tr>
+    <tr><td style="padding:3.5px 6px;font-weight:700;">Jul 18</td><td style="padding:3.5px 6px;">Lake Talapus</td><td style="padding:3.5px 6px;color:var(--mod);font-weight:700;">Moderate</td><td style="padding:3.5px 6px;">5.6 km / 3.5 mi</td><td style="padding:3.5px 6px;">200 m / 656 ft</td><td style="padding:3.5px 6px;color:var(--muted);">Snoqualmie Pass</td></tr>
+  </tbody>
+</table>
+
+<div class="foot">Seattle 2026 · Jul 2 – Jul 19 · huangwaylon.github.io/seattle</div>
+
+</body>
+</html>
