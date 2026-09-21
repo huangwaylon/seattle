@@ -51,8 +51,8 @@
  },
  {
   "slot": "txt-note",
-  "en": "Taco rice originated in Kin, 1984",
-  "id": "9e11350ac3"
+  "en": "25 min from the office &middot; taco rice originated in Kin, 1984",
+  "id": "6c48601adf"
  },
  {
   "slot": "txt",
@@ -61,18 +61,18 @@
  },
  {
   "slot": "txt-note",
-  "en": "Elephant-trunk rock formation",
-  "id": "c293ebb053"
+  "en": "19 min from Kin &middot; elephant-trunk rock formation",
+  "id": "f0d8fc7128"
  },
  {
   "slot": "txt",
-  "en": "Fukugawa Falls",
-  "id": "6eae6324ef"
+  "en": "Okinawa Milk Farm Cafe, Nago &mdash; kakigori",
+  "id": "53cc7123bd"
  },
  {
   "slot": "txt-note",
-  "en": "20&ndash;30 min return on foot",
-  "id": "8f332baeb2"
+  "en": "35 min from Manzamo &middot; 12:00&ndash;18:00, closed Wed and Thu",
+  "id": "2b1e8f2b55"
  },
  {
   "slot": "txt",
@@ -81,8 +81,8 @@
  },
  {
   "slot": "txt-note",
-  "en": "MaxValu, open 24 h",
-  "id": "e8c6938753"
+  "en": "MaxValu, 2 min from the cafe, open 24 h",
+  "id": "682db6cbee"
  },
  {
   "slot": "txt",
@@ -91,8 +91,8 @@
  },
  {
   "slot": "txt-note",
-  "en": "30 min from the dive shop",
-  "id": "8c8778b208"
+  "en": "12 min from Nago &middot; 30 min from the dive shop",
+  "id": "3e30a7a87f"
  },
  {
   "slot": "txt",
@@ -141,13 +141,23 @@
  },
  {
   "slot": "txt",
-  "en": "Kishimoto Shokudo &mdash; Okinawa soba",
-  "id": "5e6ebf5ee6"
+  "en": "Ufuya, Nago &mdash; agu and yushi-dofu soba",
+  "id": "42b12ad4b1"
  },
  {
   "slot": "txt-note",
-  "en": "11:00&ndash;17:30 &middot; cash only",
-  "id": "7586d6ab50"
+  "en": "23 min from the shop &middot; lunch to 15:30, last order 15:00",
+  "id": "9d638367a9"
+ },
+ {
+  "slot": "txt",
+  "en": "Nago &mdash; tonight's meat",
+  "id": "9bea1ad7b3"
+ },
+ {
+  "slot": "txt-note",
+  "en": "MaxValu, 7 min from Ufuya",
+  "id": "f8741f5ff5"
  },
  {
   "slot": "txt",
@@ -156,23 +166,18 @@
  },
  {
   "slot": "txt-note",
-  "en": "Sand lanes under 20,000 fukugi trees",
-  "id": "ed3fac6f18"
+  "en": "30 min from Nago &middot; sand lanes under 20,000 fukugi trees",
+  "id": "fd4370153e"
  },
  {
   "slot": "txt",
-  "en": "Kouri Island</small>",
-  "id": "5cabef99b5"
- },
- {
-  "slot": "txt",
-  "en": "Motobu &mdash; tonight's meat",
-  "id": "449f86cd53"
+  "en": "Back to camp",
+  "id": "15c64b2de6"
  },
  {
   "slot": "txt-note",
-  "en": "The Big Express, until 22:00",
-  "id": "6fe5b6d616"
+  "en": "30 min from Bise",
+  "id": "1edf2bfcf5"
  },
  {
   "slot": "txt",
@@ -311,53 +316,53 @@
  },
  {
   "slot": "bul",
-  "en": "<span class=\"time\">12:15</span><span class=\"dot\"></span><span class=\"txt\">King Tacos, Kin Town &mdash; taco rice",
-  "id": "935033f1ab"
+  "en": "<span class=\"time\">11:55</span><span class=\"dot\"></span><span class=\"txt\">King Tacos, Kin Town &mdash; taco rice",
+  "id": "efabc0ac21"
  },
  {
   "slot": "bul-note",
-  "en": "Taco rice originated in Kin, 1984",
-  "id": "c74373bef6"
+  "en": "25 min from the office &middot; taco rice originated in Kin, 1984",
+  "id": "7bdf16b28e"
  },
  {
   "slot": "bul",
-  "en": "<span class=\"time\">13:45</span><span class=\"dot\"></span><span class=\"txt\">Cape Manzamo",
-  "id": "adf33823ee"
+  "en": "<span class=\"time\">13:05</span><span class=\"dot\"></span><span class=\"txt\">Cape Manzamo",
+  "id": "08a147bba4"
  },
  {
   "slot": "bul-note",
-  "en": "Elephant-trunk rock formation",
-  "id": "7d5bd2b259"
+  "en": "19 min from Kin &middot; elephant-trunk rock formation",
+  "id": "3f5c693917"
  },
  {
   "slot": "bul",
-  "en": "<span class=\"time\">15:15</span><span class=\"dot\"></span><span class=\"txt\">Fukugawa Falls",
-  "id": "826a7862ae"
+  "en": "<span class=\"time\">14:25</span><span class=\"dot\"></span><span class=\"txt\">Okinawa Milk Farm Cafe, Nago &mdash; kakigori",
+  "id": "4e4aefa8bc"
  },
  {
   "slot": "bul-note",
-  "en": "20&ndash;30 min return on foot",
-  "id": "1327f1fff7"
+  "en": "35 min from Manzamo &middot; 12:00&ndash;18:00, closed Wed and Thu",
+  "id": "c906e07622"
  },
  {
   "slot": "bul",
-  "en": "<span class=\"time\">16:30</span><span class=\"dot\"></span><span class=\"txt\">Nago &mdash; groceries",
-  "id": "4a5eb66a13"
+  "en": "<span class=\"time\">15:30</span><span class=\"dot\"></span><span class=\"txt\">Nago &mdash; groceries",
+  "id": "9fdf489b23"
  },
  {
   "slot": "bul-note",
-  "en": "MaxValu, open 24 h",
-  "id": "4a030c530d"
+  "en": "MaxValu, 2 min from the cafe, open 24 h",
+  "id": "8eeb7715cd"
  },
  {
   "slot": "bul",
-  "en": "<span class=\"time\">17:15</span><span class=\"dot\"></span><span class=\"txt\">Camp &mdash; Yagaji or Kouri",
-  "id": "9db45ce926"
+  "en": "<span class=\"time\">16:30</span><span class=\"dot\"></span><span class=\"txt\">Camp &mdash; Yagaji or Kouri",
+  "id": "a9a2bbe00c"
  },
  {
   "slot": "bul-note",
-  "en": "30 min from the dive shop",
-  "id": "1f331e26bc"
+  "en": "12 min from Nago &middot; 30 min from the dive shop",
+  "id": "3bd5f70d26"
  },
  {
   "slot": "bul",
@@ -406,38 +411,43 @@
  },
  {
   "slot": "bul",
-  "en": "<span class=\"time\">14:15</span><span class=\"dot\"></span><span class=\"txt\">Kishimoto Shokudo &mdash; Okinawa soba",
-  "id": "bd3478e91f"
+  "en": "<span class=\"time\">13:55</span><span class=\"dot\"></span><span class=\"txt\">Ufuya, Nago &mdash; agu and yushi-dofu soba",
+  "id": "4920685c6f"
  },
  {
   "slot": "bul-note",
-  "en": "11:00&ndash;17:30 &middot; cash only",
-  "id": "5c4863c16e"
+  "en": "23 min from the shop &middot; lunch to 15:30, last order 15:00",
+  "id": "a7c3716114"
  },
  {
   "slot": "bul",
-  "en": "<span class=\"time\">15:30</span><span class=\"dot\"></span><span class=\"txt\">Bise Fukugi tree road",
-  "id": "30606afcb7"
+  "en": "<span class=\"time\">15:10</span><span class=\"dot\"></span><span class=\"txt\">Nago &mdash; tonight's meat",
+  "id": "49460251cb"
  },
  {
   "slot": "bul-note",
-  "en": "Sand lanes under 20,000 fukugi trees",
-  "id": "9b1578756f"
+  "en": "MaxValu, 7 min from Ufuya",
+  "id": "517c4e935f"
  },
  {
   "slot": "bul",
-  "en": "<span class=\"time\">16:45</span><span class=\"dot\"></span><span class=\"txt\">Kouri Island</small></span>",
-  "id": "b734ec19d4"
- },
- {
-  "slot": "bul",
-  "en": "<span class=\"time\">17:30</span><span class=\"dot\"></span><span class=\"txt\">Motobu &mdash; tonight's meat",
-  "id": "d171806003"
+  "en": "<span class=\"time\">16:15</span><span class=\"dot\"></span><span class=\"txt\">Bise Fukugi tree road",
+  "id": "12b0faeb4a"
  },
  {
   "slot": "bul-note",
-  "en": "The Big Express, until 22:00",
-  "id": "98be8cfe16"
+  "en": "30 min from Nago &middot; sand lanes under 20,000 fukugi trees",
+  "id": "bf7ec9afc0"
+ },
+ {
+  "slot": "bul",
+  "en": "<span class=\"time\">17:45</span><span class=\"dot\"></span><span class=\"txt\">Back to camp",
+  "id": "708399ae0f"
+ },
+ {
+  "slot": "bul-note",
+  "en": "30 min from Bise",
+  "id": "fb4853a918"
  },
  {
   "slot": "bul",
@@ -836,8 +846,38 @@
  },
  {
   "slot": "bul",
-  "en": "Hiji Falls, Kunigami",
-  "id": "87120d7422"
+  "en": "Open every day &middot; Day 2, after the dive",
+  "id": "8e739adce9"
+ },
+ {
+  "slot": "bul",
+  "en": "Also on the menu: ufuya soba, cartilage soki soba, agu shabu-shabu",
+  "id": "341967f99a"
+ },
+ {
+  "slot": "bul",
+  "en": "&yen;1,000&ndash;6,000 per person &middot; 0980-53-0280 &middot; online reservations",
+  "id": "b642c17771"
+ },
+ {
+  "slot": "bul",
+  "en": "Open all three days &middot; Day 1, on the way to camp",
+  "id": "d5be393108"
+ },
+ {
+  "slot": "bul",
+  "en": "Also: kokuto milk zenzai, pastel de nata, ice cream",
+  "id": "8fee1ab976"
+ },
+ {
+  "slot": "bul",
+  "en": "Under &yen;1,000 per person &middot; 080-6497-3690 &middot; 6 min from Ufuya",
+  "id": "d6675967a6"
+ },
+ {
+  "slot": "bul",
+  "en": "<a href=\"https://www.google.com/maps/place//data=!4m2!3m1!1s0x34e44481b80a403b:0x7149b317e35049cd\" target=\"_blank\" rel=\"noopener\">Hiji Falls, Kunigami</a>",
+  "id": "fce2c49425"
  },
  {
   "slot": "bul-note",
@@ -846,8 +886,8 @@
  },
  {
   "slot": "bul",
-  "en": "Ta Falls, Ogimi",
-  "id": "57b94d68a3"
+  "en": "<a href=\"https://www.google.com/maps/place//data=!4m2!3m1!1s0x34e4509229f69953:0x9fd02fa2eae0c2a1\" target=\"_blank\" rel=\"noopener\">Ta Falls, Ogimi</a>",
+  "id": "6818cdf2ca"
  },
  {
   "slot": "bul-note",
@@ -856,8 +896,8 @@
  },
  {
   "slot": "bul",
-  "en": "Kayauchi Banta, Kunigami",
-  "id": "65ee59d654"
+  "en": "<a href=\"https://www.google.com/maps/place//data=!4m2!3m1!1s0x34e46d892efb8607:0x3670f194684579ba\" target=\"_blank\" rel=\"noopener\">Kayauchi Banta, Kunigami</a>",
+  "id": "6e651bc322"
  },
  {
   "slot": "bul-note",
@@ -866,8 +906,8 @@
  },
  {
   "slot": "bul",
-  "en": "Cape Hedo, Kunigami",
-  "id": "fb9c3d5ff3"
+  "en": "<a href=\"https://www.google.com/maps/search/?api=1&amp;query=%E8%BE%BA%E6%88%B8%E5%B2%AC\" target=\"_blank\" rel=\"noopener\">Cape Hedo, Kunigami</a>",
+  "id": "966f6a35fb"
  },
  {
   "slot": "bul-note",
@@ -876,8 +916,8 @@
  },
  {
   "slot": "bul",
-  "en": "Gorilla Chop, Motobu",
-  "id": "0c4c2c20a7"
+  "en": "<a href=\"https://www.google.com/maps/place//data=!4m2!3m1!1s0x34e4fc0ffcdaaaab:0x32b298a190e3a128\" target=\"_blank\" rel=\"noopener\">Gorilla Chop, Motobu</a>",
+  "id": "87b99d1aab"
  },
  {
   "slot": "bul-note",
@@ -886,8 +926,8 @@
  },
  {
   "slot": "bul",
-  "en": "Yagaji mangroves",
-  "id": "0fe228e14b"
+  "en": "<a href=\"https://www.google.com/maps/place//data=!4m2!3m1!1s0x34e451d4dec17c9f:0xf4d55daa3d78974d\" target=\"_blank\" rel=\"noopener\">Yagaji mangroves</a>",
+  "id": "ad85d8c2d2"
  },
  {
   "slot": "bul-note",
@@ -896,8 +936,8 @@
  },
  {
   "slot": "bul",
-  "en": "Seragaki and Diamond Beach, Onna",
-  "id": "f24ae13533"
+  "en": "<a href=\"https://www.google.com/maps/place//data=!4m2!3m1!1s0x34e503ea1f7eabb1:0x89d5231ba75e0d40\" target=\"_blank\" rel=\"noopener\">Diamond Beach, Onna</a>",
+  "id": "ea43297ec8"
  },
  {
   "slot": "bul-note",
@@ -906,8 +946,8 @@
  },
  {
   "slot": "bul",
-  "en": "Kouri Island",
-  "id": "68b1856897"
+  "en": "<a href=\"https://www.google.com/maps/place//data=!4m2!3m1!1s0x34e45834628fc6c1:0xfe464c1009cf4372\" target=\"_blank\" rel=\"noopener\">Kouri Island</a>",
+  "id": "1cc3fae57e"
  },
  {
   "slot": "bul-note",
@@ -916,8 +956,8 @@
  },
  {
   "slot": "bul",
-  "en": "Bise Fukugi tree road, Motobu",
-  "id": "0f14f0765a"
+  "en": "<a href=\"https://www.google.com/maps/place//data=!4m2!3m1!1s0x34e4fa3bb2e83feb:0xa38ab5013a129a36\" target=\"_blank\" rel=\"noopener\">Bise Fukugi tree road, Motobu</a>",
+  "id": "a8316c3be1"
  },
  {
   "slot": "bul-note",
@@ -926,8 +966,8 @@
  },
  {
   "slot": "bul",
-  "en": "Aragaki Zenzai, Motobu &middot; Day 2",
-  "id": "e510e8f191"
+  "en": "<a href=\"https://www.google.com/maps/place//data=!4m2!3m1!1s0x34e4f95fa9a99bef:0x1c32bbda15ba318a\" target=\"_blank\" rel=\"noopener\">Aragaki Zenzai, Motobu &middot; Day 2</a>",
+  "id": "aec383b003"
  },
  {
   "slot": "bul-note",
@@ -936,8 +976,18 @@
  },
  {
   "slot": "bul",
-  "en": "Higashi Shokudo, Nago &middot; Day 1",
-  "id": "e4cfe31761"
+  "en": "<a href=\"https://www.google.com/maps/search/?api=1&amp;query=%E3%81%8D%E3%81%97%E3%82%82%E3%81%A8%E9%A3%9F%E5%A0%82%20%E6%9C%AC%E9%83%A8%E7%94%BA\" target=\"_blank\" rel=\"noopener\">Kishimoto Shokudo, Motobu</a>",
+  "id": "c70b4b90a3"
+ },
+ {
+  "slot": "bul-note",
+  "en": "Okinawa soba since 1905 &middot; 11:00&ndash;17:30 &middot; cash only",
+  "id": "cb78681b0d"
+ },
+ {
+  "slot": "bul",
+  "en": "<a href=\"https://www.google.com/maps/place//data=!4m2!3m1!1s0x34e4558e07501fcb:0x531cbe8be2903594\" target=\"_blank\" rel=\"noopener\">Higashi Shokudo, Nago &middot; Day 1</a>",
+  "id": "d2d2b4d0e4"
  },
  {
   "slot": "bul-note",
@@ -946,8 +996,8 @@
  },
  {
   "slot": "bul",
-  "en": "Mitsuya, Michi-no-eki Kyoda &middot; Day 1",
-  "id": "b9a0e45aa3"
+  "en": "<a href=\"https://www.google.com/maps/place//data=!4m2!3m1!1s0x34e4fff052e0f7d7:0xd50e9f1ce4b8ec8d\" target=\"_blank\" rel=\"noopener\">Mitsuya, Michi-no-eki Kyoda &middot; Day 1</a>",
+  "id": "a8bb7b5e92"
  },
  {
   "slot": "bul-note",
@@ -956,8 +1006,8 @@
  },
  {
   "slot": "bul",
-  "en": "Ryupin, Onna &middot; Day 1 or 3",
-  "id": "01013df856"
+  "en": "<a href=\"https://www.google.com/maps/place//data=!4m2!3m1!1s0x34e51aa6fcd5a1bd:0xe7ca4cf914f3b095\" target=\"_blank\" rel=\"noopener\">Ryupin, Onna &middot; Day 1 or 3</a>",
+  "id": "b429491912"
  },
  {
   "slot": "bul-note",
@@ -966,8 +1016,8 @@
  },
  {
   "slot": "bul",
-  "en": "Tsurukamedo, Yomitan &middot; Day 3",
-  "id": "42a7fd8f23"
+  "en": "<a href=\"https://www.google.com/maps/place//data=!4m2!3m1!1s0x34e5112109c7eda9:0xf12b81d29ab11787\" target=\"_blank\" rel=\"noopener\">Tsurukamedo, Yomitan &middot; Day 3</a>",
+  "id": "411a00db96"
  },
  {
   "slot": "bul-note",
@@ -976,8 +1026,8 @@
  },
  {
   "slot": "bul",
-  "en": "Kori wo Kizame, Chatan &middot; Day 3",
-  "id": "d97373304b"
+  "en": "<a href=\"https://www.google.com/maps/place//data=!4m2!3m1!1s0x34e5138116c02137:0x6538554671b58f8a\" target=\"_blank\" rel=\"noopener\">Kori wo Kizame, Chatan &middot; Day 3</a>",
+  "id": "8bc7cdaae4"
  },
  {
   "slot": "bul-note",
@@ -1018,6 +1068,16 @@
   "slot": "title",
   "en": "Know Before You Go",
   "id": "6f186efbcb"
+ },
+ {
+  "slot": "title",
+  "en": "Ufuya",
+  "id": "3065a67fa9"
+ },
+ {
+  "slot": "title",
+  "en": "Okinawa Milk Farm Cafe",
+  "id": "d166ebb79a"
  },
  {
   "slot": "title",
@@ -1216,13 +1276,23 @@
  },
  {
   "slot": "subtitle",
+  "en": "百年古家 大家 &middot; Nago",
+  "id": "b38d7f3a74"
+ },
+ {
+  "slot": "subtitle",
+  "en": "おきなわみるくふぁーむカフェ &middot; Nago",
+  "id": "eedc7cde75"
+ },
+ {
+  "slot": "subtitle",
   "en": "9 spots",
   "id": "dab1713321"
  },
  {
   "slot": "subtitle",
-  "en": "6 shops, open Oct 10&ndash;12",
-  "id": "1db17ddc51"
+  "en": "7 shops, open Oct 10&ndash;12",
+  "id": "28818a020d"
  },
  {
   "slot": "subtitle",
@@ -1426,8 +1496,28 @@
  },
  {
   "slot": "statk",
+  "en": "Rating",
+  "id": "9699964d79"
+ },
+ {
+  "slot": "statk",
+  "en": "Lunch",
+  "id": "5b260c36c3"
+ },
+ {
+  "slot": "statk",
+  "en": "Dinner",
+  "id": "7c64f6da89"
+ },
+ {
+  "slot": "statk",
   "en": "Hours",
   "id": "cf1dd3f2b7"
+ },
+ {
+  "slot": "statk",
+  "en": "Closed",
+  "id": "b3197eb345"
  },
  {
   "slot": "statk",
@@ -1553,6 +1643,46 @@
   "slot": "statv",
   "en": "06:25&ndash;18:07",
   "id": "c9f34b606e"
+ },
+ {
+  "slot": "statv",
+  "en": "Agu and yushi-dofu soba",
+  "id": "c668d65525"
+ },
+ {
+  "slot": "statv",
+  "en": "4.1 &middot; 5,957 reviews",
+  "id": "f6d242722c"
+ },
+ {
+  "slot": "statv",
+  "en": "11:00&ndash;15:30, L.O. 15:00",
+  "id": "131e771dc9"
+ },
+ {
+  "slot": "statv",
+  "en": "17:30&ndash;21:00, L.O. 20:30",
+  "id": "ec424c8f12"
+ },
+ {
+  "slot": "statv",
+  "en": "Strawberry milk kakigori",
+  "id": "e82a0d4018"
+ },
+ {
+  "slot": "statv",
+  "en": "4.4 &middot; 165 reviews",
+  "id": "5d71ac6614"
+ },
+ {
+  "slot": "statv",
+  "en": "12:00&ndash;18:00",
+  "id": "c94ff7e1ca"
+ },
+ {
+  "slot": "statv",
+  "en": "Wed and Thu",
+  "id": "340983eca8"
  },
  {
   "slot": "statv",
@@ -1768,6 +1898,16 @@
   "slot": "desc",
   "en": "Swimmable, with nights near\n          <span class=\"u\" data-metric=\"24 &deg;C\" data-imperial=\"76 &deg;F\">24 &deg;C</span>. Showers are brief; wind is the\n          main risk on an exposed pitch. October is typhoon season &mdash; about a 1-in-10 chance of one within\n          300 km over three days.",
   "id": "cd7f00b67d"
+ },
+ {
+  "slot": "desc",
+  "en": "Hundred-year-old kominka in the forest, terrace seats facing a waterfall. Okinawa soba and Ryukyu dishes.",
+  "id": "4d7e5e7ee3"
+ },
+ {
+  "slot": "desc",
+  "en": "Farm cafe in Nago. Shaved ice with house-made fruit sauces, and kokuto milk zenzai.",
+  "id": "13acebca3e"
  },
  {
   "slot": "desc",
@@ -2093,6 +2233,11 @@
   "slot": "maplink",
   "en": "divenuts.jp",
   "id": "9a0f80cb04"
+ },
+ {
+  "slot": "maplink",
+  "en": "ufuya.com",
+  "id": "e6d52b541d"
  },
  {
   "slot": "maplink",
