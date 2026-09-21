@@ -305,7 +305,6 @@
   .icon-btn:disabled{opacity:.32;cursor:default;}
   .icon-btn:disabled:active{transform:none;}
   .icon-btn.danger{color:var(--coral);border-color:var(--coral-ring);background:var(--coral-soft);}
-  /* Reorder controls sit tight together in the category header (edit mode). */
   .glabel .move{display:inline-flex;gap:5px;flex:0 0 auto;}
   .add-row{display:flex;align-items:center;gap:9px;width:100%;padding:13px 18px;border:0;border-top:1px dashed var(--line-strong);
     background:none;color:var(--sea-d);font-family:inherit;font-weight:700;font-size:14px;cursor:pointer;}
@@ -367,8 +366,8 @@
      pin are visible and the map is still a map. */
   .mapcard{margin:8px var(--gutter) 12px;background:var(--sea-wash);border:1px solid var(--line);
     border-radius:var(--r);overflow:hidden;box-shadow:var(--sh-card);}
-  /* max-height keeps the (tall) island from running off a desktop screen; the letterbox gap
-     falls on .mapcard, which is the same sea colour, so it is invisible. */
+  /* max-height caps the tall island on a desktop screen; the letterbox gap falls on
+     .mapcard, which is the same sea colour. */
   svg.map{display:block;width:100%;height:auto;max-height:78vh;}
   .map .sea{fill:var(--sea-wash);}
   .map .land path{fill:var(--bg-2);stroke:var(--sea-d);stroke-width:2.2;stroke-linejoin:round;}
@@ -387,7 +386,7 @@
   .map .stop.past .mk{fill:var(--surface);stroke:var(--c);}
   .map .cands .mk{fill:var(--surface);stroke:var(--muted);stroke-width:2.3;}
   .map .cands .pin.sel .mk{stroke:var(--sea-d);}
-  /* label: a paint-order halo instead of a background box, so it reads over land and sea */
+  /* a paint-order halo instead of a background box, so labels read over land and sea */
   .map .lab{display:none;font-family:var(--font-sans);font-size:26px;font-weight:700;fill:var(--ink);
     stroke:var(--bg);stroke-width:6;paint-order:stroke;pointer-events:none;}
   .map .pin.sel .lab,.map .stop.now .lab{display:block;}
@@ -1444,7 +1443,7 @@
             <div class="stat"><div class="k" data-en="Type">種別</div><div class="v" data-en="Wild camp">野営地</div></div>
             <div class="stat"><div class="k" data-en="Fee">料金</div><div class="v" data-en="None posted">記載なし</div></div>
           </div>
-          <p class="desc note-sm">In Yanbaru National Park &mdash; check posted fire rules.</p>
+          <p class="desc note-sm" data-en="In Yanbaru National Park &mdash; check posted fire rules.">やんばる国立公園内 &mdash; 掲示の火気ルールを確認</p>
           <a class="maplink" href="https://www.google.com/maps/place/26%C2%B038'59.4%22N+128%C2%B005'15.7%22E/@26.6497186,128.0874132,67m/data=!3m1!1e3!4m4!3m3!8m2!3d26.649824!4d128.087702?authuser=1&entry=ttu" target="_blank" rel="noopener"><span data-en="Open in Maps">マップで開く</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
           <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-en="Book / official site">予約・公式サイト</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
@@ -1465,7 +1464,7 @@
             <div class="stat"><div class="k" data-en="Type">種別</div><div class="v" data-en="Wild camp">野営地</div></div>
             <div class="stat"><div class="k" data-en="Fee">料金</div><div class="v" data-en="None posted">記載なし</div></div>
           </div>
-          <p class="desc note-sm">In Yanbaru National Park &mdash; check posted fire rules.</p>
+          <p class="desc note-sm" data-en="In Yanbaru National Park &mdash; check posted fire rules.">やんばる国立公園内 &mdash; 掲示の火気ルールを確認</p>
           <a class="maplink" href="https://www.google.com/maps/place/26%C2%B039'41.3%22N+128%C2%B006'05.3%22E/@26.6614431,128.1009642,139m/data=!3m1!1e3!4m4!3m3!8m2!3d26.661466!4d128.101462?authuser=1&entry=ttu" target="_blank" rel="noopener"><span data-en="Open in Maps">マップで開く</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
           <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-en="Book / official site">予約・公式サイト</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
@@ -1486,7 +1485,7 @@
             <div class="stat"><div class="k" data-en="Type">種別</div><div class="v" data-en="Paid camp">有料キャンプ場</div></div>
             <div class="stat"><div class="k" data-en="Fee">料金</div><div class="v" data-en="Ask on site">現地で確認</div></div>
           </div>
-          <p class="desc note-sm">In Yanbaru National Park &mdash; check posted fire rules.</p>
+          <p class="desc note-sm" data-en="In Yanbaru National Park &mdash; check posted fire rules.">やんばる国立公園内 &mdash; 掲示の火気ルールを確認</p>
           <a class="maplink" href="https://maps.app.goo.gl/w5TqEBiigaZwMsPS9" target="_blank" rel="noopener"><span data-en="Open in Maps">マップで開く</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
           <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-en="Book / official site">予約・公式サイト</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
@@ -1527,7 +1526,7 @@
             <div class="stat"><div class="k" data-en="Type">種別</div><div class="v" data-en="Wild camp">野営地</div></div>
             <div class="stat"><div class="k" data-en="Fee">料金</div><div class="v" data-en="None posted">記載なし</div></div>
           </div>
-          <p class="desc note-sm">In Yanbaru National Park &mdash; check posted fire rules.</p>
+          <p class="desc note-sm" data-en="In Yanbaru National Park &mdash; check posted fire rules.">やんばる国立公園内 &mdash; 掲示の火気ルールを確認</p>
           <a class="maplink" href="https://maps.app.goo.gl/HtPGd8hyqt3myoMw6" target="_blank" rel="noopener"><span data-en="Open in Maps">マップで開く</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
           <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-en="Book / official site">予約・公式サイト</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
@@ -1548,7 +1547,7 @@
             <div class="stat"><div class="k" data-en="Type">種別</div><div class="v" data-en="Paid camp">有料キャンプ場</div></div>
             <div class="stat"><div class="k" data-en="Fee">料金</div><div class="v" data-en="Ask on site">現地で確認</div></div>
           </div>
-          <p class="desc note-sm">In Yanbaru National Park &mdash; check posted fire rules.</p>
+          <p class="desc note-sm" data-en="In Yanbaru National Park &mdash; check posted fire rules.">やんばる国立公園内 &mdash; 掲示の火気ルールを確認</p>
           <a class="maplink" href="https://maps.app.goo.gl/zXJEK7k2b2BVBgJr8" target="_blank" rel="noopener"><span data-en="Open in Maps">マップで開く</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
           <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-en="Book / official site">予約・公式サイト</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
@@ -1569,7 +1568,7 @@
             <div class="stat"><div class="k" data-en="Type">種別</div><div class="v" data-en="Wild camp">野営地</div></div>
             <div class="stat"><div class="k" data-en="Fee">料金</div><div class="v" data-en="None posted">記載なし</div></div>
           </div>
-          <p class="desc note-sm">In Yanbaru National Park &mdash; check posted fire rules.</p>
+          <p class="desc note-sm" data-en="In Yanbaru National Park &mdash; check posted fire rules.">やんばる国立公園内 &mdash; 掲示の火気ルールを確認</p>
           <a class="maplink" href="https://www.google.com/maps/place/26%C2%B044'47.6%22N+128%C2%B010'19.0%22E/@26.7465407,128.1711413,227m/data=!3m1!1e3!4m4!3m3!8m2!3d26.746565!4d128.171939?authuser=1&entry=ttu" target="_blank" rel="noopener"><span data-en="Open in Maps">マップで開く</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
           <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-en="Book / official site">予約・公式サイト</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
@@ -1590,7 +1589,7 @@
             <div class="stat"><div class="k" data-en="Type">種別</div><div class="v" data-en="Wild camp">野営地</div></div>
             <div class="stat"><div class="k" data-en="Fee">料金</div><div class="v" data-en="None posted">記載なし</div></div>
           </div>
-          <p class="desc note-sm">In Yanbaru National Park &mdash; check posted fire rules.</p>
+          <p class="desc note-sm" data-en="In Yanbaru National Park &mdash; check posted fire rules.">やんばる国立公園内 &mdash; 掲示の火気ルールを確認</p>
           <a class="maplink" href="https://www.google.com/maps/place/26%C2%B045'02.0%22N+128%C2%B011'05.8%22E/@26.7500591,128.1839969,370m/data=!3m1!1e3!4m10!1m5!3m4!2zMjbCsDQ3JzU0LjIiTiAxMjjCsDEzJzU1LjciRQ!8m2!3d26.7983889!4d128.2321389!3m3!8m2!3d26.750541!4d128.184956?authuser=1&entry=ttu" target="_blank" rel="noopener"><span data-en="Open in Maps">マップで開く</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
           <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-en="Book / official site">予約・公式サイト</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
@@ -1611,7 +1610,7 @@
             <div class="stat"><div class="k" data-en="Type">種別</div><div class="v" data-en="Paid camp">有料キャンプ場</div></div>
             <div class="stat"><div class="k" data-en="Fee">料金</div><div class="v">¥2,000</div></div>
           </div>
-          <p class="desc note-sm">In Yanbaru National Park &mdash; check posted fire rules.</p>
+          <p class="desc note-sm" data-en="In Yanbaru National Park &mdash; check posted fire rules.">やんばる国立公園内 &mdash; 掲示の火気ルールを確認</p>
           <a class="maplink" href="https://maps.app.goo.gl/NmPtRRuQFPK5Qb7b9" target="_blank" rel="noopener"><span data-en="Open in Maps">マップで開く</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
           <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-en="Book / official site">予約・公式サイト</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
@@ -1632,7 +1631,7 @@
             <div class="stat"><div class="k" data-en="Type">種別</div><div class="v" data-en="Wild camp">野営地</div></div>
             <div class="stat"><div class="k" data-en="Fee">料金</div><div class="v" data-en="None posted">記載なし</div></div>
           </div>
-          <p class="desc note-sm">In Yanbaru National Park &mdash; check posted fire rules.</p>
+          <p class="desc note-sm" data-en="In Yanbaru National Park &mdash; check posted fire rules.">やんばる国立公園内 &mdash; 掲示の火気ルールを確認</p>
           <a class="maplink" href="https://www.google.com/maps/place/26%C2%B047'54.2%22N+128%C2%B013'55.7%22E/@26.7985574,128.2321175,156m/data=!3m1!1e3!4m4!3m3!8m2!3d26.798378!4d128.232139?authuser=1&entry=ttu" target="_blank" rel="noopener"><span data-en="Open in Maps">マップで開く</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
           <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-en="Book / official site">予約・公式サイト</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
@@ -1653,7 +1652,7 @@
             <div class="stat"><div class="k" data-en="Type">種別</div><div class="v" data-en="Paid camp">有料キャンプ場</div></div>
             <div class="stat"><div class="k" data-en="Fee">料金</div><div class="v" data-en="Ask on site">現地で確認</div></div>
           </div>
-          <p class="desc note-sm">In Yanbaru National Park &mdash; check posted fire rules.</p>
+          <p class="desc note-sm" data-en="In Yanbaru National Park &mdash; check posted fire rules.">やんばる国立公園内 &mdash; 掲示の火気ルールを確認</p>
           <a class="maplink" href="https://maps.app.goo.gl/zYafRAvFhUYwAG3fA" target="_blank" rel="noopener"><span data-en="Open in Maps">マップで開く</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
           <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-en="Book / official site">予約・公式サイト</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
@@ -1674,7 +1673,7 @@
             <div class="stat"><div class="k" data-en="Type">種別</div><div class="v" data-en="Wild camp">野営地</div></div>
             <div class="stat"><div class="k" data-en="Fee">料金</div><div class="v" data-en="None posted">記載なし</div></div>
           </div>
-          <p class="desc note-sm">In Yanbaru National Park &mdash; check posted fire rules.</p>
+          <p class="desc note-sm" data-en="In Yanbaru National Park &mdash; check posted fire rules.">やんばる国立公園内 &mdash; 掲示の火気ルールを確認</p>
           <a class="maplink" href="https://www.google.com/maps/place/26%C2%B042'57.2%22N+128%C2%B017'38.4%22E/@26.7149311,128.2914264,17.75z/data=!4m4!3m3!8m2!3d26.715876!4d128.293995?authuser=1&entry=ttu" target="_blank" rel="noopener"><span data-en="Open in Maps">マップで開く</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
           <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-en="Book / official site">予約・公式サイト</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
@@ -1695,7 +1694,7 @@
             <div class="stat"><div class="k" data-en="Type">種別</div><div class="v" data-en="Wild camp">野営地</div></div>
             <div class="stat"><div class="k" data-en="Fee">料金</div><div class="v" data-en="None posted">記載なし</div></div>
           </div>
-          <p class="desc note-sm">In Yanbaru National Park &mdash; check posted fire rules.</p>
+          <p class="desc note-sm" data-en="In Yanbaru National Park &mdash; check posted fire rules.">やんばる国立公園内 &mdash; 掲示の火気ルールを確認</p>
           <a class="maplink" href="https://www.google.com/maps/place/26%C2%B050'45.8%22N+128%C2%B017'08.5%22E/@26.8452102,128.2842858,523m/data=!3m1!1e3!4m4!3m3!8m2!3d26.846056!4d128.285682?authuser=1&entry=ttu" target="_blank" rel="noopener"><span data-en="Open in Maps">マップで開く</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
           <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-en="Book / official site">予約・公式サイト</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
@@ -1716,7 +1715,7 @@
             <div class="stat"><div class="k" data-en="Type">種別</div><div class="v" data-en="Paid camp">有料キャンプ場</div></div>
             <div class="stat"><div class="k" data-en="Fee">料金</div><div class="v" data-en="Ask on site">現地で確認</div></div>
           </div>
-          <p class="desc note-sm">In Yanbaru National Park &mdash; check posted fire rules.</p>
+          <p class="desc note-sm" data-en="In Yanbaru National Park &mdash; check posted fire rules.">やんばる国立公園内 &mdash; 掲示の火気ルールを確認</p>
           <a class="maplink" href="https://maps.app.goo.gl/NFrjgX2ypCiQRxbq8" target="_blank" rel="noopener"><span data-en="Open in Maps">マップで開く</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
           <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-en="Book / official site">予約・公式サイト</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
@@ -1741,56 +1740,56 @@
     <div id="packing">
       <div class="group">
         <div class="glabel"><span class="gicon"><svg class="ic" aria-hidden="true"><use href="#i-file"/></svg></span><span data-en="Documents &amp; Money">書類・現金</span></div>
-        <input type="checkbox" class="cb" id="packing-0-0" data-store="packing" data-gi="0"><label class="checkrow" for="packing-0-0"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="Photo ID">身分証明書<small data-en="Domestic flight &mdash; pass on the phone">国内線 &mdash; 搭乗券はスマホに</small></span></label>
-        <input type="checkbox" class="cb" id="packing-0-1" data-store="packing" data-gi="0"><label class="checkrow" for="packing-0-1"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="Driver's licence">運転免許証<small data-en="Japanese licence is all we need">日本の免許証だけで運転できます</small></span></label>
-        <input type="checkbox" class="cb" id="packing-0-2" data-store="packing" data-gi="0"><label class="checkrow" for="packing-0-2"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="Cash, about &yen;30,000">現金 約&yen;30,000<small data-en="Campsite fees, soba shops and ice are cash">キャンプ場の料金、沖縄そば店、氷は現金</small></span></label>
-        <input type="checkbox" class="cb" id="packing-0-3" data-store="packing" data-gi="0"><label class="checkrow" for="packing-0-3"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="Credit card &amp; ETC card">クレジットカード・ETCカード<small data-en="ETC saves 35% &mdash; &yen;1,040 against &yen;1,610">ETCなら35%割引 &mdash; &yen;1,610が&yen;1,040</small></span></label>
+        <input type="checkbox" class="cb" id="packing-0-0"><label class="checkrow" for="packing-0-0"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="Photo ID">身分証明書<small data-en="Domestic flight &mdash; pass on the phone">国内線 &mdash; 搭乗券はスマホに</small></span></label>
+        <input type="checkbox" class="cb" id="packing-0-1"><label class="checkrow" for="packing-0-1"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="Driver's licence">運転免許証<small data-en="Japanese licence is all we need">日本の免許証だけで運転できます</small></span></label>
+        <input type="checkbox" class="cb" id="packing-0-2"><label class="checkrow" for="packing-0-2"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="Cash, about &yen;30,000">現金 約&yen;30,000<small data-en="Campsite fees, soba shops and ice are cash">キャンプ場の料金、沖縄そば店、氷は現金</small></span></label>
+        <input type="checkbox" class="cb" id="packing-0-3"><label class="checkrow" for="packing-0-3"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="Credit card &amp; ETC card">クレジットカード・ETCカード<small data-en="ETC saves 35% &mdash; &yen;1,040 against &yen;1,610">ETCなら35%割引 &mdash; &yen;1,610が&yen;1,040</small></span></label>
       </div>
       <div class="group">
         <div class="glabel"><span class="gicon"><svg class="ic" aria-hidden="true"><use href="#i-shirt"/></svg></span><span data-en="Wear">服装</span></div>
-        <input type="checkbox" class="cb" id="packing-1-0" data-store="packing" data-gi="1"><label class="checkrow" for="packing-1-0"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="2 quick-dry tees">速乾Tシャツ 2枚<small data-en="Nothing cotton &mdash; humid and 28 &deg;C">綿素材は避ける &mdash; 湿度が高く28 &deg;C</small></span></label>
-        <input type="checkbox" class="cb" id="packing-1-1" data-store="packing" data-gi="1"><label class="checkrow" for="packing-1-1"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="Shorts + light trousers">ショートパンツ+薄手のロングパンツ</span></label>
-        <input type="checkbox" class="cb" id="packing-1-2" data-store="packing" data-gi="1"><label class="checkrow" for="packing-1-2"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="Light long sleeve">薄手の長袖<small data-en="Sun by day, mosquitoes at dusk">日中の日差しと夕方の蚊対策に</small></span></label>
-        <input type="checkbox" class="cb" id="packing-1-3" data-store="packing" data-gi="1"><label class="checkrow" for="packing-1-3"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="Packable rain shell">パッカブルレインジャケット<small data-en="Rain on about 4 days in 10">10日のうち4日ほどは雨</small></span></label>
-        <input type="checkbox" class="cb" id="packing-1-4" data-store="packing" data-gi="1"><label class="checkrow" for="packing-1-4"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="Closed shoes + sandals">足を覆う靴+サンダル<small data-en="Closed shoes for Yanbaru &mdash; habu country">やんばるは足を覆う靴で &mdash; ハブのいる土地</small></span></label>
-        <input type="checkbox" class="cb" id="packing-1-5" data-store="packing" data-gi="1"><label class="checkrow" for="packing-1-5"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="Cap + sunglasses">帽子+サングラス</span></label>
+        <input type="checkbox" class="cb" id="packing-1-0"><label class="checkrow" for="packing-1-0"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="2 quick-dry tees">速乾Tシャツ 2枚<small data-en="Nothing cotton &mdash; humid and 28 &deg;C">綿素材は避ける &mdash; 湿度が高く28 &deg;C</small></span></label>
+        <input type="checkbox" class="cb" id="packing-1-1"><label class="checkrow" for="packing-1-1"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="Shorts + light trousers">ショートパンツ+薄手のロングパンツ</span></label>
+        <input type="checkbox" class="cb" id="packing-1-2"><label class="checkrow" for="packing-1-2"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="Light long sleeve">薄手の長袖<small data-en="Sun by day, mosquitoes at dusk">日中の日差しと夕方の蚊対策に</small></span></label>
+        <input type="checkbox" class="cb" id="packing-1-3"><label class="checkrow" for="packing-1-3"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="Packable rain shell">パッカブルレインジャケット<small data-en="Rain on about 4 days in 10">10日のうち4日ほどは雨</small></span></label>
+        <input type="checkbox" class="cb" id="packing-1-4"><label class="checkrow" for="packing-1-4"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="Closed shoes + sandals">足を覆う靴+サンダル<small data-en="Closed shoes for Yanbaru &mdash; habu country">やんばるは足を覆う靴で &mdash; ハブのいる土地</small></span></label>
+        <input type="checkbox" class="cb" id="packing-1-5"><label class="checkrow" for="packing-1-5"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="Cap + sunglasses">帽子+サングラス</span></label>
       </div>
       <div class="group">
         <div class="glabel"><span class="gicon"><svg class="ic" aria-hidden="true"><use href="#i-waves"/></svg></span><span data-en="Water">海遊び</span></div>
-        <input type="checkbox" class="cb" id="packing-2-0" data-store="packing" data-gi="2"><label class="checkrow" for="packing-2-0"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="Mask + snorkel">マスク+シュノーケル<small data-en="Not in the rental">レンタルには含まれません</small></span></label>
-        <input type="checkbox" class="cb" id="packing-2-1" data-store="packing" data-gi="2"><label class="checkrow" for="packing-2-1"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="Swimsuit + long-sleeve rash guard">水着+長袖ラッシュガード<small data-en="Sun, and the real answer to jellyfish">日差し対策、そしてクラゲへの本当の備え</small></span></label>
-        <input type="checkbox" class="cb" id="packing-2-2" data-store="packing" data-gi="2"><label class="checkrow" for="packing-2-2"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="Water shoes">マリンシューズ<small data-en="Reef and urchins">サンゴ礁とウニ対策</small></span></label>
-        <input type="checkbox" class="cb" id="packing-2-3" data-store="packing" data-gi="2"><label class="checkrow" for="packing-2-3"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="Microfibre towel">マイクロファイバータオル</span></label>
-        <input type="checkbox" class="cb" id="packing-2-4" data-store="packing" data-gi="2"><label class="checkrow" for="packing-2-4"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="Dry bag">ドライバッグ</span></label>
-        <input type="checkbox" class="cb" id="packing-2-5" data-store="packing" data-gi="2"><label class="checkrow" for="packing-2-5"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="Reef-safe sunscreen + lip balm">サンゴに優しい日焼け止め+リップクリーム</span></label>
-        <input type="checkbox" class="cb" id="packing-2-6" data-store="packing" data-gi="2"><label class="checkrow" for="packing-2-6"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="Seasickness tablets">酔い止め<small data-en="For the snorkel boat on day 2">2日目のシュノーケルの船で</small></span></label>
+        <input type="checkbox" class="cb" id="packing-2-0"><label class="checkrow" for="packing-2-0"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="Mask + snorkel">マスク+シュノーケル<small data-en="Not in the rental">レンタルには含まれません</small></span></label>
+        <input type="checkbox" class="cb" id="packing-2-1"><label class="checkrow" for="packing-2-1"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="Swimsuit + long-sleeve rash guard">水着+長袖ラッシュガード<small data-en="Sun, and the real answer to jellyfish">日差し対策、そしてクラゲへの本当の備え</small></span></label>
+        <input type="checkbox" class="cb" id="packing-2-2"><label class="checkrow" for="packing-2-2"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="Water shoes">マリンシューズ<small data-en="Reef and urchins">サンゴ礁とウニ対策</small></span></label>
+        <input type="checkbox" class="cb" id="packing-2-3"><label class="checkrow" for="packing-2-3"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="Microfibre towel">マイクロファイバータオル</span></label>
+        <input type="checkbox" class="cb" id="packing-2-4"><label class="checkrow" for="packing-2-4"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="Dry bag">ドライバッグ</span></label>
+        <input type="checkbox" class="cb" id="packing-2-5"><label class="checkrow" for="packing-2-5"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="Reef-safe sunscreen + lip balm">サンゴに優しい日焼け止め+リップクリーム</span></label>
+        <input type="checkbox" class="cb" id="packing-2-6"><label class="checkrow" for="packing-2-6"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="Seasickness tablets">酔い止め<small data-en="For the snorkel boat on day 2">2日目のシュノーケルの船で</small></span></label>
       </div>
       <div class="group">
         <div class="glabel"><span class="gicon"><svg class="ic" aria-hidden="true"><use href="#i-tent"/></svg></span><span data-en="Camp &amp; BBQ">キャンプ・バーベキュー</span></div>
-        <input type="checkbox" class="cb" id="packing-3-0" data-store="packing" data-gi="3"><label class="checkrow" for="packing-3-0"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="Lighter &times; 2">ライター &times; 2<small data-en="On the body &mdash; never checked, and jet lighters are banned">身に着けて持ち込む &mdash; 預け荷物は不可、ジェットライターは禁止</small></span></label>
-        <input type="checkbox" class="cb" id="packing-3-1" data-store="packing" data-gi="3"><label class="checkrow" for="packing-3-1"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="Tongs + folding knife">トング+折りたたみナイフ</span></label>
-        <input type="checkbox" class="cb" id="packing-3-2" data-store="packing" data-gi="3"><label class="checkrow" for="packing-3-2"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="Pot, 2 bowls, chopsticks">鍋・食器2人分・箸<small data-en="The set brings a grill, not cookware">セットに付くのはグリルだけ、調理器具はなし</small></span></label>
-        <input type="checkbox" class="cb" id="packing-3-3" data-store="packing" data-gi="3"><label class="checkrow" for="packing-3-3"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="2 headlamps + spare batteries">ヘッドランプ2つ+予備電池<small data-en="One light for two is a single point of failure">2人で明かり1つだと、壊れたら終わりです</small></span></label>
-        <input type="checkbox" class="cb" id="packing-3-4" data-store="packing" data-gi="3"><label class="checkrow" for="packing-3-4"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="Small first-aid kit">小さな救急セット<small data-en="Plasters, antiseptic, pincers, antihistamine, painkillers, rehydration powder">絆創膏、消毒薬、ピンセット、抗ヒスタミン薬、痛み止め、経口補水液（粉末）</small></span></label>
-        <input type="checkbox" class="cb" id="packing-3-5" data-store="packing" data-gi="3"><label class="checkrow" for="packing-3-5"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="Rubbish bags + wet wipes">ゴミ袋+ウェットティッシュ<small data-en="Carry everything out, food waste included">生ゴミも含めて、ゴミはすべて持ち帰り</small></span></label>
-        <input type="checkbox" class="cb" id="packing-3-6" data-store="packing" data-gi="3"><label class="checkrow" for="packing-3-6"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="Small bottle of vinegar">食酢の小瓶<small data-en="Habu-kurage stings only &mdash; never a Portuguese man o&rsquo; war">ハブクラゲに刺されたときだけ &mdash; カツオノエボシには絶対に使わない</small></span></label>
-        <input type="checkbox" class="cb" id="packing-3-7" data-store="packing" data-gi="3"><label class="checkrow" for="packing-3-7"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="Foldable cooler bag">折りたたみクーラーバッグ<small data-en="Lives in the Jimny">ジムニーに積んだまま</small></span></label>
+        <input type="checkbox" class="cb" id="packing-3-0"><label class="checkrow" for="packing-3-0"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="Lighter &times; 2">ライター &times; 2<small data-en="On the body &mdash; never checked, and jet lighters are banned">身に着けて持ち込む &mdash; 預け荷物は不可、ジェットライターは禁止</small></span></label>
+        <input type="checkbox" class="cb" id="packing-3-1"><label class="checkrow" for="packing-3-1"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="Tongs + folding knife">トング+折りたたみナイフ</span></label>
+        <input type="checkbox" class="cb" id="packing-3-2"><label class="checkrow" for="packing-3-2"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="Pot, 2 bowls, chopsticks">鍋・食器2人分・箸<small data-en="The set brings a grill, not cookware">セットに付くのはグリルだけ、調理器具はなし</small></span></label>
+        <input type="checkbox" class="cb" id="packing-3-3"><label class="checkrow" for="packing-3-3"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="2 headlamps + spare batteries">ヘッドランプ2つ+予備電池<small data-en="One light for two is a single point of failure">2人で明かり1つだと、壊れたら終わりです</small></span></label>
+        <input type="checkbox" class="cb" id="packing-3-4"><label class="checkrow" for="packing-3-4"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="Small first-aid kit">小さな救急セット<small data-en="Plasters, antiseptic, pincers, antihistamine, painkillers, rehydration powder">絆創膏、消毒薬、ピンセット、抗ヒスタミン薬、痛み止め、経口補水液（粉末）</small></span></label>
+        <input type="checkbox" class="cb" id="packing-3-5"><label class="checkrow" for="packing-3-5"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="Rubbish bags + wet wipes">ゴミ袋+ウェットティッシュ<small data-en="Carry everything out, food waste included">生ゴミも含めて、ゴミはすべて持ち帰り</small></span></label>
+        <input type="checkbox" class="cb" id="packing-3-6"><label class="checkrow" for="packing-3-6"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="Small bottle of vinegar">食酢の小瓶<small data-en="Habu-kurage stings only &mdash; never a Portuguese man o&rsquo; war">ハブクラゲに刺されたときだけ &mdash; カツオノエボシには絶対に使わない</small></span></label>
+        <input type="checkbox" class="cb" id="packing-3-7"><label class="checkrow" for="packing-3-7"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="Foldable cooler bag">折りたたみクーラーバッグ<small data-en="Lives in the Jimny">ジムニーに積んだまま</small></span></label>
       </div>
       <div class="group">
         <div class="glabel"><span class="gicon"><svg class="ic" aria-hidden="true"><use href="#i-camera"/></svg></span><span data-en="Tech">電子機器</span></div>
-        <input type="checkbox" class="cb" id="packing-4-0" data-store="packing" data-gi="4"><label class="checkrow" for="packing-4-0"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="Phone, cable, car charger">スマホ・ケーブル・車載充電器</span></label>
-        <input type="checkbox" class="cb" id="packing-4-1" data-store="packing" data-gi="4"><label class="checkrow" for="packing-4-1"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="Power bank">モバイルバッテリー<small data-en="No mains at a wild site">野営地に電源はありません</small></span></label>
-        <input type="checkbox" class="cb" id="packing-4-2" data-store="packing" data-gi="4"><label class="checkrow" for="packing-4-2"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="Camera, charger, spare card">カメラ・充電器・予備カード</span></label>
-        <input type="checkbox" class="cb" id="packing-4-3" data-store="packing" data-gi="4"><label class="checkrow" for="packing-4-3"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="Offline maps downloaded">オフライン地図のダウンロード<small data-en="Yanbaru signal is patchy">やんばるは電波が不安定</small></span></label>
+        <input type="checkbox" class="cb" id="packing-4-0"><label class="checkrow" for="packing-4-0"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="Phone, cable, car charger">スマホ・ケーブル・車載充電器</span></label>
+        <input type="checkbox" class="cb" id="packing-4-1"><label class="checkrow" for="packing-4-1"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="Power bank">モバイルバッテリー<small data-en="No mains at a wild site">野営地に電源はありません</small></span></label>
+        <input type="checkbox" class="cb" id="packing-4-2"><label class="checkrow" for="packing-4-2"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="Camera, charger, spare card">カメラ・充電器・予備カード</span></label>
+        <input type="checkbox" class="cb" id="packing-4-3"><label class="checkrow" for="packing-4-3"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="Offline maps downloaded">オフライン地図のダウンロード<small data-en="Yanbaru signal is patchy">やんばるは電波が不安定</small></span></label>
       </div>
       <div class="group">
         <div class="glabel"><span class="gicon"><svg class="ic" aria-hidden="true"><use href="#i-cart"/></svg></span><span data-en="Buy on Arrival">現地調達</span></div>
-        <input type="checkbox" class="cb" id="packing-5-0" data-store="packing" data-gi="5"><label class="checkrow" for="packing-5-0"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="Night 2 meat, bought on day 2">2泊目の肉、2日目に購入<small data-en="Night 1 is the Evertrail set">1泊目はEvertrailのセット</small></span></label>
-        <input type="checkbox" class="cb" id="packing-5-1" data-store="packing" data-gi="5"><label class="checkrow" for="packing-5-1"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="Veg, rice, coffee, breakfast">野菜・米・コーヒー・朝食</span></label>
-        <input type="checkbox" class="cb" id="packing-5-2" data-store="packing" data-gi="5"><label class="checkrow" for="packing-5-2"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="Oil, salt, yakiniku sauce, foil">油・塩・焼肉のたれ・アルミホイル</span></label>
-        <input type="checkbox" class="cb" id="packing-5-3" data-store="packing" data-gi="5"><label class="checkrow" for="packing-5-3"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="Ice or freezer blocks, both days">氷か保冷剤、2日分</span></label>
-        <input type="checkbox" class="cb" id="packing-5-4" data-store="packing" data-gi="5"><label class="checkrow" for="packing-5-4"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="Drinking water, 5&ndash;10 L">飲料水 5&ndash;10 L</span></label>
-        <input type="checkbox" class="cb" id="packing-5-5" data-store="packing" data-gi="5"><label class="checkrow" for="packing-5-5"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="Insect repellent + mosquito coils">虫除けスプレー+蚊取り線香<small data-en="DEET or icaridin &mdash; coils do nothing while walking">ディートかイカリジン &mdash; 歩いているときは蚊取り線香では無力</small></span></label>
+        <input type="checkbox" class="cb" id="packing-5-0"><label class="checkrow" for="packing-5-0"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="Night 2 meat, bought on day 2">2泊目の肉、2日目に購入<small data-en="Night 1 is the Evertrail set">1泊目はEvertrailのセット</small></span></label>
+        <input type="checkbox" class="cb" id="packing-5-1"><label class="checkrow" for="packing-5-1"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="Veg, rice, coffee, breakfast">野菜・米・コーヒー・朝食</span></label>
+        <input type="checkbox" class="cb" id="packing-5-2"><label class="checkrow" for="packing-5-2"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="Oil, salt, yakiniku sauce, foil">油・塩・焼肉のたれ・アルミホイル</span></label>
+        <input type="checkbox" class="cb" id="packing-5-3"><label class="checkrow" for="packing-5-3"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="Ice or freezer blocks, both days">氷か保冷剤、2日分</span></label>
+        <input type="checkbox" class="cb" id="packing-5-4"><label class="checkrow" for="packing-5-4"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="Drinking water, 5&ndash;10 L">飲料水 5&ndash;10 L</span></label>
+        <input type="checkbox" class="cb" id="packing-5-5"><label class="checkrow" for="packing-5-5"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-en="Insect repellent + mosquito coils">虫除けスプレー+蚊取り線香<small data-en="DEET or icaridin &mdash; coils do nothing while walking">ディートかイカリジン &mdash; 歩いているときは蚊取り線香では無力</small></span></label>
       </div>
     </div>
     <div class="footer"></div>
@@ -1814,8 +1813,15 @@
 </div>
 
 <script>
-/* UI strings that JS sets at runtime (button labels, placeholders, prompts). Static markup
-   is translated via data-en instead — see the LANGUAGE module below. */
+/* localStorage throws in some private/preview contexts, so every read and write goes
+   through here and a failure just means "no saved state". */
+var LS={
+  get:function(k){try{return localStorage.getItem(k);}catch(e){return null;}},
+  set:function(k,v){try{localStorage.setItem(k,v);}catch(e){}}
+};
+
+/* UI strings JS sets at runtime (button labels, placeholders, prompts). Static markup is
+   translated via data-en instead — see the LANGUAGE module. */
 var T=(function(){
   var S={
     expandAll:['Expand all','すべて開く'],
@@ -1842,7 +1848,7 @@ var T=(function(){
 })();
 </script>
 <script>
-/* PROGRESSIVE ENHANCEMENT ONLY — the page is fully usable without this. */
+/* Progressive enhancement only — the page is fully usable without any of this. */
 (function(){
   document.documentElement.classList.remove('nojs');
   document.documentElement.classList.add('js-tabs');
@@ -1897,12 +1903,10 @@ var T=(function(){
 })();
 </script>
 <script>
-/* PACKING LIST — data-driven, editable, persisted, bilingual.
-   The static .group markup in #packing is the no-JS fallback AND the one-time seed.
-   On load we build a model from it (or restore the saved one), then render from the model.
-   Each entry keeps both languages (text/textJa, note/noteJa) read from the seed's data-ja
-   attributes; editing writes to whichever language is on screen, and either falls back to
-   the other when blank. All edits save to localStorage['packingData']. */
+/* PACKING LIST — the one place content is rendered by JS. The static .group markup in
+   #packing is both the no-JS fallback and the one-time seed: on load we build a model from
+   it (or restore the saved one) and render from that. Entries hold both languages, and an
+   edit writes to whichever is on screen, falling back to the other when blank. */
 (function(){
   var KEY='packingData';
   var box=document.getElementById('packing');
@@ -1915,8 +1919,8 @@ var T=(function(){
   function tf(){return ja()?'textJa':'text';}
   function nf(){return ja()?'nameJa':'name';}
   function pick(o,k){return (o[ja()?k+'Ja':k]||'').trim()||o[k]||'';}
-  function loadData(){try{var d=JSON.parse(localStorage.getItem(KEY));return (d&&d.v===2&&Array.isArray(d.cats))?d:null;}catch(e){return null;}}
-  function save(){try{localStorage.setItem(KEY,JSON.stringify(data));}catch(e){}}
+  function loadData(){try{var d=JSON.parse(LS.get(KEY));return (d&&d.v===2&&Array.isArray(d.cats))?d:null;}catch(e){return null;}}
+  function save(){LS.set(KEY,JSON.stringify(data));}
   function esc(s){return (s||'').replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
   function findCat(id){for(var i=0;i<data.cats.length;i++)if(data.cats[i].id===id)return data.cats[i];return null;}
   function findItem(cat,id){for(var i=0;i<cat.items.length;i++)if(cat.items[i].id===id)return cat.items[i];return null;}
@@ -2057,11 +2061,9 @@ var T=(function(){
 })();
 </script>
 <script>
-/* MAP — the island, the road routes and all 67 pins are static SVG markup. This module only
-   switches state: which day is on (data-day on #view-map), which candidate layers are on
-   (data-camp / data-nature / data-food), which pin is selected, and how far into the day the
-   clock slider has got. Everything else is CSS, so with JS off the map still shows all three
-   days and every pin. */
+/* MAP — the island, the routes and all 67 pins are static SVG. This only switches state:
+   data-day and data-camp/nature/food on #view-map, the selected pin, and the clock. The
+   show/hide is all CSS, so with JS off the map shows every day and every pin. */
 (function(){
   var view=document.getElementById('view-map'); if(!view) return;
   var svg=view.querySelector('svg.map');
@@ -2069,40 +2071,39 @@ var T=(function(){
   var pins=svg.querySelectorAll('.pin'), stops=svg.querySelectorAll('.stop'), legs=svg.querySelectorAll('.leg');
   var rows=view.querySelectorAll('.stoplist li');
   var day='1';
-  function each(l,f){Array.prototype.forEach.call(l,f);}
   function hhmm(m){return ('0'+Math.floor(m/60)).slice(-2)+':'+('0'+m%60).slice(-2);}
   function mine(el){return el.classList.contains('d'+day);}
 
-  /* Paint the clock: the latest stop at or before the slider is "now", the ones before it are
-     behind us, and legs we have not driven yet fade out. The slider starts at the top of the day,
-     so the opening view is "here is the day ahead"; "all" has no clock and clears the state. */
+  /* The latest stop at or before the slider is "now", earlier ones are behind us, and legs
+     not yet driven fade. Starts at the top of the day; "all" has no clock and clears it. */
   function paint(){
     var t=+scrub.value, live=day!=='all', now=-1;
-    if(day!=='all') out.textContent=hhmm(t);
-    if(live) each(rows,function(li){
-      var m=+li.dataset.min;
-      if(mine(li.parentNode)&&m<=t&&m>now) now=m;
-    });
-    each(rows,function(li){
+    if(live){
+      out.textContent=hhmm(t);
+      rows.forEach(function(li){
+        var m=+li.dataset.min;
+        if(mine(li.parentNode)&&m<=t&&m>now) now=m;
+      });
+    }
+    rows.forEach(function(li){
       var m=+li.dataset.min, on=live&&mine(li.parentNode);
       li.classList.toggle('past',on&&m<now);
       li.classList.toggle('now',on&&m===now);
     });
-    each(stops,function(g){
+    stops.forEach(function(g){
       var m=+g.dataset.min, on=live&&mine(g);
       g.classList.toggle('past',on&&m<now);
       g.classList.toggle('now',on&&m===now);
     });
-    each(legs,function(p){p.classList.toggle('future',live&&mine(p)&&+p.dataset.min>t);});
+    legs.forEach(function(p){p.classList.toggle('future',live&&mine(p)&&+p.dataset.min>t);});
   }
 
-  /* Select a pin, and mirror it onto its row in the day's timeline. A stop carries a time, so
-     picking one — from the map or from the row — also walks the clock to it. Candidate pins have
-     no time, so they leave the clock where it was. */
+  /* Mirror the selection onto the row, and walk the clock to it. A candidate pin has no
+     time, so it leaves the clock alone. */
   function select(pin){
-    each(pins,function(p){p.classList.toggle('sel',p===pin);});
+    pins.forEach(function(p){p.classList.toggle('sel',p===pin);});
     var d=pin&&pin.dataset.day, i=pin&&pin.dataset.i;
-    each(rows,function(li){
+    rows.forEach(function(li){
       li.classList.toggle('sel',!!d&&li.parentNode.dataset.day===d&&li.dataset.i===i);
     });
     if(d===day && pin.dataset.min!==undefined){ scrub.value=pin.dataset.min; paint(); }
@@ -2113,12 +2114,12 @@ var T=(function(){
 
   function setDay(d){
     day=d; view.dataset.day=d;
-    each(view.querySelectorAll('#mapDays button'),function(b){
+    view.querySelectorAll('#mapDays button').forEach(function(b){
       var on=b.dataset.day===d;
       b.classList.toggle('active',on); b.setAttribute('aria-pressed',String(on));
     });
     if(d!=='all'){
-      var ms=[]; each(view.querySelectorAll('.stoplist.d'+d+' li'),function(li){ms.push(+li.dataset.min);});
+      var ms=[]; view.querySelectorAll('.stoplist.d'+d+' li').forEach(function(li){ms.push(+li.dataset.min);});
       scrub.min=ms[0]; scrub.max=ms[ms.length-1]; scrub.value=ms[0];
     }
     select(null); paint();
@@ -2155,11 +2156,11 @@ var T=(function(){
 })();
 </script>
 <script>
-/* LANGUAGE (日本語 / EN) — Japanese is the markup, so first paint and the no-JS path are Japanese
-   with no flash of English. Every translatable element carries data-en holding its English inner
-   HTML; the Japanese original is cached into data-ja the first time you switch away. #packing is
-   excluded because the packing list renders from its own bilingual model. Fires 'langchange' so the
-   units and packing modules can re-apply afterwards. */
+/* LANGUAGE (日本語 / EN) — Japanese is the markup, so first paint and the no-JS path are
+   Japanese with no flash of English. Each translatable element carries its English inner HTML
+   in data-en; the Japanese is cached into data-ja on the first switch away. #packing is
+   excluded (it renders from its own bilingual model). Fires 'langchange' for the other
+   modules to re-apply. */
 (function(){
   var KEY='lang';
   function nodes(){
@@ -2184,18 +2185,15 @@ var T=(function(){
     tg.addEventListener('click',function(e){
       var b=e.target.closest('button'); if(!b) return;
       var lang=b.getAttribute('data-lang');
-      try{localStorage.setItem(KEY,lang);}catch(_){}
+      LS.set(KEY,lang);
       apply(lang);
     });
   });
-  var saved; try{saved=localStorage.getItem(KEY);}catch(e){}
-  if(saved==='en') apply('en');          /* Japanese is already in the markup */
+  if(LS.get(KEY)==='en') apply('en');   /* Japanese is already in the markup */
 })();
 </script>
 <script>
-/* Units — swaps every span.u between its metric and imperial string (distance and temperature).
-   Both strings are baked into the markup, so JS never does live math. Every .unit-toggle on the
-   page stays in sync, and the choice persists per device. */
+/* Units — swaps every span.u between its two baked-in strings, so JS never does live math. */
 (function(){
   function apply(sys){
     document.querySelectorAll('span.u').forEach(function(s){
@@ -2210,23 +2208,21 @@ var T=(function(){
     tg.addEventListener('click',function(e){
       var b=e.target.closest('button'); if(!b) return;
       var sys=b.getAttribute('data-unit');
-      try{localStorage.setItem('units',sys);}catch(_){}
+      LS.set('units',sys);
       apply(sys);
     });
   });
-  function current(){var s;try{s=localStorage.getItem('units');}catch(e){}return s==='imperial'?'imperial':'metric';}
+  function current(){return LS.get('units')==='imperial'?'imperial':'metric';}
   /* A language swap rewrites innerHTML, so re-apply units afterwards. */
   document.addEventListener('langchange',function(){apply(current());});
   apply(current());
 })();
 </script>
 <script>
-/* Service worker + update flow.
-   The SW caches the app shell for offline use. When a newer SW has installed and is
-   waiting, we surface a "New version available" banner; tapping Refresh tells the
-   waiting worker to skipWaiting, then the controllerchange reloads into the new version.
-   We never auto-skipWaiting, so the user stays in control of when the swap happens
-   (a freshly-installed worker still activates on its own once the app is fully closed). */
+/* Service worker + update flow. When a newer worker has installed and is waiting we show
+   the "New version available" banner; Refresh tells it to skipWaiting and controllerchange
+   reloads into it. Never auto-skipWaiting, so the swap happens when the user asks (or when
+   the app is fully closed). */
 if('serviceWorker' in navigator){
   var refreshing=false;
   navigator.serviceWorker.addEventListener('controllerchange',function(){

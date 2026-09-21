@@ -1,4 +1,4 @@
-const CACHE = 'okinawa-2026-v18';
+const CACHE = 'okinawa-2026-v19';
 const ASSETS = [
   './', './index.html', './manifest.webmanifest', './icon-180.png', './icon-512.png',
   './images/okinawa-hero.jpg',
@@ -34,9 +34,8 @@ const ASSETS = [
   './images/camps/yanbaru-discovery-forest.jpg',
 ];
 self.addEventListener('install', function(e){
-  // Precache the shell, but DON'T skipWaiting automatically — the page surfaces a
-  // "New version available" banner and only this newer worker takes over when the
-  // user taps Refresh (it still activates on its own once the app is fully closed).
+  // No skipWaiting here: the page shows a "New version available" banner and this
+  // worker takes over only when the user taps Refresh (or the app is fully closed).
   e.waitUntil(caches.open(CACHE).then(function(c){return c.addAll(ASSETS);}));
 });
 self.addEventListener('message', function(e){
@@ -52,16 +51,14 @@ self.addEventListener('fetch', function(e){
   e.respondWith(
     caches.match(e.request).then(function(r){
       return r || fetch(e.request).then(function(resp){
-        // Only cache our own complete, successful responses — never opaque
-        // cross-origin, 4xx/5xx, or 206 partial responses (they'd poison the cache).
+        // Our own complete 200s only — opaque, 4xx/5xx and 206 would poison the cache.
         if(resp && resp.ok && resp.type==='basic'){
           var copy = resp.clone();
           caches.open(CACHE).then(function(c){c.put(e.request, copy);});
         }
         return resp;
       }).catch(function(){
-        // Offline + uncached: fall back to the app shell only for page navigations.
-        // For other requests (images, etc.) fail honestly rather than returning HTML.
+        // Offline and uncached: the shell for navigations, an honest error otherwise.
         return e.request.mode==='navigation' ? caches.match('./index.html') : Response.error();
       });
     })

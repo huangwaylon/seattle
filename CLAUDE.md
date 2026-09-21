@@ -66,7 +66,9 @@ There is no build step or framework. No dependencies. No bundler.
   metric (so the no-JS path shows metric). Every `.unit-toggle` on the page swaps all `span.u` to
   the chosen string and they stay in sync; the choice persists in `localStorage['units']`
   (`'metric'` | `'imperial'`). Both strings are literals — JS never does live math, avoiding
-  rounding drift. There is one toggle in the Itinerary toolbar and one in the Campsites toolbar.
+  rounding drift. **Like the language switch, there is exactly one toggle, in the Itinerary
+  toolbar** — both settings are global and persisted, so repeating them per tab was noise. The
+  modules still bind `querySelectorAll`, so a second toggle anywhere would just work.
   When adding a measurement, always wrap it in a `span.u` with both attributes.
 - **No-JS fallback is required.** Plain file previews (e.g. macOS Quick Look) run the page
   *without* JavaScript. So:
@@ -102,6 +104,9 @@ There is no build step or framework. No dependencies. No bundler.
   array, so it's automatically compatible with older saved data); blank rows are pruned on exit.
   Everything (structure + order + checks) persists. The itinerary and campsites stay 100% static
   HTML — not user-editable.
+- **`LS.get` / `LS.set`** wrap every `localStorage` access, because it throws in some private and
+  preview contexts and a failure should just mean "no saved state". Don't call `localStorage`
+  directly.
 - **Persistence:** the whole packing model saves to `localStorage['packingData']` as
   `{v:2, cats:[{id, name, nameJa, icon, items:[{id, text, textJa, note, noteJa, done}]}]}`, written on
   every edit/check. Japanese is seeded from the static rows' `data-ja`; editing writes to whichever
@@ -112,6 +117,10 @@ There is no build step or framework. No dependencies. No bundler.
   installed PWA), not in ephemeral Quick Look.
 - **`.jsonly` elements** (e.g. "Expand all", "Edit list" / "Reset checks", the unit toggles, the
   campsite filter, group counts) are hidden unless JS runs, via `.nojs .jsonly{display:none}`.
+- **One vertical rhythm above the fold**, the same on all four tabs: heading → intro 6px, intro →
+  first control row 20px, control row → control row 12px, control row → content 14px. `.toolbar`
+  and `.filters` share one padding declaration, and `.spine` / `.mapcard` / `#packing` all carry the
+  same 8px top offset so the last control row sits the same distance above a card, a map or a list.
 - **Responsive:** content is a centered `max-width:var(--maxw)` (720px) column; the hero height
   is `clamp(...)`. Works phone portrait/landscape, tablet, desktop. Respects safe-area insets.
 - **Theme:** light "Okinawa Reef" palette (warm sand paper, deep sea-ink text, ocean teal `--sea`
@@ -226,6 +235,9 @@ Two constraints worth remembering:
      by its `<label class="checkrow" for="...">`. These static rows are the packing list's **seed +
      no-JS fallback** — editing them changes the defaults a *fresh* install starts from. Once a
      device has saved its own `packingData`, that model wins and the static seed is ignored there.
+     `seedFromDOM()` reads the *structure* (`.group`, `.checkrow`, `.ctxt`, the `.gicon use` href),
+     not the ids, so a row needs no bookkeeping attributes — only the `id`/`for` pair the no-JS
+     path uses.
 2. Keep markup static — do not move content rendering into JS. (The packing list is the one
    deliberate exception: its static rows seed a JS-rendered, editable model — see above.)
 3. **After ANY change to `index.html` (or other cached assets): bump the cache name in `sw.js`**
