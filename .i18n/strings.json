@@ -66,13 +66,13 @@
  },
  {
   "slot": "txt",
-  "en": "Okinawa Milk Farm Cafe, Nago &mdash; kakigori",
-  "id": "53cc7123bd"
+  "en": "Fukugawa Falls",
+  "id": "6eae6324ef"
  },
  {
   "slot": "txt-note",
-  "en": "35 min from Manzamo &middot; 12:00&ndash;18:00, closed Wed and Thu",
-  "id": "2b1e8f2b55"
+  "en": "52 min from Manzamo &middot; 20&ndash;30 min return on foot",
+  "id": "6e859eb90b"
  },
  {
   "slot": "txt",
@@ -81,8 +81,8 @@
  },
  {
   "slot": "txt-note",
-  "en": "MaxValu, 2 min from the cafe, open 24 h",
-  "id": "682db6cbee"
+  "en": "19 min from the falls &middot; MaxValu, open 24 h",
+  "id": "8cd2eb85c7"
  },
  {
   "slot": "txt",
@@ -151,23 +151,23 @@
  },
  {
   "slot": "txt",
+  "en": "Okinawa Milk Farm Cafe &mdash; kakigori",
+  "id": "fc9cd1489f"
+ },
+ {
+  "slot": "txt-note",
+  "en": "6 min from Ufuya &middot; 12:00&ndash;18:00",
+  "id": "9464a1df23"
+ },
+ {
+  "slot": "txt",
   "en": "Nago &mdash; tonight's meat",
   "id": "9bea1ad7b3"
  },
  {
   "slot": "txt-note",
-  "en": "MaxValu, 7 min from Ufuya",
-  "id": "f8741f5ff5"
- },
- {
-  "slot": "txt",
-  "en": "Bise Fukugi tree road",
-  "id": "1fd0c62896"
- },
- {
-  "slot": "txt-note",
-  "en": "30 min from Nago &middot; sand lanes under 20,000 fukugi trees",
-  "id": "fd4370153e"
+  "en": "2 min from the cafe &middot; MaxValu",
+  "id": "8cd99164e8"
  },
  {
   "slot": "txt",
@@ -176,8 +176,8 @@
  },
  {
   "slot": "txt-note",
-  "en": "30 min from Bise",
-  "id": "1edf2bfcf5"
+  "en": "12 min from Nago",
+  "id": "92a4cacfc2"
  },
  {
   "slot": "txt",
@@ -336,28 +336,28 @@
  },
  {
   "slot": "bul",
-  "en": "<span class=\"time\">14:25</span><span class=\"dot\"></span><span class=\"txt\">Okinawa Milk Farm Cafe, Nago &mdash; kakigori",
-  "id": "4e4aefa8bc"
+  "en": "<span class=\"time\">14:45</span><span class=\"dot\"></span><span class=\"txt\">Fukugawa Falls",
+  "id": "381c1093de"
  },
  {
   "slot": "bul-note",
-  "en": "35 min from Manzamo &middot; 12:00&ndash;18:00, closed Wed and Thu",
-  "id": "c906e07622"
+  "en": "52 min from Manzamo &middot; 20&ndash;30 min return on foot",
+  "id": "999a4a5b01"
  },
  {
   "slot": "bul",
-  "en": "<span class=\"time\">15:30</span><span class=\"dot\"></span><span class=\"txt\">Nago &mdash; groceries",
-  "id": "9fdf489b23"
+  "en": "<span class=\"time\">16:05</span><span class=\"dot\"></span><span class=\"txt\">Nago &mdash; groceries",
+  "id": "40b218deb1"
  },
  {
   "slot": "bul-note",
-  "en": "MaxValu, 2 min from the cafe, open 24 h",
-  "id": "8eeb7715cd"
+  "en": "19 min from the falls &middot; MaxValu, open 24 h",
+  "id": "b4445feac0"
  },
  {
   "slot": "bul",
-  "en": "<span class=\"time\">16:30</span><span class=\"dot\"></span><span class=\"txt\">Camp &mdash; Yagaji or Kouri",
-  "id": "a9a2bbe00c"
+  "en": "<span class=\"time\">16:50</span><span class=\"dot\"></span><span class=\"txt\">Camp &mdash; Yagaji or Kouri",
+  "id": "dafb60abcc"
  },
  {
   "slot": "bul-note",
@@ -421,33 +421,33 @@
  },
  {
   "slot": "bul",
-  "en": "<span class=\"time\">15:10</span><span class=\"dot\"></span><span class=\"txt\">Nago &mdash; tonight's meat",
-  "id": "49460251cb"
+  "en": "<span class=\"time\">15:15</span><span class=\"dot\"></span><span class=\"txt\">Okinawa Milk Farm Cafe &mdash; kakigori",
+  "id": "c6ae8c4c1d"
  },
  {
   "slot": "bul-note",
-  "en": "MaxValu, 7 min from Ufuya",
-  "id": "517c4e935f"
+  "en": "6 min from Ufuya &middot; 12:00&ndash;18:00",
+  "id": "4f76bcd9ff"
  },
  {
   "slot": "bul",
-  "en": "<span class=\"time\">16:15</span><span class=\"dot\"></span><span class=\"txt\">Bise Fukugi tree road",
-  "id": "12b0faeb4a"
+  "en": "<span class=\"time\">16:15</span><span class=\"dot\"></span><span class=\"txt\">Nago &mdash; tonight's meat",
+  "id": "49eab9a2f6"
  },
  {
   "slot": "bul-note",
-  "en": "30 min from Nago &middot; sand lanes under 20,000 fukugi trees",
-  "id": "bf7ec9afc0"
+  "en": "2 min from the cafe &middot; MaxValu",
+  "id": "3b75f01329"
  },
  {
   "slot": "bul",
-  "en": "<span class=\"time\">17:45</span><span class=\"dot\"></span><span class=\"txt\">Back to camp",
-  "id": "708399ae0f"
+  "en": "<span class=\"time\">17:05</span><span class=\"dot\"></span><span class=\"txt\">Back to camp",
+  "id": "3b0a028643"
  },
  {
   "slot": "bul-note",
-  "en": "30 min from Bise",
-  "id": "fb4853a918"
+  "en": "12 min from Nago",
+  "id": "74355e71ef"
  },
  {
   "slot": "bul",
@@ -861,8 +861,8 @@
  },
  {
   "slot": "bul",
-  "en": "Open all three days &middot; Day 1, on the way to camp",
-  "id": "d5be393108"
+  "en": "Open all three days &middot; Day 2, 6 min after Ufuya",
+  "id": "45240f1b8e"
  },
  {
   "slot": "bul",
@@ -1241,13 +1241,13 @@
  },
  {
   "slot": "subtitle",
-  "en": "Naha &rarr; Okinawa City &rarr; Motobu",
-  "id": "56f1f5d441"
+  "en": "Naha &rarr; Kin &rarr; Nago",
+  "id": "0563d34b91"
  },
  {
   "slot": "subtitle",
-  "en": "Minna Island, soba, Bise",
-  "id": "80faa795b6"
+  "en": "Minna Island, Ufuya, kakigori",
+  "id": "35dcc274e4"
  },
  {
   "slot": "subtitle",
