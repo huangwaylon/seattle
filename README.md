@@ -20,6 +20,7 @@ A self-contained, offline-first travel itinerary for an October 2026 camping roa
 | `index.html` | The entire app — HTML content + inline CSS + inline JS. |
 | `images/okinawa-hero.jpg` | Hero photo (the Jimny + rooftop tent), precached for offline use. |
 | `images/camps/` | One photo per campsite, precached for offline use. |
+| `images/dive/`, `images/cafe/`, `images/tidepool/` | Photos for the logistics and Nearby cards, precached. |
 | `sw.js` | Service worker — caches the app shell and hero for offline use. |
 | `manifest.webmanifest` | PWA manifest (name, icons, standalone display). |
 | `icon-180.png` / `icon-512.png` | App icons. |

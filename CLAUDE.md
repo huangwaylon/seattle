@@ -23,6 +23,7 @@ previous trip — the URL and remote are unchanged on purpose).
 | `index.html` | The entire app. Static HTML content + inline `<style>` + inline `<script>`. **Source of truth — edit directly.** |
 | `images/okinawa-hero.jpg` | The hero photo (the Jimny + rooftop tent on a coastal bluff). Precached by the service worker. |
 | `images/camps/*.jpg` | One photo per campsite, 720 px wide, scraped from the Evertrail directory's Airtable `Photos` field. All precached. |
+| `images/tidepool/*.jpg` | Two photos of the Gushikawa tide pool, 720 px wide, from the note.com article (credited in the card). Precached. |
 | `sw.js` | Service worker. Cache-first; precaches the app shell **and the hero image**. Update is **message-driven**: a freshly-installed worker waits (no auto-skipWaiting) until the page tells it to `SKIP_WAITING` via the refresh banner — or until the app is fully closed, when it activates on its own. |
 | `manifest.webmanifest` | PWA manifest (name, icons, `standalone` display, theme colors). |
 | `icon-180.png` | iOS `apple-touch-icon` (Home Screen). |
@@ -142,9 +143,11 @@ intact, and the no-JS path still shows a real map with all three days and every 
   attributes (the no-JS case) means "show everything". The JS sets nothing else except the state
   classes `.past` / `.now` / `.future` / `.sel`.
 - **The clock** (`#timeScrub`) is a range input over the selected day's first-to-last stop, in minutes.
-  Parked at the day's end it clears all clock classes, so the default view is the whole day; drag back
-  and the stop you are at gets `.now` (ring + label), earlier ones `.past` (hollow), and legs you have
-  not driven yet `.future` (faded). During Oct 10–12 2026 the tab opens on today at the current time.
+  It **starts at the top of the day and resets there on every day switch**, so the opening view is always
+  "here is the day ahead": the first stop gets `.now` (ring + label) and the whole route reads `.future`
+  (faded to .34 — deliberately still legible, since this is the default state, not an edge case). Drag
+  forward and stops behind you go `.past` (hollow) while driven legs come up to full. During Oct 10–12
+  2026 the tab opens on today at the current time instead.
 - **Pins are not focusable.** The SVG is one `role="img"` with a `<title>`, because 67 tab stops would
   swamp the keyboard order; the stop rows below the map are the keyboard path, and candidate names all
   exist in the Campsites and Nearby cards. Each pin does carry a wide invisible `circle.hit`, so the
@@ -229,7 +232,7 @@ Every link points at a real place, never a coordinate. Three tiers, in descendin
 
 1. **Campsites (26)** — the Evertrail directory's own `Google maps` field, i.e. the operator's pin.
    For unnamed wild sites this is the best available; do not "improve" it into a coordinate search.
-2. **Named venues (18)** — an exact place link of the form
+2. **Named venues (19)** — an exact place link of the form
    `https://www.google.com/maps/place//data=!4m2!3m1!1s<FID>` where `<FID>` is Google's
    `0x…:0x…` feature id.
 3. **Cape Hedo (1)** — a `?api=1&query=` place query, because Google returns a result list for it
@@ -327,6 +330,13 @@ new version activates on its own.
 - **iOS storage:** installed Home-Screen PWAs are exempt from Safari's 7-day script-storage cap,
   so the saved packing list persists — but only if opened occasionally. Install a week or two
   pre-trip.
+- **Day 3 ends at the Gushikawa tide pool, not the onsen.** The pool (具志川城跡, Kyan, Itoman —
+  26.08036, 127.66452, free) only exists around low tide, and **Oct 12 2026's afternoon low at Naha is
+  14:53** (JMA tide table, station NS: lows 02:33 / 14:53, highs 08:50 / 20:31), which is exactly when the
+  drive from Maeda Point lands you there. That forces it to be the day's last stop, which is why
+  **Ryujin-no-yu came out** — it is only 23 min on from the pool and 10 min from the airport, so keeping
+  both is possible but leaves about 30 min against the 17:30 car return instead of 45. The card documents
+  that trade. Access was closed in 2020 with no published end date, so check for a current notice.
 - **Trip shape.** The car is collected at the Evertrail office in **Okinawa City**, not the airport: bus 111 or
   117 from Naha Airport, ~1 h, ¥1,330 pp, off at Okinawa Kita IC, then a 10-min walk or a free pickup arranged
   by email. It is returned to the **airport**, where the cutoff is 17:30. Day 2 is the boat day. The
@@ -339,8 +349,8 @@ new version activates on its own.
   dates, that a gas canister cannot be flown, and every Dive Nuts price and time (read off
   divenuts.jp/taiken-snorkel in Sep 2026). **Still unverified** — King Tacos' hours, Ryujin-no-yu's rate
   and whether the holiday price applies on Sports Day, Kishimoto's 1905 founding and cash-only policy,
-  and every campsite fee (the directory prices only two). Note Dive Nuts has **suspended phone
-  bookings** — those confirmations have to go by email or LINE.
+  and every campsite fee (the directory prices only two), and whether the Gushikawa tide pool is open at
+  all. Note Dive Nuts has **suspended phone bookings** — those confirmations have to go by email or LINE.
 - **Day 2 is snorkelling, not diving.** The booking is Dive Nuts' **ボートシュノーケル, morning boat**
   (`divenuts.jp/taiken-snorkel`, detail page `/about/20726/`): ¥9,900 each at 2+ people for one drop,
   ¥2,750 for the second, gear and photos included — ¥25,300 for two of us doing both. The morning boat
