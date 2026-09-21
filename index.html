@@ -67,12 +67,13 @@
   .js-tabs .view{display:none;}
   .js-tabs #tab-itinerary:checked ~ .views #view-itinerary,
   .js-tabs #tab-camps:checked     ~ .views #view-camps,
+  .js-tabs #tab-eat:checked       ~ .views #view-eat,
   .js-tabs #tab-packing:checked   ~ .views #view-packing{display:block;animation:fade .25s ease;}
   .nojs .tabbar{display:none;}
   .nojs .views{padding-bottom:24px;}
-  .nojs #view-camps,.nojs #view-packing{margin-top:24px;border-top:1px solid var(--line);}
+  .nojs #view-camps,.nojs #view-eat,.nojs #view-packing{margin-top:24px;border-top:1px solid var(--line);}
   /* These views have no full-bleed hero, so pad past the status bar / Dynamic Island in standalone. */
-  #view-camps,#view-packing{padding-top:var(--safe-t);}
+  #view-camps,#view-eat,#view-packing{padding-top:var(--safe-t);}
   @keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
 
   h2.section{display:flex;align-items:center;gap:10px;font-family:var(--font-display);font-size:24px;
@@ -239,6 +240,12 @@
     background:var(--sea-soft);border:1px solid var(--sea-ring);padding:5px 11px;border-radius:var(--r-chip);}
   .chip.pick{color:#fff;background:var(--coral);border-color:var(--coral);}
 
+  /* Campsite photo */
+  figure.camp-thumb{margin:14px 0 0;border-radius:16px;overflow:hidden;position:relative;
+    background:var(--surface-2);border:1px solid var(--line);aspect-ratio:16/9;}
+  figure.camp-thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+  .desc.note-sm{font-size:12.5px;color:var(--muted);margin-top:10px;}
+
   /* Stat grid */
   .stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px;}
   .stat{background:var(--surface-2);border:1px solid var(--line);border-radius:var(--r-cell);
@@ -328,15 +335,17 @@
   .tabbtn{flex:1;color:var(--faint);padding:11px 0 9px;cursor:pointer;
     display:flex;flex-direction:column;align-items:center;gap:5px;
     position:relative;transition:color .15s;}
-  .tabbtn .lb{font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;}
+  .tabbtn .lb{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;}
   .tabbtn:active{opacity:.7;}
   .tabbtn::after{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);
     width:26px;height:2px;border-radius:0 0 2px 2px;background:transparent;transition:background .2s;}
   #tab-itinerary:checked ~ .tabbar .tabbtn[for="tab-itinerary"],
   #tab-camps:checked     ~ .tabbar .tabbtn[for="tab-camps"],
+  #tab-eat:checked       ~ .tabbar .tabbtn[for="tab-eat"],
   #tab-packing:checked   ~ .tabbar .tabbtn[for="tab-packing"]{color:var(--sea);}
   #tab-itinerary:checked ~ .tabbar .tabbtn[for="tab-itinerary"]::after,
   #tab-camps:checked     ~ .tabbar .tabbtn[for="tab-camps"]::after,
+  #tab-eat:checked       ~ .tabbar .tabbtn[for="tab-eat"]::after,
   #tab-packing:checked   ~ .tabbar .tabbtn[for="tab-packing"]::after{background:var(--coral);
     box-shadow:0 0 12px var(--coral-soft);}
 
@@ -375,6 +384,9 @@
     <symbol id="i-tent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 21 14 3"/><path d="M20.5 21 10 3"/><path d="M15.5 21 12 15l-3.5 6"/><path d="M2 21h20"/></symbol>
     <symbol id="i-palm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M13 8c0-2.76-2.46-5-5.5-5S2 5.24 2 8h2l1-1 1 1h4"/><path d="M13 7.14A5.82 5.82 0 0 1 16.5 6c3.04 0 5.5 2.24 5.5 5h-3l-1-1-1 1h-3"/><path d="M5.89 9.71c-2.15 2.15-2.3 5.47-.35 7.43l4.24-4.25.7-.7.71-.71 2.12-2.12c-1.95-1.96-5.27-1.8-7.42.35z"/><path d="M11 15.5c.5 2.5-.17 4.5-1 6.5h4c2-5.5-.5-12-1-14"/></symbol>
     <symbol id="i-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></symbol>
+    <symbol id="i-bowl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h20"/><path d="M20 12a8 8 0 0 1-16 0"/><path d="M12 4a3 3 0 0 0-3 3c0 1 .5 1.5 1.5 2"/><path d="M15.5 5.5c.8.6 1 1.4.5 2.5"/></symbol>
+    <symbol id="i-teacup" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 0 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><path d="M6 2v3"/><path d="M10 2v3"/><path d="M14 2v3"/></symbol>
+    <symbol id="i-gift" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"/></symbol>
     <symbol id="i-cart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></symbol>
     <symbol id="i-file" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></symbol>
     <symbol id="i-shirt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"/></symbol>
@@ -396,6 +408,7 @@
 
 <input class="tabradio" type="radio" name="tab" id="tab-itinerary" checked>
 <input class="tabradio" type="radio" name="tab" id="tab-camps">
+<input class="tabradio" type="radio" name="tab" id="tab-eat">
 <input class="tabradio" type="radio" name="tab" id="tab-packing">
 
 <div class="views">
@@ -442,27 +455,22 @@
             <li><span class="time">12:00</span><span class="dot"></span><span class="txt" data-ja="沖縄自動車道を北上<small>那覇IC &rarr; 金武IC &mdash; 全線57 kmのうち約<span class=&quot;u&quot; data-metric=&quot;40 km&quot; data-imperial=&quot;25 mi&quot;>40 km</span></small>">North on the Okinawa Expressway<small>Naha IC &rarr; Kin IC &mdash; about <span class="u" data-metric="40 km" data-imperial="25 mi">40 km</span> of the 57 km line</small></span></li>
             <li><span class="time">13:10</span><span class="dot"></span><span class="txt" data-ja="キングタコス金武町 &mdash; タコライス<small>タコライスは1984年に金武町のパーラー千里で生まれ、それを広めたのがキングタコス</small>">King Tacos, Kin Town &mdash; taco rice<small>Taco rice was invented in Kin in 1984 at Parlour Senri; King Tacos is the chain that spread it</small></span></li>
             <li><span class="time">14:30</span><span class="dot"></span><span class="txt" data-ja="道の駅許田、許田ICを降りてすぐ<small>8:30&ndash;19:00 &middot; 農産物、天ぷらコーナー、美ら海水族館の割引チケット</small>">Michi-no-eki Kyoda, off Kyoda IC<small>8:30&ndash;19:00 &middot; produce, tempura counter, discounted Churaumi tickets</small></span></li>
-            <li><span class="time">15:15</span><span class="dot"></span><span class="txt" data-ja="名護 &mdash; バーナー、ガスカートリッジ、2泊分の食料<small>マックスバリュは24時間営業 &middot; あぐー豚はサンエー為又シティでその場でカット</small>">Nago &mdash; burner, gas, two nights of food<small>MaxValu is open 24 h &middot; San-A Bijimata for agu pork cut to order</small></span></li>
+            <li><span class="time">15:15</span><span class="dot"></span><span class="txt" data-ja="名護 &mdash; 食料の買い出し<small>野菜・米・氷・朝食 &middot; マックスバリュは24時間営業</small>">Nago &mdash; groceries<small>Veg, rice, ice, breakfast &middot; MaxValu open 24 h</small></span></li>
             <li><span class="time">16:45</span><span class="dot"></span><span class="txt" data-ja="キャンプ場到着、ルーフトップテント設営">Reach camp, pop the rooftop tent</span></li>
             <li><span class="time">18:08</span><span class="dot"></span><span class="txt" data-ja="夕日">Sunset</span></li>
-            <li><span class="time">19:00</span><span class="dot"></span><span class="txt" data-ja="バーベキュー1日目 &mdash; あぐー豚・沖縄県産牛">BBQ night 1 &mdash; agu pork &amp; Okinawa beef</span></li>
+            <li><span class="time">19:00</span><span class="dot"></span><span class="txt" data-ja="バーベキュー1日目 &mdash; Evertrailのセット">BBQ night 1 &mdash; the Evertrail set</span></li>
           </ul>
           <div class="note">
             <svg class="ic" aria-hidden="true"><use href="#i-alert"/></svg>
-            <div data-ja="<strong>今日のうちにバーナーを購入してください。</strong>鉄板グリルとガスカートリッジは、辞退した肉盛りセットに付属していたものです。このままでは調理する手段がまったくありません。ガスは飛行機に持ち込めないため、現地で購入するしかありません &mdash;
-            炭は代わりになりません。多くのキャンプ場で禁止されており、恩納村も使わないよう求めています。"><strong>Buy a burner today.</strong> The teppan grill and gas canister were bundled with the meat
-            platter we declined, so we land with no way to cook. Gas cannot fly, so it has to be bought here &mdash;
-            and charcoal is no fallback, since most sites ban it and Onna Village asks visitors not to use it.</div>
+            <div data-ja="<strong>1泊目は付属、2泊目は自前です。</strong>セットは2人分の夕食1回 &mdash; あぐー豚200 g、
+            沖縄県産牛200 g、ソーセージ2本、焼き鳥4本、ガスと鉄板グリル。翌日の肉は今日ではなく2日目に買ってください。28 &deg;Cではクーラーバッグで2日はもちません。"><strong>Night 1 is covered, night 2 is not.</strong> The set is one dinner for two &mdash; 200 g agu
+            pork, 200 g Okinawa beef, two sausages, four yakitori, gas and the teppan grill. Buy tomorrow's meat on
+            day 2, not today; a cooler will not hold it through two days at 28 &deg;C.</div>
           </div>
-          <div class="subhead" data-ja="買い出しスポット（使い勝手のよい順）">Shopping stops, in order of usefulness</div>
-          <ul class="bul">
-            <li data-ja="マックスバリュ名護店 &mdash; 24時間営業<small>北部で頼れる24時間営業の店</small>">MaxValu Nago &mdash; open 24 h<small>The reliable all-night stop in the north</small></li>
-            <li data-ja="サンエー為又シティ（名護市）<small>品揃えが一番豊富 &middot; あぐー豚は精肉コーナーでカットしてもらえる</small>">San-A Bijimata, Nago<small>Biggest selection &middot; butcher counter for agu pork</small></li>
-            <li data-ja="道の駅許田、許田ICを降りてすぐ<small>8:30&ndash;19:00 &middot; 農産物と弁当が中心で、スーパーの代わりにはなりません</small>">Michi-no-eki Kyoda, off Kyoda IC<small>8:30&ndash;19:00 &middot; produce and bento, not a full grocery</small></li>
-          </ul>
           <div class="subhead" data-ja="周辺のその他">Also nearby</div>
           <ul class="bul">
-            <li data-ja="夕暮れどきはカフンジャバンタ・古宇利大橋へ">Kafu Banta &amp; Kouri Island bridge for the golden hour</li>
+            <li data-ja="道の駅許田、許田ICを降りてすぐ<small>8:30&ndash;19:00 &middot; 農産物と弁当</small>">Michi-no-eki Kyoda, off Kyoda IC<small>8:30&ndash;19:00 &middot; produce and bento</small></li>
+            <li data-ja="夕暮れどきはカフンジャバンタ・古宇利大橋へ">Kafu Banta &amp; the Kouri bridge for golden hour</li>
           </ul>
         </div>
       </details>
@@ -480,12 +488,12 @@
             <li><span class="time">06:25</span><span class="dot"></span><span class="txt" data-ja="海から昇る朝日">Sunrise over the water</span></li>
             <li><span class="time">08:00</span><span class="dot"></span><span class="txt" data-ja="コーヒー、テント撤収">Coffee, break camp</span></li>
             <li><span class="time">08:40</span><span class="dot"></span><span class="txt" data-ja="辺戸岬 &mdash; 本島最北端">Cape Hedo &mdash; the island's northern tip</span></li>
-            <li><span class="time">09:30</span><span class="dot"></span><span class="txt" data-ja="ASMUI（アスムイ）の聖地ハイク<small>2024年に大石林山から改称 &middot; 大人 &yen;2,500 &middot; 周回コース30&ndash;80分</small>">ASMUI Spiritual Hikes<small>Renamed from Daisekirinzan in 2024 &middot; &yen;2,500 adult &middot; loops 30&ndash;80 min</small></span></li>
-            <li><span class="time">11:00</span><span class="dot"></span><span class="txt" data-ja="南下して本部町へ<small>90分 &mdash; この日いちばん長い移動なので、時間どおりに出発</small>">Drive south to Motobu<small>90 min &mdash; the long leg of the day, so leave on time</small></span></li>
-            <li><span class="time">12:35</span><span class="dot"></span><span class="txt" data-ja="ゴリラチョップでシュノーケリング（本部町）<small>波が穏やかで歩いてエントリー &middot; 海水温 &asymp; <span class=&quot;u&quot; data-metric=&quot;29 &deg;C&quot; data-imperial=&quot;84 &deg;F&quot;>29 &deg;C</span></small>">Snorkel at Gorilla Chop, Motobu<small>Sheltered, walk-in entry &middot; sea &asymp; <span class="u" data-metric="29 &deg;C" data-imperial="84 &deg;F">29 &deg;C</span></small></span></li>
-            <li><span class="time">14:00</span><span class="dot"></span><span class="txt" data-ja="きしもと食堂 &mdash; 沖縄そば<small>11:00&ndash;17:30 &middot; 水曜定休 &middot; 現金のみ &middot; 売り切れ次第閉店</small>">Kishimoto Shokudo &mdash; Okinawa soba<small>11:00&ndash;17:30 &middot; closed Wed &middot; cash only &middot; closes when sold out</small></span></li>
-            <li><span class="time">15:15</span><span class="dot"></span><span class="txt" data-ja="美ら海水族館 &mdash; 車で15分<small>8:30&ndash;18:30、入館は17:30まで &middot; 大人 &yen;2,180</small>">Churaumi Aquarium &mdash; 15 min away<small>8:30&ndash;18:30, last entry 17:30 &middot; &yen;2,180 adult</small></span></li>
-            <li><span class="time">17:00</span><span class="dot"></span><span class="txt" data-ja="本部町で今夜の食材を買い出し<small>ザ・ビッグエクスプレス本部店は22:00まで &mdash; 古宇利島にスーパーはありません</small>">Groceries in Motobu for tonight<small>The Big Express Motobu until 22:00 &mdash; Kouri Island has no supermarket</small></span></li>
+            <li><span class="time">09:30</span><span class="dot"></span><span class="txt" data-ja="ASMUI（旧・大石林山）<small>&yen;2,500 &middot; 周回コース30&ndash;80分</small>">ASMUI (ex-Daisekirinzan)<small>&yen;2,500 &middot; loops 30&ndash;80 min</small></span></li>
+            <li><span class="time">11:00</span><span class="dot"></span><span class="txt" data-ja="南下して本部町へ<small>90分 &mdash; この日いちばん長い移動、時間どおりに出発</small>">Drive south to Motobu<small>90 min &mdash; the day's long leg, leave on time</small></span></li>
+            <li><span class="time">12:35</span><span class="dot"></span><span class="txt" data-ja="ゴリラチョップでシュノーケリング<small>歩いてエントリー &middot; 海水温 &asymp; <span class=&quot;u&quot; data-metric=&quot;29 &deg;C&quot; data-imperial=&quot;84 &deg;F&quot;>29 &deg;C</span></small>">Snorkel at Gorilla Chop<small>Walk-in entry &middot; sea &asymp; <span class="u" data-metric="29 &deg;C" data-imperial="84 &deg;F">29 &deg;C</span></small></span></li>
+            <li><span class="time">14:00</span><span class="dot"></span><span class="txt" data-ja="きしもと食堂 &mdash; 沖縄そば<small>11:00&ndash;17:30 &middot; 現金のみ &middot; 売り切れ次第閉店</small>">Kishimoto Shokudo &mdash; Okinawa soba<small>11:00&ndash;17:30 &middot; cash only &middot; closes when sold out</small></span></li>
+            <li><span class="time">15:15</span><span class="dot"></span><span class="txt" data-ja="美ら海水族館<small>&yen;2,180 &middot; 入館は17:30まで</small>">Churaumi Aquarium<small>&yen;2,180 &middot; last entry 17:30</small></span></li>
+            <li><span class="time">17:00</span><span class="dot"></span><span class="txt" data-ja="本部町 &mdash; 今夜の肉<small>ザ・ビッグエクスプレスは22:00まで &middot; 古宇利島にスーパーなし</small>">Motobu &mdash; tonight's meat<small>The Big Express until 22:00 &middot; Kouri has no supermarket</small></span></li>
             <li><span class="time">17:45</span><span class="dot"></span><span class="txt" data-ja="キャンプ場に到着 &mdash; 屋我地か古宇利">Reach camp &mdash; Yagaji or Kouri</span></li>
             <li><span class="time">18:07</span><span class="dot"></span><span class="txt" data-ja="夕日">Sunset</span></li>
             <li><span class="time">19:00</span><span class="dot"></span><span class="txt" data-ja="キャンプ場でバーベキュー2日目">BBQ night 2 at camp</span></li>
@@ -498,8 +506,8 @@
           </div>
           <div class="subhead" data-ja="時間があれば">If there is time</div>
           <ul class="bul">
-            <li data-ja="きしもと食堂のすぐ隣、新垣ぜんざい屋<small>甘く炊いた豆にかき氷 &middot; 月曜定休なので、行けるのは今日</small>">Aragaki Zenzai, next door to Kishimoto<small>Shaved ice over sweet beans &middot; closed Mondays, so today is the day</small></li>
-            <li data-ja="備瀬のフクギ並木、または古宇利大橋の展望スポット">Bise Fukugi tree road, or the Kouri bridge viewpoint</li>
+            <li data-ja="きしもと食堂の隣、新垣ぜんざい屋<small>「食べる」タブを参照 &mdash; 毎日売り切れます</small>">Aragaki Zenzai, next to Kishimoto<small>See the Eat tab &mdash; sells out daily</small></li>
+            <li data-ja="備瀬のフクギ並木">Bise Fukugi tree road</li>
           </ul>
         </div>
       </details>
@@ -515,14 +523,14 @@
         <div class="content">
           <ul class="tl">
             <li><span class="time">06:25</span><span class="dot"></span><span class="txt" data-ja="朝日、撤収">Sunrise, pack up</span></li>
-            <li><span class="time">07:30</span><span class="dot"></span><span class="txt" data-ja="テントを撤収して南へ<small>本部町から95分 &mdash; 今ここで出発できるかで一日が決まります</small>">Break camp and drive south<small>95 min from Motobu &mdash; the whole day depends on leaving now</small></span></li>
+            <li><span class="time">07:30</span><span class="dot"></span><span class="txt" data-ja="テントを撤収して南へ<small>95分 &mdash; 今出発できるかで一日が決まります</small>">Break camp, drive south<small>95 min &mdash; the day depends on leaving now</small></span></li>
             <li><span class="time">09:10</span><span class="dot"></span><span class="txt" data-ja="万座毛（恩納村）">Cape Manzamo, Onna</span></li>
             <li><span class="time">10:00</span><span class="dot"></span><span class="txt" data-ja="残波岬灯台（読谷村）">Cape Zanpa lighthouse, Yomitan</span></li>
             <li><span class="time">10:40</span><span class="dot"></span><span class="txt" data-ja="やちむんの里">Yachimun Pottery Village</span></li>
-            <li><span class="time">12:30</span><span class="dot"></span><span class="txt" data-ja="真栄田岬で青の洞窟シュノーケリング<small>13:50が干潮 &middot; この時間帯はずっと潮が引いていくタイミングです。波が高いと階段は閉鎖されます</small>">Blue Cave snorkel, Maeda Point<small>Low water 13:50, so the tide falls right through this window &middot; the stairway shuts in high surf</small></span></li>
-            <li><span class="time">14:15</span><span class="dot"></span><span class="txt" data-ja="北谷町／アメリカンビレッジ<small>エンダー（A&amp;W）で凍らせたジョッキのルートビア &mdash; おかわり無料</small>">Chatan / American Village<small>A&amp;W for a frozen mug of root beer &mdash; refills are free</small></span></li>
+            <li><span class="time">12:30</span><span class="dot"></span><span class="txt" data-ja="真栄田岬で青の洞窟シュノーケリング<small>13:50が干潮 &middot; 波が高いと階段は閉鎖</small>">Blue Cave snorkel, Maeda Point<small>Low water 13:50 &middot; stairway shuts in high surf</small></span></li>
+            <li><span class="time">14:15</span><span class="dot"></span><span class="txt" data-ja="北谷町／アメリカンビレッジ<small>エンダー（A&amp;W）のルートビア &mdash; おかわり無料</small>">Chatan / American Village<small>A&amp;W root beer &mdash; refills free</small></span></li>
             <li><span class="time">15:15</span><span class="dot"></span><span class="txt" data-ja="給油、車内の荷降ろし、ゴミ処理">Refuel, empty the car, bin the rubbish</span></li>
-            <li><span class="time">15:55</span><span class="dot"></span><span class="txt" data-ja="琉球温泉 龍神の湯（瀬長島）<small>6:00&ndash;24:00 &middot; 休日料金は約&yen;1,570 &middot; タオル付き &middot; OKAから12分</small>">Ryujin-no-yu onsen, Senagajima<small>6:00&ndash;24:00 &middot; about &yen;1,570 on a holiday &middot; towels included &middot; 12 min from OKA</small></span></li>
+            <li><span class="time">15:55</span><span class="dot"></span><span class="txt" data-ja="琉球温泉 龍神の湯（瀬長島）<small>約&yen;1,570 &middot; タオル付き &middot; OKAから12分</small>">Ryujin-no-yu onsen, Senagajima<small>~&yen;1,570 &middot; towels included &middot; 12 min from OKA</small></span></li>
             <li><span class="time">17:00</span><span class="dot"></span><span class="txt" data-ja="空港でジムニー返却">Return the Jimny at the airport</span></li>
             <li><span class="time">18:30</span><span class="dot"></span><span class="txt" data-ja="チェックイン、最後のブルーシール、お土産">Check in, last Blue Seal, souvenirs</span></li>
             <li><span class="time">20:25</span><span class="dot"></span><span class="txt" data-ja="那覇 &rarr; 羽田 &mdash; ソラシドエア SNA 026<small>座席 14B</small>">Naha &rarr; Haneda &mdash; Solaseed SNA 026<small>Seat 14B</small></span></li>
@@ -587,22 +595,17 @@
             <div class="stat"><div class="k" data-ja="消費税 10%">Tax 10%</div><div class="v">&yen;6,000</div></div>
             <div class="stat"><div class="k" data-ja="支払総額">Total paid</div><div class="v">&yen;68,160</div></div>
           </div>
-          <div class="note">
-            <svg class="ic" aria-hidden="true"><use href="#i-alert"/></svg>
-            <div data-ja="<strong>オプションはすべて辞退済みです。</strong>請求書に載っているのはレンタル料・保険・清掃料のみ &mdash; グリル、ガスカートリッジ、肉はすべて自分たちで用意しなければなりません。初日の夕食までにバーナーを手配しておいてください。"><strong>Every add-on was declined.</strong> The invoice lists only rent, insurance and cleaning &mdash;
-            so the grill, gas canister and meat all have to come from us. Sort the burner out before the first dinner.</div>
-          </div>
-          <div class="subhead" data-ja="付けなかったオプション &mdash; 持参か現地調達">Add-ons we declined &mdash; bring or buy these</div>
+          <div class="subhead" data-ja="付属 &mdash; バーベキューセット">Included &mdash; the BBQ set</div>
           <ul class="bul">
-            <li data-ja="鉄板グリル＋ガスカートリッジ<small>肉盛りセットとのセット扱い &mdash; 現地で代用がきかない唯一のもの</small>">Teppan grill + gas canister<small>Bundled with the meat platter &mdash; the one thing we cannot improvise</small></li>
-            <li data-ja="バーベキュー用の肉盛りセット<small>代わりにマックスバリュ名護店かサンエー為又シティであぐー豚と沖縄県産牛を購入</small>">BBQ meat platter<small>Buy agu pork and Okinawa beef at MaxValu Nago or San-A Bijimata instead</small></li>
-            <li data-ja="マスク・シュノーケル・フィン<small>自前で持参 &mdash; シュノーケリングは2回</small>">Mask, snorkel and fins<small>Pack our own &mdash; we are snorkelling twice</small></li>
-            <li data-ja="蚊取り線香<small>コンビニならどこでも蚊取り線香あり</small>">Mosquito coils<small>Any konbini has katori-senko</small></li>
-            <li data-ja="ライフジャケット &middot; プロジェクター">Life jacket &middot; projector</li>
+            <li data-ja="あぐー豚 200 g &middot; 沖縄県産牛 200 g">200 g agu pork &middot; 200 g Okinawa beef</li>
+            <li data-ja="あぐーソーセージ2本 &middot; 焼き鳥4本">2 agu sausages &middot; 4 yakitori</li>
+            <li data-ja="ガスカートリッジ+焼肉用鉄板グリル<small>買う物はなし &mdash; ただし夕食1回分なので、2泊目は自前で</small>">Gas canister + yakiniku teppan grill<small>So nothing to buy &mdash; but it is one dinner, so night 2 is on us</small></li>
           </ul>
-          <div class="subhead" data-ja="運転免許">Driving licence</div>
+          <div class="subhead" data-ja="付属しないもの">Not included</div>
           <ul class="bul">
-            <li data-ja="日本の運転免許証 &mdash; ほかに必要なものはなし<small>国際運転免許証は不要</small>">Japanese licences &mdash; nothing else needed<small>No International Driving Permit required for us</small></li>
+            <li data-ja="マスク・シュノーケル・フィン<small>自前で持参 &mdash; シュノーケリングは2回</small>">Mask, snorkel and fins<small>Pack our own &mdash; snorkelling twice</small></li>
+            <li data-ja="蚊取り線香<small>コンビニならどこでも</small>">Mosquito coils<small>Any konbini</small></li>
+            <li data-ja="必要なのは日本の運転免許証だけ<small>国際運転免許証は不要</small>">Japanese licences are all we need<small>No International Driving Permit</small></li>
           </ul>
           <a class="maplink" href="https://evertrail-onboarding.netlify.app/#/user/recYdYKhYWNWCDY3M" target="_blank" rel="noopener"><span data-ja="Evertrail の登録手順">Evertrail onboarding</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
@@ -626,33 +629,31 @@
             <div class="stat"><div class="k" data-ja="降水">Rain</div><div class="v" data-ja="10日中4日">4 days in 10</div></div>
             <div class="stat"><div class="k" data-ja="日照">Daylight</div><div class="v">06:25&ndash;18:07</div></div>
           </div>
-          <p class="desc" data-ja="まだしっかり暖かく、海にも入れる時期です &mdash; 夜も
-          <span class=&quot;u&quot; data-metric=&quot;24 &deg;C&quot; data-imperial=&quot;76 &deg;F&quot;>24 &deg;C</span>前後なので、レンタルに付いてくる寝具で十分。
-          にわか雨はさっと通り過ぎていきます。吹きさらしのサイトで本当に怖いのは風で、カセットガスのバーナーまで役に立たなくなるため、風をしのげる場所を選びましょう。10月はまだ台風シーズンで、3日間の日程なら300 km以内を通過する確率はおよそ10回に1回。雨天時の代替プランも頭に入れておくと安心です。">Still properly warm and swimmable, with nights staying near
-          <span class="u" data-metric="24 &deg;C" data-imperial="76 &deg;F">24 &deg;C</span> &mdash; the rental's bedding is
-          plenty. Showers blow through quickly. Wind is the real threat on an exposed pitch, and it will also make a
-          cassette burner useless, so pick somewhere sheltered. October is still typhoon season: roughly a 1-in-10
-          chance of one tracking within 300 km during a three-day window, so keep a wet-weather fallback in mind.</p>
+          <p class="desc" data-ja="暖かく、まだ海にも入れます。夜も
+          <span class=&quot;u&quot; data-metric=&quot;24 &deg;C&quot; data-imperial=&quot;76 &deg;F&quot;>24 &deg;C</span>前後。にわか雨はすぐ通り過ぎますが、吹きさらしのサイトで本当に怖いのは風です。10月はまだ台風シーズン &mdash; 3日間で300 km以内を通る確率はおよそ10回に1回なので、雨天時の代替プランを用意しておきましょう。">Warm and still swimmable; nights near
+          <span class="u" data-metric="24 &deg;C" data-imperial="76 &deg;F">24 &deg;C</span>. Showers pass quickly, but wind
+          is the real threat on an exposed pitch. October is still typhoon season &mdash; roughly a 1-in-10 chance of
+          one within 300 km over three days, so keep a wet-weather fallback.</p>
           <div class="subhead" data-ja="運転">Driving</div>
           <ul class="bul">
-            <li data-ja="沖縄自動車道、那覇IC &harr; 許田IC<small><span class=&quot;u&quot; data-metric=&quot;57 km&quot; data-imperial=&quot;36 mi&quot;>57 km</span> &middot; ETCカードなら&yen;1,040、現金なら&yen;1,610 &mdash; 35%割引は現在ETC限定</small>">Okinawa Expressway, Naha IC &harr; Kyoda IC<small><span class="u" data-metric="57 km" data-imperial="36 mi">57 km</span> &middot; &yen;1,040 with an ETC card against &yen;1,610 in cash &mdash; the 35% discount is ETC-only now</small></li>
-            <li data-ja="国道58号はゆっくり景色を楽しむ別ルート<small>那覇から名護まで、所要時間はおよそ2倍</small>">Route 58 is the slow, scenic alternative<small>Naha to Nago takes roughly twice as long</small></li>
-            <li data-ja="左側通行 &middot; 赤信号では右左折不可 &middot; 那覇中心部は通勤時間帯のバス専用レーンに注意">Drive on the left &middot; no turn on red &middot; watch the bus-only lanes in central Naha at rush hour</li>
+            <li data-ja="沖縄自動車道、那覇IC &harr; 許田IC<small><span class=&quot;u&quot; data-metric=&quot;57 km&quot; data-imperial=&quot;36 mi&quot;>57 km</span> &middot; ETCなら&yen;1,040、現金は&yen;1,610 &mdash; 割引はETC限定</small>">Expressway, Naha IC &harr; Kyoda IC<small><span class="u" data-metric="57 km" data-imperial="36 mi">57 km</span> &middot; &yen;1,040 by ETC, &yen;1,610 cash &mdash; the discount is ETC-only</small></li>
+            <li data-ja="国道58号は景色を楽しむ別ルート<small>名護までの所要時間はおよそ2倍</small>">Route 58 is the scenic alternative<small>Roughly twice as long to Nago</small></li>
+            <li data-ja="左側通行 &middot; 那覇中心部は通勤時間帯のバス専用レーンに注意">Drive on the left &middot; watch the bus-only lanes in central Naha at rush hour</li>
           </ul>
           <div class="subhead" data-ja="軽視できない危険">Hazards worth taking seriously</div>
           <ul class="bul">
-            <li data-ja="ハブ &mdash; 今が要注意の時期・夜行性<small>沖縄県の注意報期間は9&ndash;11月で、冬眠はしません。暗くなったら懐中電灯、足を覆う靴、石垣や丈の高い草には近づかないでください。1.5 m以上離れれば届きません。必ず距離を保ってください。咬まれたら動かず、すぐ119番へ。縛らない、切らない、吸わない</small>">Habu vipers &mdash; high-risk season, nocturnal<small>The prefecture's campaign runs Sep&ndash;Nov and they do not hibernate. Torch after dark, closed shoes, stay off stone walls and long grass. Keep 1.5 m back &mdash; they cannot jump. If bitten: keep still, call 119, no tourniquet and no cutting</small></li>
-            <li data-ja="クラゲ &mdash; 防護ネットも監視員もないものと考える<small>ハブクラゲの注意期間は6&ndash;9月なので、ネットはすでに撤去されている可能性が高く、ゴリラチョップと真栄田岬はそもそも監視員なし。どんな応急処置より長袖ラッシュガードが確実</small>">Jellyfish &mdash; assume no nets and no lifeguard<small>The box-jellyfish advisory runs Jun&ndash;Sep, so nets are likely already down, and Gorilla Chop and Maeda are unpatrolled anyway. A long-sleeve rash guard beats any first aid</small></li>
-            <li data-ja="刺されたら海水で洗う &mdash; 真水は絶対に使わない<small>食酢が使えるのは<strong>ハブクラゲだけ</strong>（傘が立方体、触手は淡い色）。カツオノエボシ &mdash; 青い浮き袋と長い青い糸 &mdash; では食酢は症状を悪化させます。触手は素手で触らず、ピンセットや棒で取り除いてから冷やしてください</small>">Stings: rinse with seawater, never fresh water<small>Vinegar is <strong>only</strong> for habu-kurage (cube-shaped bell, pale tentacles). On a Portuguese man o' war &mdash; blue float, long blue threads &mdash; vinegar makes it worse. Lift tentacles off, then cool it</small></li>
-            <li data-ja="ムカデが靴やテントに入り込みます<small>靴は履く前に振って確認、テントは必ず閉める、落ち葉の上に設営しない</small>">Centipedes get into boots and tents<small>Shake out footwear, zip the tent, don't pitch on leaf litter</small></li>
-            <li data-ja="直火も、砂浜での炭の使用も不可<small>恩納村はどちらも使わないよう求めており、多くのキャンプ場では焚き火台が必須。ガスバーナーならそのすべてを回避できます</small>">No open fires or charcoal on sand<small>Onna Village asks visitors to use neither, and most sites require a fire pan. A gas burner sidesteps all of it</small></li>
+            <li data-ja="ハブ &mdash; 夜行性、今が要注意の時期<small>暗くなったら懐中電灯、足を覆う靴、石垣や丈の高い草には近づかない。1.5 m以上離れる。咬まれたら動かず119番へ。縛らない、切らない</small>">Habu vipers &mdash; nocturnal, high-risk season<small>Torch after dark, closed shoes, stay off stone walls and long grass. Keep 1.5 m back. If bitten: stay still, call 119, no tourniquet, no cutting</small></li>
+            <li data-ja="クラゲ &mdash; 防護ネットも監視員もないものと考える<small>ゴリラチョップと真栄田岬は監視員なし。どんな応急処置より長袖ラッシュガードが確実</small>">Jellyfish &mdash; assume no nets, no lifeguard<small>Gorilla Chop and Maeda are unpatrolled. A long-sleeve rash guard beats any first aid</small></li>
+            <li data-ja="刺されたら海水で洗う &mdash; 真水は絶対に使わない<small>食酢が使えるのは<strong>ハブクラゲだけ</strong>。カツオノエボシ &mdash; 青い浮き袋と長い青い糸 &mdash; では悪化します。触手はピンセットで取り除いてから冷やす</small>">Stings: rinse with seawater, never fresh water<small>Vinegar is <strong>only</strong> for habu-kurage. On a Portuguese man o' war &mdash; blue float, long blue threads &mdash; it makes things worse. Lift tentacles off with pincers, then cool</small></li>
+            <li data-ja="ムカデが靴やテントに入り込みます<small>靴は振って確認、テントは必ず閉める</small>">Centipedes get into boots and tents<small>Shake out footwear, zip the tent</small></li>
+            <li data-ja="直火も、砂浜での炭の使用も不可<small>多くのキャンプ場は焚き火台が必須。セットの鉄板グリルなら回避できます</small>">No open fires or charcoal on sand<small>Most sites require a fire pan; the set's grill sidesteps it</small></li>
           </ul>
           <div class="subhead" data-ja="実用情報">Practical</div>
           <ul class="bul">
-            <li data-ja="水道水は飲めます<small>中部と南部は硬水、やんばるのダム水系の北部はやわらかめ。それでも<span class=&quot;u&quot; data-metric=&quot;5&ndash;10 L&quot; data-imperial=&quot;1&ndash;3 gal&quot;>5&ndash;10 L</span>は積んでおく &mdash; 野営地には水道がないことが多い</small>">Tap water is safe to drink<small>Hard in the centre and south, softer up north off the Yanbaru dams. Carry <span class="u" data-metric="5&ndash;10 L" data-imperial="1&ndash;3 gal">5&ndash;10 L</span> anyway &mdash; wild sites often have no tap</small></li>
-            <li data-ja="名護より北のスーパーは19:00頃までに閉店<small>国頭村と大宜味村にはチェーン系スーパーが一軒もありません &mdash; それ以降は国道58号沿いの24時間コンビニだけ</small>">Supermarkets north of Nago shut by ~19:00<small>Kunigami and Ogimi have no chain supermarket at all &mdash; only 24 h konbini on Route 58 after that</small></li>
-            <li data-ja="現金を用意 &mdash; 評判のいい沖縄そば店やユニオンは現金のみ">Carry cash &mdash; the best soba shops and Union supermarkets are cash-only</li>
-            <li data-ja="10月12日（月）はスポーツの日<small>三連休。キャンプ場は早めに予約、混雑を想定</small>">Mon Oct 12 is Sports Day<small>A three-day weekend: book campsites early, expect crowds</small></li>
+            <li data-ja="水道水は飲めます<small>それでも<span class=&quot;u&quot; data-metric=&quot;5&ndash;10 L&quot; data-imperial=&quot;1&ndash;3 gal&quot;>5&ndash;10 L</span>は積んでおく &mdash; 野営地には水道がないことが多い</small>">Tap water is safe to drink<small>Carry <span class="u" data-metric="5&ndash;10 L" data-imperial="1&ndash;3 gal">5&ndash;10 L</span> anyway &mdash; wild sites often have no tap</small></li>
+            <li data-ja="名護より北のスーパーは19:00頃までに閉店<small>国頭村と大宜味村には一軒もなし &mdash; 国道58号沿いの24時間コンビニだけ</small>">Supermarkets north of Nago shut by ~19:00<small>Kunigami and Ogimi have none at all &mdash; only 24 h konbini on Route 58</small></li>
+            <li data-ja="現金を用意 &mdash; 評判のいい沖縄そば店は現金のみ">Carry cash &mdash; the best soba shops are cash-only</li>
+            <li data-ja="10月12日（月）はスポーツの日<small>三連休。キャンプ場は早めに予約</small>">Mon Oct 12 is Sports Day<small>Three-day weekend: book campsites early</small></li>
           </ul>
         </div>
       </details>
@@ -693,14 +694,15 @@
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
-          <p class="desc" data-ja="波打ち際のすぐそばに設営でき、息をのむような夕日を眺められるビーチキャンプです。本島南部にあって空港からも近く、無料で利用できるうえ、トイレも無料で使えます。ただし週末は混み合うことがあります。砂浜への車の乗り入れはご遠慮ください。ほかのキャンパーへの配慮を忘れず、ゴミは必ず持ち帰りましょう。">Experience beachside camping where you can set up right by the shore and enjoy stunning sunsets. Located on the southern side of the island and conveniently close to the airport, this free campsite offers access to toilet facilities at no cost. Please note that it can be crowded on weekends. Please avoid driving your car on the beach, respect other campers, and leave no trace behind.</p>
+          <figure class="camp-thumb"><img src="images/camps/kita-nashiro-beach.jpg" alt="" loading="lazy" decoding="async" width="720" height="405"></figure>
+          <p class="desc" data-ja="無料、波打ち際のすぐそば、空港からいちばん近いサイト。トイレあり。週末は混み合います。">Free, right on the sand, closest site to the airport. Toilets. Busy at weekends.</p>
           <div class="chips"><span class="chip" data-ja="ビーチ">Beach</span><span class="chip" data-ja="オーシャンビュー">Ocean view</span><span class="chip" data-ja="夕日">Sunset</span><span class="chip" data-ja="トイレ">Toilet</span></div>
           <div class="stat-grid">
             <div class="stat"><div class="k" data-ja="種別">Type</div><div class="v" data-ja="野営地">Wild camp</div></div>
             <div class="stat"><div class="k" data-ja="料金">Fee</div><div class="v" data-ja="記載なし">None posted</div></div>
           </div>
           <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=26.10800,127.66160" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-          <a class="maplink alt" href="https://directory.evertrailokinawa.com/site/recZiAxPmX7q9Nd0H" target="_blank" rel="noopener"><span data-ja="Evertrail の掲載情報">Evertrail listing</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+          <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-ja="予約・公式サイト">Book / official site</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
       </details>
       <details class="card camp paid f-beach f-toilet f-shower">
@@ -712,14 +714,15 @@
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
-          <p class="desc" data-ja="沖縄県南城市のネオス・アウトドアパークは、ファミリー、ソロ、ペット同伴、オートキャンプと多彩なサイトをそろえたキャンプ場です。ビーチに直結しているのでカヤックやパドルボードが楽しめ、電動アシスト自転車で周辺を巡ることもできます。美しいオーシャンビューと満天の星に包まれて、のんびり過ごせるよう整えられています。">Neos Outdoor Park in Nanjo, Okinawa, offers a variety of camping options, including family, solo, and pet-friendly sites, as well as car camping. With direct access to the beach, visitors can enjoy activities like kayaking and paddleboarding, or explore the area on electric bikes. The park is designed to provide a relaxing experience with stunning ocean views and starry skies.</p>
+          <figure class="camp-thumb"><img src="images/camps/neos-outdoor-park.jpg" alt="" loading="lazy" decoding="async" width="720" height="405"></figure>
+          <p class="desc" data-ja="ビーチ直結の管理型パーク。オートキャンプ、カヤック・SUPのレンタルあり。">Managed park with direct beach access, car camping, kayak and SUP rental.</p>
           <div class="chips"><span class="chip pick" data-ja="おすすめ">Good fit</span><span class="chip" data-ja="ビーチ">Beach</span><span class="chip" data-ja="オーシャンビュー">Ocean view</span><span class="chip" data-ja="朝日">Sunrise</span><span class="chip" data-ja="星空">Stargazing</span><span class="chip" data-ja="トイレ">Toilet</span><span class="chip" data-ja="シャワー">Shower</span></div>
           <div class="stat-grid">
             <div class="stat"><div class="k" data-ja="種別">Type</div><div class="v" data-ja="有料キャンプ場">Paid camp</div></div>
             <div class="stat"><div class="k" data-ja="料金">Fee</div><div class="v" data-ja="現地で確認">Ask on site</div></div>
           </div>
           <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=26.14820,127.80390" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-          <a class="maplink alt" href="https://neos-outdoor-park.com/" target="_blank" rel="noopener"><span data-ja="予約・公式サイト">Book / official site</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+          <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-ja="予約・公式サイト">Book / official site</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
       </details>
       <details class="card camp paid f-beach f-toilet f-shower">
@@ -731,14 +734,15 @@
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
-          <p class="desc" data-ja="穏やかな安座真ビーチ沿いに広がるキャンプ場です。よく手入れされた広い芝生のサイトは、家族で過ごすのにぴったり。朝は久高島の向こうから昇る息をのむような朝日で目覚め、清潔なトイレと、食事や休憩に使える6棟の東屋も利用できます。焚き火や花火ができる指定エリアもあり、昔ながらのキャンプファイヤーの夜を過ごせる場所です。">Nestled along the serene shores of Azama Beach, this campsite offers an idyllic retreat with its expansive, well-maintained grassy areas perfect for family fun. Wake up to breathtaking sunrises over Kudaka Island, and enjoy amenities such as clean restrooms and six cozy pavilions for dining or relaxation. The site is equipped with designated areas for bonfires and fireworks, making it an excellent spot for a classic campfire night.</p>
+          <figure class="camp-thumb"><img src="images/camps/azama-sun-beach-camping-ground.jpg" alt="" loading="lazy" decoding="async" width="720" height="405"></figure>
+          <p class="desc" data-ja="手入れされた広い芝生、久高島の向こうから昇る朝日、清潔なトイレと東屋6棟。">Wide mown lawn, sunrise over Kudaka Island, clean toilets and six pavilions.</p>
           <div class="chips"><span class="chip pick" data-ja="おすすめ">Good fit</span><span class="chip" data-ja="ビーチ">Beach</span><span class="chip" data-ja="オーシャンビュー">Ocean view</span><span class="chip" data-ja="朝日">Sunrise</span><span class="chip" data-ja="トイレ">Toilet</span><span class="chip" data-ja="シャワー">Shower</span></div>
           <div class="stat-grid">
             <div class="stat"><div class="k" data-ja="種別">Type</div><div class="v" data-ja="有料キャンプ場">Paid camp</div></div>
             <div class="stat"><div class="k" data-ja="料金">Fee</div><div class="v" data-ja="現地で確認">Ask on site</div></div>
           </div>
           <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=26.17800,127.82920" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-          <a class="maplink alt" href="https://www.azama-beach.com/" target="_blank" rel="noopener"><span data-ja="予約・公式サイト">Book / official site</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+          <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-ja="予約・公式サイト">Book / official site</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
       </details>
       <details class="card camp wild f-beach">
@@ -750,14 +754,15 @@
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
-          <p class="desc" data-ja="久手堅ビーチは朝日側にある無料の野営地で、ビーチキャンプと星空観賞にうってつけです。静かな環境で自然を満喫でき、車で少し走れば知念岬の絶景も楽しめます。無料で使える場所だからこそ、地元の方への配慮を忘れず、「ゴミも痕跡も残さない」という原則を守って、この美しい自然を次に訪れる人へ残しましょう。">Kudeken Beach is a beautiful, free campsite located on the sunrise side, offering a perfect spot for beach camping and stargazing. The peaceful surroundings make it an ideal place to enjoy nature, with stunning views of Cape Chinen just a short drive away. As this is a free campsite, it&#x27;s important to be courteous to the locals and practice &quot;leave no trace&quot; principles to help preserve its natural beauty for everyone.</p>
+          <figure class="camp-thumb"><img src="images/camps/kudeken-beach.jpg" alt="" loading="lazy" decoding="async" width="720" height="405"></figure>
+          <p class="desc" data-ja="朝日側の無料ビーチ。星空がよく見え、知念岬も車ですぐ。">Free sunrise-side beach, good stargazing, Cape Chinen a short drive on.</p>
           <div class="chips"><span class="chip" data-ja="ビーチ">Beach</span><span class="chip" data-ja="朝日">Sunrise</span><span class="chip" data-ja="星空">Stargazing</span></div>
           <div class="stat-grid">
             <div class="stat"><div class="k" data-ja="種別">Type</div><div class="v" data-ja="野営地">Wild camp</div></div>
             <div class="stat"><div class="k" data-ja="料金">Fee</div><div class="v" data-ja="記載なし">None posted</div></div>
           </div>
           <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=26.16620,127.82560" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-          <a class="maplink alt" href="https://directory.evertrailokinawa.com/site/recqsgq4LbDFdGjIJ" target="_blank" rel="noopener"><span data-ja="Evertrail の掲載情報">Evertrail listing</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+          <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-ja="予約・公式サイト">Book / official site</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
       </details>
       <h3 class="region" data-ja="中部<small>うるま・恩納 &middot; 2件</small>">Central<small>Uruma &amp; Onna &middot; 2 sites</small></h3>
@@ -770,14 +775,15 @@
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
-          <p class="desc" data-ja="北風をさえぎる地形のおかげで、冬でも快適に過ごせる風光明媚なビーチキャンプ地です。海はたいていとても穏やかで、街並みの向こうに沈む見事な夕日を眺められます。ただしトイレはなく、釣り人や夕日目当ての人にも人気の場所です。ほかの利用者に配慮し、ゴミは必ず持ち帰りましょう。">Enjoy a picturesque beachside camping experience sheltered from the north wind, making it ideal for winter. Most of the time, the ocean conditions are very calm, and you can witness stunning sunsets over the city. However, please note that there are no toilet facilities, and this spot is popular among fishermen and sunset enthusiasts. As always please respect other users of the spot and leave no trace behind.</p>
+          <figure class="camp-thumb"><img src="images/camps/katsuren-beach.jpg" alt="" loading="lazy" decoding="async" width="720" height="405"></figure>
+          <p class="desc" data-ja="穏やかな湾、街並みの向こうに沈む夕日。トイレなし。">Calm bay with sunsets over the city. No toilets.</p>
           <div class="chips"><span class="chip" data-ja="ビーチ">Beach</span><span class="chip" data-ja="オーシャンビュー">Ocean view</span><span class="chip" data-ja="夕日">Sunset</span></div>
           <div class="stat-grid">
             <div class="stat"><div class="k" data-ja="種別">Type</div><div class="v" data-ja="野営地">Wild camp</div></div>
             <div class="stat"><div class="k" data-ja="料金">Fee</div><div class="v" data-ja="記載なし">None posted</div></div>
           </div>
           <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=26.32630,127.87750" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-          <a class="maplink alt" href="https://directory.evertrailokinawa.com/site/recv0pqOupJBsSPkt" target="_blank" rel="noopener"><span data-ja="Evertrail の掲載情報">Evertrail listing</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+          <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-ja="予約・公式サイト">Book / official site</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
       </details>
       <details class="card camp paid f-toilet f-shower">
@@ -789,14 +795,15 @@
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
-          <p class="desc" data-ja="沖縄県民の森のキャンプ場は、緑豊かな森に包まれた理想的な隠れ家です。高い木立の中に区画は広々と取られ、日帰りでも泊まりでも快適に過ごせます。炊事設備、トイレ、シャワーがそろい、アウトドア用品のレンタルもあるので、アクティブに動きたい人もゆっくり休みたい人も満足できます。森の遊歩道を歩くのもよし、星空の下で静かな夜を過ごすのもよし。喧騒を離れ、自然とつながる時間が待っています。">Kenmin no Mori (Okinawa Prefectural People&#x27;s Forrest) campsite offers an idyllic retreat in Okinawa&#x27;s lush forests. Nestled amidst towering trees, the campsite provides spacious plots, perfect for both day trips and overnight stays. With amenities like cooking facilities, toilets and showers, recreational gear for rental, it caters to both adventurers and relaxation seekers. The serene setting is ideal for immersing in nature, whether you&#x27;re exploring forest trails or simply enjoying a peaceful night under the stars. Unplug and reconnect with nature at Kenmin no Mori, where tranquility meets adventure.</p>
+          <figure class="camp-thumb"><img src="images/camps/okinawa-prefectural-people-s-forrest.jpg" alt="" loading="lazy" decoding="async" width="720" height="405"></figure>
+          <p class="desc" data-ja="森の中の広々した区画と炊事指定エリア — 火の使用ルールが明確です。">Forest site with spacious plots and designated cooking areas — fire rules are clear here.</p>
           <div class="chips"><span class="chip pick" data-ja="おすすめ">Good fit</span><span class="chip" data-ja="星空">Stargazing</span><span class="chip" data-ja="トイレ">Toilet</span><span class="chip" data-ja="シャワー">Shower</span></div>
           <div class="stat-grid">
             <div class="stat"><div class="k" data-ja="種別">Type</div><div class="v" data-ja="有料キャンプ場">Paid camp</div></div>
             <div class="stat"><div class="k" data-ja="料金">Fee</div><div class="v" data-ja="現地で確認">Ask on site</div></div>
           </div>
           <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=26.51170,127.90640" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-          <a class="maplink alt" href="https://www.kenminnomori-obsi.jp/camp.php" target="_blank" rel="noopener"><span data-ja="予約・公式サイト">Book / official site</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+          <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-ja="予約・公式サイト">Book / official site</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
       </details>
       <h3 class="region" data-ja="名護・今帰仁<small>名護・屋我地・古宇利 &middot; 7件</small>">Nago &amp; Nakijin<small>Nago, Yagaji &amp; Kouri &middot; 7 sites</small></h3>
@@ -809,10 +816,11 @@
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
-          <p class="desc" data-ja="ビーチ沿いに設営すれば、人目につかない静かな一角で美しい夕日を楽しめます。湾内はおおむね穏やかで、混み合うこともあまりありません。ただし場内にトイレはなく、場所を探し当てるのに少し手間がかかるかもしれません。周囲への配慮を忘れず、ゴミは必ず持ち帰りましょう。">Set up your camp along the beach for a scenic stay and enjoy beautiful sunsets from this secluded area. The bay usually has calm waters and doesn&#x27;t get too crowded. However, be aware that there are no toilet facilities on-site, and finding the exact location might require some effort. Please respect others around you, and leave no trace behind.</p>
+          <figure class="camp-thumb"><img src="images/camps/koki-camp-spot.jpg" alt="" loading="lazy" decoding="async" width="720" height="405"></figure>
+          <p class="desc" data-ja="静かな湾、穏やかな海、トイレなし。">Quiet bay, calm water, no toilets.</p>
           <div class="note">
             <svg class="ic" aria-hidden="true"><use href="#i-alert"/></svg>
-            <div data-ja="掲載されている座標が50 m離れた高速道路上に吸着しているため、この所要時間は信頼できず、進入路もはっきりしません。ここに決める前に、必ず現地を下見してください。">The published coordinate snaps to the expressway 50 m away, so this drive time is unreliable and access is unclear. Scout it before committing.</div>
+            <div data-ja="掲載されている座標が高速道路上に乗っているため、所要時間は信頼できません。先に現地を下見してください。">The published coordinate lands on the expressway, so the drive time is unreliable. Scout it first.</div>
           </div>
           <div class="chips"><span class="chip" data-ja="ビーチ">Beach</span><span class="chip" data-ja="オーシャンビュー">Ocean view</span><span class="chip" data-ja="夕日">Sunset</span></div>
           <div class="stat-grid">
@@ -820,7 +828,7 @@
             <div class="stat"><div class="k" data-ja="料金">Fee</div><div class="v" data-ja="記載なし">None posted</div></div>
           </div>
           <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=26.54360,127.96000" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-          <a class="maplink alt" href="https://directory.evertrailokinawa.com/site/recWPttchCBPzwSDK" target="_blank" rel="noopener"><span data-ja="Evertrail の掲載情報">Evertrail listing</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+          <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-ja="予約・公式サイト">Book / official site</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
       </details>
       <details class="card camp wild f-toilet">
@@ -832,10 +840,11 @@
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
-          <p class="desc" data-ja="名護城橋のたもとは、風雨をしのげる落ち着いたキャンプスポットです。景色のよい川沿いにあり、すぐ近くに水道ときれいなトイレがそろっているので便利で快適。地形が自然と風雨を防いでくれるため、天気がぐずつく日でも頼れる場所です。なお、すぐ横のオフロードには入らないようにしてください。走りにくく、思わぬトラブルにつながることがあります。ゴミは必ず持ち帰り、地域の方への配慮も忘れずに。この美しい場所を次の人へ残しましょう。">Nago Bridge offers a cozy, sheltered camping spot perfect for a peaceful escape. Nestled by a scenic river, this location provides the essentials with nearby running water and clean restroom facilities, making it both convenient and comfortable. Thanks to its natural protection from wind and rain, it’s an ideal refuge for those looking to enjoy the outdoors, even in less-than-perfect weather. While camping at Nago Bridge, be sure to avoid the off-road path nearby, as it can be challenging and may lead to unexpected trouble. Remember to practice Leave No Trace principles and show respect for the local community, preserving this beautiful spot for others to enjoy.</p>
+          <figure class="camp-thumb"><img src="images/camps/nago-castle-bridge-spot.jpg" alt="" loading="lazy" decoding="async" width="720" height="405"></figure>
+          <p class="desc" data-ja="風雨をしのげる川沿いの待避スペース。水道ときれいなトイレあり。">Sheltered riverside pull-in with water and clean toilets.</p>
           <div class="note">
             <svg class="ic" aria-hidden="true"><use href="#i-alert"/></svg>
-            <div data-ja="名護市街の道路橋の下にある川沿いの待避スペースです &mdash; ビーチも眺望もありません。おすすめしません。">A riverside pull-in under a road bridge in urban Nago &mdash; no beach and no view. Not recommended.</div>
+            <div data-ja="名護市街の道路橋の下 &mdash; ビーチも眺望もありません。おすすめしません。">Under a road bridge in urban Nago &mdash; no beach, no view. Not recommended.</div>
           </div>
           <div class="chips"><span class="chip" data-ja="トイレ">Toilet</span></div>
           <div class="stat-grid">
@@ -843,7 +852,7 @@
             <div class="stat"><div class="k" data-ja="料金">Fee</div><div class="v" data-ja="記載なし">None posted</div></div>
           </div>
           <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=26.58686,127.99276" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-          <a class="maplink alt" href="https://directory.evertrailokinawa.com/site/reciWZwGNICfMzmvc" target="_blank" rel="noopener"><span data-ja="Evertrail の掲載情報">Evertrail listing</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+          <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-ja="予約・公式サイト">Book / official site</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
       </details>
       <details class="card camp paid f-toilet f-shower">
@@ -855,14 +864,15 @@
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
-          <p class="desc" data-ja="名護市近くのベースキャンプ沖縄は、自然に囲まれて静かに過ごせるキャンプ場です。初心者からベテランまで楽しめ、シャワーとトイレに加え、バーとグランピングエリアでは無料Wi-Fiも使えます。下段のサイトは風雨をよくしのげるので、天候がすぐれない日に人気があります。場内のバーでは地元のフルーツを使ったカクテルも提供しています。テントのレンタルはありませんが、設営はスタッフが手伝ってくれるので安心です。">Base Camp Okinawa, located near Nago city, offers a serene camping experience surrounded by nature. It’s ideal for both beginners and seasoned campers, featuring amenities like showers, toilets, and free Wi-Fi in the bar and glamping areas. The lower sites are well sheltered from winds and rain and is a popular spot for less favorable conditions. The camp&#x27;s on-site bar serves cocktails made from local fruits, adding a special touch to your stay. While tents aren’t available for rent, staff are on hand to help with setup, ensuring a comfortable experience for all.</p>
+          <figure class="camp-thumb"><img src="images/camps/base-camp.jpg" alt="" loading="lazy" decoding="async" width="720" height="405"></figure>
+          <p class="desc" data-ja="名護市近くの管理型キャンプ場。シャワー、トイレ、Wi-Fiあり。下段のサイトは悪天候でも風雨をしのげます。">Managed site near Nago with showers, toilets and Wi-Fi. Lower pitches shelter well in bad weather.</p>
           <div class="chips"><span class="chip" data-ja="夕日">Sunset</span><span class="chip" data-ja="星空">Stargazing</span><span class="chip" data-ja="トイレ">Toilet</span><span class="chip" data-ja="シャワー">Shower</span></div>
           <div class="stat-grid">
             <div class="stat"><div class="k" data-ja="種別">Type</div><div class="v" data-ja="有料キャンプ場">Paid camp</div></div>
             <div class="stat"><div class="k" data-ja="料金">Fee</div><div class="v" data-ja="現地で確認">Ask on site</div></div>
           </div>
           <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=26.61681,127.93812" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-          <a class="maplink alt" href="https://directory.evertrailokinawa.com/site/recanYgIPy3HUi8OW" target="_blank" rel="noopener"><span data-ja="Evertrail の掲載情報">Evertrail listing</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+          <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-ja="予約・公式サイト">Book / official site</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
       </details>
       <details class="card camp paid f-beach f-toilet f-shower">
@@ -874,14 +884,15 @@
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
-          <p class="desc" data-ja="沖縄の屋我地ビーチは、ファミリーやグループにぴったりの、忘れがたいビーチキャンプが楽しめる場所です。オートキャンプとバンガロー泊に対応し、ボートやカヤックのレンタルで澄んだ海へ出ることもできます。バーベキュー設備とおいしい肉のセットもそろい、海辺での食事や仲間との集まりに最適です。">Yagaji Beach in Okinawa offers an unforgettable beach camping experience, perfect for families and groups. Enjoy auto camping and bungalow stays, with options for boat and kayak rentals to explore the pristine waters. The beach provides barbecue facilities with delicious meat selections, making it an ideal spot for seaside feasts and group gatherings.</p>
+          <figure class="camp-thumb"><img src="images/camps/yagaji-beach-campsite.jpg" alt="" loading="lazy" decoding="async" width="720" height="405"></figure>
+          <p class="desc" data-ja="オートキャンプとバンガロー、バーベキュー設備あり。ボート・カヤックのレンタルも。">Auto camping and bungalows with BBQ facilities; boat and kayak rental.</p>
           <div class="chips"><span class="chip pick" data-ja="おすすめ">Good fit</span><span class="chip" data-ja="ビーチ">Beach</span><span class="chip" data-ja="オーシャンビュー">Ocean view</span><span class="chip" data-ja="夕日">Sunset</span><span class="chip" data-ja="トイレ">Toilet</span><span class="chip" data-ja="シャワー">Shower</span></div>
           <div class="stat-grid">
             <div class="stat"><div class="k" data-ja="種別">Type</div><div class="v" data-ja="有料キャンプ場">Paid camp</div></div>
-            <div class="stat"><div class="k" data-ja="料金">Fee</div><div class="v">&yen;1,000</div></div>
+            <div class="stat"><div class="k" data-ja="料金">Fee</div><div class="v">¥1,000</div></div>
           </div>
           <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=26.64820,128.03368" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-          <a class="maplink alt" href="https://yagaji-beach.com/contact" target="_blank" rel="noopener"><span data-ja="予約・公式サイト">Book / official site</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+          <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-ja="予約・公式サイト">Book / official site</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
       </details>
       <details class="card camp wild f-beach">
@@ -893,10 +904,11 @@
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
-          <p class="desc" data-ja="稲嶺キャンプスポットは、車1台分のスペースしかない人目につきにくい海辺の隠れ家。早めの到着がおすすめです。古宇利大橋の絶景と海に沈む夕日を眺められ、歩いて10分ほどの地元のカラオケ店で夜のひとときも楽しめます。">Inamine Camp Spot is a secluded beachside retreat with space for just one car, so be sure to arrive early. Enjoy stunning views of Kori Bridge and sunsets over the ocean, and take a short ten-minute walk to the local karaoke spot for some evening entertainment.</p>
+          <figure class="camp-thumb"><img src="images/camps/inamine-camp-spot.jpg" alt="" loading="lazy" decoding="async" width="720" height="405"></figure>
+          <p class="desc" data-ja="古宇利大橋の眺望と海に沈む夕日。車1台分のスペース。">Views of Kouri Bridge and ocean sunsets. Room for one car.</p>
           <div class="note">
             <svg class="ic" aria-hidden="true"><use href="#i-alert"/></svg>
-            <div data-ja="駐車できるのは車1台分だけです。ルーフトップテントは一度張ると動かせないため、三連休にここへ賭けるのは危険です。">Room for a single car. Risky on a holiday weekend when a rooftop tent cannot be moved once pitched.</div>
+            <div data-ja="駐車は車1台分だけ &mdash; ルーフトップテントで三連休に賭けるのは危険です。">One car only &mdash; risky on a holiday weekend with a rooftop tent.</div>
           </div>
           <div class="chips"><span class="chip" data-ja="ビーチ">Beach</span><span class="chip" data-ja="オーシャンビュー">Ocean view</span><span class="chip" data-ja="夕日">Sunset</span></div>
           <div class="stat-grid">
@@ -904,7 +916,7 @@
             <div class="stat"><div class="k" data-ja="料金">Fee</div><div class="v" data-ja="記載なし">None posted</div></div>
           </div>
           <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=26.63460,128.05000" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-          <a class="maplink alt" href="https://directory.evertrailokinawa.com/site/recMHPjjkfHIRkfjb" target="_blank" rel="noopener"><span data-ja="Evertrail の掲載情報">Evertrail listing</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+          <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-ja="予約・公式サイト">Book / official site</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
       </details>
       <details class="card camp wild f-beach">
@@ -916,10 +928,11 @@
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
-          <p class="desc" data-ja="海のすぐそばにひっそりと佇む屋我地島のスポットは、静けさと海辺の美しさを求める人にうってつけの穴場の野営地です。駐車スペースがごく限られており、まるでプライベートビーチのような一角です。星空を眺める静かな夜にも、友人との小さな集まりにもぴったり。見事なオーシャンビューと、沖縄らしい美しい夕日を最前列で楽しめます。ご注意ください。道はこのスポットで行き止まりになるため、出るときはバックで戻るか、慎重に切り返して向きを変える必要があります。同乗者に誘導してもらえば、小型の車なら問題なく切り返せます。土地への敬意を忘れず、ゴミは必ず持ち帰りましょう。">Tucked away beside the ocean, Yagajima Spot is a hidden wild camping gem perfect for those seeking seclusion and coastal beauty. With very limited parking, it often feels like your own private beachfront—ideal for a quiet night under the stars or a small gathering with friends. Expect stunning ocean views and a front-row seat to a beautiful Okinawan sunset. Please note: The road ends at the spot, so you’ll need to either reverse out or carefully perform a 3-point turn to exit. With the help of a passenger, this is manageable in a compact camper. As always, please respect the land and leave no trace.</p>
+          <figure class="camp-thumb"><img src="images/camps/yagajima-spot.jpg" alt="" loading="lazy" decoding="async" width="720" height="405"></figure>
+          <p class="desc" data-ja="人目につかない海辺の一角。プライベート感があり、海に沈む夕日も。">Secluded strip of coast that feels private, with ocean sunsets.</p>
           <div class="note">
             <svg class="ic" aria-hidden="true"><use href="#i-alert"/></svg>
-            <div data-ja="行き止まりの細い道で、スペースはごくわずか &mdash; 出るときはバックで戻るしかありません。">Dead-end track with very little room &mdash; you have to reverse back out.</div>
+            <div data-ja="行き止まりの道でスペースはごくわずか、出るときはバックで戻ります。">Dead-end track, very little room, and you reverse back out.</div>
           </div>
           <div class="chips"><span class="chip" data-ja="ビーチ">Beach</span><span class="chip" data-ja="オーシャンビュー">Ocean view</span><span class="chip" data-ja="夕日">Sunset</span></div>
           <div class="stat-grid">
@@ -927,7 +940,7 @@
             <div class="stat"><div class="k" data-ja="料金">Fee</div><div class="v" data-ja="記載なし">None posted</div></div>
           </div>
           <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=26.65472,128.03404" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-          <a class="maplink alt" href="https://directory.evertrailokinawa.com/site/recRE03jw04rBu1FY" target="_blank" rel="noopener"><span data-ja="Evertrail の掲載情報">Evertrail listing</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+          <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-ja="予約・公式サイト">Book / official site</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
       </details>
       <details class="card camp paid f-toilet f-shower">
@@ -939,14 +952,15 @@
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
-          <p class="desc" data-ja="古宇利島の古宇利島キャンプガーデンは、ビーチサイド、マウンテン、VIPと選べるサイトが魅力のキャンプ場です。エメラルドグリーンの海と緑豊かな景色が広がり、静かで絵になるような雰囲気に包まれています。設備やレンタルも充実しており、ファミリーやグループに最適。光害が少ないため、夜には見事な星空を高い確率で楽しめます。">Kourijima Camp Garden on Kouri Island offers a spectacular camping experience with beachside, mountain, and VIP options. This scenic spot boasts breathtaking views of emerald waters and lush landscapes, creating a serene and artistic atmosphere. It&#x27;s perfect for families and groups, with various amenities and rental services to enhance your stay. Also, because of the little light pollution, you can regularly see amazing stars at night.</p>
+          <figure class="camp-thumb"><img src="images/camps/kouri-island-camp-ground.jpg" alt="" loading="lazy" decoding="async" width="720" height="405"></figure>
+          <p class="desc" data-ja="エメラルドの海を望むビーチサイド・マウンテン・VIPサイト。予約可。">Beachside, mountain and VIP pitches over emerald water. Bookable.</p>
           <div class="chips"><span class="chip pick" data-ja="おすすめ">Good fit</span><span class="chip" data-ja="オーシャンビュー">Ocean view</span><span class="chip" data-ja="夕日">Sunset</span><span class="chip" data-ja="星空">Stargazing</span><span class="chip" data-ja="トイレ">Toilet</span><span class="chip" data-ja="シャワー">Shower</span></div>
           <div class="stat-grid">
             <div class="stat"><div class="k" data-ja="種別">Type</div><div class="v" data-ja="有料キャンプ場">Paid camp</div></div>
             <div class="stat"><div class="k" data-ja="料金">Fee</div><div class="v" data-ja="現地で確認">Ask on site</div></div>
           </div>
           <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=26.70850,128.01800" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-          <a class="maplink alt" href="https://www.kourijima-camp.jp/" target="_blank" rel="noopener"><span data-ja="予約・公式サイト">Book / official site</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+          <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-ja="予約・公式サイト">Book / official site</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
       </details>
       <h3 class="region" data-ja="大宜味・東<small>北東海岸 &middot; 5件</small>">Ogimi &amp; Higashi<small>North-east coast &middot; 5 sites</small></h3>
@@ -959,15 +973,16 @@
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
-          <p class="desc" data-ja="平南橋のキャンプスポットは夕日側にあり、名所・古宇利大橋を望む絶景が広がります。日差しや雨、冬の北風をしのげる日陰の多い場所にテントを張れます。地元の方やほかのキャンパーへの配慮を忘れず、ゴミは必ず持ち帰りましょう。また、満潮時の浸水を避けるため、駐車は水際から十分に離れた場所にしてください。">Discover the Henan Bridge camp spot, perfectly situated on the sunset side with breathtaking views of the iconic Kori Bridge. Set up your beach camp in a spot that offers ample shade from the sun, rain, and north winds during winter. Remember to respect the locals and fellow campers by leaving no trace behind. And always park at a safe distance from the water to avoid flooding during high tide.</p>
+          <figure class="camp-thumb"><img src="images/camps/henan-bridge.jpg" alt="" loading="lazy" decoding="async" width="720" height="405"></figure>
+          <p class="desc" data-ja="夕日側の日陰のサイトで、古宇利大橋を望みます。駐車は水際から十分に離して。">Shaded sunset-side pitch looking across to Kouri Bridge. Park well back from the tide line.</p>
           <div class="chips"><span class="chip" data-ja="ビーチ">Beach</span><span class="chip" data-ja="オーシャンビュー">Ocean view</span><span class="chip" data-ja="夕日">Sunset</span></div>
           <div class="stat-grid">
             <div class="stat"><div class="k" data-ja="種別">Type</div><div class="v" data-ja="野営地">Wild camp</div></div>
             <div class="stat"><div class="k" data-ja="料金">Fee</div><div class="v" data-ja="記載なし">None posted</div></div>
           </div>
-          <p class="desc small-note">Inside Yanbaru National Park &mdash; check the posted fire and camping rules on arrival.</p>
+          <p class="desc note-sm">In Yanbaru National Park &mdash; check posted fire rules.</p>
           <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=26.64990,128.08770" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-          <a class="maplink alt" href="https://directory.evertrailokinawa.com/site/recXDkrTYleEpKt3K" target="_blank" rel="noopener"><span data-ja="Evertrail の掲載情報">Evertrail listing</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+          <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-ja="予約・公式サイト">Book / official site</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
       </details>
       <details class="card camp wild f-beach f-toilet">
@@ -979,15 +994,16 @@
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
-          <p class="desc" data-ja="大宜味村の津波ビーチでビーチキャンプ。息をのむような夕日を眺められます。隣に道の駅とコンビニがあり、買い物にも困りません。地元の方やほかのキャンパーへの配慮を忘れず、ゴミは必ず持ち帰りましょう。">Set up your beach camp at Tsuha Beach in Ogimi, where you&#x27;ll be treated to stunning sunset views. Enjoy the convenience of having a Michi no Eki and a convenience store adjacent to the campsite. Remember to respect the locals and fellow campers, and always leave no trace behind.</p>
+          <figure class="camp-thumb"><img src="images/camps/tsuha-beach-camp-spot.jpg" alt="" loading="lazy" decoding="async" width="720" height="405"></figure>
+          <p class="desc" data-ja="夕日のビーチ。隣に道の駅とコンビニ。">Sunset beach with a michi-no-eki and konbini next door.</p>
           <div class="chips"><span class="chip" data-ja="ビーチ">Beach</span><span class="chip" data-ja="オーシャンビュー">Ocean view</span><span class="chip" data-ja="夕日">Sunset</span><span class="chip" data-ja="トイレ">Toilet</span></div>
           <div class="stat-grid">
             <div class="stat"><div class="k" data-ja="種別">Type</div><div class="v" data-ja="野営地">Wild camp</div></div>
             <div class="stat"><div class="k" data-ja="料金">Fee</div><div class="v" data-ja="記載なし">None posted</div></div>
           </div>
-          <p class="desc small-note">Inside Yanbaru National Park &mdash; check the posted fire and camping rules on arrival.</p>
+          <p class="desc note-sm">In Yanbaru National Park &mdash; check posted fire rules.</p>
           <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=26.66150,128.10150" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-          <a class="maplink alt" href="https://directory.evertrailokinawa.com/site/rec4UFG8bsOigRHab" target="_blank" rel="noopener"><span data-ja="Evertrail の掲載情報">Evertrail listing</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+          <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-ja="予約・公式サイト">Book / official site</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
       </details>
       <details class="card camp paid f-beach f-toilet f-shower">
@@ -999,18 +1015,19 @@
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
-          <p class="desc" data-ja="渡野喜屋キャンプ場は大宜味村にある静かなキャンプ場で、トイレ、シャワー、グリル、焚き火場と必要なものがシンプルにそろっています。ゆっくり時間を過ごし、穏やかな環境と星空の下の静かな夜を味わうのにぴったりです。オーナーの親川さんはとても親しみやすい人柄で、場内全体に温かい雰囲気が漂っています。">Tonokiya Camping Ground is a peaceful campsite in Ogimi Village with simple, practical facilities like toilets, showers, grills, and fire pits. It is a great place to slow down, enjoy the calm surroundings, and spend a quiet night under the stars. The owner, Oyakawa, is known for being especially friendly and makes the whole place feel warm and welcoming.</p>
+          <figure class="camp-thumb"><img src="images/camps/tonokiya-campsite.jpg" alt="" loading="lazy" decoding="async" width="720" height="405"></figure>
+          <p class="desc" data-ja="シンプルで静か。トイレ、シャワー、グリル、焚き火場あり — 北部でいちばん手軽にバーベキューできます。">Simple and quiet, with toilets, showers, grills and fire pits — the easiest BBQ of the north.</p>
           <div class="chips"><span class="chip pick" data-ja="おすすめ">Good fit</span><span class="chip" data-ja="ビーチ">Beach</span><span class="chip" data-ja="オーシャンビュー">Ocean view</span><span class="chip" data-ja="星空">Stargazing</span><span class="chip" data-ja="トイレ">Toilet</span><span class="chip" data-ja="シャワー">Shower</span></div>
           <div class="stat-grid">
             <div class="stat"><div class="k" data-ja="種別">Type</div><div class="v" data-ja="有料キャンプ場">Paid camp</div></div>
             <div class="stat"><div class="k" data-ja="料金">Fee</div><div class="v" data-ja="現地で確認">Ask on site</div></div>
           </div>
-          <p class="desc small-note">Inside Yanbaru National Park &mdash; check the posted fire and camping rules on arrival.</p>
+          <p class="desc note-sm">In Yanbaru National Park &mdash; check posted fire rules.</p>
           <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=26.66378,128.10874" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-          <a class="maplink alt" href="https://directory.evertrailokinawa.com/site/recNMQdiRVkOFlAdt" target="_blank" rel="noopener"><span data-ja="Evertrail の掲載情報">Evertrail listing</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+          <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-ja="予約・公式サイト">Book / official site</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
       </details>
-      <details class="card camp wild ">
+      <details class="card camp wild">
         <summary class="head">
           <span class="node"></span>
           <div class="lead-chip"><div class="d">116</div><div class="m" data-ja="分">MIN</div></div>
@@ -1019,19 +1036,20 @@
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
-          <p class="desc" data-ja="ゆるやかに流れる川のほとりにひっそりと佇む大保川キャンプは、自然好きのための人里離れた野営地です。風をさえぎる背の高い木々に囲まれた川沿いの草地で、車を停めてそのまま設営できます。聞こえてくるのは自然の音だけ。静けさと一人の時間を求める人にうってつけの隠れ家です。手つかずの環境を守るため、ゴミはすべて持ち帰り、基本的なキャンプのマナーを守りましょう。大保のこの美しさを、みんなで次へ残していきたいものです。">Tucked away beside a gentle-flowing river, Daiboo River Camp is a wild, off-the-beaten-path campsite perfect for nature lovers. Surrounded by tall trees that shield you from the wind, this grassy riverside patch offers a serene place to park up and set up camp. With nothing but the sounds of nature around you, it&#x27;s the ideal escape for those seeking peace and solitude. Please respect this untouched environment by taking all your rubbish with you and following common camping etiquette. Let’s keep Daiboo wild and beautiful for everyone to enjoy.</p>
+          <figure class="camp-thumb"><img src="images/camps/daiboo-river-camp.jpg" alt="" loading="lazy" decoding="async" width="720" height="405"></figure>
+          <p class="desc" data-ja="背の高い木々の下、川沿いの草地。あるのは川だけ。">Grassy riverside clearing under tall trees. Nothing but the river.</p>
           <div class="note">
             <svg class="ic" aria-hidden="true"><use href="#i-alert"/></svg>
-            <div data-ja="設備はなく、最寄りの道路から180 m、しかも台風シーズンの川沿いです。おすすめしません。">No facilities, 180 m from the nearest road, and riverside in typhoon season. Not recommended.</div>
+            <div data-ja="設備なし、進入はオフロード、しかも台風シーズンの川沿いです。おすすめしません。">No facilities, off-road access, riverside in typhoon season. Not recommended.</div>
           </div>
           <div class="chips"><span class="chip" data-ja="星空">Stargazing</span></div>
           <div class="stat-grid">
             <div class="stat"><div class="k" data-ja="種別">Type</div><div class="v" data-ja="野営地">Wild camp</div></div>
             <div class="stat"><div class="k" data-ja="料金">Fee</div><div class="v" data-ja="記載なし">None posted</div></div>
           </div>
-          <p class="desc small-note">Inside Yanbaru National Park &mdash; check the posted fire and camping rules on arrival.</p>
+          <p class="desc note-sm">In Yanbaru National Park &mdash; check posted fire rules.</p>
           <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=26.65352,128.14329" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-          <a class="maplink alt" href="https://directory.evertrailokinawa.com/site/recLKiiM7pS660pi0" target="_blank" rel="noopener"><span data-ja="Evertrail の掲載情報">Evertrail listing</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+          <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-ja="予約・公式サイト">Book / official site</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
       </details>
       <details class="card camp paid f-beach f-toilet f-shower">
@@ -1043,15 +1061,16 @@
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
-          <p class="desc" data-ja="沖縄の福地川海浜公園は、ビーチサイド、リバーサイド、VIPと多彩なサイトを備えたキャンプ場です。マリンアクティビティも楽しめ、静かな自然に囲まれた環境は、思い出に残るキャンプを求めるファミリーやグループにぴったりです。">Fukujigawa Seaside Park in Okinawa offers diverse camping options, including beachside, riverside, and VIP sites. Ideal for outdoor enthusiasts, the park provides access to marine activities and a serene natural environment, perfect for families and groups seeking a memorable camping experience.</p>
+          <figure class="camp-thumb"><img src="images/camps/fukuchi-river-seaside-park.jpg" alt="" loading="lazy" decoding="async" width="720" height="405"></figure>
+          <p class="desc" data-ja="ビーチサイド・リバーサイド・VIPサイト。マリンアクティビティも楽しめます。">Beachside, riverside and VIP pitches with access to water sports.</p>
           <div class="chips"><span class="chip" data-ja="ビーチ">Beach</span><span class="chip" data-ja="オーシャンビュー">Ocean view</span><span class="chip" data-ja="朝日">Sunrise</span><span class="chip" data-ja="星空">Stargazing</span><span class="chip" data-ja="トイレ">Toilet</span><span class="chip" data-ja="シャワー">Shower</span></div>
           <div class="stat-grid">
             <div class="stat"><div class="k" data-ja="種別">Type</div><div class="v" data-ja="有料キャンプ場">Paid camp</div></div>
             <div class="stat"><div class="k" data-ja="料金">Fee</div><div class="v" data-ja="現地で確認">Ask on site</div></div>
           </div>
-          <p class="desc small-note">Inside Yanbaru National Park &mdash; check the posted fire and camping rules on arrival.</p>
+          <p class="desc note-sm">In Yanbaru National Park &mdash; check posted fire rules.</p>
           <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=26.63160,128.15860" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-          <a class="maplink alt" href="https://fukujipark.com/" target="_blank" rel="noopener"><span data-ja="予約・公式サイト">Book / official site</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+          <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-ja="予約・公式サイト">Book / official site</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
       </details>
       <h3 class="region" data-ja="やんばる<small>国頭・辺戸岬 &middot; 8件</small>">Yanbaru<small>Kunigami &amp; Cape Hedo &middot; 8 sites</small></h3>
@@ -1064,15 +1083,16 @@
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
-          <p class="desc" data-ja="夕日側にあるコキョウノビーチは、美しい海のすぐそばにテントを張れる魅力的な場所です。トイレとシャワーが無料で使えます。週末や祝日はほかのキャンパーや海水浴客も訪れるので、場所を広く取りすぎないよう配慮しましょう。すぐ近くには地元の居酒屋があり、夕食を楽しんでからキャンプ地に戻るのもおすすめです。ほかのキャンパーへの敬意を忘れず、ゴミは必ず持ち帰りましょう。">Experience the allure of Kokyono Beach on the sunset side, where you can set up a beach camp by the beautiful ocean. Enjoy the convenience of free toilets and showers. On weekends and holidays, you&#x27;ll find fellow campers and beachgoers, so be considerate by not taking up too much space. Plus, there&#x27;s a cozy local restaurant (a Japanese Izakaya) just a stone&#x27;s throw away, perfect for enjoying dinner and drinks before returning to your camp spot. Always respect other campers and leave no trace behind.</p>
+          <figure class="camp-thumb"><img src="images/camps/kokyono-beach.jpg" alt="" loading="lazy" decoding="async" width="720" height="405"></figure>
+          <p class="desc" data-ja="無料の夕日ビーチ、トイレとシャワーも無料。週末は海水浴客と共用。">Free sunset beach with free toilets and showers. Shared with day visitors at weekends.</p>
           <div class="chips"><span class="chip" data-ja="ビーチ">Beach</span><span class="chip" data-ja="オーシャンビュー">Ocean view</span><span class="chip" data-ja="夕日">Sunset</span><span class="chip" data-ja="トイレ">Toilet</span><span class="chip" data-ja="シャワー">Shower</span></div>
           <div class="stat-grid">
             <div class="stat"><div class="k" data-ja="種別">Type</div><div class="v" data-ja="野営地">Wild camp</div></div>
             <div class="stat"><div class="k" data-ja="料金">Fee</div><div class="v" data-ja="記載なし">None posted</div></div>
           </div>
-          <p class="desc small-note">Inside Yanbaru National Park &mdash; check the posted fire and camping rules on arrival.</p>
+          <p class="desc note-sm">In Yanbaru National Park &mdash; check posted fire rules.</p>
           <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=26.74660,128.17200" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-          <a class="maplink alt" href="https://directory.evertrailokinawa.com/site/recLg2l3tR5JIqwNN" target="_blank" rel="noopener"><span data-ja="Evertrail の掲載情報">Evertrail listing</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+          <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-ja="予約・公式サイト">Book / official site</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
       </details>
       <details class="card camp wild f-beach">
@@ -1084,15 +1104,16 @@
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
-          <p class="desc" data-ja="辺土名のキャンプスポットは、美しい景色の中でビーチキャンプを楽しめる絶好のロケーションです。晴れた夜には満天の星、そして見事な夕日が待っています。地元の方への配慮を忘れず、ゴミは必ず持ち帰りましょう。">Discover the Hentona camp spot, a perfect location for beach camping with beautiful scenery. On clear nights, enjoy a sky full of stars and stunning sunsets. Please respect the locals and ensure you leave no trace behind.</p>
+          <figure class="camp-thumb"><img src="images/camps/hentona-camp-spot.jpg" alt="" loading="lazy" decoding="async" width="720" height="405"></figure>
+          <p class="desc" data-ja="素朴なビーチサイト。晴れた夜は星空、夕日も見事。">Straightforward beach pitch with clear-night skies and good sunsets.</p>
           <div class="chips"><span class="chip" data-ja="ビーチ">Beach</span><span class="chip" data-ja="オーシャンビュー">Ocean view</span><span class="chip" data-ja="夕日">Sunset</span><span class="chip" data-ja="星空">Stargazing</span></div>
           <div class="stat-grid">
             <div class="stat"><div class="k" data-ja="種別">Type</div><div class="v" data-ja="野営地">Wild camp</div></div>
             <div class="stat"><div class="k" data-ja="料金">Fee</div><div class="v" data-ja="記載なし">None posted</div></div>
           </div>
-          <p class="desc small-note">Inside Yanbaru National Park &mdash; check the posted fire and camping rules on arrival.</p>
+          <p class="desc note-sm">In Yanbaru National Park &mdash; check posted fire rules.</p>
           <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=26.75060,128.18490" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-          <a class="maplink alt" href="https://directory.evertrailokinawa.com/site/recWYbfm1aJBc8QWj" target="_blank" rel="noopener"><span data-ja="Evertrail の掲載情報">Evertrail listing</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+          <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-ja="予約・公式サイト">Book / official site</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
       </details>
       <details class="card camp paid f-toilet f-shower">
@@ -1104,18 +1125,19 @@
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
-          <p class="desc" data-ja="夕日の美しさが格別な有料キャンプ場です。晴れた夜には屈指の星空が広がります。トイレ、シャワー、キッチンがそろい、どこを向いても静かな自然に包まれています。さらに、天候に恵まれない日には、わずかな追加料金で屋内に泊まることもできます。">Discover a paid campsite where the sunsets are nothing short of breathtaking. This gem offers one of the finest stargazing spots on clear nights. With toilets, showers, and a kitchen available, you&#x27;ll be surrounded by the serene beauty of nature at every turn. Plus, on days when the weather isn&#x27;t cooperating, you have the option to sleep indoors for a small extra fee.</p>
+          <figure class="camp-thumb"><img src="images/camps/okuma-mountains.jpg" alt="" loading="lazy" decoding="async" width="720" height="405"></figure>
+          <p class="desc" data-ja="北部屈指の星空。トイレ、シャワー、キッチンあり。">Some of the best stargazing up north, with toilets, showers and a kitchen.</p>
           <div class="chips"><span class="chip" data-ja="オーシャンビュー">Ocean view</span><span class="chip" data-ja="夕日">Sunset</span><span class="chip" data-ja="星空">Stargazing</span><span class="chip" data-ja="トイレ">Toilet</span><span class="chip" data-ja="シャワー">Shower</span></div>
           <div class="stat-grid">
             <div class="stat"><div class="k" data-ja="種別">Type</div><div class="v" data-ja="有料キャンプ場">Paid camp</div></div>
-            <div class="stat"><div class="k" data-ja="料金">Fee</div><div class="v">&yen;2,000</div></div>
+            <div class="stat"><div class="k" data-ja="料金">Fee</div><div class="v">¥2,000</div></div>
           </div>
-          <p class="desc small-note">Inside Yanbaru National Park &mdash; check the posted fire and camping rules on arrival.</p>
+          <p class="desc note-sm">In Yanbaru National Park &mdash; check posted fire rules.</p>
           <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=26.72960,128.19040" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-          <a class="maplink alt" href="https://directory.evertrailokinawa.com/site/rect9XJaW9qy69wBq" target="_blank" rel="noopener"><span data-ja="Evertrail の掲載情報">Evertrail listing</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+          <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-ja="予約・公式サイト">Book / official site</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
       </details>
-      <details class="card camp wild ">
+      <details class="card camp wild">
         <summary class="head">
           <span class="node"></span>
           <div class="lead-chip"><div class="d">142</div><div class="m" data-ja="分">MIN</div></div>
@@ -1124,15 +1146,16 @@
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
-          <p class="desc" data-ja="本島北部、辺戸岬から車で15分ほどの場所に、海と辺野喜川が出会う美しいスポットがあります。夕日が見事で光害も少なく、星空観賞にうってつけ。近くにはやんばるそばのお店もあります。地元の方への配慮を忘れず、ゴミは必ず持ち帰りましょう。">In the northern region of Okinawa, just a 15-minute drive from Cape Hedo, you&#x27;ll find a beautiful spot where the ocean meets the Benoki River. This area offers stunning sunsets and minimal light pollution, making it perfect for stargazing. Nearby, you can visit the Yanbaru Soba Bar. Please respect the locals and ensure you leave no trash behind.</p>
+          <figure class="camp-thumb"><img src="images/camps/benoki-camp-spot.jpg" alt="" loading="lazy" decoding="async" width="720" height="405"></figure>
+          <p class="desc" data-ja="辺野喜川が海と出会う場所 — 光害はほとんどありません。">Where the Benoki River meets the sea — almost no light pollution.</p>
           <div class="chips"><span class="chip" data-ja="オーシャンビュー">Ocean view</span><span class="chip" data-ja="夕日">Sunset</span><span class="chip" data-ja="星空">Stargazing</span></div>
           <div class="stat-grid">
             <div class="stat"><div class="k" data-ja="種別">Type</div><div class="v" data-ja="野営地">Wild camp</div></div>
             <div class="stat"><div class="k" data-ja="料金">Fee</div><div class="v" data-ja="記載なし">None posted</div></div>
           </div>
-          <p class="desc small-note">Inside Yanbaru National Park &mdash; check the posted fire and camping rules on arrival.</p>
+          <p class="desc note-sm">In Yanbaru National Park &mdash; check posted fire rules.</p>
           <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=26.79850,128.23210" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-          <a class="maplink alt" href="https://directory.evertrailokinawa.com/site/recdFutZoJECAYPkn" target="_blank" rel="noopener"><span data-ja="Evertrail の掲載情報">Evertrail listing</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+          <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-ja="予約・公式サイト">Book / official site</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
       </details>
       <details class="card camp paid f-toilet f-shower">
@@ -1144,15 +1167,16 @@
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
-          <p class="desc" data-ja="やんばる学びの森キャンプ場では、手つかずの沖縄の自然にどっぷり浸かれます。高くそびえる木々の緑の天蓋の下にテントを張れば、みずみずしい葉の香りと生きものたちの鳴き声に包まれます。景色のよい散策路、静かな沢、豊かな生態系が広がり、冒険と静けさがほどよく混ざり合った場所です。一日たっぷり遊んだあとは、場内のレストランで食事をし、温泉風の浴場でくつろぐ。野外の時間に少しだけ贅沢を添えてくれます。">At Yanbaru Discovery Forest Camp Ground, immerse yourself in the untouched beauty of Okinawa’s natural wonders. Imagine pitching your tent beneath a canopy of towering trees, where the air is filled with the scent of fresh foliage and the melodies of local wildlife. This campsite offers a perfect blend of adventure and tranquility, with scenic trails, serene streams, and a vibrant ecosystem waiting to be explored. After a day of adventure, indulge in the on-site dine-in restaurant and unwind in the onsen-style baths, enhancing your wilderness experience with a touch of luxury.</p>
+          <figure class="camp-thumb"><img src="images/camps/yanbaru-discovery-forest.jpg" alt="" loading="lazy" decoding="async" width="720" height="405"></figure>
+          <p class="desc" data-ja="やんばるの奥、森の天蓋の下のサイト。トイレとシャワーあり。">Pitches under forest canopy deep in Yanbaru, with toilets and showers.</p>
           <div class="chips"><span class="chip" data-ja="朝日">Sunrise</span><span class="chip" data-ja="星空">Stargazing</span><span class="chip" data-ja="トイレ">Toilet</span><span class="chip" data-ja="シャワー">Shower</span></div>
           <div class="stat-grid">
             <div class="stat"><div class="k" data-ja="種別">Type</div><div class="v" data-ja="有料キャンプ場">Paid camp</div></div>
             <div class="stat"><div class="k" data-ja="料金">Fee</div><div class="v" data-ja="現地で確認">Ask on site</div></div>
           </div>
-          <p class="desc small-note">Inside Yanbaru National Park &mdash; check the posted fire and camping rules on arrival.</p>
+          <p class="desc note-sm">In Yanbaru National Park &mdash; check posted fire rules.</p>
           <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=26.72350,128.26490" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-          <a class="maplink alt" href="https://yanbaru-manabi.com/" target="_blank" rel="noopener"><span data-ja="予約・公式サイト">Book / official site</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+          <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-ja="予約・公式サイト">Book / official site</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
       </details>
       <details class="card camp wild f-beach">
@@ -1164,15 +1188,16 @@
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
-          <p class="desc" data-ja="オーシャンビューが心を奪う地元のキャンプスポットです。息をのむような朝日と、晴れた夜の美しい星空が待っています。最高の景色と使いやすい設備の両方がそろった場所です。なお週末は混み合うことがあります。また、地図のピンで示された場所をご利用ください。使ったあとはきれいに片づけ、ほかのキャンパーへの配慮を忘れず、ゴミは必ず持ち帰りましょう。">Nestled in a local camp spot with a mesmerizing ocean view, this site offers breathtaking sunrises and the most beautiful stars on clear nights. Enjoy the perfect blend of nature&#x27;s finest views with the convenience of modern amenities. Please note this spot may be busy on weekends and to use the spot located on the map pin. Please always clean up after yourself, respect other campers, and leave no trace behind.</p>
+          <figure class="camp-thumb"><img src="images/camps/aha-yanbaru.jpg" alt="" loading="lazy" decoding="async" width="720" height="405"></figure>
+          <p class="desc" data-ja="地元のスポット。オーシャンビュー、朝日、暗い夜空。トイレ・シャワーなし。">Local spot with ocean views, sunrises and dark skies. No toilet or shower.</p>
           <div class="chips"><span class="chip" data-ja="ビーチ">Beach</span><span class="chip" data-ja="オーシャンビュー">Ocean view</span><span class="chip" data-ja="朝日">Sunrise</span><span class="chip" data-ja="星空">Stargazing</span></div>
           <div class="stat-grid">
             <div class="stat"><div class="k" data-ja="種別">Type</div><div class="v" data-ja="野営地">Wild camp</div></div>
             <div class="stat"><div class="k" data-ja="料金">Fee</div><div class="v" data-ja="記載なし">None posted</div></div>
           </div>
-          <p class="desc small-note">Inside Yanbaru National Park &mdash; check the posted fire and camping rules on arrival.</p>
+          <p class="desc note-sm">In Yanbaru National Park &mdash; check posted fire rules.</p>
           <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=26.71590,128.29390" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-          <a class="maplink alt" href="https://directory.evertrailokinawa.com/site/recnt5WngEZCdNKHG" target="_blank" rel="noopener"><span data-ja="Evertrail の掲載情報">Evertrail listing</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+          <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-ja="予約・公式サイト">Book / official site</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
       </details>
       <details class="card camp wild f-beach">
@@ -1184,15 +1209,16 @@
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
-          <p class="desc" data-ja="本島北東の海岸、辺戸岬から南へ約3 kmの場所に、キャンプの穴場・奥ビーチロードがあります。日陰が豊かで、日差しを避けて設営するのにうってつけ。色鮮やかなサンゴ礁に囲まれた美しいビーチで、自然に包まれてくつろげます。場所を広く取りすぎないよう気をつけ、ゴミは必ず持ち帰って、この絶景の地を大切に使いましょう。">At the north-east coast, about 3 km south of Cape Hedo, you’ll discover Oku Beach Road, a hidden gem for camping. This beautifully shaded area is perfect for escaping the sun while you set up your camp. Immerse yourself in nature as you relax on the stunning beach, surrounded by vibrant coral reefs. Please respect this breathtaking spot by not taking up too much space and ensuring you leave no trace behind.</p>
+          <figure class="camp-thumb"><img src="images/camps/oku-beach-road.jpg" alt="" loading="lazy" decoding="async" width="720" height="405"></figure>
+          <p class="desc" data-ja="辺戸岬から南へ約3 km、北東海岸の日陰のサイト。サンゴ礁に囲まれています。">Shaded pitch on the north-east coast about 3 km below Cape Hedo, fringed by reef.</p>
           <div class="chips"><span class="chip" data-ja="ビーチ">Beach</span><span class="chip" data-ja="オーシャンビュー">Ocean view</span><span class="chip" data-ja="星空">Stargazing</span></div>
           <div class="stat-grid">
             <div class="stat"><div class="k" data-ja="種別">Type</div><div class="v" data-ja="野営地">Wild camp</div></div>
             <div class="stat"><div class="k" data-ja="料金">Fee</div><div class="v" data-ja="記載なし">None posted</div></div>
           </div>
-          <p class="desc small-note">Inside Yanbaru National Park &mdash; check the posted fire and camping rules on arrival.</p>
+          <p class="desc note-sm">In Yanbaru National Park &mdash; check posted fire rules.</p>
           <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=26.84620,128.28570" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-          <a class="maplink alt" href="https://directory.evertrailokinawa.com/site/recFSeQcdhIIj2QQe" target="_blank" rel="noopener"><span data-ja="Evertrail の掲載情報">Evertrail listing</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+          <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-ja="予約・公式サイト">Book / official site</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
       </details>
       <details class="card camp paid f-beach f-toilet f-shower">
@@ -1204,19 +1230,20 @@
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
-          <p class="desc" data-ja="辺戸岬から車で10分、アダンビーチは沖縄本島北東部にひっそりと隠れた楽園です。透きとおるターコイズブルーの海、やわらかな砂浜、豊かな海の生きものたち。静けさを求めるなら申し分ない穴場です。駐車場とシャワーという最低限の設備もあり、これだけ北まで来ると星空も見事。ウェブサイトはなく、地元の年配の方が管理しています。">Just a 10-minute drive from Cape Hedo, Adan Beach is a secluded paradise on Okinawa&#x27;s northeastern coast. With its clear turquoise waters, soft sands, and vibrant marine life, this hidden gem offers a tranquil escape. Basic amenities like parking and showers add convenience, and being so far up north makes for amazing star gazing. There is no website, and the beach is run by an elderly local.</p>
+          <figure class="camp-thumb"><img src="images/camps/adan-beach-campsite.jpg" alt="" loading="lazy" decoding="async" width="720" height="405"></figure>
+          <p class="desc" data-ja="辺戸岬から10分、人知れぬターコイズブルーの湾。駐車場とシャワーあり。">Secluded turquoise bay 10 min from Cape Hedo, with parking and showers.</p>
           <div class="note">
             <svg class="ic" aria-hidden="true"><use href="#i-alert"/></svg>
-            <div data-ja="ルートは奥与那林道と楚洲林道を通ります &mdash; 幅が狭く未舗装で、荒天後は通行止めになります。70号線経由の場合は、所要時間を長めに見込んでください。">Routing runs over the Okuyona and Soshu forest roads &mdash; narrow, unsealed and closed after storms. Allow longer via Route 70.</div>
+            <div data-ja="ルートは荒天後に通行止めになる狭い林道を通ります。70号線経由では所要時間を長めに見込んでください。">Routing uses narrow forest roads that close after storms. Allow longer via Route 70.</div>
           </div>
           <div class="chips"><span class="chip" data-ja="ビーチ">Beach</span><span class="chip" data-ja="オーシャンビュー">Ocean view</span><span class="chip" data-ja="朝日">Sunrise</span><span class="chip" data-ja="星空">Stargazing</span><span class="chip" data-ja="トイレ">Toilet</span><span class="chip" data-ja="シャワー">Shower</span></div>
           <div class="stat-grid">
             <div class="stat"><div class="k" data-ja="種別">Type</div><div class="v" data-ja="有料キャンプ場">Paid camp</div></div>
             <div class="stat"><div class="k" data-ja="料金">Fee</div><div class="v" data-ja="現地で確認">Ask on site</div></div>
           </div>
-          <p class="desc small-note">Inside Yanbaru National Park &mdash; check the posted fire and camping rules on arrival.</p>
+          <p class="desc note-sm">In Yanbaru National Park &mdash; check posted fire rules.</p>
           <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=26.82100,128.31350" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-          <a class="maplink alt" href="https://directory.evertrailokinawa.com/site/recr2oDjuNvJtPvLH" target="_blank" rel="noopener"><span data-ja="Evertrail の掲載情報">Evertrail listing</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+          <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-ja="予約・公式サイト">Book / official site</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
       </details>
     </div>
@@ -1225,25 +1252,329 @@
       about &yen;1,000 each way in expressway tolls. Data from directory.evertrailokinawa.com</div>
   </section>
 
+  <section class="view" id="view-eat">
+    <h2 class="section"><svg class="ic" aria-hidden="true"><use href="#i-teacup"/></svg><span data-ja="食べる">Eat</span></h2>
+    <p class="intro" data-ja="かき氷、カフェ、お土産スイーツ。いずれも3日間の日程で営業を確認済みです。数字は、そのドライブに
+      組み込みやすい日を示しています。三連休なので、有名店には行列ができます。">Shaved ice, cafes and sweets, all checked open on our three dates. The day number is where each
+      one fits the drive. It is a long weekend, so the famous ones will have a queue.</p>
+    <div class="toolbar">
+      <div class="seg lang-toggle jsonly" role="group" aria-label="Language"><button type="button" data-lang="en" class="active">EN</button><button type="button" data-lang="ja">日本語</button></div>
+    </div>
+    <div class="spine" id="eat">
+      <h3 class="region" data-ja="かき氷・ぜんざい<small>6軒</small>">Kakigori &amp; zenzai<small>6 spots</small></h3>
+      <details class="card eat">
+        <summary class="head">
+          <span class="node"></span>
+          <div class="lead-chip"><div class="d">1</div><div class="m" data-ja="日目">DAY</div></div>
+          <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-bowl"/></svg></span>
+          <div class="ttl"><div class="t" data-ja="三矢 道の駅許田店">Mitsuya, Michi-no-eki Kyoda</div><div class="sub2" data-ja="名護市">三矢 &middot; Nago</div></div>
+          <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
+        </summary>
+        <div class="content">
+          <p class="desc" data-ja="揚げたてのサーターアンダギーが&yen;150。スイーツ百名店2026、美ら海水族館の割引チケットもここで買えます。">Fried-to-order sata andagi, &yen;150. Sweets Hyakumeiten 2026, and the Churaumi discount tickets are sold here.</p>
+          <div class="stat-grid">
+            <div class="stat"><div class="k" data-ja="おすすめ">Order</div><div class="v" data-ja="サーターアンダギー &yen;150">Sata andagi &yen;150</div></div>
+            <div class="stat"><div class="k" data-ja="営業時間">Hours</div><div class="v" data-ja="09:00&ndash;19:00 &middot; 定休日なし">09:00&ndash;19:00 &middot; never closed</div></div>
+          </div>
+          <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=26.55202,127.97000" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+        </div>
+      </details>
+      <details class="card eat">
+        <summary class="head">
+          <span class="node"></span>
+          <div class="lead-chip"><div class="d">1</div><div class="m" data-ja="日目">DAY</div></div>
+          <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-bowl"/></svg></span>
+          <div class="ttl"><div class="t" data-ja="ひがし食堂">Higashi Shokudo</div><div class="sub2" data-ja="名護市">ひがし食堂 &middot; Nago</div></div>
+          <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
+        </summary>
+        <div class="content">
+          <p class="desc" data-ja="創業50年の食堂。ミルクぜんざいは名護の定番です。">Fifty-year-old shokudo whose milk zenzai is a Nago institution.</p>
+          <div class="stat-grid">
+            <div class="stat"><div class="k" data-ja="おすすめ">Order</div><div class="v" data-ja="ミルクぜんざい &yen;480">Milk zenzai &yen;480</div></div>
+            <div class="stat"><div class="k" data-ja="営業時間">Hours</div><div class="v" data-ja="11:00&ndash;18:30 &middot; 駐車3台">11:00&ndash;18:30 &middot; 3 spaces</div></div>
+          </div>
+          <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=26.58882,127.98867" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+        </div>
+      </details>
+      <details class="card eat">
+        <summary class="head">
+          <span class="node"></span>
+          <div class="lead-chip"><div class="d">2</div><div class="m" data-ja="日目">DAY</div></div>
+          <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-bowl"/></svg></span>
+          <div class="ttl"><div class="t" data-ja="新垣ぜんざい屋">Aragaki Zenzai</div><div class="sub2" data-ja="本部町">新垣ぜんざい屋 &middot; Motobu</div></div>
+          <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
+        </summary>
+        <div class="content">
+          <p class="desc" data-ja="1948年から一品のみ、豆は薪で炊き上げます。美ら海水族館から10分。">One item since 1948, beans cooked over a wood fire. Ten minutes from Churaumi.</p>
+          <div class="stat-grid">
+            <div class="stat"><div class="k" data-ja="おすすめ">Order</div><div class="v" data-ja="氷ぜんざい &yen;350">Ice zenzai &yen;350</div></div>
+            <div class="stat"><div class="k" data-ja="営業時間">Hours</div><div class="v" data-ja="12:00&ndash;18:00 &middot; 売り切れ次第終了 &middot; 駐車場なし">12:00&ndash;18:00 &middot; sells out &middot; no car park</div></div>
+          </div>
+          <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=26.66064,127.89584" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+        </div>
+      </details>
+      <details class="card eat">
+        <summary class="head">
+          <span class="node"></span>
+          <div class="lead-chip"><div class="d">3</div><div class="m" data-ja="日目">DAY</div></div>
+          <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-bowl"/></svg></span>
+          <div class="ttl"><div class="t" data-ja="琉冰 おんなの駅">Ryupin, Onna-no-Eki</div><div class="sub2" data-ja="恩納村">琉冰 &middot; Onna</div></div>
+          <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
+        </summary>
+        <div class="content">
+          <p class="desc" data-ja="沖縄のかき氷を象徴するマンゴーのアイスマウンテン。スイーツ百名店2026。">The mango ice mountain that defines Okinawan shaved ice. Hyakumeiten 2026.</p>
+          <div class="stat-grid">
+            <div class="stat"><div class="k" data-ja="おすすめ">Order</div><div class="v" data-ja="アイスマウンテン 約&yen;1,500から">Ice Mountain from ~&yen;1,500</div></div>
+            <div class="stat"><div class="k" data-ja="営業時間">Hours</div><div class="v" data-ja="10:00&ndash;19:00 &middot; 無料駐車104台">10:00&ndash;19:00 &middot; 104 free spaces</div></div>
+          </div>
+          <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=26.43625,127.79471" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+        </div>
+      </details>
+      <details class="card eat">
+        <summary class="head">
+          <span class="node"></span>
+          <div class="lead-chip"><div class="d">3</div><div class="m" data-ja="日目">DAY</div></div>
+          <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-bowl"/></svg></span>
+          <div class="ttl"><div class="t" data-ja="鶴亀堂ぜんざい">Tsurukamedo Zenzai</div><div class="sub2" data-ja="読谷村">鶴亀堂ぜんざい &middot; Yomitan</div></div>
+          <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
+        </summary>
+        <div class="content">
+          <p class="desc" data-ja="座喜味城跡の入口。きめ細かい氷に読谷の紫芋。">At the Zakimi Castle gate; fine ice with Yomitan purple sweet potato.</p>
+          <div class="stat-grid">
+            <div class="stat"><div class="k" data-ja="おすすめ">Order</div><div class="v" data-ja="紅イモ黒糖ぜんざい 約&yen;580">Beni-imo kokuto zenzai ~&yen;580</div></div>
+            <div class="stat"><div class="k" data-ja="営業時間">Hours</div><div class="v" data-ja="11:00&ndash;17:00 &middot; 火・水定休">11:00&ndash;17:00 &middot; closed Tue &amp; Wed</div></div>
+          </div>
+          <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=26.40621,127.74230" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+        </div>
+      </details>
+      <details class="card eat">
+        <summary class="head">
+          <span class="node"></span>
+          <div class="lead-chip"><div class="d">3</div><div class="m" data-ja="日目">DAY</div></div>
+          <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-bowl"/></svg></span>
+          <div class="ttl"><div class="t" data-ja="氷ヲ刻メ">Kori wo Kizame</div><div class="sub2" data-ja="北谷町">氷ヲ刻メ &middot; Chatan</div></div>
+          <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
+        </summary>
+        <div class="content">
+          <p class="desc" data-ja="中部で唯一の本格モダンかき氷店。12席だけで、売り切れます。">The one serious modern kakigori shop in the centre. Twelve seats and it sells out.</p>
+          <div class="stat-grid">
+            <div class="stat"><div class="k" data-ja="おすすめ">Order</div><div class="v" data-ja="塩キャラメルグラノーラ &yen;800">Salt caramel granola &yen;800</div></div>
+            <div class="stat"><div class="k" data-ja="営業時間">Hours</div><div class="v" data-ja="11:00から売り切れ次第終了 &middot; 水曜定休">11:00 till the ice runs out &middot; closed Wed</div></div>
+          </div>
+          <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=26.32753,127.75177" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+        </div>
+      </details>
+      <h3 class="region" data-ja="カフェ<small>7軒</small>">Cafes<small>7 spots</small></h3>
+      <details class="card eat">
+        <summary class="head">
+          <span class="node"></span>
+          <div class="lead-chip"><div class="d">2</div><div class="m" data-ja="日目">DAY</div></div>
+          <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-teacup"/></svg></span>
+          <div class="ttl"><div class="t" data-ja="ふしくぶカフェ">Fushikubu Cafe</div><div class="sub2" data-ja="国頭村">ふしくぶカフェ &middot; Kunigami</div></div>
+          <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
+        </summary>
+        <div class="content">
+          <p class="desc" data-ja="辺戸岬の観光案内所2階 &mdash; 東シナ海から太平洋までを一望。">Upstairs at the Cape Hedo visitor centre &mdash; East China Sea to Pacific in one view.</p>
+          <div class="stat-grid">
+            <div class="stat"><div class="k" data-ja="おすすめ">Order</div><div class="v" data-ja="ロコモコ、コーヒー">Loco moco, coffee</div></div>
+            <div class="stat"><div class="k" data-ja="営業時間">Hours</div><div class="v" data-ja="10:00&ndash;17:30 &middot; 定休日なし">10:00&ndash;17:30 &middot; never closed</div></div>
+          </div>
+          <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=26.87256,128.26327" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+        </div>
+      </details>
+      <details class="card eat">
+        <summary class="head">
+          <span class="node"></span>
+          <div class="lead-chip"><div class="d">2</div><div class="m" data-ja="日目">DAY</div></div>
+          <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-teacup"/></svg></span>
+          <div class="ttl"><div class="t" data-ja="花人逢">Kajinho</div><div class="sub2" data-ja="本部町">花人逢 &middot; Motobu</div></div>
+          <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
+        </summary>
+        <div class="content">
+          <p class="desc" data-ja="伊江島を望む丘の上の赤瓦の民家。本島でいちばん写真に撮られる絶景カフェ。">Hilltop red-tiled house looking out to Ie-jima. The most photographed view cafe on the island.</p>
+          <div class="stat-grid">
+            <div class="stat"><div class="k" data-ja="おすすめ">Order</div><div class="v" data-ja="ピザ（小）&yen;1,500">Pizza (small) &yen;1,500</div></div>
+            <div class="stat"><div class="k" data-ja="営業時間">Hours</div><div class="v" data-ja="11:30&ndash;19:00 &middot; 火・水定休">11:30&ndash;19:00 &middot; closed Tue &amp; Wed</div></div>
+          </div>
+          <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=26.66859,127.90082" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+        </div>
+      </details>
+      <details class="card eat">
+        <summary class="head">
+          <span class="node"></span>
+          <div class="lead-chip"><div class="d">2</div><div class="m" data-ja="日目">DAY</div></div>
+          <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-teacup"/></svg></span>
+          <div class="ttl"><div class="t" data-ja="cafe CAHAYA BULAN">Cafe Cahaya Bulan</div><div class="sub2" data-ja="本部町">チャハヤブラン &middot; Motobu</div></div>
+          <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
+        </summary>
+        <div class="content">
+          <p class="desc" data-ja="備瀬のフクギ並木の中、砂地のテラスから伊江島を望みます。08:00開店。">Terrace on the sand inside the Bise fukugi grove, facing Ie-jima. Opens at 08:00.</p>
+          <div class="stat-grid">
+            <div class="stat"><div class="k" data-ja="おすすめ">Order</div><div class="v" data-ja="パンケーキ">Pancakes</div></div>
+            <div class="stat"><div class="k" data-ja="営業時間">Hours</div><div class="v">08:00&ndash;18:00</div></div>
+          </div>
+          <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=26.70213,127.87989" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+        </div>
+      </details>
+      <details class="card eat">
+        <summary class="head">
+          <span class="node"></span>
+          <div class="lead-chip"><div class="d">2</div><div class="m" data-ja="日目">DAY</div></div>
+          <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-teacup"/></svg></span>
+          <div class="ttl"><div class="t" data-ja="亜熱帯茶屋">Anettai Chaya</div><div class="sub2" data-ja="本部町">亜熱帯茶屋 &middot; Motobu</div></div>
+          <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
+        </summary>
+        <div class="content">
+          <p class="desc" data-ja="斜面に吊られたハンモック席と、ほかでは飲めないぶくぶく茶。">Hammock seats on a hillside, and bukubuku-cha you will not find elsewhere.</p>
+          <div class="stat-grid">
+            <div class="stat"><div class="k" data-ja="おすすめ">Order</div><div class="v" data-ja="ぶくぶく茶">Bukubuku-cha</div></div>
+            <div class="stat"><div class="k" data-ja="営業時間">Hours</div><div class="v" data-ja="11:00&ndash;18:30 &middot; 木曜定休">11:00&ndash;18:30 &middot; closed Thu</div></div>
+          </div>
+          <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=26.66711,127.90033" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+        </div>
+      </details>
+      <details class="card eat">
+        <summary class="head">
+          <span class="node"></span>
+          <div class="lead-chip"><div class="d">3</div><div class="m" data-ja="日目">DAY</div></div>
+          <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-teacup"/></svg></span>
+          <div class="ttl"><div class="t" data-ja="バンタカフェ">Banta Cafe</div><div class="sub2" data-ja="読谷村">バンタカフェ &middot; Yomitan</div></div>
+          <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
+        </summary>
+        <div class="content">
+          <p class="desc" data-ja="岩場に建つ星野リゾートの断崖カフェ。屋外160席、日没から1時間で閉店。">Hoshino Resorts cliff cafe built into the rocks; 160 outdoor seats, shuts an hour after sunset.</p>
+          <div class="stat-grid">
+            <div class="stat"><div class="k" data-ja="おすすめ">Order</div><div class="v" data-ja="ジェラート、スイーツ">Gelato, sweets</div></div>
+            <div class="stat"><div class="k" data-ja="営業時間">Hours</div><div class="v" data-ja="祝日は8:00から &middot; 駐車77台">From 08:00 on holidays &middot; 77 spaces</div></div>
+          </div>
+          <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=26.41772,127.71401" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+        </div>
+      </details>
+      <details class="card eat">
+        <summary class="head">
+          <span class="node"></span>
+          <div class="lead-chip"><div class="d">3</div><div class="m" data-ja="日目">DAY</div></div>
+          <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-teacup"/></svg></span>
+          <div class="ttl"><div class="t" data-ja="THE CALIF KITCHEN">The Calif Kitchen</div><div class="sub2" data-ja="北谷町">カリフキッチン &middot; Chatan</div></div>
+          <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
+        </summary>
+        <div class="content">
+          <p class="desc" data-ja="アメリカンビレッジのルーフトップ。目線の高さに海が広がります。">Rooftop over American Village with the sea at eye level.</p>
+          <div class="stat-grid">
+            <div class="stat"><div class="k" data-ja="おすすめ">Order</div><div class="v" data-ja="パンケーキ、かき氷">Pancakes, kakigori</div></div>
+            <div class="stat"><div class="k" data-ja="営業時間">Hours</div><div class="v">08:00&ndash;22:00</div></div>
+          </div>
+          <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=26.31574,127.75377" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+        </div>
+      </details>
+      <details class="card eat">
+        <summary class="head">
+          <span class="node"></span>
+          <div class="lead-chip"><div class="d">3</div><div class="m" data-ja="日目">DAY</div></div>
+          <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-teacup"/></svg></span>
+          <div class="ttl"><div class="t" data-ja="ZHYVAGO COFFEE ROASTERY">Zhyvago Coffee Roastery</div><div class="sub2" data-ja="北谷町">ジバゴ &middot; Chatan</div></div>
+          <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
+        </summary>
+        <div class="content">
+          <p class="desc" data-ja="150席、07:00&ndash;22:00 &mdash; シーウォール店が混み合うときの確実な代替。">150 seats, 07:00&ndash;22:00 &mdash; the reliable fallback when the seawall branch is mobbed.</p>
+          <div class="stat-grid">
+            <div class="stat"><div class="k" data-ja="おすすめ">Order</div><div class="v" data-ja="コーヒー、ケーキ">Coffee, cake</div></div>
+            <div class="stat"><div class="k" data-ja="営業時間">Hours</div><div class="v">07:00&ndash;22:00</div></div>
+          </div>
+          <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=26.31583,127.75375" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+        </div>
+      </details>
+      <h3 class="region" data-ja="お土産スイーツ<small>4軒</small>">Sweets to take home<small>4 spots</small></h3>
+      <details class="card eat">
+        <summary class="head">
+          <span class="node"></span>
+          <div class="lead-chip"><div class="d">3</div><div class="m" data-ja="日目">DAY</div></div>
+          <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-gift"/></svg></span>
+          <div class="ttl"><div class="t" data-ja="御菓子御殿 読谷本店">Okashi Goten, Yomitan</div><div class="sub2" data-ja="読谷村">御菓子御殿 &middot; Yomitan</div></div>
+          <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
+        </summary>
+        <div class="content">
+          <p class="desc" data-ja="紅イモタルトの元祖。本店には工場の見学窓もあります。">The original beni-imo tart, at the flagship with a factory window.</p>
+          <div class="stat-grid">
+            <div class="stat"><div class="k" data-ja="おすすめ">Order</div><div class="v" data-ja="紅イモタルト（箱入り）">Beni-imo tart, boxed</div></div>
+            <div class="stat"><div class="k" data-ja="営業時間">Hours</div><div class="v" data-ja="09:00&ndash;21:00 &middot; 定休日なし &middot; 駐車40台">09:00&ndash;21:00 &middot; never closed &middot; 40 spaces</div></div>
+          </div>
+          <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=26.43275,127.71874" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+        </div>
+      </details>
+      <details class="card eat">
+        <summary class="head">
+          <span class="node"></span>
+          <div class="lead-chip"><div class="d">3</div><div class="m" data-ja="日目">DAY</div></div>
+          <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-gift"/></svg></span>
+          <div class="ttl"><div class="t" data-ja="ブルーシール 牧港本店">Blue Seal, Makiminato</div><div class="sub2" data-ja="浦添市">ブルーシール牧港本店 &middot; Urasoe</div></div>
+          <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
+        </summary>
+        <div class="content">
+          <p class="desc" data-ja="1963年創業の本店、レトロなダイナー内装。紅イモと塩ちんすこうのスクープ。">The 1963 flagship with a retro diner interior. Beni-imo and salt-chinsuko scoops.</p>
+          <div class="stat-grid">
+            <div class="stat"><div class="k" data-ja="おすすめ">Order</div><div class="v" data-ja="シングルコーン">Single cone</div></div>
+            <div class="stat"><div class="k" data-ja="営業時間">Hours</div><div class="v" data-ja="10:00&ndash;22:00 &middot; 定休日なし &middot; 駐車50台">10:00&ndash;22:00 &middot; never closed &middot; 50 spaces</div></div>
+          </div>
+          <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=26.26734,127.72144" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+        </div>
+      </details>
+      <details class="card eat">
+        <summary class="head">
+          <span class="node"></span>
+          <div class="lead-chip"><div class="d">3</div><div class="m" data-ja="日目">DAY</div></div>
+          <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-gift"/></svg></span>
+          <div class="ttl"><div class="t" data-ja="oHacorte 港川本店">oHacorte, Minatogawa</div><div class="sub2" data-ja="浦添市">オハコルテ &middot; Urasoe</div></div>
+          <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
+        </summary>
+        <div class="content">
+          <p class="desc" data-ja="外国人住宅街のフルーツタルト &mdash; 寄り道そのものが絵になります。">Fruit tarts in the old American housing district &mdash; a photogenic detour in itself.</p>
+          <div class="stat-grid">
+            <div class="stat"><div class="k" data-ja="おすすめ">Order</div><div class="v" data-ja="季節のフルーツタルト 約&yen;680">Seasonal fruit tart ~&yen;680</div></div>
+            <div class="stat"><div class="k" data-ja="営業時間">Hours</div><div class="v" data-ja="11:30&ndash;19:00 &middot; 火曜定休 &middot; 駐車3台">11:30&ndash;19:00 &middot; closed Tue &middot; 3 spaces</div></div>
+          </div>
+          <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=26.26250,127.71537" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+        </div>
+      </details>
+      <details class="card eat">
+        <summary class="head">
+          <span class="node"></span>
+          <div class="lead-chip"><div class="d">3</div><div class="m" data-ja="日目">DAY</div></div>
+          <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-gift"/></svg></span>
+          <div class="ttl"><div class="t">ippe coppe</div><div class="sub2" data-ja="浦添市">イッペコッペ &middot; Urasoe</div></div>
+          <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
+        </summary>
+        <div class="content">
+          <p class="desc" data-ja="天然酵母のパンとスコーン。キャンプ旅のお土産に最適 &mdash; 冷蔵いらずです。">Naturally leavened bread and scones. The best edible souvenir for a camping trip &mdash; no fridge needed.</p>
+          <div class="stat-grid">
+            <div class="stat"><div class="k" data-ja="おすすめ">Order</div><div class="v" data-ja="食パン、スコーン">Shokupan, scones</div></div>
+            <div class="stat"><div class="k" data-ja="営業時間">Hours</div><div class="v" data-ja="12:30&ndash;18:30 &middot; 売り切れ次第終了 &middot; 火・水定休">12:30&ndash;18:30 &middot; sells out &middot; closed Tue &amp; Wed</div></div>
+          </div>
+          <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=26.26258,127.71570" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+        </div>
+      </details>
+    </div>
+    <div class="footer" data-ja="出典は食べログ、おきなわ物語、各店公式サイト &middot; 長距離の移動前に営業時間を確認してください">Sourced from Tabelog, Okinawa Story and shop sites &middot; verify hours before a long drive</div>
+  </section>
+
   <section class="view" id="view-packing">
     <h2 class="section"><svg class="ic" aria-hidden="true"><use href="#i-backpack"/></svg><span data-ja="持ち物">Packing</span></h2>
-    <p class="intro" data-ja="3日間、ひとりバックパック1つ。暑くて湿気の多い時期です。寝具はルーフトップテントに付いてくるので、ここにあるのは持参する物と現地で買う物だけ &mdash;
-      しかもバーナーもガスも食料も持たずに到着します。行をタップするとチェックが付き、<strong>リスト編集</strong>で内容を変えられます。すべてスマホに保存されます。">One backpack each, three days, hot and humid. Bedding comes with the rooftop tent, so this is
-      only what we carry plus what we buy on landing &mdash; and we land with no stove, no gas and no food. Tap a row
-      to check it off, or <strong>Edit list</strong> to change it. Everything saves on your phone.</p>
+    <p class="intro" data-ja="ひとりバックパック1つ。寝具とバーベキューセットはレンタルに付いてくるので、ここにあるのは持参する物と
+      現地で買う物だけ。行をタップするとチェックが付き、<strong>リスト編集</strong>で内容を変えられます。">One backpack each. Bedding and the BBQ set come with the rental, so this is what we carry plus
+      what we buy on landing. Tap a row to check it off, or <strong>Edit list</strong> to change it.</p>
     <div class="toolbar jsonly">
       <div class="seg lang-toggle jsonly" role="group" aria-label="Language"><button type="button" data-lang="en" class="active">EN</button><button type="button" data-lang="ja">日本語</button></div>
-      <button class="btn-sm" id="editPacking" type="button"><svg class="ic" aria-hidden="true"><use href="#i-pencil"/></svg>Edit list</button>
+      <button class="btn-sm" id="editPacking" type="button"><svg class="ic" aria-hidden="true"><use href="#i-pencil"/></svg><span>Edit list</span></button>
       <div class="spacer"></div>
       <button class="btn-sm" id="resetPacking" type="button" data-ja="チェックをリセット">Reset checks</button>
     </div>
     <div id="packing">
       <div class="group">
         <div class="glabel"><span class="gicon"><svg class="ic" aria-hidden="true"><use href="#i-file"/></svg></span><span data-ja="書類・現金">Documents &amp; Money</span></div>
-        <input type="checkbox" class="cb" id="packing-0-0" data-store="packing" data-gi="0"><label class="checkrow" for="packing-0-0"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-ja="身分証明書">Photo ID<small data-ja="国内線 &mdash; 搭乗券はスマホに">Domestic flight &mdash; boarding pass on the phone</small></span></label>
+        <input type="checkbox" class="cb" id="packing-0-0" data-store="packing" data-gi="0"><label class="checkrow" for="packing-0-0"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-ja="身分証明書">Photo ID<small data-ja="国内線 &mdash; 搭乗券はスマホに">Domestic flight &mdash; pass on the phone</small></span></label>
         <input type="checkbox" class="cb" id="packing-0-1" data-store="packing" data-gi="0"><label class="checkrow" for="packing-0-1"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-ja="運転免許証">Driver's licence<small data-ja="日本の免許証だけで運転できます">Japanese licence is all we need</small></span></label>
-        <input type="checkbox" class="cb" id="packing-0-2" data-store="packing" data-gi="0"><label class="checkrow" for="packing-0-2"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-ja="現金 約&yen;30,000">Cash, about &yen;30,000<small data-ja="キャンプ場の料金、沖縄そば店、氷はすべて現金">Campsite fees, soba shops and ice are all cash</small></span></label>
-        <input type="checkbox" class="cb" id="packing-0-3" data-store="packing" data-gi="0"><label class="checkrow" for="packing-0-3"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-ja="クレジットカード・ETCカード">Credit card &amp; ETC card<small data-ja="ETCなら高速料金が35%割引 &mdash; &yen;1,610が&yen;1,040">ETC saves 35% on the toll &mdash; &yen;1,040 against &yen;1,610</small></span></label>
+        <input type="checkbox" class="cb" id="packing-0-2" data-store="packing" data-gi="0"><label class="checkrow" for="packing-0-2"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-ja="現金 約&yen;30,000">Cash, about &yen;30,000<small data-ja="キャンプ場の料金、沖縄そば店、氷は現金">Campsite fees, soba shops and ice are cash</small></span></label>
+        <input type="checkbox" class="cb" id="packing-0-3" data-store="packing" data-gi="0"><label class="checkrow" for="packing-0-3"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-ja="クレジットカード・ETCカード">Credit card &amp; ETC card<small data-ja="ETCなら35%割引 &mdash; &yen;1,610が&yen;1,040">ETC saves 35% &mdash; &yen;1,040 against &yen;1,610</small></span></label>
       </div>
       <div class="group">
         <div class="glabel"><span class="gicon"><svg class="ic" aria-hidden="true"><use href="#i-shirt"/></svg></span><span data-ja="服装">Wear</span></div>
@@ -1256,43 +1587,39 @@
       </div>
       <div class="group">
         <div class="glabel"><span class="gicon"><svg class="ic" aria-hidden="true"><use href="#i-waves"/></svg></span><span data-ja="海遊び">Water</span></div>
-        <input type="checkbox" class="cb" id="packing-2-0" data-store="packing" data-gi="2"><label class="checkrow" for="packing-2-0"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-ja="マスク+シュノーケル">Mask + snorkel<small data-ja="レンタルのオプションは断ったので持参 &mdash; 自前で用意">Declined on the rental &mdash; bring our own</small></span></label>
+        <input type="checkbox" class="cb" id="packing-2-0" data-store="packing" data-gi="2"><label class="checkrow" for="packing-2-0"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-ja="マスク+シュノーケル">Mask + snorkel<small data-ja="レンタルには含まれません">Not in the rental</small></span></label>
         <input type="checkbox" class="cb" id="packing-2-1" data-store="packing" data-gi="2"><label class="checkrow" for="packing-2-1"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-ja="水着+長袖ラッシュガード">Swimsuit + long-sleeve rash guard<small data-ja="日差し対策、そしてクラゲへの本当の備え">Sun, and the real answer to jellyfish</small></span></label>
-        <input type="checkbox" class="cb" id="packing-2-2" data-store="packing" data-gi="2"><label class="checkrow" for="packing-2-2"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-ja="マリンシューズ">Water shoes<small data-ja="サンゴ礁・岩場のエントリー・ウニ対策">Reef, rock entries and urchins</small></span></label>
+        <input type="checkbox" class="cb" id="packing-2-2" data-store="packing" data-gi="2"><label class="checkrow" for="packing-2-2"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-ja="マリンシューズ">Water shoes<small data-ja="サンゴ礁とウニ対策">Reef and urchins</small></span></label>
         <input type="checkbox" class="cb" id="packing-2-3" data-store="packing" data-gi="2"><label class="checkrow" for="packing-2-3"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-ja="マイクロファイバータオル">Microfibre towel</span></label>
         <input type="checkbox" class="cb" id="packing-2-4" data-store="packing" data-gi="2"><label class="checkrow" for="packing-2-4"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-ja="ドライバッグ">Dry bag</span></label>
         <input type="checkbox" class="cb" id="packing-2-5" data-store="packing" data-gi="2"><label class="checkrow" for="packing-2-5"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-ja="サンゴに優しい日焼け止め+リップクリーム">Reef-safe sunscreen + lip balm</span></label>
       </div>
       <div class="group">
         <div class="glabel"><span class="gicon"><svg class="ic" aria-hidden="true"><use href="#i-tent"/></svg></span><span data-ja="キャンプ・バーベキュー">Camp &amp; BBQ</span></div>
-        <input type="checkbox" class="cb" id="packing-3-0" data-store="packing" data-gi="3"><label class="checkrow" for="packing-3-0"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-ja="カセットガス（CB缶）バーナー">Cassette-gas (CB) burner<small data-ja="CB缶はどのコンビニにも置いてあります。ねじ込み式のOD缶はまず見つかりません">CB cartridges are on every konbini shelf; screw-thread OD ones are not</small></span></label>
-        <input type="checkbox" class="cb" id="packing-3-1" data-store="packing" data-gi="3"><label class="checkrow" for="packing-3-1"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-ja="ライター &times; 2">Lighter &times; 2<small data-ja="身に着けて持ち込む &mdash; 預け荷物は不可、ジェット（ターボ）ライターは全面禁止">Carry on the body &mdash; never in checked bags, and jet lighters are banned outright</small></span></label>
-        <input type="checkbox" class="cb" id="packing-3-2" data-store="packing" data-gi="3"><label class="checkrow" for="packing-3-2"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-ja="バーナー用の風防">Windshield for the burner<small data-ja="吹きさらしのサイトでは風に負けます">Wind will otherwise beat it on an exposed pitch</small></span></label>
-        <input type="checkbox" class="cb" id="packing-3-3" data-store="packing" data-gi="3"><label class="checkrow" for="packing-3-3"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-ja="鍋・食器2人分・箸">Pot, 2 bowls, chopsticks<small data-ja="米もコーヒーも火にかける器が必要">Rice and coffee both need something to cook in</small></span></label>
-        <input type="checkbox" class="cb" id="packing-3-4" data-store="packing" data-gi="3"><label class="checkrow" for="packing-3-4"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-ja="トング+折りたたみナイフ">Tongs + folding knife</span></label>
-        <input type="checkbox" class="cb" id="packing-3-5" data-store="packing" data-gi="3"><label class="checkrow" for="packing-3-5"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-ja="ヘッドランプ2つ+予備電池">2 headlamps + spare batteries<small data-ja="2人で明かりが1つだけだと、暗くなってから動けません">One light for two people is a single point of failure after dark</small></span></label>
-        <input type="checkbox" class="cb" id="packing-3-6" data-store="packing" data-gi="3"><label class="checkrow" for="packing-3-6"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-ja="小さな救急セット">Small first-aid kit<small data-ja="絆創膏、消毒薬、ピンセット、抗ヒスタミン薬、痛み止め、経口補水液（粉末）">Plasters, antiseptic, tweezers, antihistamine, painkillers, rehydration salts</small></span></label>
-        <input type="checkbox" class="cb" id="packing-3-7" data-store="packing" data-gi="3"><label class="checkrow" for="packing-3-7"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-ja="ゴミ袋+ウェットティッシュ">Rubbish bags + wet wipes<small data-ja="生ゴミも含めて、ゴミはすべて持ち帰り">Carry everything out, food waste included</small></span></label>
-        <input type="checkbox" class="cb" id="packing-3-8" data-store="packing" data-gi="3"><label class="checkrow" for="packing-3-8"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-ja="食酢の小瓶">Small bottle of vinegar<small data-ja="ハブクラゲに刺されたときだけ &mdash; カツオノエボシには絶対に使わない">Habu-kurage stings only &mdash; never on a Portuguese man o&rsquo; war</small></span></label>
-        <input type="checkbox" class="cb" id="packing-3-9" data-store="packing" data-gi="3"><label class="checkrow" for="packing-3-9"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-ja="折りたたみクーラーバッグ">Foldable cooler bag<small data-ja="ジムニーに積んだまま &mdash; 移動中の肉と氷の保冷に">Lives in the Jimny &mdash; meat and ice on the drive</small></span></label>
+        <input type="checkbox" class="cb" id="packing-3-0" data-store="packing" data-gi="3"><label class="checkrow" for="packing-3-0"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-ja="ライター &times; 2">Lighter &times; 2<small data-ja="身に着けて持ち込む &mdash; 預け荷物は不可、ジェットライターは禁止">On the body &mdash; never checked, and jet lighters are banned</small></span></label>
+        <input type="checkbox" class="cb" id="packing-3-1" data-store="packing" data-gi="3"><label class="checkrow" for="packing-3-1"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-ja="トング+折りたたみナイフ">Tongs + folding knife</span></label>
+        <input type="checkbox" class="cb" id="packing-3-2" data-store="packing" data-gi="3"><label class="checkrow" for="packing-3-2"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-ja="鍋・食器2人分・箸">Pot, 2 bowls, chopsticks<small data-ja="セットに付くのはグリルだけ、調理器具はなし">The set brings a grill, not cookware</small></span></label>
+        <input type="checkbox" class="cb" id="packing-3-3" data-store="packing" data-gi="3"><label class="checkrow" for="packing-3-3"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-ja="ヘッドランプ2つ+予備電池">2 headlamps + spare batteries<small data-ja="2人で明かり1つだと、壊れたら終わりです">One light for two is a single point of failure</small></span></label>
+        <input type="checkbox" class="cb" id="packing-3-4" data-store="packing" data-gi="3"><label class="checkrow" for="packing-3-4"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-ja="小さな救急セット">Small first-aid kit<small data-ja="絆創膏、消毒薬、ピンセット、抗ヒスタミン薬、痛み止め、経口補水液（粉末）">Plasters, antiseptic, pincers, antihistamine, painkillers, rehydration powder</small></span></label>
+        <input type="checkbox" class="cb" id="packing-3-5" data-store="packing" data-gi="3"><label class="checkrow" for="packing-3-5"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-ja="ゴミ袋+ウェットティッシュ">Rubbish bags + wet wipes<small data-ja="生ゴミも含めて、ゴミはすべて持ち帰り">Carry everything out, food waste included</small></span></label>
+        <input type="checkbox" class="cb" id="packing-3-6" data-store="packing" data-gi="3"><label class="checkrow" for="packing-3-6"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-ja="食酢の小瓶">Small bottle of vinegar<small data-ja="ハブクラゲに刺されたときだけ &mdash; カツオノエボシには絶対に使わない">Habu-kurage stings only &mdash; never a Portuguese man o&rsquo; war</small></span></label>
+        <input type="checkbox" class="cb" id="packing-3-7" data-store="packing" data-gi="3"><label class="checkrow" for="packing-3-7"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-ja="折りたたみクーラーバッグ">Foldable cooler bag<small data-ja="ジムニーに積んだまま">Lives in the Jimny</small></span></label>
       </div>
       <div class="group">
         <div class="glabel"><span class="gicon"><svg class="ic" aria-hidden="true"><use href="#i-camera"/></svg></span><span data-ja="電子機器">Tech</span></div>
         <input type="checkbox" class="cb" id="packing-4-0" data-store="packing" data-gi="4"><label class="checkrow" for="packing-4-0"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-ja="スマホ・ケーブル・車載充電器">Phone, cable, car charger</span></label>
-        <input type="checkbox" class="cb" id="packing-4-1" data-store="packing" data-gi="4"><label class="checkrow" for="packing-4-1"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-ja="モバイルバッテリー">Power bank<small data-ja="野営地に電源はありません">No mains power at a wild site</small></span></label>
+        <input type="checkbox" class="cb" id="packing-4-1" data-store="packing" data-gi="4"><label class="checkrow" for="packing-4-1"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-ja="モバイルバッテリー">Power bank<small data-ja="野営地に電源はありません">No mains at a wild site</small></span></label>
         <input type="checkbox" class="cb" id="packing-4-2" data-store="packing" data-gi="4"><label class="checkrow" for="packing-4-2"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-ja="カメラ・充電器・予備カード">Camera, charger, spare card</span></label>
-        <input type="checkbox" class="cb" id="packing-4-3" data-store="packing" data-gi="4"><label class="checkrow" for="packing-4-3"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-ja="オフライン地図のダウンロード">Offline maps downloaded<small data-ja="やんばるは電波が不安定">Yanbaru has patchy signal</small></span></label>
+        <input type="checkbox" class="cb" id="packing-4-3" data-store="packing" data-gi="4"><label class="checkrow" for="packing-4-3"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-ja="オフライン地図のダウンロード">Offline maps downloaded<small data-ja="やんばるは電波が不安定">Yanbaru signal is patchy</small></span></label>
       </div>
       <div class="group">
         <div class="glabel"><span class="gicon"><svg class="ic" aria-hidden="true"><use href="#i-cart"/></svg></span><span data-ja="現地調達">Buy on Arrival</span></div>
-        <input type="checkbox" class="cb" id="packing-5-0" data-store="packing" data-gi="5"><label class="checkrow" for="packing-5-0"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-ja="バーナー用ガスカートリッジ">Gas cartridge for the burner<small data-ja="飛行機に持ち込めません &mdash; 現地で購入">Cannot fly with one &mdash; buy it here</small></span></label>
-        <input type="checkbox" class="cb" id="packing-5-1" data-store="packing" data-gi="5"><label class="checkrow" for="packing-5-1"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-ja="バーベキュー用の肉、1泊目は名護で">BBQ meat, night 1 in Nago<small data-ja="あぐー豚と沖縄県産牛">Agu pork and Okinawa beef</small></span></label>
-        <input type="checkbox" class="cb" id="packing-5-2" data-store="packing" data-gi="5"><label class="checkrow" for="packing-5-2"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-ja="バーベキュー用の肉、2泊目は本部町で">BBQ meat, night 2 in Motobu<small data-ja="2日目に購入 &mdash; 28 &deg;Cでは折りたたみクーラーバッグで2日はもちません">Buy it on day 2 &mdash; a soft cooler will not hold it two days at 28 &deg;C</small></span></label>
-        <input type="checkbox" class="cb" id="packing-5-3" data-store="packing" data-gi="5"><label class="checkrow" for="packing-5-3"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-ja="野菜・米・コーヒー・朝食">Veg, rice, coffee, breakfast</span></label>
-        <input type="checkbox" class="cb" id="packing-5-4" data-store="packing" data-gi="5"><label class="checkrow" for="packing-5-4"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-ja="油・塩・焼肉のたれ・アルミホイル">Oil, salt, yakiniku sauce, foil</span></label>
-        <input type="checkbox" class="cb" id="packing-5-5" data-store="packing" data-gi="5"><label class="checkrow" for="packing-5-5"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-ja="氷か保冷剤、2日分">Ice or freezer blocks, both days</span></label>
-        <input type="checkbox" class="cb" id="packing-5-6" data-store="packing" data-gi="5"><label class="checkrow" for="packing-5-6"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-ja="飲料水 5&ndash;10 L">Drinking water, 5&ndash;10 L</span></label>
-        <input type="checkbox" class="cb" id="packing-5-7" data-store="packing" data-gi="5"><label class="checkrow" for="packing-5-7"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-ja="虫除けスプレー+蚊取り線香">Insect repellent + mosquito coils<small data-ja="夕暮れに歩くときは蚊取り線香では無力 &mdash; ディートかイカリジンも持参">Coils do nothing while walking at dusk &mdash; bring DEET or icaridin too</small></span></label>
+        <input type="checkbox" class="cb" id="packing-5-0" data-store="packing" data-gi="5"><label class="checkrow" for="packing-5-0"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-ja="2泊目の肉、2日目に購入">Night 2 meat, bought on day 2<small data-ja="1泊目はEvertrailのセット">Night 1 is the Evertrail set</small></span></label>
+        <input type="checkbox" class="cb" id="packing-5-1" data-store="packing" data-gi="5"><label class="checkrow" for="packing-5-1"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-ja="野菜・米・コーヒー・朝食">Veg, rice, coffee, breakfast</span></label>
+        <input type="checkbox" class="cb" id="packing-5-2" data-store="packing" data-gi="5"><label class="checkrow" for="packing-5-2"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-ja="油・塩・焼肉のたれ・アルミホイル">Oil, salt, yakiniku sauce, foil</span></label>
+        <input type="checkbox" class="cb" id="packing-5-3" data-store="packing" data-gi="5"><label class="checkrow" for="packing-5-3"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-ja="氷か保冷剤、2日分">Ice or freezer blocks, both days</span></label>
+        <input type="checkbox" class="cb" id="packing-5-4" data-store="packing" data-gi="5"><label class="checkrow" for="packing-5-4"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-ja="飲料水 5&ndash;10 L">Drinking water, 5&ndash;10 L</span></label>
+        <input type="checkbox" class="cb" id="packing-5-5" data-store="packing" data-gi="5"><label class="checkrow" for="packing-5-5"><span class="box"><svg width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span><span class="ctxt" data-ja="虫除けスプレー+蚊取り線香">Insect repellent + mosquito coils<small data-ja="ディートかイカリジン &mdash; 歩いているときは蚊取り線香では無力">DEET or icaridin &mdash; coils do nothing while walking</small></span></label>
       </div>
     </div>
     <div class="footer"></div>
@@ -1304,6 +1631,7 @@
   <div class="tabbar-inner">
     <label class="tabbtn" for="tab-itinerary"><svg class="ic ic-tab" aria-hidden="true"><use href="#i-calendar"/></svg><span class="lb" data-ja="日程">Itinerary</span></label>
     <label class="tabbtn" for="tab-camps"><svg class="ic ic-tab" aria-hidden="true"><use href="#i-tent"/></svg><span class="lb" data-ja="キャンプ場">Camps</span></label>
+    <label class="tabbtn" for="tab-eat"><svg class="ic ic-tab" aria-hidden="true"><use href="#i-teacup"/></svg><span class="lb" data-ja="食べる">Eat</span></label>
     <label class="tabbtn" for="tab-packing"><svg class="ic ic-tab" aria-hidden="true"><use href="#i-backpack"/></svg><span class="lb" data-ja="持ち物">Packing</span></label>
   </div>
 </nav>

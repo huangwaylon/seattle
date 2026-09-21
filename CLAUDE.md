@@ -21,6 +21,7 @@ previous trip — the URL and remote are unchanged on purpose).
 |------|------|
 | `index.html` | The entire app. Static HTML content + inline `<style>` + inline `<script>`. **Source of truth — edit directly.** |
 | `images/okinawa-hero.jpg` | The hero photo (the Jimny + rooftop tent on a coastal bluff). Precached by the service worker. |
+| `images/camps/*.jpg` | One photo per campsite, 720 px wide, scraped from the Evertrail directory's Airtable `Photos` field. All precached. |
 | `sw.js` | Service worker. Cache-first; precaches the app shell **and the hero image**. Update is **message-driven**: a freshly-installed worker waits (no auto-skipWaiting) until the page tells it to `SKIP_WAITING` via the refresh banner — or until the app is fully closed, when it activates on its own. |
 | `manifest.webmanifest` | PWA manifest (name, icons, `standalone` display, theme colors). |
 | `icon-180.png` | iOS `apple-touch-icon` (Home Screen). |
@@ -34,7 +35,7 @@ There is no build step or framework. No dependencies. No bundler.
 - **Self-contained:** no external CSS/JS/fonts/CDN assets. The only outbound links are per-campsite
   Google Maps and Evertrail listing links, plus the Evertrail onboarding link (all open externally
   and fail gracefully offline). System font stack only.
-- **Three tabs:** Itinerary, Campsites, Packing.
+- **Four tabs:** Itinerary, Campsites, Eat, Packing.
 - **Bilingual (EN / 日本語).** Every translatable element carries a `data-ja` attribute holding its
   **Japanese inner HTML**; English stays in the markup, so first paint and the no-JS path are English.
   The language module caches the original into `data-en` on first switch, swaps `innerHTML`, and fires a
@@ -110,8 +111,12 @@ self-contained — but keep it, or any future English edit means re-translating 
 
 **Workflow when you change English text:**
 1. Edit `index.html` **from a clean base** — strip the layer first with
-   `re.sub(r'( data-ja="[^"]*")+', '', html)`. Do not unwrap the `<span>` wrappers inside `h2.section`,
-   `a.maplink` or `.glabel`; the packing seed reads its category name by selector and breaks without it.
+   `re.sub(r'( data-ja="[^"]*")+', '', html)`. **Strip the attribute only, never unwrap a `<span>`.**
+   Wrapper spans inside `h2.section`, `a.maplink`, `.glabel` and the `#editPacking` button are load-bearing:
+   the packing seed reads its category name by selector, and the JS sets button labels through
+   `querySelector('span')`. An earlier regex that unwrapped `<span data-ja="…">x</span>` silently broke
+   all four, and the symptom (category names rendering as "List", button labels frozen) shows up only at
+   runtime.
 2. Re-extract, diff against the merged `ja-*.json` by `id`, and translate only the missing ids.
 3. Re-inject onto the clean base. Injecting onto an already-injected file yields duplicate attributes.
 
@@ -134,6 +139,9 @@ Two constraints worth remembering:
      days, the 17:30 airport car return, habu season).
    - **Logistics cards:** `<details class="card travel">` (Flights, The Jimny, Know Before You Go)
      in the second `.spine` under the "Logistics" heading.
+   - **Eat cards:** `<details class="card eat">` in `#eat`, grouped by `<h3 class="region">` into kakigori /
+     cafes / sweets. The `.lead-chip` holds the **day number** the stop fits, not a date. Every entry was
+     checked open on Oct 10–12 2026; hours and closing days drift, so re-verify before a long detour.
    - **Campsite cards:** `<details class="card camp wild|paid f-beach f-toilet f-shower">` grouped
      under `<h3 class="region">` headings. The `f-*` classes and `wild`/`paid` drive the filter
      buttons in `#campFilters` — the filter shows one criterion at a time and hides a region

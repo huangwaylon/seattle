@@ -1,7 +1,33 @@
-const CACHE = 'okinawa-2026-v3';
+const CACHE = 'okinawa-2026-v4';
 const ASSETS = [
   './', './index.html', './manifest.webmanifest', './icon-180.png', './icon-512.png',
   './images/okinawa-hero.jpg',
+  './images/camps/adan-beach-campsite.jpg',
+  './images/camps/aha-yanbaru.jpg',
+  './images/camps/azama-sun-beach-camping-ground.jpg',
+  './images/camps/base-camp.jpg',
+  './images/camps/benoki-camp-spot.jpg',
+  './images/camps/daiboo-river-camp.jpg',
+  './images/camps/fukuchi-river-seaside-park.jpg',
+  './images/camps/henan-bridge.jpg',
+  './images/camps/hentona-camp-spot.jpg',
+  './images/camps/inamine-camp-spot.jpg',
+  './images/camps/katsuren-beach.jpg',
+  './images/camps/kita-nashiro-beach.jpg',
+  './images/camps/koki-camp-spot.jpg',
+  './images/camps/kokyono-beach.jpg',
+  './images/camps/kouri-island-camp-ground.jpg',
+  './images/camps/kudeken-beach.jpg',
+  './images/camps/nago-castle-bridge-spot.jpg',
+  './images/camps/neos-outdoor-park.jpg',
+  './images/camps/okinawa-prefectural-people-s-forrest.jpg',
+  './images/camps/oku-beach-road.jpg',
+  './images/camps/okuma-mountains.jpg',
+  './images/camps/tonokiya-campsite.jpg',
+  './images/camps/tsuha-beach-camp-spot.jpg',
+  './images/camps/yagaji-beach-campsite.jpg',
+  './images/camps/yagajima-spot.jpg',
+  './images/camps/yanbaru-discovery-forest.jpg',
 ];
 self.addEventListener('install', function(e){
   // Precache the shell, but DON'T skipWaiting automatically — the page surfaces a

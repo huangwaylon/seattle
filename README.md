@@ -6,7 +6,8 @@ A self-contained, offline-first travel itinerary for an October 2026 camping roa
 
 ## Features
 - 3-day itinerary, logistics cards (flights, the Jimny, weather & hazards), and an editable packing list.
-- **Campsites tab** — all 26 drivable main-island campsites, ordered by real road time from Naha Airport, filterable by free / paid / beach / toilet / shower.
+- **Campsites tab** — all 26 drivable main-island campsites with photos, ordered by real road time from Naha Airport, filterable by free / paid / beach / toilet / shower.
+- **Eat tab** — kakigori, cafes and sweets sourced from Japanese guides, each checked open on the trip dates and tagged with the day it fits.
 - Works **fully offline** once installed (service worker caches everything).
 - **Metric ⇄ imperial toggle** swaps every distance and temperature; the choice persists.
 - **English ⇄ 日本語 toggle** — the whole app is translated, guidebook-style; the choice persists.
@@ -17,6 +18,7 @@ A self-contained, offline-first travel itinerary for an October 2026 camping roa
 |------|---------|
 | `index.html` | The entire app — HTML content + inline CSS + inline JS. |
 | `images/okinawa-hero.jpg` | Hero photo (the Jimny + rooftop tent), precached for offline use. |
+| `images/camps/` | One photo per campsite, precached for offline use. |
 | `sw.js` | Service worker — caches the app shell and hero for offline use. |
 | `manifest.webmanifest` | PWA manifest (name, icons, standalone display). |
 | `icon-180.png` / `icon-512.png` | App icons. |
