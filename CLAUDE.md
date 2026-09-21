@@ -4,414 +4,254 @@ Guidance for working in this repo. Keep it accurate — update it when the archi
 
 ## What this is
 
-A single-page, **offline-first travel itinerary** for an October 2026 Okinawa camping road trip,
-built as an installable **PWA** for iPhone. The whole app (HTML, CSS, JS) lives in one
-self-contained `index.html` — including an inline-SVG map of the island, so there are no map tiles
-and no network dependency. The hero photo is a real file in `images/`. The service worker makes it
-work fully offline once loaded.
+A single-page, **offline-first PWA bookshelf of trip guide books** for iPhone. The whole app (HTML,
+CSS, JS, an inline-SVG map) lives in one self-contained `index.html`. Photos are real files in
+`images/`; the service worker makes it fully offline once loaded.
 
-The trip: Oct 10–12 2026, Haneda ⇄ Naha on Solaseed Air, main island only, self-driving a rented
-Suzuki Jimny Sierra with a rooftop tent, camping two nights.
+Two books, both 2026: **Okinawa** (Oct 10–12, camping road trip, bilingual JA/EN) and **Seattle**
+(Jul 2–19, hiking, English). The reader lands on the shelf, taps a book, and the cover zooms and turns
+open; a back button in the hero returns to the shelf. Where they were is remembered across launches.
 
-Live site: https://huangwaylon.github.io/seattle/ (the repo is still named `seattle` from the
-previous trip — the URL and remote are unchanged on purpose).
+Live site: https://huangwaylon.github.io/seattle/ (the repo is still named `seattle` from the first
+trip — the URL and remote are unchanged on purpose).
 
 ## Files
 
 | File | Role |
 |------|------|
-| `index.html` | The entire app. Static HTML content + inline `<style>` + inline `<script>`. **Source of truth — edit directly.** |
-| `images/okinawa-hero.jpg` | The hero photo (the Jimny + rooftop tent on a coastal bluff). Precached by the service worker. |
-| `images/camps/*.jpg` | One photo per campsite, 720 px wide, scraped from the Evertrail directory's Airtable `Photos` field. All precached. |
-| `images/tidepool/*.jpg` | Two photos of the Gushikawa tide pool, 720 px wide, from the note.com article (credited in the card). Precached. |
-| `sw.js` | Service worker. Cache-first; precaches the app shell **and the hero image**. Update is **message-driven**: a freshly-installed worker waits (no auto-skipWaiting) until the page tells it to `SKIP_WAITING` via the refresh banner — or until the app is fully closed, when it activates on its own. |
-| `manifest.webmanifest` | PWA manifest (name, icons, `standalone` display, theme colors). |
-| `icon-180.png` | iOS `apple-touch-icon` (Home Screen). |
-| `icon-512.png` | Manifest/PWA install icon (also `maskable`). |
-| `.map/build.py` | Generator for the map tab's SVG geometry. **Not shipped** — see "The map tab". |
-| `README.md` | User-facing description + install steps. |
+| `index.html` | The entire app. **Source of truth — edit directly.** |
+| `images/okinawa-hero.jpg`, `images/mount-rainier.jpg` | The two book covers, which are also the heroes. |
+| `images/camps/*`, `images/tidepool/*`, `images/dive/*`, `images/cafe/*` | Okinawa card photos, 720 px wide. |
+| `images/*.webp` | Seattle hike photos. |
+| `sw.js` | Cache-first service worker; precaches the shell and every image. A new worker waits until the refresh banner is tapped (or the app is fully closed). |
+| `manifest.webmanifest`, `icon-180.png`, `icon-512.png` | PWA manifest and icons. |
+| `.map/build.py` | Generator for the Okinawa map SVG. **Not shipped** — see "The map". |
+| `.i18n/` | Translation source of truth. **Not shipped** — see "The Japanese layer". |
 
-There is no build step or framework. No dependencies. No bundler.
+No build step, no framework, no dependencies, no CDN assets, system fonts only. The only outbound
+links are Google Maps, Evertrail and trail maps, which open externally and fail gracefully offline.
 
-## Core architecture & conventions
+## Architecture
 
-- **Self-contained:** no external CSS/JS/fonts/CDN assets. The only outbound links are per-campsite
-  Google Maps and Evertrail listing links, plus the Evertrail onboarding link (all open externally
-  and fail gracefully offline). System font stack only.
-- **Four tabs:** Itinerary, Map, Campsites, Packing. Nature, kakigori and cafe recommendations sit in
-  `details.card.travel` cards under a "Nearby" heading at the bottom of the Itinerary tab — there is
-  deliberately no separate Eat tab.
-- **Voice: factual only.** No tone, no evaluation, no explanation, no persuasion. Entries are clipped
-  fact-lists ("Calm bay, sunsets over the city. No toilets."), and Japanese matches with 体言止め throughout.
-  Do not add words like "worth it", "the best", "don't miss", or reasons-why. **There are no `.note`
-  callouts anywhere** — the class and its icon were removed. If a fact matters, it goes in a plain bullet
-  or a stat tile.
-- **`.lead-chip` appears only on the three day cards** (the date). Every other card — logistics, Nearby,
-  campsites — has no leading number. A campsite's drive time lives in a `From office` stat tile instead.
-- **Bilingual, Japanese-first.** **Japanese is the markup**, so first paint and the no-JS path are
-  Japanese with no flash. Every translatable element carries a `data-en` attribute holding its **English
-  inner HTML**; the language module caches the Japanese into `data-ja` the first time you switch away,
-  swaps `innerHTML`, and fires a `langchange` event that the units and packing modules listen for.
-  `#packing` is excluded from the sweep because it renders from its own bilingual model.
-  **There is exactly one language toggle, in the Itinerary toolbar** — it is global, so repeating it on
-  every tab was noise. The module still binds `querySelectorAll('.lang-toggle')`, so adding a second one
-  back would just work.
-  **The flag is `lang-en` on `<html>`, and its absence means Japanese** — so `T()` and the packing model
-  test `!contains('lang-en')`. Choice persists in `localStorage['lang']`; only `'en'` does any work on load.
-  Strings JS sets at runtime (button labels, placeholders, `confirm()` text) live in the `T()` table at the
-  top of the script block — keep its Japanese wording identical to the markup, or a label will change
-  the first time the user toggles.
-- **Units (metric / imperial):** every distance *and temperature* is wrapped in
-  `<span class="u" data-metric="11.5 km" data-imperial="7 mi">11.5 km</span>`. The default text is
-  metric (so the no-JS path shows metric). Every `.unit-toggle` on the page swaps all `span.u` to
-  the chosen string and they stay in sync; the choice persists in `localStorage['units']`
-  (`'metric'` | `'imperial'`). Both strings are literals — JS never does live math, avoiding
-  rounding drift. **Like the language switch, there is exactly one toggle, in the Itinerary
-  toolbar** — both settings are global and persisted, so repeating them per tab was noise. The
-  modules still bind `querySelectorAll`, so a second toggle anywhere would just work.
-  When adding a measurement, always wrap it in a `span.u` with both attributes.
-- **No-JS fallback is required.** Plain file previews (e.g. macOS Quick Look) run the page
-  *without* JavaScript. So:
-  - All content is **static HTML** — never generated by JS at runtime.
-  - `<html class="nojs">`; JS removes `nojs` and adds `js-tabs` on load.
-  - Without JS: every `.view` is `display:block` (all sections stacked, scrollable), the tab bar
-    is hidden, and the packing list shows its static seed rows (read-only). Fully usable.
-  - With JS (`.js-tabs`): only the selected `.view` shows (CSS `:checked ~` on hidden radios),
-    the tab bar appears, the packing list becomes editable, the campsite filter works, and the
-    "today" highlight lights the matching itinerary date's spine node during the trip (Oct 2026).
-  - Quick Look renders `details[open] .content` mid-animation, so open cards can look blank in a
-    `qlmanage` thumbnail. That is a Quick Look artifact only — verify no-JS layout in a browser.
-- **Tabs = pure CSS.** Four hidden `<input type="radio" name="tab">` (`#tab-itinerary`, `#tab-map`,
-  `#tab-camps`, `#tab-packing`) at the top of `<body>` drive
-  `#tab-*:checked ~ .views #view-*{display:block}`. The bottom bar uses `<label for=...>`.
-  No JS needed for tab switching. Adding a tab means touching four rule blocks — the
-  `:checked ~ .views` show rule, the two `.tabbar` colour/underline rules, and the
-  `padding-top:var(--safe-t)` list.
-- **Accordions = native `<details>/<summary>`.** No JS for expand/collapse. The chevron rotates
-  via `details[open] > summary .chev`.
-- **Checklists = native `<input type="checkbox" class="cb">` + `<label class="checkrow">`.**
-  Checked styling is pure CSS (`.cb:checked + .checkrow ...`).
-- **`.spine`** is the shared vertical-timeline wrapper (a `::before` rule) used by the itinerary
-  days, the logistics cards, and the campsite list. Each card carries an absolutely-positioned
-  `.node` dot; `.lead-chip` is the shared left column (a date on the itinerary, a drive time on
-  campsites).
-- **The packing list is data-driven & user-editable** (the one exception to "static markup").
-  The static `.group` blocks inside `#packing` are BOTH the no-JS fallback AND the one-time seed:
-  on load the packing script builds a model from that DOM, or restores the saved model, then
-  re-renders `#packing` from the model. An **Edit list** toggle swaps each row into inline inputs
-  with controls to create / rename / delete categories and create / edit / delete items, plus
-  **up/down buttons to reorder the top-level categories** (reordering just permutes the `cats`
-  array, so it's automatically compatible with older saved data); blank rows are pruned on exit.
-  Everything (structure + order + checks) persists. The itinerary and campsites stay 100% static
-  HTML — not user-editable.
-- **`LS.get` / `LS.set`** wrap every `localStorage` access, because it throws in some private and
-  preview contexts and a failure should just mean "no saved state". Don't call `localStorage`
-  directly.
-- **Persistence:** the whole packing model saves to `localStorage['packingData']` as
-  `{v:2, cats:[{id, name, nameJa, icon, items:[{id, text, textJa, note, noteJa, done}]}]}`, written on
-  every edit/check. Japanese is seeded from the static rows' `data-ja`; editing writes to whichever
-  language is on screen and falls back to the other when one is blank. A saved model wins over the seed,
-  so a device that already has one will **not** pick up edited defaults — clear the key to re-seed.
-  Item/category ids are generated at runtime (`uid()`), so they're stable per device but differ
-  across installs — never hard-code them. Only persists in a real browser context (Safari /
-  installed PWA), not in ephemeral Quick Look.
-- **`.jsonly` elements** (e.g. "Expand all", "Edit list" / "Reset checks", the unit toggles, the
-  campsite filter, group counts) are hidden unless JS runs, via `.nojs .jsonly{display:none}`.
-- **One vertical rhythm above the fold**, the same on all four tabs: heading → intro 6px, intro →
-  first control row 20px, control row → control row 12px, control row → content 14px. `.toolbar`
-  and `.filters` share one padding declaration, and `.spine` / `.mapcard` / `#packing` all carry the
-  same 8px top offset so the last control row sits the same distance above a card, a map or a list.
-- **Responsive:** content is a centered `max-width:var(--maxw)` (720px) column; the hero height
-  is `clamp(...)`. Works phone portrait/landscape, tablet, desktop. Respects safe-area insets.
-- **Theme:** light "Okinawa Reef" palette (warm sand paper, deep sea-ink text, ocean teal `--sea`
-  + coral `--coral` accents), all via CSS custom properties in `:root`. Keep the variable set
-  tight — don't reintroduce dead ones.
+- **One attribute is the navigation state.** `data-place` on `<html>` is `shelf`, `okinawa` or
+  `seattle`, and CSS shows that one place. The bootstrap script in `<head>` sets it before first paint
+  and swaps `nojs` for `js-tabs`, so there is no flash; it persists in `localStorage['place']` and is
+  mirrored into `history` so Back works. Adding a book means one more selector in the
+  `html[data-place=…]` rule.
+- **Opening a book** zooms `#turner` (a fixed overlay carrying the cover image) from the book's rect to
+  full screen, then rotates its inner page off the spine. Reduced motion skips straight to the guide.
+- **Themes are token sets.** `:root` holds structure plus a neutral palette for the shelf and the
+  update banner; `.t-okinawa` and `.t-seattle` each declare their own colours (`--acc`, `--acc2`,
+  `--ink`, `--bg`, …). Nothing in the shared CSS names a guide. `--shell` is the page backdrop per
+  place, and JS copies it into the `theme-color` meta.
+- **The shelf** is a 3D scene per book: a cloth `.book-spine` face hinged (`rotateY(90deg)`) to the
+  photo `.book-cover`, in a recessed case on a plank, on warm paper a shade off both guide
+  backgrounds so opening a book is not a jump. It is a touch UI, so there is **no hover state**: each
+  book turns, floats and slides a gloss highlight on its own, with mismatched cycle lengths per book
+  (`--sway` / `--float`) so they never fall into step. `.books` is always two columns — a third book
+  means changing that one value. Each book is an `<a href="#g-…">`, so the no-JS path still navigates.
+  The back button lives inside the hero and scrolls away with it.
+- **Tabs are pure CSS.** Each guide has one radio group (`name="tab-<slug>"`) with each radio inside
+  its `<label class="tabbtn">`, and `.guide:has(.t-<tab>:checked) .v-<tab>` shows the view. A new tab
+  means one more selector there; the tab-bar highlight is already generic
+  (`.tabbtn:has(.tabradio:checked)`).
+- **Accordions** are native `<details>/<summary>`; **checklists** are `<input class="cb">` +
+  `<label class="checkrow">`. Both are styled purely in CSS.
+- **`.spine`** is the shared vertical timeline behind day, logistics and campsite cards. Each card
+  carries a `.node` dot and, optionally, a `.lead-chip` left column — a date on a day, a drive time on
+  a campsite.
+- **No-JS fallback is required**, because plain file previews (macOS Quick Look) run without JS. All
+  content is therefore static HTML, never generated at runtime. Without JS, every place and view shows
+  stacked and scrollable, tab bars / back buttons / `.jsonly` controls are hidden, and the packing list
+  shows its static seed rows read-only. (Quick Look renders `details[open] .content` mid-animation, so
+  open cards can look blank in a thumbnail — a Quick Look artifact only.)
+- **Per-guide JS.** One loop wires each `.guide`: language, expand-all, today, tab scroll, campsite
+  filter, packing, map. A module whose markup that guide lacks returns early, which is how Seattle
+  simply has no map, no filter and no language toggle.
+- **Bilingual, Japanese-first (Okinawa only).** Japanese is the markup, so first paint and the no-JS
+  path are Japanese. Every translatable element carries its English inner HTML in `data-en`; the
+  Japanese is cached into `data-ja` on the first switch, and a bubbling `langchange` event lets other
+  modules re-apply. The guide's `data-lang` is the flag and `data-bilingual` marks it translatable; the
+  choice persists in `localStorage['lang']`. Strings JS sets at runtime live in the `T()` table — keep
+  its Japanese identical to the markup. The packing list is excluded from the sweep: it renders from
+  its own bilingual model.
+- **Units.** Every distance and temperature is a
+  `<span class="u" data-metric="11.5 km" data-imperial="7 mi">11.5 km</span>`. Both strings are
+  literals, so JS never does live maths. The default text is metric, the choice persists in
+  `localStorage['units']`, and it is global across both books. Always wrap a new measurement.
+- **One toolbar rhythm on every tab:** heading → intro 6px, intro → control row 20px, row → row 12px,
+  row → content 14px. The language and unit toggles exist once each, in the Okinawa itinerary toolbar.
+- **The packing list is the one exception to static markup.** The static `.group` rows are both the
+  no-JS fallback and the one-time seed: JS builds a model from them, or restores the saved one, then
+  re-renders. **Edit list** renames, adds, deletes and reorders categories and items; blank rows are
+  pruned on exit. Saved per book as `localStorage['packingData:<slug>']` =
+  `{v:2, cats:[{id,name,nameJa,icon,items:[{id,text,textJa,note,noteJa,done}]}]}`. A saved model wins
+  over the seed, so editing the defaults only affects a fresh install. Ids come from `uid()` at
+  runtime — never hard-code them. Okinawa also reads the pre-shelf `packingData` key, so phones that
+  already have a list keep it.
+- **`LS.get` / `LS.set`** wrap every `localStorage` access, because it throws in private and preview
+  contexts and a failure should just mean "no saved state". Never call `localStorage` directly.
+- **Responsive:** a centred `max-width:var(--maxw)` (720px) column, `clamp()` hero height, safe-area
+  insets respected. Works phone portrait/landscape, tablet and desktop.
 
-## The map tab
+## The map (Okinawa)
 
-`#view-map` is an inline SVG — no tiles, no library, no network. Everything in it (the island, the
-route, all 67 pins, the three stop timelines) is **static markup generated at authoring time** by
-`.map/build.py`; the JS module only toggles state. That keeps the "all content is static HTML" rule
-intact, and the no-JS path still shows a real map with all three days and every pin on it.
+`.v-map` is an inline SVG — no tiles, no library, no network. The island, the route, all 67 pins and
+the three stop timelines are **static markup generated at authoring time** by `.map/build.py`; JS only
+toggles state. With JS off, all three days and every pin show.
 
-- **Projection** is plain equirectangular with a `cos(lat)` correction, window
-  `lat 26.055–26.895 / lon 127.615–128.345`, giving `viewBox="0 0 778 1000"`. North is up and the
-  frame is **the same for every day** on purpose — day 2 only fills the north of it, but the island
-  never moves, so you always know where you are. Geometry is Douglas-Peucker simplified (coastline
-  tol 1.8 / 1.1 user units, routes 1.2) and rounded to 1 dp.
-- **Data.** Coastline = OSM `natural=coastline` via Overpass, stitched into closed rings, keeping the
-  24 rings with area ≥ 18 px² inside the window. Routes = one **OSRM driving leg per pair of
-  consecutive stops**, so the lines follow real roads; the two snorkel-boat legs and the airport bus legs
-  are straight dashed lines instead, and so is the ~870 m walk between the office and Okinawa Kita IC
-  (`KIND` marks it `'walk'` — its car route loops 13 km onto the expressway and would draw a lie). OSRM's per-leg minutes are also what the itinerary's drive times
-  were checked against (all within a minute or two). Both sources need attribution — the footer credits
-  OSRM and OpenStreetMap, keep it.
-- **Colour = day.** `--sun` (a new token) is day 3, alongside `--sea` (day 1) and `--coral` (day 2).
-  Each day's paths and pins carry `.d1`/`.d2`/`.d3`, which set `--c`; every fill and stroke reads
-  `var(--c)`. The day and layer chips carry a matching `.sw` swatch, so **the chips are the legend** —
-  there is deliberately no separate legend block. Candidate layers are told apart by **shape**, not
-  colour: ■ campsite, ▲ nature, ◆ food.
-- **State lives in attributes on `#view-map`:** `data-day="1|2|3|all"` and `data-camp` / `data-nature` /
-  `data-food`. All the show/hide is CSS keyed off those, scoped under `.js-tabs` so the absence of the
-  attributes (the no-JS case) means "show everything". The JS sets nothing else except the state
-  classes `.past` / `.now` / `.future` / `.sel`.
-- **The map pins to the top** (`.mapstick`, `position:sticky`) so the stop list scrolls against it.
-  `.mapstick` exists to carry the page background — without it, rows would show through the gutters
-  beside the card. `svg.map` is capped at `max-height:66vh` so the pinned map leaves room for a few
-  rows; without a cap it fills the viewport and sticky buys nothing. The day and layer chips
-  deliberately scroll away.
-- **There is no time slider.** Tapping a stop — a pin on the map or a row in the list — is the only
-  clock. The tapped stop is `.now` (ring + label), everything earlier on the day goes grey
-  (`--faint`) via `.stop.past` / `.leg.done` / `li.past`, and the day's colour is only ever what is
-  still ahead. A day opens at its first stop, so the default view is "here is the day ahead"; during
-  Oct 10–12 2026 it opens at the stop you should be at by now. A candidate pin has no time, so it
-  highlights without disturbing the day. Where a day doubles back — Day 3 drives the west coast south
-  and the bus takes it north again — the ahead leg paints over the done one, which is the more useful
-  of the two.
-- **Pins are not focusable.** The SVG is one `role="img"` with a `<title>`, because 67 tab stops would
-  swamp the keyboard order; the stop rows below the map are the keyboard path, and candidate names all
-  exist in the Campsites and Nearby cards. Each pin does carry a wide invisible `circle.hit`, so the
-  visible dot can stay small without being unhittable.
-- **Regenerating.** `python3 .map/build.py` needs `.map/coast.json` and `.map/legs.json` (gitignored —
+- **Projection:** equirectangular with a `cos(lat)` correction, window
+  `lat 26.055–26.895 / lon 127.615–128.345`, `viewBox="0 0 778 1000"`. The frame is the same for every
+  day on purpose, so the island never moves. Geometry is Douglas-Peucker simplified, rounded to 1 dp.
+- **Data:** coastline = OSM `natural=coastline` via Overpass (the 24 rings with area ≥ 18 px²). Routes
+  = one OSRM driving leg per pair of consecutive stops, so the lines follow real roads; the boat, bus
+  and ~870 m office→IC walk are straight dashed lines instead (`KIND` marks the walk, whose car route
+  loops 13 km onto the expressway and would draw a lie). OSRM's per-leg minutes are what the
+  itinerary's drive times were checked against. **Keep the footer credit to OSRM and OpenStreetMap.**
+- **Colour = day** (`--acc`, `--acc2`, `--sun`). The day and layer chips carry a matching `.sw`
+  swatch, so **the chips are the legend** — there is deliberately no legend block. Candidate layers are
+  told apart by **shape**: ■ campsite, ▲ nature, ◆ food.
+- **State lives in attributes on the view:** `data-day="1|2|3|all"` and
+  `data-camp`/`data-nature`/`data-food`. All show/hide is CSS scoped under `.js-tabs`, so their
+  absence means "show everything".
+- **There is no time slider.** Tapping a stop — a pin or a row — is the only clock. That stop is
+  `.now`; everything earlier that day goes grey, so the day's colour is only what is still ahead. A day
+  opens at its first stop, or during Oct 10–12 2026 at the stop you should be at by now.
+- **Pins are not focusable** (67 tab stops would swamp the keyboard order): the SVG is one
+  `role="img"` and the stop rows are the keyboard path. Each pin carries a wide invisible `circle.hit`
+  so a small dot stays hittable.
+- **Regenerating:** `python3 .map/build.py` needs `.map/coast.json` and `.map/legs.json` (gitignored —
   the header in `build.py` has the exact Overpass and OSRM calls, run from an in-page `fetch()`). It
   writes `.map/map.svg.html` and `.map/map.lists.html`; splice those over the `<svg class="map">` block
   and the three `<ul class="tl stoplist">` blocks, then bump `CACHE` in `sw.js`. Edit the place tables
-  in `build.py`, never the generated coordinates by hand.
+  in `build.py`, never the generated coordinates.
 
 ## The Japanese layer
 
-`.i18n/` is the translation source of truth. It is **not** shipped to the browser — `index.html` is still
-self-contained — but keep it, or any future English edit means re-translating from scratch.
+`.i18n/` is the translation source of truth: `GLOSSARY.md` (tone spec + fixed place names),
+`strings.json` (English, keyed by `sha1(slot|en)[:10]`) and `ja-*.json` (the Japanese by the same id).
+Note the direction — `.i18n` keys on **English**, but the **shipped markup is Japanese with English in
+`data-en`**, so regenerating means flipping the file back to English-base first, re-running the
+extract/inject scripts, then flipping again.
 
-| File | Role |
-|------|------|
-| `.i18n/GLOSSARY.md` | Tone spec (ガイドブック調) + fixed place-name and term list. Read this before translating. |
-| `.i18n/strings.json` | Every extracted English string as `{id, slot, en}`. `id` = sha1(`slot|en`)[:10]. |
-| `.i18n/ja-*.json` | The Japanese, keyed by the same `id`. Several files, merged on inject. |
+When you change English text: strip the layer first (`re.sub(r'( data-en="[^"]*")+', '', html)` —
+**the attribute only, never unwrap a `<span>`**, since wrapper spans in `h2.section`, `a.outlink`,
+`.glabel` and the edit button are load-bearing), re-extract, translate only the missing ids, then
+re-inject onto the clean base. Injecting twice duplicates attributes. Because an id hashes the English,
+changing one word orphans its translation — that is the point.
 
-Note the direction: `.i18n` holds **English** as the keying language (`strings.json`) with Japanese in
-`ja-*.json`, but the **shipped markup is Japanese with English in `data-en`**. The extract/inject scripts
-were written against an English-base file, so regenerating means flipping the file back to English-base
-first (swap each `data-en` value with its element's content), re-running them, then flipping again.
+Two constraints: a `data-en`/`data-ja` value may contain `<small>`/`<strong>` and must reproduce any
+nested `span.u` byte-for-byte; and **packing rows must not contain inline HTML**, because the packing
+model escapes its strings.
 
-**Workflow when you change English text:**
-1. Edit `index.html` **from a clean base** — strip the layer first with
-   `re.sub(r'( data-en="[^"]*")+', '', html)`. **Strip the attribute only, never unwrap a `<span>`.**
-   Wrapper spans inside `h2.section`, `a.maplink`, `.glabel` and the `#editPacking` button are load-bearing:
-   the packing seed reads its category name by selector, and the JS sets button labels through
-   `querySelector('span')`. An earlier regex that unwrapped `<span data-ja="…">x</span>` silently broke
-   all four, and the symptom (category names rendering as "List", button labels frozen) shows up only at
-   runtime.
-2. Re-extract, diff against the merged `ja-*.json` by `id`, and translate only the missing ids.
-3. Re-inject onto the clean base. Injecting onto an already-injected file yields duplicate attributes.
-
-**Known drift:** the map tab and the Day 2 snorkelling rewrite added English strings that have never been
-through the extractor, so `.i18n/strings.json` is behind `index.html` for those. The shipped markup carries
-both languages (Japanese inline, English in `data-en`), so nothing is broken at runtime — but re-extract
-before the next translation pass or those strings will look "new" twice.
-
-Because an `id` is a hash of the English, changing one word orphans its translation — that is the point,
-it surfaces exactly what needs re-translating. Note the extractor's bullet pattern also matches timeline
-`<li>`s, so a few "unresolved" units on every run are expected noise.
-
-Two constraints worth remembering:
-- A `data-ja` value may contain `<small>`/`<strong>`, and must reproduce any nested
-  `<span class="u" …>` **byte-for-byte**, since switching language re-parses it.
-- **Packing rows must not contain inline HTML.** The packing model escapes its strings, so a `<strong>`
-  in a packing item renders as literal text. Keep emphasis out of `.ctxt` and its `<small>`.
+**Known drift:** the map tab, the Day 2 snorkelling rewrite and the shelf added English strings that
+have never been through the extractor. Nothing is broken at runtime — re-extract before the next
+translation pass.
 
 ## Editing content
 
-1. Edit `index.html` directly — itinerary days, logistics cards, campsites, and the packing list's
-   seed rows are plain HTML.
-   - **Day cards:** `<details class="card day">` inside `#days`, each with an hour-by-hour
-     `<ul class="tl">`. The things that will actually bite us (closing days, the 18:00 office close on
-     the car return, habu season) go in a plain `<small>` under the line they belong to — no callouts.
-   - **Logistics cards:** `<details class="card travel">` (Flights, The Jimny, Know Before You Go)
-     in the second `.spine` under the "Logistics" heading.
-   - **Campsite cards:** `<details class="card camp wild|paid f-beach f-toilet f-shower">` in one flat
-     list. The `f-*` classes and `wild`/`paid` drive the filter buttons in `#campFilters` — the filter
-     shows one criterion at a time and reveals `#campEmpty` if nothing matches. Keep the class list in
-     sync with the chips. The list is a **flat ordering by road time from the Evertrail
-     office** (Ikehara, Okinawa City — 26.3794, 127.8257), which is where the car is collected. It is *not*
-     measured from Naha Airport.
-   - **Map:** do not hand-edit `#view-map`'s SVG — change the tables in `.map/build.py` and regenerate.
-     A new or moved itinerary stop needs its OSRM leg refetched too, or the line will not reach its pin.
-   - **Checklist items:** an `<input class="cb" id="<store>-<group>-<index>">` immediately followed
-     by its `<label class="checkrow" for="...">`. These static rows are the packing list's **seed +
-     no-JS fallback** — editing them changes the defaults a *fresh* install starts from. Once a
-     device has saved its own `packingData`, that model wins and the static seed is ignored there.
-     `seedFromDOM()` reads the *structure* (`.group`, `.checkrow`, `.ctxt`, the `.gicon use` href),
-     not the ids, so a row needs no bookkeeping attributes — only the `id`/`for` pair the no-JS
-     path uses.
-2. Keep markup static — do not move content rendering into JS. (The packing list is the one
-   deliberate exception: its static rows seed a JS-rendered, editable model — see above.)
-3. **After ANY change to `index.html` (or other cached assets): bump the cache name in `sw.js`**
-   (`okinawa-2026-v1` → `v2`). Otherwise installed phones keep serving the old cached copy.
+1. Edit `index.html` directly. Day cards are `<details class="card day">` (Okinawa) or `.card.hike` /
+   `.card.travel` (Seattle) inside `.spine.days`, each with an hour-by-hour `<ul class="tl">`.
+   Campsites are `<details class="card camp wild|paid f-beach f-toilet f-shower">` in one flat list
+   ordered by road time from the Evertrail office in Okinawa City (26.3794, 127.8257) — **not** from
+   Naha Airport. The `f-*` classes drive `.camp-filters`; keep them in sync with the chips.
+2. **Voice: factual only.** No tone, no evaluation, no persuasion — clipped fact-lists ("Calm bay,
+   sunsets over the city. No toilets."), Japanese in 体言止め. No "worth it", "the best" or
+   reasons-why. There are **no `.note` callouts**: a fact that matters goes in a plain bullet, a
+   `<small>` under the line it belongs to, or a stat tile.
+3. **Do not hand-edit the map SVG** — change the tables in `.map/build.py` and regenerate. A new or
+   moved stop needs its OSRM leg refetched too, or the line will not reach its pin.
+4. Checklist rows are an `<input class="cb" id="<slug>-packing-<group>-<index>">` followed by its
+   `<label class="checkrow" for="…">`. `seedFromDOM()` reads structure (`.group`, `.checkrow`, `.ctxt`,
+   the `.gicon use` href), not ids.
+5. **After any change to `index.html` or another cached asset, bump `CACHE` in `sw.js`** — otherwise
+   installed phones keep serving the old copy.
 
-### Google Maps links — how they were built
+### Google Maps links
 
-Every link points at a real place, never a coordinate. Three tiers, in descending precision:
+Every link points at a real place, never a coordinate: campsites use the Evertrail directory's own
+`Google maps` field (the operator's pin — do not "improve" it), named venues use
+`https://www.google.com/maps/place//data=!4m2!3m1!1s<FID>`, and Cape Hedo uses a `?api=1&query=` place
+query because Google returns a list for it.
 
-Every campsite card used to carry a second "Book / official site" link pointing at `#i-tent` — a sprite
-id, not a URL, so 26 dead links. The directory has no per-site page, so they were removed; the Maps link
-is the only one a campsite gets.
+To get a FID without an API key: `window.open('https://www.google.com/maps/search/<query>')` from an
+allowlisted origin for several venues at once, wait ~6 s, then read chrome-devtools `list_pages` — each
+tab's **resolved** URL carries `!1s0x…:0x…` (the FID) and `!3d/!4d` (Google's coordinates). Verify
+those against an independent reference (Tabelog for shops, OSM/Nominatim for landmarks, the Evertrail
+record otherwise). Known acceptable gaps: 比地大滝 130 m and 崎本部緑地 45 m (place pin vs OSM node),
+ター滝 ~625 m (Google marks the falls, Evertrail the trailhead), 古宇利島 (island centroid). If a tab
+stays on `/maps/search/` there is no single match — retry with the official name (ゴリラチョップ only
+resolves as 崎本部緑地, Seragaki as ダイヤモンドビーチ), and failing that leave a query link rather
+than inventing a pin. **`https://maps.google.com/?cid=<decimal>` no longer works** — it looks right
+and fails silently.
 
-1. **Campsites (26)** — the Evertrail directory's own `Google maps` field, i.e. the operator's pin.
-   For unnamed wild sites this is the best available; do not "improve" it into a coordinate search.
-2. **Named venues (19)** — an exact place link of the form
-   `https://www.google.com/maps/place//data=!4m2!3m1!1s<FID>` where `<FID>` is Google's
-   `0x…:0x…` feature id.
-3. **Cape Hedo (1)** — a `?api=1&query=` place query, because Google returns a result list for it
-   rather than one place. Flagged here so nobody assumes it was missed.
+### Where the data came from
 
-**How a FID is obtained** (no API key needed):
-1. From a page on an allowlisted origin, `window.open('https://www.google.com/maps/search/<query>')`
-   for each venue — several at once is fine.
-2. Wait ~6 s, then call chrome-devtools `list_pages`. Each tab's entry shows its **resolved** URL,
-   which for a single match becomes `/maps/place/<name>/@<lat>,<lon>,17z/data=…!1s0x…:0x…!8m2!3d<lat>!4d<lon>`.
-   This is the trick that makes it cheap — the page list carries the resolved URL, so one call reads
-   a whole batch. `evaluate_script` on each tab would work too but costs a call per venue.
-3. Take `!1s0x…:0x…` as the FID and `!3d/!4d` as Google's coordinates for that place.
-4. **Verify**: compare `!3d/!4d` against an independent reference — Tabelog's coordinates for shops,
-   OSM/Nominatim for landmarks, the Evertrail record otherwise. All ten shops and cafes matched to
-   within ~2 m. Accept a larger gap only with a reason: 比地大滝 130 m and 崎本部緑地 45 m are the
-   place pin versus the OSM node; ター滝 is ~625 m from Evertrail's pin because Google marks the falls
-   and Evertrail marks the trailhead; 古宇利島 is the island centroid, not the bridge.
-5. If a tab stays on `/maps/search/`, there is no single matching place. Retry with the official name
-   (ゴリラチョップ only resolved as 崎本部緑地, Seragaki only as ダイヤモンドビーチ). If it still does
-   not resolve, leave a query link rather than inventing a pin.
-
-**Dead end worth remembering:** `https://maps.google.com/?cid=<decimal>` no longer works. It looks
-right and fails silently — a test link opened in Tokyo. Only the FID form or a place query is safe.
-
-### Where the campsite data came from
-
-The 26 campsites are the drivable main-island subset of the **Evertrail Okinawa directory**
-(https://directory.evertrailokinawa.com/). That site is a React SPA backed by Airtable base
-`apph4puq05ed8CGbz`, table `Sites` — the read-only PAT ships in its `assets/App-*.js` bundle, and
-the table also holds `Hot spot` / `Dining` records used to source itinerary stops. Nine ferry-only
-outer-island sites (Iheya, Izena, Tokashiki, Zamami) are deliberately excluded. Drive times are
-real road times from Naha Airport via the public OSRM router, not straight-line estimates.
-
-Note: `WebFetch` and direct `curl` are blocked by the local sandbox, but in-page `fetch()` from
-the chrome-devtools MCP works — that is how this data was retrieved.
-
-### Replacing the hero photo
-
-```bash
-sips --resampleHeightWidthMax 1600 NEW.jpg --out /tmp/hero.jpg
-sips -s format jpeg -s formatOptions 48 /tmp/hero.jpg --out images/okinawa-hero.jpg
-# Icons, cropped square from the same photo:
-sips -c 1280 1280 --cropOffset 200 0 /tmp/hero.jpg --out /tmp/sq.jpg
-sips -z 180 180 -s format png /tmp/sq.jpg --out icon-180.png
-sips -z 512 512 -s format png /tmp/sq.jpg --out icon-512.png
-```
-`--cropOffset` is `<top> <left>`; keep `top + 1280 <=` the image height or you get a black band.
-Then **bump `CACHE` in `sw.js`** so installed PWAs pick up the new bytes.
+Okinawa campsites are the 26 drivable main-island sites in the **Evertrail directory**
+(https://directory.evertrailokinawa.com/ — a React SPA over Airtable base `apph4puq05ed8CGbz`, table
+`Sites`, read-only PAT in its JS bundle; its `Hot spot` / `Dining` records sourced itinerary stops).
+Nine ferry-only outer-island sites are deliberately excluded. Seattle hikes come from WTA and
+AllTrails, with trail maps linked to `huangwaylon.github.io/gpx`. `WebFetch` and `curl` are
+sandbox-blocked; in-page `fetch()` from chrome-devtools works.
 
 ## Testing locally
 
-Service workers need a real origin (not `file://`):
-```bash
-python3 -m http.server 8765      # then open http://localhost:8765/index.html
-```
-To check offline: load once, confirm the SW is `activated`, stop the server, reload — it should
-still load from cache. If an old worker from a previous trip is still registered on
-`localhost:8765`, unregister it and clear caches first or you'll be served stale HTML.
-The no-JS path is best checked by forcing `documentElement.classList` to `nojs` in a browser
-(`qlmanage -t -s 1400 -o . index.html` also works but see the animation caveat above).
+Service workers need a real origin: `python3 -m http.server 8765`, then
+`http://localhost:8765/index.html`. To check offline, load once, confirm the worker is activated, stop
+the server and reload. **An old worker from a previous version serves stale HTML** — unregister it and
+clear caches first. Check the no-JS path in a browser by setting
+`documentElement.className='nojs'` and removing `data-place`.
 
-## Deploying to GitHub Pages
+## Deploying
 
-Remote: `git@github.com:huangwaylon/seattle.git` (personal github.com; SSH).
-The local `gh` CLI is logged into Apple's internal GitHub only — do **not** use it for this repo.
+Remote `git@github.com:huangwaylon/seattle.git` (personal github.com, SSH). The local `gh` CLI is
+logged into Apple's internal GitHub — do **not** use it here. Commit and push to `main` (end commits
+with the `Co-Authored-By` trailer); Pages rebuilds in about a minute from `main` at folder `/`. All
+asset paths are relative, so the project site works under `/seattle/`.
 
-**Routine deploy (Pages already enabled):**
-```bash
-git add -A
-git commit -m "..."     # end commits with the Co-Authored-By trailer
-git push
-```
-GitHub Pages auto-rebuilds from `main` (~1 min). Check the **Actions** tab for the
-"pages build and deployment" run.
+**On iPhone:** open the live URL in Safari on Wi-Fi, let it fully load, Share → Add to Home Screen,
+then open once from the icon while online. After a `CACHE` bump, an installed app shows the refresh
+banner on its next online launch; a full close-and-reopen activates the new worker on its own.
+Installed PWAs are exempt from Safari's 7-day storage cap, so the packing list survives — install a
+week or two before the trip.
 
-**One-time Pages setup (already done, for reference):**
-- Repo **Settings → Pages → Build and deployment**: Source = **Deploy from a branch**,
-  Branch = **main**, Folder = **/ (root)** → Save.
-- All asset paths are **relative**, so the project site works under the `/seattle/` subpath.
-- HTTPS (required for the service worker) is automatic on `*.github.io`.
+## Trip facts worth remembering
 
-**Installing on iPhone (after a deploy):** open the live URL in **Safari on Wi-Fi**, let it fully
-load (caches it), then **Share → Add to Home Screen**, and open once from the icon while online.
-After bumping the SW cache, an installed app shows a **"New version available" refresh banner**
-on its next **online** launch (or when it returns to the foreground and re-checks); tapping
-**Refresh** activates the new worker and reloads. If the app is fully closed and reopened, the
-new version activates on its own.
-
-## Gotchas & notes
-
-- **Privacy:** the Pages site is public (true even for a private repo on the free tier). It names
-  the travellers, flight/booking references, and seat numbers. Flag this before adding more
-  sensitive detail — and consider whether the ticket and booking numbers should stay.
-- **iOS storage:** installed Home-Screen PWAs are exempt from Safari's 7-day script-storage cap,
-  so the saved packing list persists — but only if opened occasionally. Install a week or two
-  pre-trip.
-- **Drive-time buffers were audited leg by leg against OSRM.** Every gap now clears its drive by 18 min
-  or more; the two that did not were Day 3's 76-min run south (4 min of slack) and the 56-min run to the
-  office with a refuel in it (4 min), both rebalanced. Day 3's morning drive is 72 min, so Zanpa moved to
-  09:15. Two stated times were also wrong against the per-leg figures the map is drawn from: the office to
-  King Tacos is 26 min, not 25. Note Kin → Manzamo reads 19 min per-leg but 21 in a chained five-waypoint
-  route — the per-leg figure is the one to quote, since that is what the map draws.
-- **Day 3 has no snorkelling.** Maeda Point came out; 11:00 is **バンタカフェ** (Yomitan, 26.41771,
-  127.71400) instead — 6 min on from Senaha Beach, 76 min from there to the tide pool. Alternatives
-  considered and listed in its card: トランジットカフェ (Chatan, 2F sea view) and 瀬長島ウミカジテラス
-  (22 min from the pool, 11 min on to the airport). The jellyfish bullet used to name Maeda as the
-  unpatrolled swim; it now names the tide pool, which is the only swim left on the day.
-- **Day 3 ends at the Gushikawa tide pool, not the onsen.** The pool (具志川城跡, Kyan, Itoman —
-  26.08036, 127.66452, free) only exists around low tide, and **Oct 12 2026's afternoon low at Naha is
-  14:53** (JMA tide table, station NS: lows 02:33 / 14:53, highs 08:50 / 20:31), which is exactly when the
-  drive from Maeda Point lands you there. That forces it to be the day's last stop, which is why
-  **Ryujin-no-yu came out** — it is only 23 min on from the pool and 10 min from the airport, so keeping
-  both is no longer possible at all: the car goes back to Okinawa City, 41 min *north* of the onsen, so a
-  bath cannot fit before the office shuts at 18:00. The card says so rather than leaving it as an option. Access was closed in 2020 with no published end date, so check for a current notice.
-- **Trip shape.** The car is collected at the Evertrail office in **Okinawa City**, not the airport: bus 111 or
-  117 from Naha Airport, ~1 h, ¥1,330 pp, off at Okinawa Kita IC, then a 10-min walk or a free pickup arranged
-  by email. **It goes back to the same office, not the airport**, so the bus is a round trip: bus out on
-  Day 1, drop the car by the office's 18:00 close on Day 3, then bus back to Naha. ¥5,320 of fares for
-  two, both ways. Evertrail's ¥10,000 airport shuttle only runs 10:30–16:00, so it cannot cover the
-  return. Day 2 is the boat day. The travellers want nature — waterfalls, capes, beaches, reef — and explicitly not
-  shopping, souvenirs, crowds, caves or historical sites, so American Village, the pottery village and the Blue
-  Cave were all removed. Don't reintroduce them.
-- **Verified, and what is not.** The content was fact-checked in Sep 2026. Confirmed against primary
-  sources: the Solaseed flight times, Naha sunrise/sunset, Oct 12 2026 = Sports Day, the ¥1,040 ETC vs
-  ¥1,610 cash toll and its ETC-only discount, Churaumi's ¥2,180, JMA weather normals, the habu campaign
-  dates, that a gas canister cannot be flown, and every Dive Nuts price and time (read off
-  divenuts.jp/taiken-snorkel in Sep 2026). **Still unverified** — King Tacos' hours, Ryujin-no-yu's rate
-  and whether the holiday price applies on Sports Day, Kishimoto's 1905 founding and cash-only policy,
-  and every campsite fee (the directory prices only two), and whether the Gushikawa tide pool is open at
-  all. Note Dive Nuts has **suspended phone bookings** — those confirmations have to go by email or LINE.
-- **Day 2 is snorkelling, not diving.** The booking is Dive Nuts' **ボートシュノーケル, morning boat**
-  (`divenuts.jp/taiken-snorkel`, detail page `/about/20726/`): ¥9,900 each at 2+ people for one drop,
-  ¥2,750 for the second, gear and photos included — ¥25,300 for two of us doing both. The morning boat
-  runs 08:00 meet → 12:00 back at the port, which is what Day 2's timeline is built on. Two consequences
-  worth remembering: the old ¥17,000-each fun-diving estimate is gone (it was never a published price),
-  and **the no-fly-after-diving constraint no longer applies**, so the boat no longer *has* to be Day 2 —
-  it stays there by choice, not necessity. The other four courses and their prices are listed in the card.
-- **The Day 1 waterfall is フンガー滝**, in **名護市真喜屋** — 26.60810, 128.05392, FID
-  `0x34e4570022eb29ff:0xfbbd1edacdb1b196`, Google's only pin for it (3.8, 13 reviews). It has been
-  called two wrong things in this repo: 福川の滝 originally, then 普久川の滝 after I "corrected" it.
-  The trap is that OSM has a node labelled **普久川滝** 400 m away with no Google place at all, and
-  because OSRM snaps both to the same road point the drive times matched either way (Manzamo → 53 min
-  / 33.3 km, → Nago 19 min / 11.9 km), so the times "confirmed" the wrong name. Don't rename it again
-  without a Google place id. Note it is **not a managed site**: a local operator (がじゅまる自然学校)
-  has publicly asked on the listing for the pin to be removed because visitor traffic puts
-  conservation and safety on the village, reviewers say to read the posted cautions, and there is no
-  phone signal further in.
-- **Two claims were wrong and are now corrected** — King Tacos is *not* the 1984 original (taco rice was
-  invented at Parlour Senri in Kin; King Tacos spread it), and Daisekirinzan was renamed **ASMUI** in
-  Dec 2024 and charges ¥2,500. Campsite drive times are OSRM **free-flow** — add 20–40 min in holiday
-  traffic, and note Koki's coordinate snaps to the expressway so its figure is unreliable.
-- **Jellyfish first aid is species-dependent.** Vinegar is correct for habu-kurage and makes a Portuguese
-  man o' war sting **worse**. Do not simplify that bullet into generic "use vinegar" advice.
+- **Privacy:** the Pages site is public (true even for a private repo on the free tier) and names the
+  travellers, flight/booking references and seat numbers. Flag this before adding more sensitive detail.
+- **Okinawa shape.** The car is collected at the Evertrail office in **Okinawa City**, not the airport:
+  bus 111 or 117 from Naha, ~1 h, ¥1,330 pp, off at Okinawa Kita IC, then a 10-min walk or a free
+  pickup arranged by email. It goes **back to the same office**, so the bus is a round trip (¥5,320 for
+  two, both ways; Evertrail's ¥10,000 shuttle only runs 10:30–16:00 and cannot cover the return). The
+  travellers want nature — waterfalls, capes, beaches, reef — and explicitly **not** shopping,
+  souvenirs, crowds, caves or historical sites, so American Village, the pottery village and the Blue
+  Cave were removed. Don't reintroduce them.
+- **Day 2 is snorkelling, not diving:** Dive Nuts' ボートシュノーケル morning boat (08:00 meet, 12:00
+  back at the port), ¥9,900 each at 2+ people for one drop and ¥2,750 for the second — ¥25,300 for two
+  doing both. The no-fly-after-diving constraint therefore no longer applies; the boat stays on Day 2
+  by choice. Phone bookings are suspended — email or LINE only.
+- **Day 3 ends at the Gushikawa tide pool, not the onsen.** The pool only exists around low tide, and
+  Oct 12 2026's afternoon low at Naha is **14:53** (JMA), exactly when the drive lands there.
+  Ryujin-no-yu came out because the car goes back to Okinawa City, 41 min *north* of it, before the
+  office shuts at 18:00. Access was closed in 2020 with no published end date — check for a notice.
+  Day 3 also has no snorkelling: 11:00 is バンタカフェ (Yomitan), not Maeda Point.
+- **The Day 1 waterfall is フンガー滝**, 名護市真喜屋 (26.60810, 128.05392, FID
+  `0x34e4570022eb29ff:0xfbbd1edacdb1b196`). It has been wrongly called 福川の滝 and 普久川の滝: OSM has
+  a 普久川滝 node 400 m away with no Google place, and OSRM snaps both to the same road point, so the
+  drive times "confirm" either name. **Don't rename it without a Google place id.** It is not a managed
+  site — a local operator has publicly asked for the pin's removal, and there is no phone signal
+  further in.
+- **Drive-time buffers were audited leg by leg against OSRM**; every gap clears its drive by 18 min or
+  more. Quote **per-leg** figures, which is what the map draws (office → King Tacos is 26 min; Kin →
+  Manzamo is 19 per-leg but 21 chained). Campsite times are free-flow — add 20–40 min in holiday
+  traffic, and Koki's coordinate snaps to the expressway so its figure is unreliable.
+- **Jellyfish first aid is species-dependent.** Vinegar is right for habu-kurage and makes a Portuguese
+  man o' war sting **worse**. Never simplify that bullet into generic "use vinegar" advice.
+- **Verified in Sep 2026:** Solaseed flight times, Naha sunrise/sunset, Oct 12 2026 = Sports Day, the
+  ¥1,040 ETC vs ¥1,610 cash toll, Churaumi's ¥2,180, JMA normals, habu campaign dates, that a gas
+  canister cannot be flown, every Dive Nuts price. **Still unverified:** King Tacos' hours,
+  Ryujin-no-yu's rate, Kishimoto's 1905 founding and cash-only policy, every campsite fee (the
+  directory prices only two), and whether the tide pool is accessible at all. Two claims were wrong and
+  are corrected: King Tacos is not the 1984 original (taco rice began at Parlour Senri in Kin), and
+  Daisekirinzan was renamed **ASMUI** in Dec 2024 and charges ¥2,500.
 - **Don't** add a runtime build/render step or external CDN assets.

@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="うめうぇの旅">
-<meta name="theme-color" content="#241c17">
+<meta name="theme-color" content="#f4ecdd">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icon-180.png">
 <link rel="preload" as="image" href="images/okinawa-hero.jpg" fetchpriority="high">
@@ -36,9 +36,10 @@
     --ink:#18221f; --ink-2:#3d4a46; --muted:#5e6b67; --faint:#8a9491;
     --acc:#1f6f5c; --acc-d:#175949; --acc-soft:rgba(31,111,92,.10); --acc-ring:rgba(31,111,92,.30);
     --acc2:#d4662b; --acc2-soft:rgba(212,102,43,.12); --acc2-ring:rgba(212,102,43,.34);
+    --eyebrow:#ffb59e;
 
     /* The page backdrop, one value per place. JS copies it into the theme-color meta. */
-    --shell:#241c17;
+    --shell:#f4ecdd;
   }
   html[data-place="okinawa"]{--shell:#f7f4ec;}
   html[data-place="seattle"]{--shell:#f3f5f1;}
@@ -101,37 +102,47 @@
   .nojs .guide{border-top:2px solid var(--line-strong);}
 
   /* ---- BOOKSHELF ---- */
-  #shelf{min-height:100vh;color:#f6ecdc;
+  /* Warm paper, a shade off both guides, so opening a book is not a jump from dark to light. */
+  #shelf{min-height:100vh;color:#3a2c1e;
     padding:calc(var(--safe-t) + 54px) var(--gutter) calc(var(--safe-b) + 46px);
-    background:radial-gradient(130% 70% at 50% 0%,#3b2d23 0%,#241c17 72%);}
+    background:radial-gradient(130% 70% at 50% 0%,#fdf9f1 0%,#f0e7d6 72%);}
   html[data-place="shelf"] #shelf{animation:fade .3s ease;}
   .shelf-in{max-width:var(--maxw);margin:0 auto;}
   /* A title page: mincho set large, with a brass hairline between the two lines. */
-  .masthead h1{margin:0;font-family:var(--font-jp);font-size:clamp(28px,8vw,36px);font-weight:400;
-    letter-spacing:.1em;line-height:1.14;}
+  .masthead h1{margin:0;font-family:var(--font-jp);font-size:clamp(28px,8vw,36px);font-weight:600;
+    letter-spacing:.1em;line-height:1.14;color:#33261a;}
   .shelf-rule{width:40px;height:1px;margin:16px 0 0;
-    background:linear-gradient(90deg,#c9a86a,rgba(201,168,106,0));}
-  .shelf-sub{margin:14px 0 0;font-family:var(--font-jp);font-size:15px;font-weight:400;
-    letter-spacing:.16em;color:rgba(246,236,220,.6);}
+    background:linear-gradient(90deg,#a9803c,rgba(169,128,60,0));}
+  .shelf-sub{margin:14px 0 0;font-family:var(--font-jp);font-size:15px;font-weight:600;
+    letter-spacing:.16em;color:#7d6a51;}
   /* A shelf case: recessed back panel, books standing on a lit plank. */
   .shelf-case{position:relative;margin:32px 0 0;padding:0 14px;border-radius:7px;
-    background:linear-gradient(180deg,#191210 0%,#241b15 100%);
-    box-shadow:inset 0 16px 34px rgba(0,0,0,.62), inset 0 -8px 18px rgba(0,0,0,.4),
-      inset 0 0 0 1px rgba(0,0,0,.5);}
-  .books{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:20px;
-    align-items:end;padding:30px 6px 0;}
+    background:linear-gradient(180deg,#d8c4a4 0%,#e7d8bd 100%);
+    box-shadow:inset 0 16px 28px rgba(76,52,26,.26), inset 0 -8px 16px rgba(76,52,26,.16),
+      inset 0 0 0 1px rgba(76,52,26,.16);}
+  .books{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;align-items:end;padding:30px 6px 18px;}
   .shelf-plank{height:18px;margin:0 -14px;border-radius:0 0 7px 7px;
-    background:linear-gradient(180deg,#8d6644 0 5px,#6b4a2f 5px 58%,#46301e 100%);
-    box-shadow:0 12px 26px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.22);}
+    background:linear-gradient(180deg,#a8804f 0 5px,#87643c 5px 58%,#5d431f 100%);
+    box-shadow:0 12px 24px rgba(58,38,18,.35), inset 0 1px 0 rgba(255,255,255,.28);}
 
-  /* Each book is a 3D scene: a cloth spine face hinged to the photo cover. */
+  /* Each book is a 3D scene: a cloth spine face hinged to the photo cover. Touch only, so the
+     books turn, drift and catch the light on their own; two cycles of mismatched length per book,
+     and different lengths per book, keep everything out of step. */
   .book{position:relative;display:block;text-decoration:none;color:inherit;perspective:1400px;
-    --d:26px;--turn:21deg;}
+    --d:26px;--turn:21deg;transition:opacity .12s ease;
+    animation:float var(--float) ease-in-out var(--float-delay) infinite alternate;}
+  .book:nth-child(odd){--sway:7.3s;--sway-delay:-2.1s;--float:5.3s;--float-delay:-1.7s;}
+  .book:nth-child(even){--sway:9.7s;--sway-delay:-6.4s;--float:6.9s;--float-delay:-4.3s;}
+  .book:active{opacity:.88;}
+  /* Rotating about the centre keeps the foreshortened cover centred in its column. */
   .book-3d{position:relative;display:block;aspect-ratio:3/4.2;transform-style:preserve-3d;
-    transform-origin:left center;transform:rotateY(var(--turn));
-    transition:transform .34s cubic-bezier(.3,0,.2,1);}
-  .book:hover .book-3d{transform:rotateY(calc(var(--turn) - 9deg)) translateZ(26px) translateY(-8px);}
-  .book:active .book-3d{transform:rotateY(calc(var(--turn) - 4deg)) translateZ(10px) scale(.99);}
+    transform:rotateY(var(--turn));
+    animation:sway var(--sway) ease-in-out var(--sway-delay) infinite alternate;}
+  @keyframes sway{
+    from{transform:rotateY(calc(var(--turn) - 5deg));}
+    to{transform:rotateY(calc(var(--turn) + 4deg));}
+  }
+  @keyframes float{from{transform:translateY(0);} to{transform:translateY(-9px);}}
 
   .book-spine{position:absolute;top:0;bottom:0;left:0;width:var(--d);transform-origin:left center;
     transform:rotateY(90deg);border-radius:2px 0 0 2px;
@@ -146,14 +157,20 @@
     box-shadow:0 22px 40px rgba(0,0,0,.5), inset 0 0 0 1px rgba(255,255,255,.1);}
   .book-img{position:absolute;inset:0;background-image:var(--cover);background-size:cover;
     background-position:var(--cover-pos,50% 50%);}
-  /* Hinge groove, one top-left sheen and a little cloth grain, over the photo. */
+  /* Hinge groove and a little cloth grain, over the photo. */
   .book-cover::before{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
     background:linear-gradient(90deg,rgba(0,0,0,.6) 0,rgba(0,0,0,.2) 5%,rgba(255,255,255,.14) 7%,
         rgba(255,255,255,0) 15%),
-      linear-gradient(104deg,rgba(255,255,255,.15) 0,rgba(255,255,255,.04) 16%,rgba(255,255,255,0) 38%),
       repeating-linear-gradient(48deg,rgba(255,255,255,.022) 0 1px,rgba(0,0,0,.022) 1px 3px);}
   .book-cover::after{content:"";position:absolute;inset:0;z-index:1;
     background:linear-gradient(180deg,rgba(10,12,11,.12) 34%,rgba(10,12,11,.82) 100%);}
+  /* Laminated gloss: a soft diagonal glint that slides across as the cover turns. Keep the band
+     wide and low-contrast — a narrow one reads as a seam down the cover, not as light. */
+  .book-gloss{position:absolute;inset:-25% -60%;z-index:2;pointer-events:none;
+    background:linear-gradient(125deg,rgba(255,255,255,0) 28%,rgba(255,255,255,.1) 44%,
+      rgba(255,255,255,.2) 50%,rgba(255,255,255,.1) 56%,rgba(255,255,255,0) 72%);
+    animation:gloss var(--sway) ease-in-out var(--sway-delay) infinite alternate;}
+  @keyframes gloss{from{transform:translateX(-20%);} to{transform:translateX(20%);}}
   .book-txt{position:absolute;left:0;right:0;bottom:0;z-index:3;padding:16px 14px 17px 18px;}
   .bk-eyebrow{display:block;font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
     color:var(--eyebrow);text-shadow:0 1px 8px rgba(0,0,0,.7);}
@@ -171,7 +188,8 @@
   .turner-page::after{content:"";position:absolute;inset:0;
     background:linear-gradient(90deg,rgba(0,0,0,.5) 0,rgba(0,0,0,0) 34%);}
 
-  .backbtn{position:fixed;top:calc(var(--safe-t) + 12px);left:var(--gutter);z-index:55;border:0;cursor:pointer;
+  /* Inside the hero, so it scrolls away with the cover photo. */
+  .backbtn{position:absolute;top:calc(var(--safe-t) + 12px);left:var(--gutter);z-index:3;border:0;cursor:pointer;
     display:inline-flex;align-items:center;gap:6px;color:#fff;font-family:inherit;font-size:12.5px;
     font-weight:700;letter-spacing:.04em;padding:9px 15px 9px 11px;border-radius:var(--r-chip);
     background:rgba(16,24,22,.5);backdrop-filter:blur(16px) saturate(160%);
@@ -616,6 +634,7 @@ var LS={
             <span class="book-spine"><span class="spine-txt">沖縄 2026</span></span>
             <span class="book-cover">
               <span class="book-img"></span>
+            <span class="book-gloss"></span>
               <span class="book-txt">
                 <span class="bk-eyebrow">Okinawa &middot; 3 days</span>
                 <span class="bk-title">沖縄 2026</span>
@@ -630,6 +649,7 @@ var LS={
             <span class="book-spine"><span class="spine-txt">Seattle 2026</span></span>
             <span class="book-cover">
               <span class="book-img"></span>
+            <span class="book-gloss"></span>
               <span class="book-txt">
                 <span class="bk-eyebrow">Cascades &middot; 18 days</span>
                 <span class="bk-title">Seattle 2026</span>
