@@ -35,7 +35,9 @@ There is no build step or framework. No dependencies. No bundler.
 - **Self-contained:** no external CSS/JS/fonts/CDN assets. The only outbound links are per-campsite
   Google Maps and Evertrail listing links, plus the Evertrail onboarding link (all open externally
   and fail gracefully offline). System font stack only.
-- **Four tabs:** Itinerary, Campsites, Eat, Packing.
+- **Three tabs:** Itinerary, Campsites, Packing. Food and nature recommendations live in three
+  `details.card.travel` cards under a "Worth a Detour" heading at the bottom of the Itinerary tab — there is
+  deliberately no separate Eat tab.
 - **Bilingual (EN / 日本語).** Every translatable element carries a `data-ja` attribute holding its
   **Japanese inner HTML**; English stays in the markup, so first paint and the no-JS path are English.
   The language module caches the original into `data-en` on first switch, swaps `innerHTML`, and fires a
@@ -139,15 +141,14 @@ Two constraints worth remembering:
      days, the 17:30 airport car return, habu season).
    - **Logistics cards:** `<details class="card travel">` (Flights, The Jimny, Know Before You Go)
      in the second `.spine` under the "Logistics" heading.
-   - **Eat cards:** `<details class="card eat">` in `#eat`, grouped by `<h3 class="region">` into kakigori /
-     cafes / sweets. The `.lead-chip` holds the **day number** the stop fits, not a date. Every entry was
-     checked open on Oct 10–12 2026; hours and closing days drift, so re-verify before a long detour.
    - **Campsite cards:** `<details class="card camp wild|paid f-beach f-toilet f-shower">` grouped
      under `<h3 class="region">` headings. The `f-*` classes and `wild`/`paid` drive the filter
      buttons in `#campFilters` — the filter shows one criterion at a time and hides a region
      heading when all its cards are filtered out. Keep the class list in sync with the chips.
      A `.chip.pick` ("Good fit") marks the six sites that actually suit a rooftop tent plus BBQ;
-     six sites carry a `.note` warning instead.
+     six sites carry a `.note` warning instead. The list is a **flat ordering by road time from the Evertrail
+     office** (Ikehara, Okinawa City — 26.3794, 127.8257), which is where the car is collected. It is *not*
+     measured from Naha Airport, and there are no region headings.
    - **Checklist items:** an `<input class="cb" id="<store>-<group>-<index>">` immediately followed
      by its `<label class="checkrow" for="...">`. These static rows are the packing list's **seed +
      no-JS fallback** — editing them changes the defaults a *fresh* install starts from. Once a
@@ -229,6 +230,12 @@ new version activates on its own.
 - **iOS storage:** installed Home-Screen PWAs are exempt from Safari's 7-day script-storage cap,
   so the saved packing list persists — but only if opened occasionally. Install a week or two
   pre-trip.
+- **Trip shape.** The car is collected at the Evertrail office in **Okinawa City**, not the airport: bus 111 or
+  117 from Naha Airport, ~1 h, ¥1,330 pp, off at Okinawa Kita IC, then a 10-min walk or a free pickup arranged
+  by email. It is returned to the **airport**, where the cutoff is 17:30. Day 2 is the dive day for
+  surface-interval reasons. The travellers want nature — waterfalls, capes, beaches, reef — and explicitly not
+  shopping, souvenirs, crowds, caves or historical sites, so American Village, the pottery village and the Blue
+  Cave were all removed. Don't reintroduce them.
 - **Verified, and what is not.** The content was fact-checked in Sep 2026. Confirmed against primary
   sources: the Solaseed flight times, Naha sunrise/sunset, Oct 12 2026 = Sports Day, the ¥1,040 ETC vs
   ¥1,610 cash toll and its ETC-only discount, Churaumi's ¥2,180, JMA weather normals, the habu campaign

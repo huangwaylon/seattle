@@ -67,13 +67,12 @@
   .js-tabs .view{display:none;}
   .js-tabs #tab-itinerary:checked ~ .views #view-itinerary,
   .js-tabs #tab-camps:checked     ~ .views #view-camps,
-  .js-tabs #tab-eat:checked       ~ .views #view-eat,
   .js-tabs #tab-packing:checked   ~ .views #view-packing{display:block;animation:fade .25s ease;}
   .nojs .tabbar{display:none;}
   .nojs .views{padding-bottom:24px;}
-  .nojs #view-camps,.nojs #view-eat,.nojs #view-packing{margin-top:24px;border-top:1px solid var(--line);}
+  .nojs #view-camps,.nojs #view-packing{margin-top:24px;border-top:1px solid var(--line);}
   /* These views have no full-bleed hero, so pad past the status bar / Dynamic Island in standalone. */
-  #view-camps,#view-eat,#view-packing{padding-top:var(--safe-t);}
+  #view-camps,#view-packing{padding-top:var(--safe-t);}
   @keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
 
   h2.section{display:flex;align-items:center;gap:10px;font-family:var(--font-display);font-size:24px;
@@ -335,17 +334,15 @@
   .tabbtn{flex:1;color:var(--faint);padding:11px 0 9px;cursor:pointer;
     display:flex;flex-direction:column;align-items:center;gap:5px;
     position:relative;transition:color .15s;}
-  .tabbtn .lb{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;}
+  .tabbtn .lb{font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;}
   .tabbtn:active{opacity:.7;}
   .tabbtn::after{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);
     width:26px;height:2px;border-radius:0 0 2px 2px;background:transparent;transition:background .2s;}
   #tab-itinerary:checked ~ .tabbar .tabbtn[for="tab-itinerary"],
   #tab-camps:checked     ~ .tabbar .tabbtn[for="tab-camps"],
-  #tab-eat:checked       ~ .tabbar .tabbtn[for="tab-eat"],
   #tab-packing:checked   ~ .tabbar .tabbtn[for="tab-packing"]{color:var(--sea);}
   #tab-itinerary:checked ~ .tabbar .tabbtn[for="tab-itinerary"]::after,
   #tab-camps:checked     ~ .tabbar .tabbtn[for="tab-camps"]::after,
-  #tab-eat:checked       ~ .tabbar .tabbtn[for="tab-eat"]::after,
   #tab-packing:checked   ~ .tabbar .tabbtn[for="tab-packing"]::after{background:var(--coral);
     box-shadow:0 0 12px var(--coral-soft);}
 
@@ -386,7 +383,6 @@
     <symbol id="i-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></symbol>
     <symbol id="i-bowl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h20"/><path d="M20 12a8 8 0 0 1-16 0"/><path d="M12 4a3 3 0 0 0-3 3c0 1 .5 1.5 1.5 2"/><path d="M15.5 5.5c.8.6 1 1.4.5 2.5"/></symbol>
     <symbol id="i-teacup" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 0 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><path d="M6 2v3"/><path d="M10 2v3"/><path d="M14 2v3"/></symbol>
-    <symbol id="i-gift" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"/></symbol>
     <symbol id="i-cart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></symbol>
     <symbol id="i-file" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></symbol>
     <symbol id="i-shirt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"/></symbol>
@@ -408,7 +404,6 @@
 
 <input class="tabradio" type="radio" name="tab" id="tab-itinerary" checked>
 <input class="tabradio" type="radio" name="tab" id="tab-camps">
-<input class="tabradio" type="radio" name="tab" id="tab-eat">
 <input class="tabradio" type="radio" name="tab" id="tab-packing">
 
 <div class="views">
@@ -443,20 +438,21 @@
           <span class="node"></span>
           <div class="lead-chip"><div class="d">10</div><div class="m" data-ja="10月">OCT</div><div class="wd" data-ja="土">Sat</div></div>
           <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-plane-landing"/></svg></span>
-          <div class="ttl"><div class="t" data-ja="那覇到着・北上">Land &amp; Drive North</div><div class="sub2" data-ja="那覇 &rarr; 金武 &rarr; 本部">Naha &rarr; Kin &rarr; Motobu</div></div>
+          <div class="ttl"><div class="t" data-ja="到着・バス・北上">Land, Bus, Drive North</div><div class="sub2" data-ja="那覇 &rarr; 沖縄市 &rarr; 本部">Naha &rarr; Okinawa City &rarr; Motobu</div></div>
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
           <ul class="tl">
             <li><span class="time">06:10</span><span class="dot"></span><span class="txt" data-ja="羽田 &rarr; 那覇 &mdash; ソラシドエア SNA 021<small>座席 14B &middot; 航空券番号 2052520018908</small>">Haneda &rarr; Naha &mdash; Solaseed SNA 021<small>Seat 14B &middot; ticket 2052520018908</small></span></li>
             <li><span class="time">08:55</span><span class="dot"></span><span class="txt" data-ja="那覇空港（OKA）着">Land at Naha (OKA)</span></li>
-            <li><span class="time">09:30</span><span class="dot"></span><span class="txt" data-ja="朝食、現金、SIM">Breakfast, cash, SIM</span></li>
-            <li><span class="time">11:00</span><span class="dot"></span><span class="txt" data-ja="ジムニー受け取り（Evertrailオフィス）<small>空港受け取りは 10:30&ndash;16:30 &middot; 予約番号 #260096</small>">Pick up the Jimny &mdash; Evertrail office<small>Airport pickup window 10:30&ndash;16:30 &middot; booking #260096</small></span></li>
-            <li><span class="time">12:00</span><span class="dot"></span><span class="txt" data-ja="沖縄自動車道を北上<small>那覇IC &rarr; 金武IC &mdash; 全線57 kmのうち約<span class=&quot;u&quot; data-metric=&quot;40 km&quot; data-imperial=&quot;25 mi&quot;>40 km</span></small>">North on the Okinawa Expressway<small>Naha IC &rarr; Kin IC &mdash; about <span class="u" data-metric="40 km" data-imperial="25 mi">40 km</span> of the 57 km line</small></span></li>
-            <li><span class="time">13:10</span><span class="dot"></span><span class="txt" data-ja="キングタコス金武町 &mdash; タコライス<small>タコライスは1984年に金武町のパーラー千里で生まれ、それを広めたのがキングタコス</small>">King Tacos, Kin Town &mdash; taco rice<small>Taco rice was invented in Kin in 1984 at Parlour Senri; King Tacos is the chain that spread it</small></span></li>
-            <li><span class="time">14:30</span><span class="dot"></span><span class="txt" data-ja="道の駅許田、許田ICを降りてすぐ<small>8:30&ndash;19:00 &middot; 農産物、天ぷらコーナー、美ら海水族館の割引チケット</small>">Michi-no-eki Kyoda, off Kyoda IC<small>8:30&ndash;19:00 &middot; produce, tempura counter, discounted Churaumi tickets</small></span></li>
-            <li><span class="time">15:15</span><span class="dot"></span><span class="txt" data-ja="名護 &mdash; 食料の買い出し<small>野菜・米・氷・朝食 &middot; マックスバリュは24時間営業</small>">Nago &mdash; groceries<small>Veg, rice, ice, breakfast &middot; MaxValu open 24 h</small></span></li>
-            <li><span class="time">16:15</span><span class="dot"></span><span class="txt" data-ja="キャンプ &mdash; 屋我地か古宇利<small>翌日に備えてダイビングショップから30分圏内に</small>">Camp &mdash; Yagaji or Kouri<small>Stay within 30 min of the dive shop for tomorrow</small></span></li>
+            <li><span class="time">09:40</span><span class="dot"></span><span class="txt" data-ja="空港から路線バス111番／117番<small>1人&yen;1,330、乗車時に支払い &middot; 高速経由で約1時間</small>">Airport bus 111 or 117<small>&yen;1,330 each, pay on board &middot; about 1 h up the expressway</small></span></li>
+            <li><span class="time">10:45</span><span class="dot"></span><span class="txt" data-ja="沖縄北ICで下車<small>営業所まで徒歩10分、またはメールで無料送迎を依頼</small>">Off at Okinawa Kita IC<small>10 min walk to the office, or ask Evertrail by email for the free pickup</small></span></li>
+            <li><span class="time">11:00</span><span class="dot"></span><span class="txt" data-ja="ジムニー受け取り &mdash; 沖縄市池原<small>営業9:30&ndash;18:00 &middot; 余分な荷物は帰りまでここに預けられます</small>">Pick up the Jimny &mdash; Ikehara, Okinawa City<small>Office 9:30&ndash;18:00 &middot; leave spare luggage here for the return</small></span></li>
+            <li><span class="time">12:15</span><span class="dot"></span><span class="txt" data-ja="キングタコス金武町 &mdash; タコライス<small>タコライスは1984年、金武町のパーラー千里で誕生</small>">King Tacos, Kin Town &mdash; taco rice<small>Taco rice was invented in Kin in 1984 at Parlour Senri</small></span></li>
+            <li><span class="time">13:45</span><span class="dot"></span><span class="txt" data-ja="万座毛（恩納村）<small>サンゴ礁に突き出す象の鼻の断崖 &mdash; 岬をひと回り</small>">Cape Manzamo, Onna<small>Elephant-trunk cliff over the reef &mdash; walk the whole headland</small></span></li>
+            <li><span class="time">15:15</span><span class="dot"></span><span class="txt" data-ja="福川の滝（名護市）<small>森を抜けて往復20&ndash;30分 &middot; 足元は濡れます</small>">Fukugawa Falls, Nago<small>20&ndash;30 min in and out through the forest &middot; wet feet</small></span></li>
+            <li><span class="time">16:30</span><span class="dot"></span><span class="txt" data-ja="名護 &mdash; 食料の買い出し<small>野菜・米・氷・朝食 &middot; マックスバリュは24時間営業</small>">Nago &mdash; groceries<small>Veg, rice, ice, breakfast &middot; MaxValu open 24 h</small></span></li>
+            <li><span class="time">17:15</span><span class="dot"></span><span class="txt" data-ja="キャンプ &mdash; 屋我地か古宇利<small>翌日に備えてダイビングショップから30分圏内に</small>">Camp &mdash; Yagaji or Kouri<small>Within 30 min of tomorrow's dive shop</small></span></li>
             <li><span class="time">18:08</span><span class="dot"></span><span class="txt" data-ja="夕日">Sunset</span></li>
             <li><span class="time">19:00</span><span class="dot"></span><span class="txt" data-ja="バーベキュー1日目 &mdash; Evertrailのセット">BBQ night 1 &mdash; the Evertrail set</span></li>
           </ul>
@@ -464,14 +460,9 @@
             <svg class="ic" aria-hidden="true"><use href="#i-alert"/></svg>
             <div data-ja="<strong>1泊目は付属、2泊目は自前です。</strong>セットは2人分の夕食1回 &mdash; あぐー豚200 g、
             沖縄県産牛200 g、ソーセージ2本、焼き鳥4本、ガスと鉄板グリル。翌日の肉は今日ではなく2日目に買ってください。28 &deg;Cではクーラーバッグで2日はもちません。"><strong>Night 1 is covered, night 2 is not.</strong> The set is one dinner for two &mdash; 200 g agu
-            pork, 200 g Okinawa beef, two sausages, four yakitori, gas and the teppan grill. Buy tomorrow's meat on
-            day 2, not today; a cooler will not hold it through two days at 28 &deg;C.</div>
+            pork, 200 g Okinawa beef, two sausages, four yakitori, gas and the teppan grill. Buy tomorrow's meat
+            tomorrow; a cooler will not hold it two days at 28 &deg;C.</div>
           </div>
-          <div class="subhead" data-ja="周辺のその他">Also nearby</div>
-          <ul class="bul">
-            <li data-ja="道の駅許田、許田ICを降りてすぐ<small>8:30&ndash;19:00 &middot; 農産物と弁当</small>">Michi-no-eki Kyoda, off Kyoda IC<small>8:30&ndash;19:00 &middot; produce and bento</small></li>
-            <li data-ja="夕暮れどきはカフンジャバンタ・古宇利大橋へ">Kafu Banta &amp; the Kouri bridge for golden hour</li>
-          </ul>
         </div>
       </details>
 
@@ -480,7 +471,7 @@
           <span class="node"></span>
           <div class="lead-chip"><div class="d">11</div><div class="m" data-ja="10月">OCT</div><div class="wd" data-ja="日">Sun</div></div>
           <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-waves"/></svg></span>
-          <div class="ttl"><div class="t" data-ja="ダイビングの日">Diving Day</div><div class="sub2" data-ja="水納島、沖縄そば、美ら海">Minna Island, soba, Churaumi</div></div>
+          <div class="ttl"><div class="t" data-ja="ダイビングの日">Diving Day</div><div class="sub2" data-ja="水納島、沖縄そば、備瀬">Minna Island, soba, Bise</div></div>
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
@@ -490,10 +481,10 @@
             <li><span class="time">09:15</span><span class="dot"></span><span class="txt" data-ja="ボートで出航 &mdash; 2ダイブ<small>水納島まで20分、瀬底島なら10&ndash;20分 &middot; 海水温 &asymp; <span class=&quot;u&quot; data-metric=&quot;29 &deg;C&quot; data-imperial=&quot;84 &deg;F&quot;>29 &deg;C</span></small>">Boat out &mdash; two dives<small>Minna Island 20 min out, or Sesoko 10&ndash;20 min &middot; sea &asymp; <span class="u" data-metric="29 &deg;C" data-imperial="84 &deg;F">29 &deg;C</span></small></span></li>
             <li><span class="time">13:00</span><span class="dot"></span><span class="txt" data-ja="ショップに帰着 &mdash; シャワー、水中写真<small>タオル・アメニティ・ドライヤーあり、水中写真は無料</small>">Back at the shop &mdash; shower, photos<small>Towels, amenities and a dryer are there; the underwater photos are free</small></span></li>
             <li><span class="time">14:15</span><span class="dot"></span><span class="txt" data-ja="きしもと食堂 &mdash; 沖縄そば<small>11:00&ndash;17:30 &middot; 現金のみ &middot; 売り切れ次第閉店</small>">Kishimoto Shokudo &mdash; Okinawa soba<small>11:00&ndash;17:30 &middot; cash only &middot; closes when sold out</small></span></li>
-            <li><span class="time">15:30</span><span class="dot"></span><span class="txt" data-ja="美ら海水族館か備瀬のフクギ並木<small>&yen;2,180 &middot; 入館は17:30まで</small>">Churaumi Aquarium, or Bise Fukugi<small>&yen;2,180 &middot; last entry 17:30</small></span></li>
-            <li><span class="time">17:00</span><span class="dot"></span><span class="txt" data-ja="本部町 &mdash; 今夜の肉<small>ザ・ビッグエクスプレスは22:00まで &middot; 古宇利島にスーパーなし</small>">Motobu &mdash; tonight's meat<small>The Big Express until 22:00 &middot; Kouri has no supermarket</small></span></li>
-            <li><span class="time">17:45</span><span class="dot"></span><span class="txt" data-ja="キャンプ場へ戻る">Back to camp</span></li>
-            <li><span class="time">18:07</span><span class="dot"></span><span class="txt" data-ja="夕日">Sunset</span></li>
+            <li><span class="time">15:30</span><span class="dot"></span><span class="txt" data-ja="備瀬のフクギ並木<small>砂道に2万本のフクギ &middot; 突き当たりのビーチまで歩く</small>">Bise Fukugi tree road<small>20,000 fukugi over sand lanes &middot; walk to the beach at the end</small></span></li>
+            <li><span class="time">16:45</span><span class="dot"></span><span class="txt" data-ja="古宇利島 &mdash; ビーチと大橋</small>">Kouri Island &mdash; beach and bridge</small></span></li>
+            <li><span class="time">17:30</span><span class="dot"></span><span class="txt" data-ja="本部町 &mdash; 今夜の肉<small>ザ・ビッグエクスプレスは22:00まで &middot; 古宇利島にスーパーなし</small>">Motobu &mdash; tonight's meat<small>The Big Express until 22:00 &middot; Kouri has no supermarket</small></span></li>
+            <li><span class="time">18:07</span><span class="dot"></span><span class="txt" data-ja="日没、キャンプ場に帰着">Sunset, back at camp</span></li>
             <li><span class="time">19:00</span><span class="dot"></span><span class="txt" data-ja="キャンプ場でバーベキュー2日目">BBQ night 2 at camp</span></li>
           </ul>
           <div class="note">
@@ -504,11 +495,6 @@
             before tomorrow's 20:25 flight &mdash; comfortably past the 24 h that two dives want. Diving on Day 3
             would not be safe.</div>
           </div>
-          <div class="subhead" data-ja="時間があれば">If there is time</div>
-          <ul class="bul">
-            <li data-ja="きしもと食堂の隣、新垣ぜんざい屋<small>「食べる」タブを参照 &mdash; 毎日売り切れます</small>">Aragaki Zenzai, next to Kishimoto<small>See the Eat tab &mdash; sells out daily</small></li>
-            <li data-ja="備瀬のフクギ並木か古宇利大橋">Bise Fukugi tree road, or the Kouri bridge</li>
-          </ul>
         </div>
       </details>
 
@@ -517,30 +503,31 @@
           <span class="node"></span>
           <div class="lead-chip"><div class="d">12</div><div class="m" data-ja="10月">OCT</div><div class="wd" data-ja="月">Mon</div></div>
           <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-plane-takeoff"/></svg></span>
-          <div class="ttl"><div class="t" data-ja="南部海岸・帰路">South Coast &amp; Fly Home</div><div class="sub2" data-ja="読谷、北谷、温泉、那覇空港">Yomitan, Chatan, onsen, OKA</div></div>
+          <div class="ttl"><div class="t" data-ja="西海岸・帰路">West Coast &amp; Fly Home</div><div class="sub2" data-ja="残波岬、リーフシュノーケリング、温泉">Zanpa, reef snorkel, onsen</div></div>
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
           <ul class="tl">
             <li><span class="time">06:25</span><span class="dot"></span><span class="txt" data-ja="朝日、撤収">Sunrise, pack up</span></li>
-            <li><span class="time">07:30</span><span class="dot"></span><span class="txt" data-ja="テントを撤収して南へ<small>95分 &mdash; 今出発できるかで一日が決まります</small>">Break camp, drive south<small>95 min &mdash; the day depends on leaving now</small></span></li>
-            <li><span class="time">09:10</span><span class="dot"></span><span class="txt" data-ja="万座毛（恩納村）">Cape Manzamo, Onna</span></li>
-            <li><span class="time">10:00</span><span class="dot"></span><span class="txt" data-ja="残波岬灯台（読谷村）">Cape Zanpa lighthouse, Yomitan</span></li>
-            <li><span class="time">10:40</span><span class="dot"></span><span class="txt" data-ja="やちむんの里">Yachimun Pottery Village</span></li>
-            <li><span class="time">12:30</span><span class="dot"></span><span class="txt" data-ja="真栄田岬で青の洞窟シュノーケリング<small>13:50が干潮 &middot; 波が高いと階段は閉鎖</small>">Blue Cave snorkel, Maeda Point<small>Low water 13:50 &middot; stairway shuts in high surf</small></span></li>
-            <li><span class="time">14:15</span><span class="dot"></span><span class="txt" data-ja="北谷町／アメリカンビレッジ<small>エンダー（A&amp;W）のルートビア &mdash; おかわり無料</small>">Chatan / American Village<small>A&amp;W root beer &mdash; refills free</small></span></li>
-            <li><span class="time">15:15</span><span class="dot"></span><span class="txt" data-ja="給油、車内の荷降ろし、ゴミ処理">Refuel, empty the car, bin the rubbish</span></li>
-            <li><span class="time">15:55</span><span class="dot"></span><span class="txt" data-ja="琉球温泉 龍神の湯（瀬長島）<small>約&yen;1,570 &middot; タオル付き &middot; OKAから12分</small>">Ryujin-no-yu onsen, Senagajima<small>~&yen;1,570 &middot; towels included &middot; 12 min from OKA</small></span></li>
-            <li><span class="time">17:00</span><span class="dot"></span><span class="txt" data-ja="空港でジムニー返却">Return the Jimny at the airport</span></li>
-            <li><span class="time">18:30</span><span class="dot"></span><span class="txt" data-ja="チェックイン、最後のブルーシール、お土産">Check in, last Blue Seal, souvenirs</span></li>
+            <li><span class="time">07:30</span><span class="dot"></span><span class="txt" data-ja="テントを撤収して南へ">Break camp, drive south</span></li>
+            <li><span class="time">09:00</span><span class="dot"></span><span class="txt" data-ja="残波岬（読谷村）<small>2 km続く隆起サンゴの断崖に波が直撃</small>">Cape Zanpa, Yomitan<small>Two kilometres of raised-coral cliff, surf straight into it</small></span></li>
+            <li><span class="time">10:15</span><span class="dot"></span><span class="txt" data-ja="瀬名波ビーチ（読谷村）<small>管理はなく、たいてい無人 &mdash; 設備なし</small>">Senaha Beach, Yomitan<small>Unmanaged and usually empty &mdash; no facilities</small></span></li>
+            <li><span class="time">11:45</span><span class="dot"></span><span class="txt" data-ja="真栄田岬でリーフシュノーケリング<small>階段から歩いてエントリー &middot; 洞窟は寄らず、狙いはサンゴ礁</small>">Reef snorkel at Maeda Point<small>Walk-in off the steps &middot; skip the cave, the reef is the point</small></span></li>
+            <li><span class="time">13:30</span><span class="dot"></span><span class="txt" data-ja="海沿いで遅めの昼食">Late lunch on the coast</span></li>
+            <li><span class="time">14:45</span><span class="dot"></span><span class="txt" data-ja="琉球温泉 龍神の湯（瀬長島）<small>6:00&ndash;24:00 &middot; 休日料金は約&yen;1,570 &middot; タオル付き</small>">Ryujin-no-yu onsen, Senagajima<small>6:00&ndash;24:00 &middot; ~&yen;1,570 on a holiday &middot; towels included</small></span></li>
+            <li><span class="time">16:15</span><span class="dot"></span><span class="txt" data-ja="給油、車の荷降ろし">Refuel, empty the car</span></li>
+            <li><span class="time">16:45</span><span class="dot"></span><span class="txt" data-ja="空港でジムニー返却">Return the Jimny at the airport</span></li>
+            <li><span class="time">18:30</span><span class="dot"></span><span class="txt" data-ja="チェックイン">Check in</span></li>
             <li><span class="time">20:25</span><span class="dot"></span><span class="txt" data-ja="那覇 &rarr; 羽田 &mdash; ソラシドエア SNA 026<small>座席 14B</small>">Naha &rarr; Haneda &mdash; Solaseed SNA 026<small>Seat 14B</small></span></li>
             <li><span class="time">22:50</span><span class="dot"></span><span class="txt" data-ja="羽田着">Land at Haneda</span></li>
           </ul>
           <div class="note">
             <svg class="ic" aria-hidden="true"><use href="#i-alert"/></svg>
-            <div data-ja="<strong>車の返却は18:00ではなく17:30までです。</strong>予約票の18:00はEvertrailオフィスの受付時間で、<em>空港</em>返却は<strong>17:30</strong>で締め切られます。この日はスポーツの日（祝日）でもあります &mdash; 国道58号の渋滞とターミナルの混雑を見込んでください。"><strong>Return the car by 17:30, not 18:00.</strong> The booking's 18:00 slot is the Evertrail office;
-            <em>airport</em> return closes at <strong>17:30</strong>. Today is also Sports Day, a national holiday &mdash;
-            expect traffic on Route 58 and a busy terminal.</div>
+            <div data-ja="<strong>空港での返却は17:30で締め切られます。</strong>予約票の18:00は沖縄市の営業所の受付時間で、
+            そちらに戻るとバス代と1時間が余計にかかります。この日はスポーツの日 &mdash; 国道58号の渋滞を
+            見込んでください。"><strong>Airport return closes 17:30.</strong> The booking's 18:00 slot is the Okinawa City office, so
+            going back there instead costs an hour plus the bus. Today is Sports Day &mdash; expect traffic on
+            Route 58.</div>
           </div>
         </div>
       </details>
@@ -585,8 +572,8 @@
         </summary>
         <div class="content">
           <p class="desc" data-ja="ルーフトップテント付きのスズキ・ジムニー シエラ II、2名、10月10&ndash;12日。Asuka Umeda名義で予約済み。
-          受け取り11:00、返却18:00 &mdash; ただし空港での返却受付は17:30までです。">Suzuki Jimny Sierra II with a rooftop tent, 2 guests, Oct 10&ndash;12. Booked under Asuka Umeda.
-          Pick up 11:00, drop off 18:00 &mdash; but airport return closes 17:30.</p>
+          受け取りは沖縄市池原のEvertrail営業所、返却は空港です。">Suzuki Jimny Sierra II with a rooftop tent, 2 guests, Oct 10&ndash;12, booked under Asuka
+          Umeda. Collected at the Evertrail office in Ikehara, Okinawa City; returned to the airport.</p>
           <div class="stat-grid">
             <div class="stat"><div class="k" data-ja="レンタル料">Rent</div><div class="v">&yen;17,000 &times; 3</div></div>
             <div class="stat"><div class="k" data-ja="免責補償">Zero Liability</div><div class="v">&yen;9,000</div></div>
@@ -603,9 +590,22 @@
           </ul>
           <div class="subhead" data-ja="付属しないもの">Not included</div>
           <ul class="bul">
-            <li data-ja="マスク・シュノーケル・フィン<small>自前で持参 &mdash; シュノーケリングは2回</small>">Mask, snorkel and fins<small>Pack our own &mdash; snorkelling twice</small></li>
+            <li data-ja="マスク・シュノーケル・フィン<small>自前で持参</small>">Mask, snorkel and fins<small>Pack our own</small></li>
             <li data-ja="蚊取り線香<small>コンビニならどこでも</small>">Mosquito coils<small>Any konbini</small></li>
             <li data-ja="必要なのは日本の運転免許証だけ<small>国際運転免許証は不要</small>">Japanese licences are all we need<small>No International Driving Permit</small></li>
+          </ul>
+          <div class="subhead" data-ja="行きと帰り">Getting there and back</div>
+          <ul class="bul">
+            <li data-ja="営業所：沖縄市池原2-11-7<small>9:30&ndash;18:00 &middot; 080 9104 3373 &middot; 駐車場あり、余分な荷物も預かってもらえます</small>">Office: 2-11-7 Ikehara, Okinawa City<small>9:30&ndash;18:00 &middot; 080 9104 3373 &middot; parking, and they hold spare luggage</small></li>
+            <li data-ja="空港から路線バス111番／117番<small>1人&yen;1,330、約1時間、車内で支払い &mdash; Evertrail自身のおすすめ</small>">Bus 111 or 117 from the airport<small>&yen;1,330 each, about 1 h, pay on board &mdash; Evertrail's own recommendation</small></li>
+            <li data-ja="沖縄北ICで下車<small>徒歩10分、または予約後にメールで無料送迎を依頼</small>">Get off at Okinawa Kita IC<small>10 min walk, or request the free pickup by email after booking</small></li>
+            <li data-ja="代替は空港シャトル<small>2名片道&yen;10,000、10:30&ndash;16:00 &mdash; バスのほうが断然安い</small>">Airport shuttle is the alternative<small>&yen;10,000 for two one way, 10:30&ndash;16:00 &mdash; the bus is far cheaper</small></li>
+          </ul>
+          <div class="subhead" data-ja="台風が来たら">If a typhoon comes</div>
+          <ul class="bul">
+            <li data-ja="車両の引き上げ &rarr; 未使用日数を100%返金">Vehicle recalled &rarr; 100% refund of unused days</li>
+            <li data-ja="ルーフトップテントが使用不可 &rarr; 該当日ごとに30%返金">Rooftop tent ruled unsafe &rarr; 30% back for each affected day</li>
+            <li data-ja="フライトの遅延・欠航 &rarr; 変更手数料は免除<small>キャンプ用品は車両保険の対象外です</small>">Flight delayed or cancelled &rarr; amendment fees waived<small>Camping gear is not covered by the vehicle insurance</small></li>
           </ul>
           <a class="maplink" href="https://evertrail-onboarding.netlify.app/#/user/recYdYKhYWNWCDY3M" target="_blank" rel="noopener"><span data-ja="Evertrail の登録手順">Evertrail onboarding</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
@@ -709,15 +709,83 @@
       </details>
 
     </div>
+    <h2 class="section"><svg class="ic" aria-hidden="true"><use href="#i-palm"/></svg><span data-ja="寄り道するなら">Worth a Detour</span></h2>
+
+    <div class="spine">
+
+      <details class="card travel">
+        <summary class="head">
+          <span class="node"></span>
+          <div class="lead-chip"><div class="d">9</div><div class="m" data-ja="箇所">SPOTS</div></div>
+          <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-waves"/></svg></span>
+          <div class="ttl"><div class="t" data-ja="自然">Nature</div><div class="sub2" data-ja="滝・岬・静かなビーチ">Waterfalls, capes, quiet beaches</div></div>
+          <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
+        </summary>
+        <div class="content">
+          <ul class="bul">
+            <li data-ja="比地大滝（国頭村）<small>沖縄でいちばん名の知れた滝 &middot; 吊り橋を渡って片道1.5 km</small>">Hiji Falls, Kunigami<small>Okinawa's best-known waterfall &middot; 1.5 km each way over a suspension bridge</small></li>
+            <li data-ja="ター滝（大宜味村）<small>歩いてすぐ、泳げる滝つぼ</small>">Ta Falls, Ogimi<small>Short walk in, swimmable plunge pool</small></li>
+            <li data-ja="カヤウチバンタ（国頭村）<small>河口を見下ろす断崖、混むことはほぼありません</small>">Kayauchi Banta, Kunigami<small>Cliff over a river mouth, almost never busy</small></li>
+            <li data-ja="辺戸岬（国頭村）<small>本島最北端 &middot; 本部町から90分、一日かける覚悟で</small>">Cape Hedo, Kunigami<small>The northern tip &middot; 90 min past Motobu, so a day of its own</small></li>
+            <li data-ja="ゴリラチョップ（本部町）<small>歩いて入れる浅く穏やかなリーフ &mdash; 手軽なシュノーケリング</small>">Gorilla Chop, Motobu<small>Walk-in reef, calm and shallow &mdash; the easy snorkel</small></li>
+            <li data-ja="屋我地のマングローブ<small>東村のふれあいヒルギ公園でカヤックか木道散策</small>">Yagaji mangroves<small>Paddle or walk the boardwalk at Fureai, Higashi</small></li>
+            <li data-ja="瀬良垣・ダイヤモンドビーチ（恩納村）<small>穏やかな海でウミガメとマダラトビエイ</small>">Seragaki &amp; Diamond Beach, Onna<small>Turtles and eagle rays in calm water</small></li>
+            <li data-ja="古宇利島<small>徒歩1時間で一周、写真は古宇利大橋で</small>">Kouri Island<small>Circle it on foot in an hour; the bridge is the photo</small></li>
+            <li data-ja="備瀬のフクギ並木（本部町）<small>2万本の木陰の砂道を抜けて、人けのないビーチへ</small>">Bise Fukugi tree road, Motobu<small>Sand lanes under 20,000 trees, out to an empty beach</small></li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="card travel">
+        <summary class="head">
+          <span class="node"></span>
+          <div class="lead-chip"><div class="d">6</div><div class="m" data-ja="軒">SHOPS</div></div>
+          <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-bowl"/></svg></span>
+          <div class="ttl"><div class="t" data-ja="かき氷・ぜんざい">Kakigori &amp; Zenzai</div><div class="sub2" data-ja="日程中はすべて営業">All open on our dates</div></div>
+          <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
+        </summary>
+        <div class="content">
+          <ul class="bul">
+            <li data-ja="新垣ぜんざい屋（本部町）&middot; 2日目<small>&yen;350、1948年から一品のみ &middot; 12:00&ndash;18:00、売り切れ次第終了</small>">Aragaki Zenzai, Motobu &middot; Day 2<small>&yen;350, one item since 1948 &middot; 12:00&ndash;18:00, sells out</small></li>
+            <li data-ja="ひがし食堂（名護市）&middot; 1日目<small>ミルクぜんざい&yen;480 &middot; 11:00&ndash;18:30、駐車3台</small>">Higashi Shokudo, Nago &middot; Day 1<small>Milk zenzai &yen;480 &middot; 11:00&ndash;18:30, 3 parking spaces</small></li>
+            <li data-ja="三矢 道の駅許田店 &middot; 1日目<small>揚げたてサーターアンダギー&yen;150 &middot; 09:00&ndash;19:00</small>">Mitsuya, Michi-no-eki Kyoda &middot; Day 1<small>Sata andagi fried to order, &yen;150 &middot; 09:00&ndash;19:00</small></li>
+            <li data-ja="琉冰 おんなの駅 &middot; 1日目か3日目<small>マンゴーのアイスマウンテン &middot; 10:00&ndash;19:00 &middot; 行列はこの中で最長</small>">Ryupin, Onna &middot; Day 1 or 3<small>Mango ice mountain &middot; 10:00&ndash;19:00 &middot; worst queue on the list</small></li>
+            <li data-ja="鶴亀堂ぜんざい（読谷村）&middot; 3日目<small>紅イモ黒糖ぜんざい &middot; 11:00&ndash;17:00、火・水定休</small>">Tsurukamedo, Yomitan &middot; Day 3<small>Beni-imo kokuto zenzai &middot; 11:00&ndash;17:00, closed Tue &amp; Wed</small></li>
+            <li data-ja="氷ヲ刻メ（北谷町）&middot; 3日目<small>塩キャラメルグラノーラ&yen;800 &middot; 12席、売り切れます</small>">Kori wo Kizame, Chatan &middot; Day 3<small>Salt caramel granola &yen;800 &middot; 12 seats, sells out</small></li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="card travel">
+        <summary class="head">
+          <span class="node"></span>
+          <div class="lead-chip"><div class="d">5</div><div class="m" data-ja="軒">CAFES</div></div>
+          <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-teacup"/></svg></span>
+          <div class="ttl"><div class="t" data-ja="カフェ">Cafes</div><div class="sub2" data-ja="海を望む席">Views over the water</div></div>
+          <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
+        </summary>
+        <div class="content">
+          <ul class="bul">
+            <li data-ja="花人逢（本部町）&middot; 2日目<small>伊江島を望む丘の上の赤瓦の民家 &middot; 11:30&ndash;19:00、火・水定休</small>">Kajinho, Motobu &middot; Day 2<small>Hilltop red-tiled house facing Ie-jima &middot; 11:30&ndash;19:00, closed Tue &amp; Wed</small></li>
+            <li data-ja="cafe CAHAYA BULAN（備瀬）&middot; 2日目<small>フクギ並木の中、砂地のテラス &middot; 08:00から</small>">Cahaya Bulan, Bise &middot; Day 2<small>Terrace on the sand in the fukugi grove &middot; from 08:00</small></li>
+            <li data-ja="亜熱帯茶屋（本部町）&middot; 2日目<small>ハンモック席とぶくぶく茶 &middot; 花人逢から200 m</small>">Anettai Chaya, Motobu &middot; Day 2<small>Hammocks and bukubuku-cha &middot; 200 m from Kajinho</small></li>
+            <li data-ja="バンタカフェ（読谷村）&middot; 3日目<small>断崖に建つ屋外160席 &middot; 祝日は08:00から</small>">Banta Cafe, Yomitan &middot; Day 3<small>Built into the cliff, 160 outdoor seats &middot; from 08:00 on holidays</small></li>
+            <li data-ja="ZHYVAGO ROASTERY（北谷町）&middot; 3日目<small>07:00&ndash;22:00 &mdash; ほかが混み合うときの確実な代替</small>">Zhyvago Roastery, Chatan &middot; Day 3<small>07:00&ndash;22:00 &mdash; the reliable one when the others are full</small></li>
+          </ul>
+        </div>
+      </details>
+
+    </div>
     <div class="footer" data-ja="時刻はすべて日本時間">All times JST</div>
   </section>
 
   <section class="view" id="view-camps">
     <h2 class="section"><svg class="ic" aria-hidden="true"><use href="#i-tent"/></svg><span data-ja="キャンプ場">Campsites</span></h2>
-    <p class="intro" data-ja="Evertrail のディレクトリに載る、車で行けるキャンプ場のすべて &mdash; 本島の全26か所を、地域ごとに那覇空港からの所要時間順に並べています。船でしか行けない離島は除いています。料金が明記されているのは2か所だけなので、「記載なし」は無料ではなく不明と考えてください。有料キャンプ場は必ず予約を &mdash; 10月10&ndash;12日はスポーツの日の三連休です。">Every drivable campsite in the Evertrail directory &mdash; 26 sites on the main island,
-      ordered by road time from Naha Airport within each region. Ferry-only islands are left out. The directory
-      lists a fee for only two of them, so treat &ldquo;none posted&rdquo; as unknown rather than free, and book the
-      paid sites &mdash; Oct 10&ndash;12 is the Sports Day long weekend.</p>
+    <p class="intro" data-ja="Evertrail のディレクトリに載る、車で行けるキャンプ場のすべて &mdash; 全26か所を、車を受け取る沖縄市の
+      Evertrail営業所からの所要時間順に並べています。料金が明記されているのは2か所だけなので、
+      「記載なし」は無料ではなく不明と考えてください。有料キャンプ場は必ず予約を &mdash; 10月10&ndash;12日はスポーツの日の三連休です。">All 26 drivable sites in the Evertrail directory, ordered by road time from the Evertrail
+      office in Okinawa City &mdash; where we collect the car. The directory prices only two of them, so
+      &ldquo;none posted&rdquo; means unknown, not free. Book the paid ones: Oct 10&ndash;12 is the Sports Day weekend.</p>
     <div class="toolbar">
       <div class="seg lang-toggle jsonly" role="group" aria-label="Language"><button type="button" data-lang="en" class="active">EN</button><button type="button" data-lang="ja">日本語</button></div>
       <div class="seg unit-toggle jsonly" role="group" aria-label="Units">
@@ -734,94 +802,12 @@
       <button type="button" data-filter="shower" data-ja="シャワー">Shower</button>
     </div>
     <div class="spine" id="camps">
-      <h3 class="region" data-ja="南部<small>糸満・南城 &middot; 4件</small>">South<small>Itoman &amp; Nanjo &middot; 4 sites</small></h3>
-      <details class="card camp wild f-beach f-toilet">
-        <summary class="head">
-          <span class="node"></span>
-          <div class="lead-chip"><div class="d">23</div><div class="m" data-ja="分">MIN</div></div>
-          <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-tent"/></svg></span>
-          <div class="ttl"><div class="t" data-ja="北名城ビーチ">Kita Nashiro Beach</div><div class="sub2" data-ja="野営地 &middot; 糸満市 &middot; <span class=&quot;u&quot; data-metric=&quot;11.5 km&quot; data-imperial=&quot;7 mi&quot;>11.5 km</span>">Wild camp &middot; Itoman &middot; <span class="u" data-metric="11.5 km" data-imperial="7 mi">11.5 km</span></div></div>
-          <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
-        </summary>
-        <div class="content">
-          <figure class="camp-thumb"><img src="images/camps/kita-nashiro-beach.jpg" alt="" loading="lazy" decoding="async" width="720" height="405"></figure>
-          <p class="desc" data-ja="無料、波打ち際のすぐそば、空港からいちばん近いサイト。トイレあり。週末は混み合います。">Free, right on the sand, closest site to the airport. Toilets. Busy at weekends.</p>
-          <div class="chips"><span class="chip" data-ja="ビーチ">Beach</span><span class="chip" data-ja="オーシャンビュー">Ocean view</span><span class="chip" data-ja="夕日">Sunset</span><span class="chip" data-ja="トイレ">Toilet</span></div>
-          <div class="stat-grid">
-            <div class="stat"><div class="k" data-ja="種別">Type</div><div class="v" data-ja="野営地">Wild camp</div></div>
-            <div class="stat"><div class="k" data-ja="料金">Fee</div><div class="v" data-ja="記載なし">None posted</div></div>
-          </div>
-          <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=26.10800,127.66160" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-          <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-ja="予約・公式サイト">Book / official site</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-        </div>
-      </details>
-      <details class="card camp paid f-beach f-toilet f-shower">
-        <summary class="head">
-          <span class="node"></span>
-          <div class="lead-chip"><div class="d">40</div><div class="m" data-ja="分">MIN</div></div>
-          <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-tent"/></svg></span>
-          <div class="ttl"><div class="t" data-ja="NEOSアウトドアパーク">NEOS Outdoor Park</div><div class="sub2" data-ja="有料キャンプ場 &middot; 南城市 &middot; <span class=&quot;u&quot; data-metric=&quot;22.1 km&quot; data-imperial=&quot;14 mi&quot;>22.1 km</span>">Paid camp &middot; Nanjō &middot; <span class="u" data-metric="22.1 km" data-imperial="14 mi">22.1 km</span></div></div>
-          <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
-        </summary>
-        <div class="content">
-          <figure class="camp-thumb"><img src="images/camps/neos-outdoor-park.jpg" alt="" loading="lazy" decoding="async" width="720" height="405"></figure>
-          <p class="desc" data-ja="ビーチ直結の管理型パーク。オートキャンプ、カヤック・SUPのレンタルあり。">Managed park with direct beach access, car camping, kayak and SUP rental.</p>
-          <div class="chips"><span class="chip pick">Good fit</span><span class="chip" data-ja="ビーチ">Beach</span><span class="chip" data-ja="オーシャンビュー">Ocean view</span><span class="chip" data-ja="朝日">Sunrise</span><span class="chip" data-ja="星空">Stargazing</span><span class="chip" data-ja="トイレ">Toilet</span><span class="chip" data-ja="シャワー">Shower</span></div>
-          <div class="stat-grid">
-            <div class="stat"><div class="k" data-ja="種別">Type</div><div class="v" data-ja="有料キャンプ場">Paid camp</div></div>
-            <div class="stat"><div class="k" data-ja="料金">Fee</div><div class="v" data-ja="現地で確認">Ask on site</div></div>
-          </div>
-          <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=26.14820,127.80390" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-          <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-ja="予約・公式サイト">Book / official site</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-        </div>
-      </details>
-      <details class="card camp paid f-beach f-toilet f-shower">
-        <summary class="head">
-          <span class="node"></span>
-          <div class="lead-chip"><div class="d">44</div><div class="m" data-ja="分">MIN</div></div>
-          <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-tent"/></svg></span>
-          <div class="ttl"><div class="t" data-ja="あざまサンサンビーチ キャンプ場">Azama Sun Beach Camping Ground</div><div class="sub2" data-ja="有料キャンプ場 &middot; 南城市 &middot; <span class=&quot;u&quot; data-metric=&quot;26.2 km&quot; data-imperial=&quot;16 mi&quot;>26.2 km</span>">Paid camp &middot; Nanjō &middot; <span class="u" data-metric="26.2 km" data-imperial="16 mi">26.2 km</span></div></div>
-          <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
-        </summary>
-        <div class="content">
-          <figure class="camp-thumb"><img src="images/camps/azama-sun-beach-camping-ground.jpg" alt="" loading="lazy" decoding="async" width="720" height="405"></figure>
-          <p class="desc" data-ja="手入れされた広い芝生、久高島の向こうから昇る朝日、清潔なトイレと東屋6棟。">Wide mown lawn, sunrise over Kudaka Island, clean toilets and six pavilions.</p>
-          <div class="chips"><span class="chip pick">Good fit</span><span class="chip" data-ja="ビーチ">Beach</span><span class="chip" data-ja="オーシャンビュー">Ocean view</span><span class="chip" data-ja="朝日">Sunrise</span><span class="chip" data-ja="トイレ">Toilet</span><span class="chip" data-ja="シャワー">Shower</span></div>
-          <div class="stat-grid">
-            <div class="stat"><div class="k" data-ja="種別">Type</div><div class="v" data-ja="有料キャンプ場">Paid camp</div></div>
-            <div class="stat"><div class="k" data-ja="料金">Fee</div><div class="v" data-ja="現地で確認">Ask on site</div></div>
-          </div>
-          <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=26.17800,127.82920" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-          <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-ja="予約・公式サイト">Book / official site</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-        </div>
-      </details>
       <details class="card camp wild f-beach">
         <summary class="head">
           <span class="node"></span>
-          <div class="lead-chip"><div class="d">44</div><div class="m" data-ja="分">MIN</div></div>
+          <div class="lead-chip"><div class="d">17</div><div class="m" data-ja="分">MIN</div></div>
           <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-tent"/></svg></span>
-          <div class="ttl"><div class="t" data-ja="久手堅ビーチ">Kudeken Beach</div><div class="sub2" data-ja="野営地 &middot; 南城市 &middot; <span class=&quot;u&quot; data-metric=&quot;24.6 km&quot; data-imperial=&quot;15 mi&quot;>24.6 km</span>">Wild camp &middot; Nanjō &middot; <span class="u" data-metric="24.6 km" data-imperial="15 mi">24.6 km</span></div></div>
-          <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
-        </summary>
-        <div class="content">
-          <figure class="camp-thumb"><img src="images/camps/kudeken-beach.jpg" alt="" loading="lazy" decoding="async" width="720" height="405"></figure>
-          <p class="desc" data-ja="朝日側の無料ビーチ。星空がよく見え、知念岬も車ですぐ。">Free sunrise-side beach, good stargazing, Cape Chinen a short drive on.</p>
-          <div class="chips"><span class="chip" data-ja="ビーチ">Beach</span><span class="chip" data-ja="朝日">Sunrise</span><span class="chip" data-ja="星空">Stargazing</span></div>
-          <div class="stat-grid">
-            <div class="stat"><div class="k" data-ja="種別">Type</div><div class="v" data-ja="野営地">Wild camp</div></div>
-            <div class="stat"><div class="k" data-ja="料金">Fee</div><div class="v" data-ja="記載なし">None posted</div></div>
-          </div>
-          <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=26.16620,127.82560" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-          <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-ja="予約・公式サイト">Book / official site</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-        </div>
-      </details>
-      <h3 class="region" data-ja="中部<small>うるま・恩納 &middot; 2件</small>">Central<small>Uruma &amp; Onna &middot; 2 sites</small></h3>
-      <details class="card camp wild f-beach">
-        <summary class="head">
-          <span class="node"></span>
-          <div class="lead-chip"><div class="d">59</div><div class="m" data-ja="分">MIN</div></div>
-          <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-tent"/></svg></span>
-          <div class="ttl"><div class="t" data-ja="勝連ビーチ">Katsuren Beach</div><div class="sub2" data-ja="野営地 &middot; うるま市 &middot; <span class=&quot;u&quot; data-metric=&quot;40.4 km&quot; data-imperial=&quot;25 mi&quot;>40.4 km</span>">Wild camp &middot; Uruma &middot; <span class="u" data-metric="40.4 km" data-imperial="25 mi">40.4 km</span></div></div>
+          <div class="ttl"><div class="t" data-ja="勝連ビーチ">Katsuren Beach</div><div class="sub2" data-ja="野営地 &middot; うるま市 &middot; <span class=&quot;u&quot; data-metric=&quot;9.9 km&quot; data-imperial=&quot;6 mi&quot;>9.9 km</span>">Wild camp &middot; Uruma &middot; <span class="u" data-metric="9.9 km" data-imperial="6 mi">9.9 km</span></div></div>
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
@@ -839,9 +825,9 @@
       <details class="card camp paid f-toilet f-shower">
         <summary class="head">
           <span class="node"></span>
-          <div class="lead-chip"><div class="d">71</div><div class="m" data-ja="分">MIN</div></div>
+          <div class="lead-chip"><div class="d">29</div><div class="m" data-ja="分">MIN</div></div>
           <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-tent"/></svg></span>
-          <div class="ttl"><div class="t" data-ja="沖縄県民の森">Okinawa Prefectural People&#x27;s Forrest</div><div class="sub2" data-ja="有料キャンプ場 &middot; 恩納村 &middot; <span class=&quot;u&quot; data-metric=&quot;60.4 km&quot; data-imperial=&quot;38 mi&quot;>60.4 km</span>">Paid camp &middot; Onna &middot; <span class="u" data-metric="60.4 km" data-imperial="38 mi">60.4 km</span></div></div>
+          <div class="ttl"><div class="t" data-ja="沖縄県民の森">Okinawa Prefectural People&#x27;s Forrest</div><div class="sub2" data-ja="有料キャンプ場 &middot; 恩納村 &middot; <span class=&quot;u&quot; data-metric=&quot;24.7 km&quot; data-imperial=&quot;15 mi&quot;>24.7 km</span>">Paid camp &middot; Onna &middot; <span class="u" data-metric="24.7 km" data-imperial="15 mi">24.7 km</span></div></div>
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
@@ -856,13 +842,12 @@
           <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-ja="予約・公式サイト">Book / official site</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
       </details>
-      <h3 class="region" data-ja="名護・今帰仁<small>名護・屋我地・古宇利 &middot; 7件</small>">Nago &amp; Nakijin<small>Nago, Yagaji &amp; Kouri &middot; 7 sites</small></h3>
       <details class="card camp wild f-beach">
         <summary class="head">
           <span class="node"></span>
-          <div class="lead-chip"><div class="d">77</div><div class="m" data-ja="分">MIN</div></div>
+          <div class="lead-chip"><div class="d">36</div><div class="m" data-ja="分">MIN</div></div>
           <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-tent"/></svg></span>
-          <div class="ttl"><div class="t" data-ja="幸喜（こうき）の野営地">Koki Camp Spot</div><div class="sub2" data-ja="野営地 &middot; 名護市 &middot; <span class=&quot;u&quot; data-metric=&quot;70.9 km&quot; data-imperial=&quot;44 mi&quot;>70.9 km</span>">Wild camp &middot; Nago &middot; <span class="u" data-metric="70.9 km" data-imperial="44 mi">70.9 km</span></div></div>
+          <div class="ttl"><div class="t" data-ja="幸喜（こうき）の野営地">Koki Camp Spot</div><div class="sub2" data-ja="野営地 &middot; 名護市 &middot; <span class=&quot;u&quot; data-metric=&quot;35.2 km&quot; data-imperial=&quot;22 mi&quot;>35.2 km</span>">Wild camp &middot; Nago &middot; <span class="u" data-metric="35.2 km" data-imperial="22 mi">35.2 km</span></div></div>
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
@@ -884,9 +869,9 @@
       <details class="card camp wild f-toilet">
         <summary class="head">
           <span class="node"></span>
-          <div class="lead-chip"><div class="d">86</div><div class="m" data-ja="分">MIN</div></div>
+          <div class="lead-chip"><div class="d">45</div><div class="m" data-ja="分">MIN</div></div>
           <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-tent"/></svg></span>
-          <div class="ttl"><div class="t" data-ja="名護城橋の野営地">Nago Castle Bridge Spot</div><div class="sub2" data-ja="野営地 &middot; 名護市 &middot; <span class=&quot;u&quot; data-metric=&quot;77.5 km&quot; data-imperial=&quot;48 mi&quot;>77.5 km</span>">Wild camp &middot; Nago &middot; <span class="u" data-metric="77.5 km" data-imperial="48 mi">77.5 km</span></div></div>
+          <div class="ttl"><div class="t" data-ja="名護城橋の野営地">Nago Castle Bridge Spot</div><div class="sub2" data-ja="野営地 &middot; 名護市 &middot; <span class=&quot;u&quot; data-metric=&quot;41.8 km&quot; data-imperial=&quot;26 mi&quot;>41.8 km</span>">Wild camp &middot; Nago &middot; <span class="u" data-metric="41.8 km" data-imperial="26 mi">41.8 km</span></div></div>
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
@@ -905,12 +890,92 @@
           <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-ja="予約・公式サイト">Book / official site</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
       </details>
+      <details class="card camp paid f-beach f-toilet f-shower">
+        <summary class="head">
+          <span class="node"></span>
+          <div class="lead-chip"><div class="d">45</div><div class="m" data-ja="分">MIN</div></div>
+          <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-tent"/></svg></span>
+          <div class="ttl"><div class="t" data-ja="NEOSアウトドアパーク">NEOS Outdoor Park</div><div class="sub2" data-ja="有料キャンプ場 &middot; 南城市 &middot; <span class=&quot;u&quot; data-metric=&quot;35.5 km&quot; data-imperial=&quot;22 mi&quot;>35.5 km</span>">Paid camp &middot; Nanjō &middot; <span class="u" data-metric="35.5 km" data-imperial="22 mi">35.5 km</span></div></div>
+          <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
+        </summary>
+        <div class="content">
+          <figure class="camp-thumb"><img src="images/camps/neos-outdoor-park.jpg" alt="" loading="lazy" decoding="async" width="720" height="405"></figure>
+          <p class="desc" data-ja="ビーチ直結の管理型パーク。オートキャンプ、カヤック・SUPのレンタルあり。">Managed park with direct beach access, car camping, kayak and SUP rental.</p>
+          <div class="chips"><span class="chip pick">Good fit</span><span class="chip" data-ja="ビーチ">Beach</span><span class="chip" data-ja="オーシャンビュー">Ocean view</span><span class="chip" data-ja="朝日">Sunrise</span><span class="chip" data-ja="星空">Stargazing</span><span class="chip" data-ja="トイレ">Toilet</span><span class="chip" data-ja="シャワー">Shower</span></div>
+          <div class="stat-grid">
+            <div class="stat"><div class="k" data-ja="種別">Type</div><div class="v" data-ja="有料キャンプ場">Paid camp</div></div>
+            <div class="stat"><div class="k" data-ja="料金">Fee</div><div class="v" data-ja="現地で確認">Ask on site</div></div>
+          </div>
+          <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=26.14820,127.80390" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+          <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-ja="予約・公式サイト">Book / official site</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+        </div>
+      </details>
+      <details class="card camp paid f-beach f-toilet f-shower">
+        <summary class="head">
+          <span class="node"></span>
+          <div class="lead-chip"><div class="d">47</div><div class="m" data-ja="分">MIN</div></div>
+          <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-tent"/></svg></span>
+          <div class="ttl"><div class="t" data-ja="あざまサンサンビーチ キャンプ場">Azama Sun Beach Camping Ground</div><div class="sub2" data-ja="有料キャンプ場 &middot; 南城市 &middot; <span class=&quot;u&quot; data-metric=&quot;38.4 km&quot; data-imperial=&quot;24 mi&quot;>38.4 km</span>">Paid camp &middot; Nanjō &middot; <span class="u" data-metric="38.4 km" data-imperial="24 mi">38.4 km</span></div></div>
+          <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
+        </summary>
+        <div class="content">
+          <figure class="camp-thumb"><img src="images/camps/azama-sun-beach-camping-ground.jpg" alt="" loading="lazy" decoding="async" width="720" height="405"></figure>
+          <p class="desc" data-ja="手入れされた広い芝生、久高島の向こうから昇る朝日、清潔なトイレと東屋6棟。">Wide mown lawn, sunrise over Kudaka Island, clean toilets and six pavilions.</p>
+          <div class="chips"><span class="chip pick">Good fit</span><span class="chip" data-ja="ビーチ">Beach</span><span class="chip" data-ja="オーシャンビュー">Ocean view</span><span class="chip" data-ja="朝日">Sunrise</span><span class="chip" data-ja="トイレ">Toilet</span><span class="chip" data-ja="シャワー">Shower</span></div>
+          <div class="stat-grid">
+            <div class="stat"><div class="k" data-ja="種別">Type</div><div class="v" data-ja="有料キャンプ場">Paid camp</div></div>
+            <div class="stat"><div class="k" data-ja="料金">Fee</div><div class="v" data-ja="現地で確認">Ask on site</div></div>
+          </div>
+          <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=26.17800,127.82920" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+          <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-ja="予約・公式サイト">Book / official site</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+        </div>
+      </details>
+      <details class="card camp wild f-beach f-toilet">
+        <summary class="head">
+          <span class="node"></span>
+          <div class="lead-chip"><div class="d">48</div><div class="m" data-ja="分">MIN</div></div>
+          <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-tent"/></svg></span>
+          <div class="ttl"><div class="t" data-ja="北名城ビーチ">Kita Nashiro Beach</div><div class="sub2" data-ja="野営地 &middot; 糸満市 &middot; <span class=&quot;u&quot; data-metric=&quot;43.1 km&quot; data-imperial=&quot;27 mi&quot;>43.1 km</span>">Wild camp &middot; Itoman &middot; <span class="u" data-metric="43.1 km" data-imperial="27 mi">43.1 km</span></div></div>
+          <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
+        </summary>
+        <div class="content">
+          <figure class="camp-thumb"><img src="images/camps/kita-nashiro-beach.jpg" alt="" loading="lazy" decoding="async" width="720" height="405"></figure>
+          <p class="desc" data-ja="無料、波打ち際のすぐそば、空港からいちばん近いサイト。トイレあり。週末は混み合います。">Free, right on the sand, closest site to the airport. Toilets. Busy at weekends.</p>
+          <div class="chips"><span class="chip" data-ja="ビーチ">Beach</span><span class="chip" data-ja="オーシャンビュー">Ocean view</span><span class="chip" data-ja="夕日">Sunset</span><span class="chip" data-ja="トイレ">Toilet</span></div>
+          <div class="stat-grid">
+            <div class="stat"><div class="k" data-ja="種別">Type</div><div class="v" data-ja="野営地">Wild camp</div></div>
+            <div class="stat"><div class="k" data-ja="料金">Fee</div><div class="v" data-ja="記載なし">None posted</div></div>
+          </div>
+          <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=26.10800,127.66160" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+          <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-ja="予約・公式サイト">Book / official site</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+        </div>
+      </details>
+      <details class="card camp wild f-beach">
+        <summary class="head">
+          <span class="node"></span>
+          <div class="lead-chip"><div class="d">50</div><div class="m" data-ja="分">MIN</div></div>
+          <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-tent"/></svg></span>
+          <div class="ttl"><div class="t" data-ja="久手堅ビーチ">Kudeken Beach</div><div class="sub2" data-ja="野営地 &middot; 南城市 &middot; <span class=&quot;u&quot; data-metric=&quot;38.1 km&quot; data-imperial=&quot;24 mi&quot;>38.1 km</span>">Wild camp &middot; Nanjō &middot; <span class="u" data-metric="38.1 km" data-imperial="24 mi">38.1 km</span></div></div>
+          <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
+        </summary>
+        <div class="content">
+          <figure class="camp-thumb"><img src="images/camps/kudeken-beach.jpg" alt="" loading="lazy" decoding="async" width="720" height="405"></figure>
+          <p class="desc" data-ja="朝日側の無料ビーチ。星空がよく見え、知念岬も車ですぐ。">Free sunrise-side beach, good stargazing, Cape Chinen a short drive on.</p>
+          <div class="chips"><span class="chip" data-ja="ビーチ">Beach</span><span class="chip" data-ja="朝日">Sunrise</span><span class="chip" data-ja="星空">Stargazing</span></div>
+          <div class="stat-grid">
+            <div class="stat"><div class="k" data-ja="種別">Type</div><div class="v" data-ja="野営地">Wild camp</div></div>
+            <div class="stat"><div class="k" data-ja="料金">Fee</div><div class="v" data-ja="記載なし">None posted</div></div>
+          </div>
+          <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=26.16620,127.82560" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+          <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-ja="予約・公式サイト">Book / official site</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+        </div>
+      </details>
       <details class="card camp paid f-toilet f-shower">
         <summary class="head">
           <span class="node"></span>
-          <div class="lead-chip"><div class="d">95</div><div class="m" data-ja="分">MIN</div></div>
+          <div class="lead-chip"><div class="d">53</div><div class="m" data-ja="分">MIN</div></div>
           <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-tent"/></svg></span>
-          <div class="ttl"><div class="t" data-ja="ベースキャンプ">Base Camp</div><div class="sub2" data-ja="有料キャンプ場 &middot; 名護市 &middot; <span class=&quot;u&quot; data-metric=&quot;83.8 km&quot; data-imperial=&quot;52 mi&quot;>83.8 km</span>">Paid camp &middot; Nago &middot; <span class="u" data-metric="83.8 km" data-imperial="52 mi">83.8 km</span></div></div>
+          <div class="ttl"><div class="t" data-ja="ベースキャンプ">Base Camp</div><div class="sub2" data-ja="有料キャンプ場 &middot; 名護市 &middot; <span class=&quot;u&quot; data-metric=&quot;48.1 km&quot; data-imperial=&quot;30 mi&quot;>48.1 km</span>">Paid camp &middot; Nago &middot; <span class="u" data-metric="48.1 km" data-imperial="30 mi">48.1 km</span></div></div>
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
@@ -928,9 +993,9 @@
       <details class="card camp paid f-beach f-toilet f-shower">
         <summary class="head">
           <span class="node"></span>
-          <div class="lead-chip"><div class="d">98</div><div class="m" data-ja="分">MIN</div></div>
+          <div class="lead-chip"><div class="d">57</div><div class="m" data-ja="分">MIN</div></div>
           <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-tent"/></svg></span>
-          <div class="ttl"><div class="t" data-ja="屋我地ビーチ キャンプ場">Yagaji Beach Campsite</div><div class="sub2" data-ja="有料キャンプ場 &middot; 名護市 &middot; <span class=&quot;u&quot; data-metric=&quot;86.3 km&quot; data-imperial=&quot;54 mi&quot;>86.3 km</span>">Paid camp &middot; Nago &middot; <span class="u" data-metric="86.3 km" data-imperial="54 mi">86.3 km</span></div></div>
+          <div class="ttl"><div class="t" data-ja="屋我地ビーチ キャンプ場">Yagaji Beach Campsite</div><div class="sub2" data-ja="有料キャンプ場 &middot; 名護市 &middot; <span class=&quot;u&quot; data-metric=&quot;50.6 km&quot; data-imperial=&quot;31 mi&quot;>50.6 km</span>">Paid camp &middot; Nago &middot; <span class="u" data-metric="50.6 km" data-imperial="31 mi">50.6 km</span></div></div>
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
@@ -948,9 +1013,9 @@
       <details class="card camp wild f-beach">
         <summary class="head">
           <span class="node"></span>
-          <div class="lead-chip"><div class="d">98</div><div class="m" data-ja="分">MIN</div></div>
+          <div class="lead-chip"><div class="d">57</div><div class="m" data-ja="分">MIN</div></div>
           <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-tent"/></svg></span>
-          <div class="ttl"><div class="t" data-ja="稲嶺の野営地">Inamine Camp Spot</div><div class="sub2" data-ja="野営地 &middot; 名護市 &middot; <span class=&quot;u&quot; data-metric=&quot;86.2 km&quot; data-imperial=&quot;54 mi&quot;>86.2 km</span>">Wild camp &middot; Nago &middot; <span class="u" data-metric="86.2 km" data-imperial="54 mi">86.2 km</span></div></div>
+          <div class="ttl"><div class="t" data-ja="稲嶺の野営地">Inamine Camp Spot</div><div class="sub2" data-ja="野営地 &middot; 名護市 &middot; <span class=&quot;u&quot; data-metric=&quot;50.5 km&quot; data-imperial=&quot;31 mi&quot;>50.5 km</span>">Wild camp &middot; Nago &middot; <span class="u" data-metric="50.5 km" data-imperial="31 mi">50.5 km</span></div></div>
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
@@ -972,9 +1037,9 @@
       <details class="card camp wild f-beach">
         <summary class="head">
           <span class="node"></span>
-          <div class="lead-chip"><div class="d">101</div><div class="m" data-ja="分">MIN</div></div>
+          <div class="lead-chip"><div class="d">59</div><div class="m" data-ja="分">MIN</div></div>
           <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-tent"/></svg></span>
-          <div class="ttl"><div class="t" data-ja="屋我地島の野営地">Yagajima Spot</div><div class="sub2" data-ja="野営地 &middot; 名護市 &middot; <span class=&quot;u&quot; data-metric=&quot;87.4 km&quot; data-imperial=&quot;54 mi&quot;>87.4 km</span>">Wild camp &middot; Nago &middot; <span class="u" data-metric="87.4 km" data-imperial="54 mi">87.4 km</span></div></div>
+          <div class="ttl"><div class="t" data-ja="屋我地島の野営地">Yagajima Spot</div><div class="sub2" data-ja="野営地 &middot; 名護市 &middot; <span class=&quot;u&quot; data-metric=&quot;51.7 km&quot; data-imperial=&quot;32 mi&quot;>51.7 km</span>">Wild camp &middot; Nago &middot; <span class="u" data-metric="51.7 km" data-imperial="32 mi">51.7 km</span></div></div>
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
@@ -993,33 +1058,12 @@
           <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-ja="予約・公式サイト">Book / official site</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
       </details>
-      <details class="card camp paid f-toilet f-shower">
-        <summary class="head">
-          <span class="node"></span>
-          <div class="lead-chip"><div class="d">116</div><div class="m" data-ja="分">MIN</div></div>
-          <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-tent"/></svg></span>
-          <div class="ttl"><div class="t" data-ja="古宇利島キャンプ場">Kouri Island Camp Ground</div><div class="sub2" data-ja="有料キャンプ場 &middot; 今帰仁村 &middot; <span class=&quot;u&quot; data-metric=&quot;95.7 km&quot; data-imperial=&quot;59 mi&quot;>95.7 km</span>">Paid camp &middot; Nakijin &middot; <span class="u" data-metric="95.7 km" data-imperial="59 mi">95.7 km</span></div></div>
-          <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
-        </summary>
-        <div class="content">
-          <figure class="camp-thumb"><img src="images/camps/kouri-island-camp-ground.jpg" alt="" loading="lazy" decoding="async" width="720" height="405"></figure>
-          <p class="desc" data-ja="エメラルドの海を望むビーチサイド・マウンテン・VIPサイト。予約可。">Beachside, mountain and VIP pitches over emerald water. Bookable.</p>
-          <div class="chips"><span class="chip pick">Good fit</span><span class="chip" data-ja="オーシャンビュー">Ocean view</span><span class="chip" data-ja="夕日">Sunset</span><span class="chip" data-ja="星空">Stargazing</span><span class="chip" data-ja="トイレ">Toilet</span><span class="chip" data-ja="シャワー">Shower</span></div>
-          <div class="stat-grid">
-            <div class="stat"><div class="k" data-ja="種別">Type</div><div class="v" data-ja="有料キャンプ場">Paid camp</div></div>
-            <div class="stat"><div class="k" data-ja="料金">Fee</div><div class="v" data-ja="現地で確認">Ask on site</div></div>
-          </div>
-          <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=26.70850,128.01800" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-          <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-ja="予約・公式サイト">Book / official site</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-        </div>
-      </details>
-      <h3 class="region" data-ja="大宜味・東<small>北東海岸 &middot; 5件</small>">Ogimi &amp; Higashi<small>North-east coast &middot; 5 sites</small></h3>
       <details class="card camp wild f-beach">
         <summary class="head">
           <span class="node"></span>
-          <div class="lead-chip"><div class="d">105</div><div class="m" data-ja="分">MIN</div></div>
+          <div class="lead-chip"><div class="d">63</div><div class="m" data-ja="分">MIN</div></div>
           <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-tent"/></svg></span>
-          <div class="ttl"><div class="t" data-ja="平南橋">Henan Bridge</div><div class="sub2" data-ja="野営地 &middot; 大宜味村 &middot; <span class=&quot;u&quot; data-metric=&quot;90.6 km&quot; data-imperial=&quot;56 mi&quot;>90.6 km</span>">Wild camp &middot; Ogimi &middot; <span class="u" data-metric="90.6 km" data-imperial="56 mi">90.6 km</span></div></div>
+          <div class="ttl"><div class="t" data-ja="平南橋">Henan Bridge</div><div class="sub2" data-ja="野営地 &middot; 大宜味村 &middot; <span class=&quot;u&quot; data-metric=&quot;54.9 km&quot; data-imperial=&quot;34 mi&quot;>54.9 km</span>">Wild camp &middot; Ogimi &middot; <span class="u" data-metric="54.9 km" data-imperial="34 mi">54.9 km</span></div></div>
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
@@ -1038,9 +1082,9 @@
       <details class="card camp wild f-beach f-toilet">
         <summary class="head">
           <span class="node"></span>
-          <div class="lead-chip"><div class="d">108</div><div class="m" data-ja="分">MIN</div></div>
+          <div class="lead-chip"><div class="d">66</div><div class="m" data-ja="分">MIN</div></div>
           <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-tent"/></svg></span>
-          <div class="ttl"><div class="t" data-ja="津波ビーチの野営地">Tsuha Beach Camp Spot</div><div class="sub2" data-ja="野営地 &middot; 大宜味村 &middot; <span class=&quot;u&quot; data-metric=&quot;92.7 km&quot; data-imperial=&quot;58 mi&quot;>92.7 km</span>">Wild camp &middot; Ogimi &middot; <span class="u" data-metric="92.7 km" data-imperial="58 mi">92.7 km</span></div></div>
+          <div class="ttl"><div class="t" data-ja="津波ビーチの野営地">Tsuha Beach Camp Spot</div><div class="sub2" data-ja="野営地 &middot; 大宜味村 &middot; <span class=&quot;u&quot; data-metric=&quot;57 km&quot; data-imperial=&quot;35 mi&quot;>57 km</span>">Wild camp &middot; Ogimi &middot; <span class="u" data-metric="57 km" data-imperial="35 mi">57 km</span></div></div>
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
@@ -1059,9 +1103,9 @@
       <details class="card camp paid f-beach f-toilet f-shower">
         <summary class="head">
           <span class="node"></span>
-          <div class="lead-chip"><div class="d">109</div><div class="m" data-ja="分">MIN</div></div>
+          <div class="lead-chip"><div class="d">68</div><div class="m" data-ja="分">MIN</div></div>
           <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-tent"/></svg></span>
-          <div class="ttl"><div class="t" data-ja="渡野喜屋キャンプ場">Tonokiya Campsite</div><div class="sub2" data-ja="有料キャンプ場 &middot; 大宜味村 &middot; <span class=&quot;u&quot; data-metric=&quot;93.6 km&quot; data-imperial=&quot;58 mi&quot;>93.6 km</span>">Paid camp &middot; Ogimi &middot; <span class="u" data-metric="93.6 km" data-imperial="58 mi">93.6 km</span></div></div>
+          <div class="ttl"><div class="t" data-ja="渡野喜屋キャンプ場">Tonokiya Campsite</div><div class="sub2" data-ja="有料キャンプ場 &middot; 大宜味村 &middot; <span class=&quot;u&quot; data-metric=&quot;57.9 km&quot; data-imperial=&quot;36 mi&quot;>57.9 km</span>">Paid camp &middot; Ogimi &middot; <span class="u" data-metric="57.9 km" data-imperial="36 mi">57.9 km</span></div></div>
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
@@ -1077,12 +1121,32 @@
           <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-ja="予約・公式サイト">Book / official site</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
       </details>
+      <details class="card camp paid f-toilet f-shower">
+        <summary class="head">
+          <span class="node"></span>
+          <div class="lead-chip"><div class="d">74</div><div class="m" data-ja="分">MIN</div></div>
+          <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-tent"/></svg></span>
+          <div class="ttl"><div class="t" data-ja="古宇利島キャンプ場">Kouri Island Camp Ground</div><div class="sub2" data-ja="有料キャンプ場 &middot; 今帰仁村 &middot; <span class=&quot;u&quot; data-metric=&quot;60 km&quot; data-imperial=&quot;37 mi&quot;>60 km</span>">Paid camp &middot; Nakijin &middot; <span class="u" data-metric="60 km" data-imperial="37 mi">60 km</span></div></div>
+          <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
+        </summary>
+        <div class="content">
+          <figure class="camp-thumb"><img src="images/camps/kouri-island-camp-ground.jpg" alt="" loading="lazy" decoding="async" width="720" height="405"></figure>
+          <p class="desc" data-ja="エメラルドの海を望むビーチサイド・マウンテン・VIPサイト。予約可。">Beachside, mountain and VIP pitches over emerald water. Bookable.</p>
+          <div class="chips"><span class="chip pick">Good fit</span><span class="chip" data-ja="オーシャンビュー">Ocean view</span><span class="chip" data-ja="夕日">Sunset</span><span class="chip" data-ja="星空">Stargazing</span><span class="chip" data-ja="トイレ">Toilet</span><span class="chip" data-ja="シャワー">Shower</span></div>
+          <div class="stat-grid">
+            <div class="stat"><div class="k" data-ja="種別">Type</div><div class="v" data-ja="有料キャンプ場">Paid camp</div></div>
+            <div class="stat"><div class="k" data-ja="料金">Fee</div><div class="v" data-ja="現地で確認">Ask on site</div></div>
+          </div>
+          <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=26.70850,128.01800" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+          <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-ja="予約・公式サイト">Book / official site</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+        </div>
+      </details>
       <details class="card camp wild">
         <summary class="head">
           <span class="node"></span>
-          <div class="lead-chip"><div class="d">116</div><div class="m" data-ja="分">MIN</div></div>
+          <div class="lead-chip"><div class="d">74</div><div class="m" data-ja="分">MIN</div></div>
           <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-tent"/></svg></span>
-          <div class="ttl"><div class="t" data-ja="大保川キャンプ場">Daiboo River Camp</div><div class="sub2" data-ja="野営地 &middot; 大宜味村 &middot; <span class=&quot;u&quot; data-metric=&quot;97.5 km&quot; data-imperial=&quot;61 mi&quot;>97.5 km</span>">Wild camp &middot; Ogimi &middot; <span class="u" data-metric="97.5 km" data-imperial="61 mi">97.5 km</span></div></div>
+          <div class="ttl"><div class="t" data-ja="大保川キャンプ場">Daiboo River Camp</div><div class="sub2" data-ja="野営地 &middot; 大宜味村 &middot; <span class=&quot;u&quot; data-metric=&quot;61.8 km&quot; data-imperial=&quot;38 mi&quot;>61.8 km</span>">Wild camp &middot; Ogimi &middot; <span class="u" data-metric="61.8 km" data-imperial="38 mi">61.8 km</span></div></div>
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
@@ -1105,9 +1169,9 @@
       <details class="card camp paid f-beach f-toilet f-shower">
         <summary class="head">
           <span class="node"></span>
-          <div class="lead-chip"><div class="d">123</div><div class="m" data-ja="分">MIN</div></div>
+          <div class="lead-chip"><div class="d">81</div><div class="m" data-ja="分">MIN</div></div>
           <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-tent"/></svg></span>
-          <div class="ttl"><div class="t" data-ja="福地川海浜公園">Fukuchi River Seaside Park</div><div class="sub2" data-ja="有料キャンプ場 &middot; 東村 &middot; <span class=&quot;u&quot; data-metric=&quot;101.9 km&quot; data-imperial=&quot;63 mi&quot;>101.9 km</span>">Paid camp &middot; Higashi &middot; <span class="u" data-metric="101.9 km" data-imperial="63 mi">101.9 km</span></div></div>
+          <div class="ttl"><div class="t" data-ja="福地川海浜公園">Fukuchi River Seaside Park</div><div class="sub2" data-ja="有料キャンプ場 &middot; 東村 &middot; <span class=&quot;u&quot; data-metric=&quot;66.2 km&quot; data-imperial=&quot;41 mi&quot;>66.2 km</span>">Paid camp &middot; Higashi &middot; <span class="u" data-metric="66.2 km" data-imperial="41 mi">66.2 km</span></div></div>
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
@@ -1123,13 +1187,12 @@
           <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-ja="予約・公式サイト">Book / official site</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
       </details>
-      <h3 class="region" data-ja="やんばる<small>国頭・辺戸岬 &middot; 8件</small>">Yanbaru<small>Kunigami &amp; Cape Hedo &middot; 8 sites</small></h3>
       <details class="card camp wild f-beach f-toilet f-shower">
         <summary class="head">
           <span class="node"></span>
-          <div class="lead-chip"><div class="d">129</div><div class="m" data-ja="分">MIN</div></div>
+          <div class="lead-chip"><div class="d">87</div><div class="m" data-ja="分">MIN</div></div>
           <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-tent"/></svg></span>
-          <div class="ttl"><div class="t" data-ja="コキョウノビーチ">Kokyono Beach</div><div class="sub2" data-ja="野営地 &middot; 国頭村 &middot; <span class=&quot;u&quot; data-metric=&quot;106.5 km&quot; data-imperial=&quot;66 mi&quot;>106.5 km</span>">Wild camp &middot; Kunigami &middot; <span class="u" data-metric="106.5 km" data-imperial="66 mi">106.5 km</span></div></div>
+          <div class="ttl"><div class="t" data-ja="コキョウノビーチ">Kokyono Beach</div><div class="sub2" data-ja="野営地 &middot; 国頭村 &middot; <span class=&quot;u&quot; data-metric=&quot;70.8 km&quot; data-imperial=&quot;44 mi&quot;>70.8 km</span>">Wild camp &middot; Kunigami &middot; <span class="u" data-metric="70.8 km" data-imperial="44 mi">70.8 km</span></div></div>
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
@@ -1148,9 +1211,9 @@
       <details class="card camp wild f-beach">
         <summary class="head">
           <span class="node"></span>
-          <div class="lead-chip"><div class="d">130</div><div class="m" data-ja="分">MIN</div></div>
+          <div class="lead-chip"><div class="d">89</div><div class="m" data-ja="分">MIN</div></div>
           <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-tent"/></svg></span>
-          <div class="ttl"><div class="t" data-ja="辺土名の野営地">Hentona Camp Spot</div><div class="sub2" data-ja="野営地 &middot; 国頭村 &middot; <span class=&quot;u&quot; data-metric=&quot;107.3 km&quot; data-imperial=&quot;67 mi&quot;>107.3 km</span>">Wild camp &middot; Kunigami &middot; <span class="u" data-metric="107.3 km" data-imperial="67 mi">107.3 km</span></div></div>
+          <div class="ttl"><div class="t" data-ja="辺土名の野営地">Hentona Camp Spot</div><div class="sub2" data-ja="野営地 &middot; 国頭村 &middot; <span class=&quot;u&quot; data-metric=&quot;71.6 km&quot; data-imperial=&quot;44 mi&quot;>71.6 km</span>">Wild camp &middot; Kunigami &middot; <span class="u" data-metric="71.6 km" data-imperial="44 mi">71.6 km</span></div></div>
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
@@ -1169,9 +1232,9 @@
       <details class="card camp paid f-toilet f-shower">
         <summary class="head">
           <span class="node"></span>
-          <div class="lead-chip"><div class="d">133</div><div class="m" data-ja="分">MIN</div></div>
+          <div class="lead-chip"><div class="d">91</div><div class="m" data-ja="分">MIN</div></div>
           <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-tent"/></svg></span>
-          <div class="ttl"><div class="t" data-ja="奥間の山あい">Okuma Mountains</div><div class="sub2" data-ja="有料キャンプ場 &middot; 国頭村 &middot; <span class=&quot;u&quot; data-metric=&quot;107.6 km&quot; data-imperial=&quot;67 mi&quot;>107.6 km</span>">Paid camp &middot; Kunigami &middot; <span class="u" data-metric="107.6 km" data-imperial="67 mi">107.6 km</span></div></div>
+          <div class="ttl"><div class="t" data-ja="奥間の山あい">Okuma Mountains</div><div class="sub2" data-ja="有料キャンプ場 &middot; 国頭村 &middot; <span class=&quot;u&quot; data-metric=&quot;71.9 km&quot; data-imperial=&quot;45 mi&quot;>71.9 km</span>">Paid camp &middot; Kunigami &middot; <span class="u" data-metric="71.9 km" data-imperial="45 mi">71.9 km</span></div></div>
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
@@ -1190,9 +1253,9 @@
       <details class="card camp wild">
         <summary class="head">
           <span class="node"></span>
-          <div class="lead-chip"><div class="d">142</div><div class="m" data-ja="分">MIN</div></div>
+          <div class="lead-chip"><div class="d">101</div><div class="m" data-ja="分">MIN</div></div>
           <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-tent"/></svg></span>
-          <div class="ttl"><div class="t" data-ja="辺野喜の野営地">Benoki Camp Spot</div><div class="sub2" data-ja="野営地 &middot; 国頭村 &middot; <span class=&quot;u&quot; data-metric=&quot;115.3 km&quot; data-imperial=&quot;72 mi&quot;>115.3 km</span>">Wild camp &middot; Kunigami &middot; <span class="u" data-metric="115.3 km" data-imperial="72 mi">115.3 km</span></div></div>
+          <div class="ttl"><div class="t" data-ja="辺野喜の野営地">Benoki Camp Spot</div><div class="sub2" data-ja="野営地 &middot; 国頭村 &middot; <span class=&quot;u&quot; data-metric=&quot;79.6 km&quot; data-imperial=&quot;49 mi&quot;>79.6 km</span>">Wild camp &middot; Kunigami &middot; <span class="u" data-metric="79.6 km" data-imperial="49 mi">79.6 km</span></div></div>
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
@@ -1211,9 +1274,9 @@
       <details class="card camp paid f-toilet f-shower">
         <summary class="head">
           <span class="node"></span>
-          <div class="lead-chip"><div class="d">164</div><div class="m" data-ja="分">MIN</div></div>
+          <div class="lead-chip"><div class="d">122</div><div class="m" data-ja="分">MIN</div></div>
           <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-tent"/></svg></span>
-          <div class="ttl"><div class="t" data-ja="やんばる学びの森">Yanbaru Discovery Forest</div><div class="sub2" data-ja="有料キャンプ場 &middot; 国頭村 &middot; <span class=&quot;u&quot; data-metric=&quot;123.4 km&quot; data-imperial=&quot;77 mi&quot;>123.4 km</span>">Paid camp &middot; Kunigami &middot; <span class="u" data-metric="123.4 km" data-imperial="77 mi">123.4 km</span></div></div>
+          <div class="ttl"><div class="t" data-ja="やんばる学びの森">Yanbaru Discovery Forest</div><div class="sub2" data-ja="有料キャンプ場 &middot; 国頭村 &middot; <span class=&quot;u&quot; data-metric=&quot;87.7 km&quot; data-imperial=&quot;54 mi&quot;>87.7 km</span>">Paid camp &middot; Kunigami &middot; <span class="u" data-metric="87.7 km" data-imperial="54 mi">87.7 km</span></div></div>
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
@@ -1232,9 +1295,9 @@
       <details class="card camp wild f-beach">
         <summary class="head">
           <span class="node"></span>
-          <div class="lead-chip"><div class="d">172</div><div class="m" data-ja="分">MIN</div></div>
+          <div class="lead-chip"><div class="d">131</div><div class="m" data-ja="分">MIN</div></div>
           <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-tent"/></svg></span>
-          <div class="ttl"><div class="t" data-ja="安波（やんばる）">Aha, Yanbaru</div><div class="sub2" data-ja="野営地 &middot; 国頭村 &middot; <span class=&quot;u&quot; data-metric=&quot;126.1 km&quot; data-imperial=&quot;78 mi&quot;>126.1 km</span>">Wild camp &middot; Kunigami &middot; <span class="u" data-metric="126.1 km" data-imperial="78 mi">126.1 km</span></div></div>
+          <div class="ttl"><div class="t" data-ja="安波（やんばる）">Aha, Yanbaru</div><div class="sub2" data-ja="野営地 &middot; 国頭村 &middot; <span class=&quot;u&quot; data-metric=&quot;90.4 km&quot; data-imperial=&quot;56 mi&quot;>90.4 km</span>">Wild camp &middot; Kunigami &middot; <span class="u" data-metric="90.4 km" data-imperial="56 mi">90.4 km</span></div></div>
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
@@ -1253,9 +1316,9 @@
       <details class="card camp wild f-beach">
         <summary class="head">
           <span class="node"></span>
-          <div class="lead-chip"><div class="d">173</div><div class="m" data-ja="分">MIN</div></div>
+          <div class="lead-chip"><div class="d">132</div><div class="m" data-ja="分">MIN</div></div>
           <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-tent"/></svg></span>
-          <div class="ttl"><div class="t" data-ja="奥のビーチロード">Oku Beach Road</div><div class="sub2" data-ja="野営地 &middot; 国頭村 &middot; <span class=&quot;u&quot; data-metric=&quot;132.6 km&quot; data-imperial=&quot;82 mi&quot;>132.6 km</span>">Wild camp &middot; Kunigami &middot; <span class="u" data-metric="132.6 km" data-imperial="82 mi">132.6 km</span></div></div>
+          <div class="ttl"><div class="t" data-ja="奥のビーチロード">Oku Beach Road</div><div class="sub2" data-ja="野営地 &middot; 国頭村 &middot; <span class=&quot;u&quot; data-metric=&quot;96.9 km&quot; data-imperial=&quot;60 mi&quot;>96.9 km</span>">Wild camp &middot; Kunigami &middot; <span class="u" data-metric="96.9 km" data-imperial="60 mi">96.9 km</span></div></div>
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
@@ -1274,9 +1337,9 @@
       <details class="card camp paid f-beach f-toilet f-shower">
         <summary class="head">
           <span class="node"></span>
-          <div class="lead-chip"><div class="d">174</div><div class="m" data-ja="分">MIN</div></div>
+          <div class="lead-chip"><div class="d">133</div><div class="m" data-ja="分">MIN</div></div>
           <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-tent"/></svg></span>
-          <div class="ttl"><div class="t" data-ja="アダンビーチ キャンプ場">Adan Beach Campsite</div><div class="sub2" data-ja="有料キャンプ場 &middot; 国頭村 &middot; <span class=&quot;u&quot; data-metric=&quot;131.1 km&quot; data-imperial=&quot;81 mi&quot;>131.1 km</span>">Paid camp &middot; Kunigami &middot; <span class="u" data-metric="131.1 km" data-imperial="81 mi">131.1 km</span></div></div>
+          <div class="ttl"><div class="t" data-ja="アダンビーチ キャンプ場">Adan Beach Campsite</div><div class="sub2" data-ja="有料キャンプ場 &middot; 国頭村 &middot; <span class=&quot;u&quot; data-metric=&quot;95.4 km&quot; data-imperial=&quot;59 mi&quot;>95.4 km</span>">Paid camp &middot; Kunigami &middot; <span class="u" data-metric="95.4 km" data-imperial="59 mi">95.4 km</span></div></div>
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
@@ -1298,296 +1361,9 @@
       </details>
     </div>
     <p class="empty-note jsonly" id="campEmpty" hidden data-ja="条件に合うキャンプ場はありません。">No campsites match that filter.</p>
-    <div class="footer" data-ja="所要時間は OSRM による渋滞なしの値 &mdash; 連休の渋滞時は20&ndash;40分を加え、高速料金は片道約&yen;1,000を見込んでください。データ出典 directory.evertrailokinawa.com">Free-flow drive times via OSRM &mdash; add 20&ndash;40 min in holiday traffic, and budget
-      about &yen;1,000 each way in expressway tolls. Data from directory.evertrailokinawa.com</div>
-  </section>
-
-  <section class="view" id="view-eat">
-    <h2 class="section"><svg class="ic" aria-hidden="true"><use href="#i-teacup"/></svg><span data-ja="食べる">Eat</span></h2>
-    <p class="intro" data-ja="かき氷、カフェ、お土産スイーツ。いずれも3日間の日程で営業を確認済みです。数字は、そのドライブに
-      組み込みやすい日を示しています。三連休なので、有名店には行列ができます。">Shaved ice, cafes and sweets, all checked open on our three dates. The day number is where each
-      one fits the drive. It is a long weekend, so the famous ones will have a queue.</p>
-    <div class="toolbar">
-      <div class="seg lang-toggle jsonly" role="group" aria-label="Language"><button type="button" data-lang="en" class="active">EN</button><button type="button" data-lang="ja">日本語</button></div>
-    </div>
-    <div class="spine" id="eat">
-      <h3 class="region" data-ja="かき氷・ぜんざい<small>6軒</small>">Kakigori &amp; zenzai<small>6 spots</small></h3>
-      <details class="card eat">
-        <summary class="head">
-          <span class="node"></span>
-          <div class="lead-chip"><div class="d">1</div><div class="m" data-ja="日目">DAY</div></div>
-          <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-bowl"/></svg></span>
-          <div class="ttl"><div class="t" data-ja="三矢 道の駅許田店">Mitsuya, Michi-no-eki Kyoda</div><div class="sub2" data-ja="名護市">三矢 &middot; Nago</div></div>
-          <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
-        </summary>
-        <div class="content">
-          <p class="desc" data-ja="揚げたてのサーターアンダギーが&yen;150。スイーツ百名店2026、美ら海水族館の割引チケットもここで買えます。">Fried-to-order sata andagi, &yen;150. Sweets Hyakumeiten 2026, and the Churaumi discount tickets are sold here.</p>
-          <div class="stat-grid">
-            <div class="stat"><div class="k" data-ja="おすすめ">Order</div><div class="v" data-ja="サーターアンダギー &yen;150">Sata andagi &yen;150</div></div>
-            <div class="stat"><div class="k" data-ja="営業時間">Hours</div><div class="v" data-ja="09:00&ndash;19:00 &middot; 定休日なし">09:00&ndash;19:00 &middot; never closed</div></div>
-          </div>
-          <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=26.55202,127.97000" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-        </div>
-      </details>
-      <details class="card eat">
-        <summary class="head">
-          <span class="node"></span>
-          <div class="lead-chip"><div class="d">1</div><div class="m" data-ja="日目">DAY</div></div>
-          <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-bowl"/></svg></span>
-          <div class="ttl"><div class="t" data-ja="ひがし食堂">Higashi Shokudo</div><div class="sub2" data-ja="名護市">ひがし食堂 &middot; Nago</div></div>
-          <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
-        </summary>
-        <div class="content">
-          <p class="desc" data-ja="創業50年の食堂。ミルクぜんざいは名護の定番です。">Fifty-year-old shokudo whose milk zenzai is a Nago institution.</p>
-          <div class="stat-grid">
-            <div class="stat"><div class="k" data-ja="おすすめ">Order</div><div class="v" data-ja="ミルクぜんざい &yen;480">Milk zenzai &yen;480</div></div>
-            <div class="stat"><div class="k" data-ja="営業時間">Hours</div><div class="v" data-ja="11:00&ndash;18:30 &middot; 駐車3台">11:00&ndash;18:30 &middot; 3 spaces</div></div>
-          </div>
-          <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=26.58882,127.98867" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-        </div>
-      </details>
-      <details class="card eat">
-        <summary class="head">
-          <span class="node"></span>
-          <div class="lead-chip"><div class="d">2</div><div class="m" data-ja="日目">DAY</div></div>
-          <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-bowl"/></svg></span>
-          <div class="ttl"><div class="t" data-ja="新垣ぜんざい屋">Aragaki Zenzai</div><div class="sub2" data-ja="本部町">新垣ぜんざい屋 &middot; Motobu</div></div>
-          <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
-        </summary>
-        <div class="content">
-          <p class="desc" data-ja="1948年から一品のみ、豆は薪で炊き上げます。美ら海水族館から10分。">One item since 1948, beans cooked over a wood fire. Ten minutes from Churaumi.</p>
-          <div class="stat-grid">
-            <div class="stat"><div class="k" data-ja="おすすめ">Order</div><div class="v" data-ja="氷ぜんざい &yen;350">Ice zenzai &yen;350</div></div>
-            <div class="stat"><div class="k" data-ja="営業時間">Hours</div><div class="v" data-ja="12:00&ndash;18:00 &middot; 売り切れ次第終了 &middot; 駐車場なし">12:00&ndash;18:00 &middot; sells out &middot; no car park</div></div>
-          </div>
-          <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=26.66064,127.89584" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-        </div>
-      </details>
-      <details class="card eat">
-        <summary class="head">
-          <span class="node"></span>
-          <div class="lead-chip"><div class="d">3</div><div class="m" data-ja="日目">DAY</div></div>
-          <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-bowl"/></svg></span>
-          <div class="ttl"><div class="t" data-ja="琉冰 おんなの駅">Ryupin, Onna-no-Eki</div><div class="sub2" data-ja="恩納村">琉冰 &middot; Onna</div></div>
-          <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
-        </summary>
-        <div class="content">
-          <p class="desc" data-ja="沖縄のかき氷を象徴するマンゴーのアイスマウンテン。スイーツ百名店2026。">The mango ice mountain that defines Okinawan shaved ice. Hyakumeiten 2026.</p>
-          <div class="stat-grid">
-            <div class="stat"><div class="k" data-ja="おすすめ">Order</div><div class="v" data-ja="アイスマウンテン 約&yen;1,500から">Ice Mountain from ~&yen;1,500</div></div>
-            <div class="stat"><div class="k" data-ja="営業時間">Hours</div><div class="v" data-ja="10:00&ndash;19:00 &middot; 無料駐車104台">10:00&ndash;19:00 &middot; 104 free spaces</div></div>
-          </div>
-          <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=26.43625,127.79471" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-        </div>
-      </details>
-      <details class="card eat">
-        <summary class="head">
-          <span class="node"></span>
-          <div class="lead-chip"><div class="d">3</div><div class="m" data-ja="日目">DAY</div></div>
-          <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-bowl"/></svg></span>
-          <div class="ttl"><div class="t" data-ja="鶴亀堂ぜんざい">Tsurukamedo Zenzai</div><div class="sub2" data-ja="読谷村">鶴亀堂ぜんざい &middot; Yomitan</div></div>
-          <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
-        </summary>
-        <div class="content">
-          <p class="desc" data-ja="座喜味城跡の入口。きめ細かい氷に読谷の紫芋。">At the Zakimi Castle gate; fine ice with Yomitan purple sweet potato.</p>
-          <div class="stat-grid">
-            <div class="stat"><div class="k" data-ja="おすすめ">Order</div><div class="v" data-ja="紅イモ黒糖ぜんざい 約&yen;580">Beni-imo kokuto zenzai ~&yen;580</div></div>
-            <div class="stat"><div class="k" data-ja="営業時間">Hours</div><div class="v" data-ja="11:00&ndash;17:00 &middot; 火・水定休">11:00&ndash;17:00 &middot; closed Tue &amp; Wed</div></div>
-          </div>
-          <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=26.40621,127.74230" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-        </div>
-      </details>
-      <details class="card eat">
-        <summary class="head">
-          <span class="node"></span>
-          <div class="lead-chip"><div class="d">3</div><div class="m" data-ja="日目">DAY</div></div>
-          <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-bowl"/></svg></span>
-          <div class="ttl"><div class="t" data-ja="氷ヲ刻メ">Kori wo Kizame</div><div class="sub2" data-ja="北谷町">氷ヲ刻メ &middot; Chatan</div></div>
-          <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
-        </summary>
-        <div class="content">
-          <p class="desc" data-ja="中部で唯一の本格モダンかき氷店。12席だけで、売り切れます。">The one serious modern kakigori shop in the centre. Twelve seats and it sells out.</p>
-          <div class="stat-grid">
-            <div class="stat"><div class="k" data-ja="おすすめ">Order</div><div class="v" data-ja="塩キャラメルグラノーラ &yen;800">Salt caramel granola &yen;800</div></div>
-            <div class="stat"><div class="k" data-ja="営業時間">Hours</div><div class="v" data-ja="11:00から売り切れ次第終了 &middot; 水曜定休">11:00 till the ice runs out &middot; closed Wed</div></div>
-          </div>
-          <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=26.32753,127.75177" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-        </div>
-      </details>
-      <h3 class="region" data-ja="カフェ<small>6軒</small>">Cafes<small>6 spots</small></h3>
-      <details class="card eat">
-        <summary class="head">
-          <span class="node"></span>
-          <div class="lead-chip"><div class="d">2</div><div class="m" data-ja="日目">DAY</div></div>
-          <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-teacup"/></svg></span>
-          <div class="ttl"><div class="t" data-ja="花人逢">Kajinho</div><div class="sub2" data-ja="本部町">花人逢 &middot; Motobu</div></div>
-          <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
-        </summary>
-        <div class="content">
-          <p class="desc" data-ja="伊江島を望む丘の上の赤瓦の民家。本島でいちばん写真に撮られる絶景カフェ。">Hilltop red-tiled house looking out to Ie-jima. The most photographed view cafe on the island.</p>
-          <div class="stat-grid">
-            <div class="stat"><div class="k" data-ja="おすすめ">Order</div><div class="v" data-ja="ピザ（小）&yen;1,500">Pizza (small) &yen;1,500</div></div>
-            <div class="stat"><div class="k" data-ja="営業時間">Hours</div><div class="v" data-ja="11:30&ndash;19:00 &middot; 火・水定休">11:30&ndash;19:00 &middot; closed Tue &amp; Wed</div></div>
-          </div>
-          <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=26.66859,127.90082" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-        </div>
-      </details>
-      <details class="card eat">
-        <summary class="head">
-          <span class="node"></span>
-          <div class="lead-chip"><div class="d">2</div><div class="m" data-ja="日目">DAY</div></div>
-          <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-teacup"/></svg></span>
-          <div class="ttl"><div class="t" data-ja="cafe CAHAYA BULAN">Cafe Cahaya Bulan</div><div class="sub2" data-ja="本部町">チャハヤブラン &middot; Motobu</div></div>
-          <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
-        </summary>
-        <div class="content">
-          <p class="desc" data-ja="備瀬のフクギ並木の中、砂地のテラスから伊江島を望みます。08:00開店。">Terrace on the sand inside the Bise fukugi grove, facing Ie-jima. Opens at 08:00.</p>
-          <div class="stat-grid">
-            <div class="stat"><div class="k" data-ja="おすすめ">Order</div><div class="v" data-ja="パンケーキ">Pancakes</div></div>
-            <div class="stat"><div class="k" data-ja="営業時間">Hours</div><div class="v">08:00&ndash;18:00</div></div>
-          </div>
-          <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=26.70213,127.87989" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-        </div>
-      </details>
-      <details class="card eat">
-        <summary class="head">
-          <span class="node"></span>
-          <div class="lead-chip"><div class="d">2</div><div class="m" data-ja="日目">DAY</div></div>
-          <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-teacup"/></svg></span>
-          <div class="ttl"><div class="t" data-ja="亜熱帯茶屋">Anettai Chaya</div><div class="sub2" data-ja="本部町">亜熱帯茶屋 &middot; Motobu</div></div>
-          <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
-        </summary>
-        <div class="content">
-          <p class="desc" data-ja="斜面に吊られたハンモック席と、ほかでは飲めないぶくぶく茶。">Hammock seats on a hillside, and bukubuku-cha you will not find elsewhere.</p>
-          <div class="stat-grid">
-            <div class="stat"><div class="k" data-ja="おすすめ">Order</div><div class="v" data-ja="ぶくぶく茶">Bukubuku-cha</div></div>
-            <div class="stat"><div class="k" data-ja="営業時間">Hours</div><div class="v" data-ja="11:00&ndash;18:30 &middot; 木曜定休">11:00&ndash;18:30 &middot; closed Thu</div></div>
-          </div>
-          <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=26.66711,127.90033" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-        </div>
-      </details>
-      <details class="card eat">
-        <summary class="head">
-          <span class="node"></span>
-          <div class="lead-chip"><div class="d">3</div><div class="m" data-ja="日目">DAY</div></div>
-          <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-teacup"/></svg></span>
-          <div class="ttl"><div class="t" data-ja="バンタカフェ">Banta Cafe</div><div class="sub2" data-ja="読谷村">バンタカフェ &middot; Yomitan</div></div>
-          <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
-        </summary>
-        <div class="content">
-          <p class="desc" data-ja="岩場に建つ星野リゾートの断崖カフェ。屋外160席、日没から1時間で閉店。">Hoshino Resorts cliff cafe built into the rocks; 160 outdoor seats, shuts an hour after sunset.</p>
-          <div class="stat-grid">
-            <div class="stat"><div class="k" data-ja="おすすめ">Order</div><div class="v" data-ja="ジェラート、スイーツ">Gelato, sweets</div></div>
-            <div class="stat"><div class="k" data-ja="営業時間">Hours</div><div class="v" data-ja="祝日は8:00から &middot; 駐車77台">From 08:00 on holidays &middot; 77 spaces</div></div>
-          </div>
-          <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=26.41772,127.71401" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-        </div>
-      </details>
-      <details class="card eat">
-        <summary class="head">
-          <span class="node"></span>
-          <div class="lead-chip"><div class="d">3</div><div class="m" data-ja="日目">DAY</div></div>
-          <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-teacup"/></svg></span>
-          <div class="ttl"><div class="t" data-ja="THE CALIF KITCHEN">The Calif Kitchen</div><div class="sub2" data-ja="北谷町">カリフキッチン &middot; Chatan</div></div>
-          <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
-        </summary>
-        <div class="content">
-          <p class="desc" data-ja="アメリカンビレッジのルーフトップ。目線の高さに海が広がります。">Rooftop over American Village with the sea at eye level.</p>
-          <div class="stat-grid">
-            <div class="stat"><div class="k" data-ja="おすすめ">Order</div><div class="v" data-ja="パンケーキ、かき氷">Pancakes, kakigori</div></div>
-            <div class="stat"><div class="k" data-ja="営業時間">Hours</div><div class="v">08:00&ndash;22:00</div></div>
-          </div>
-          <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=26.31574,127.75377" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-        </div>
-      </details>
-      <details class="card eat">
-        <summary class="head">
-          <span class="node"></span>
-          <div class="lead-chip"><div class="d">3</div><div class="m" data-ja="日目">DAY</div></div>
-          <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-teacup"/></svg></span>
-          <div class="ttl"><div class="t" data-ja="ZHYVAGO COFFEE ROASTERY">Zhyvago Coffee Roastery</div><div class="sub2" data-ja="北谷町">ジバゴ &middot; Chatan</div></div>
-          <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
-        </summary>
-        <div class="content">
-          <p class="desc" data-ja="150席、07:00&ndash;22:00 &mdash; シーウォール店が混み合うときの確実な代替。">150 seats, 07:00&ndash;22:00 &mdash; the reliable fallback when the seawall branch is mobbed.</p>
-          <div class="stat-grid">
-            <div class="stat"><div class="k" data-ja="おすすめ">Order</div><div class="v" data-ja="コーヒー、ケーキ">Coffee, cake</div></div>
-            <div class="stat"><div class="k" data-ja="営業時間">Hours</div><div class="v">07:00&ndash;22:00</div></div>
-          </div>
-          <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=26.31583,127.75375" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-        </div>
-      </details>
-      <h3 class="region" data-ja="お土産スイーツ<small>4軒</small>">Sweets to take home<small>4 spots</small></h3>
-      <details class="card eat">
-        <summary class="head">
-          <span class="node"></span>
-          <div class="lead-chip"><div class="d">3</div><div class="m" data-ja="日目">DAY</div></div>
-          <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-gift"/></svg></span>
-          <div class="ttl"><div class="t" data-ja="御菓子御殿 読谷本店">Okashi Goten, Yomitan</div><div class="sub2" data-ja="読谷村">御菓子御殿 &middot; Yomitan</div></div>
-          <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
-        </summary>
-        <div class="content">
-          <p class="desc" data-ja="紅イモタルトの元祖。本店には工場の見学窓もあります。">The original beni-imo tart, at the flagship with a factory window.</p>
-          <div class="stat-grid">
-            <div class="stat"><div class="k" data-ja="おすすめ">Order</div><div class="v" data-ja="紅イモタルト（箱入り）">Beni-imo tart, boxed</div></div>
-            <div class="stat"><div class="k" data-ja="営業時間">Hours</div><div class="v" data-ja="09:00&ndash;21:00 &middot; 定休日なし &middot; 駐車40台">09:00&ndash;21:00 &middot; never closed &middot; 40 spaces</div></div>
-          </div>
-          <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=26.43275,127.71874" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-        </div>
-      </details>
-      <details class="card eat">
-        <summary class="head">
-          <span class="node"></span>
-          <div class="lead-chip"><div class="d">3</div><div class="m" data-ja="日目">DAY</div></div>
-          <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-gift"/></svg></span>
-          <div class="ttl"><div class="t" data-ja="ブルーシール 牧港本店">Blue Seal, Makiminato</div><div class="sub2" data-ja="浦添市">ブルーシール牧港本店 &middot; Urasoe</div></div>
-          <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
-        </summary>
-        <div class="content">
-          <p class="desc" data-ja="1963年創業の本店、レトロなダイナー内装。紅イモと塩ちんすこうのスクープ。">The 1963 flagship with a retro diner interior. Beni-imo and salt-chinsuko scoops.</p>
-          <div class="stat-grid">
-            <div class="stat"><div class="k" data-ja="おすすめ">Order</div><div class="v" data-ja="シングルコーン">Single cone</div></div>
-            <div class="stat"><div class="k" data-ja="営業時間">Hours</div><div class="v" data-ja="10:00&ndash;22:00 &middot; 定休日なし &middot; 駐車50台">10:00&ndash;22:00 &middot; never closed &middot; 50 spaces</div></div>
-          </div>
-          <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=26.26734,127.72144" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-        </div>
-      </details>
-      <details class="card eat">
-        <summary class="head">
-          <span class="node"></span>
-          <div class="lead-chip"><div class="d">3</div><div class="m" data-ja="日目">DAY</div></div>
-          <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-gift"/></svg></span>
-          <div class="ttl"><div class="t" data-ja="oHacorte 港川本店">oHacorte, Minatogawa</div><div class="sub2" data-ja="浦添市">オハコルテ &middot; Urasoe</div></div>
-          <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
-        </summary>
-        <div class="content">
-          <p class="desc" data-ja="外国人住宅街のフルーツタルト &mdash; 寄り道そのものが絵になります。">Fruit tarts in the old American housing district &mdash; a photogenic detour in itself.</p>
-          <div class="stat-grid">
-            <div class="stat"><div class="k" data-ja="おすすめ">Order</div><div class="v" data-ja="季節のフルーツタルト 約&yen;680">Seasonal fruit tart ~&yen;680</div></div>
-            <div class="stat"><div class="k" data-ja="営業時間">Hours</div><div class="v" data-ja="11:30&ndash;19:00 &middot; 火曜定休 &middot; 駐車3台">11:30&ndash;19:00 &middot; closed Tue &middot; 3 spaces</div></div>
-          </div>
-          <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=26.26250,127.71537" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-        </div>
-      </details>
-      <details class="card eat">
-        <summary class="head">
-          <span class="node"></span>
-          <div class="lead-chip"><div class="d">3</div><div class="m" data-ja="日目">DAY</div></div>
-          <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-gift"/></svg></span>
-          <div class="ttl"><div class="t">ippe coppe</div><div class="sub2" data-ja="浦添市">イッペコッペ &middot; Urasoe</div></div>
-          <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
-        </summary>
-        <div class="content">
-          <p class="desc" data-ja="天然酵母のパンとスコーン。キャンプ旅のお土産に最適 &mdash; 冷蔵いらずです。">Naturally leavened bread and scones. The best edible souvenir for a camping trip &mdash; no fridge needed.</p>
-          <div class="stat-grid">
-            <div class="stat"><div class="k" data-ja="おすすめ">Order</div><div class="v" data-ja="食パン、スコーン">Shokupan, scones</div></div>
-            <div class="stat"><div class="k" data-ja="営業時間">Hours</div><div class="v" data-ja="12:30&ndash;18:30 &middot; 売り切れ次第終了 &middot; 火・水定休">12:30&ndash;18:30 &middot; sells out &middot; closed Tue &amp; Wed</div></div>
-          </div>
-          <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=26.26258,127.71570" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-        </div>
-      </details>
-    </div>
-    <div class="footer" data-ja="出典は食べログ、おきなわ物語、各店公式サイト &middot; 長距離の移動前に営業時間を確認してください">Sourced from Tabelog, Okinawa Story and shop sites &middot; verify hours before a long drive</div>
+    <div class="footer" data-ja="所要時間はEvertrail営業所からのOSRMによる渋滞なしの値 &mdash; 連休の渋滞時は20&ndash;40分を
+      加えてください。データ出典 directory.evertrailokinawa.com">Free-flow drive times from the Evertrail office via OSRM &mdash; add 20&ndash;40 min in
+      holiday traffic. Data from directory.evertrailokinawa.com</div>
   </section>
 
   <section class="view" id="view-packing">
@@ -1664,7 +1440,6 @@
   <div class="tabbar-inner">
     <label class="tabbtn" for="tab-itinerary"><svg class="ic ic-tab" aria-hidden="true"><use href="#i-calendar"/></svg><span class="lb" data-ja="日程">Itinerary</span></label>
     <label class="tabbtn" for="tab-camps"><svg class="ic ic-tab" aria-hidden="true"><use href="#i-tent"/></svg><span class="lb" data-ja="キャンプ場">Camps</span></label>
-    <label class="tabbtn" for="tab-eat"><svg class="ic ic-tab" aria-hidden="true"><use href="#i-teacup"/></svg><span class="lb" data-ja="食べる">Eat</span></label>
     <label class="tabbtn" for="tab-packing"><svg class="ic ic-tab" aria-hidden="true"><use href="#i-backpack"/></svg><span class="lb" data-ja="持ち物">Packing</span></label>
   </div>
 </nav>

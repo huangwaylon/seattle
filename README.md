@@ -6,8 +6,8 @@ A self-contained, offline-first travel itinerary for an October 2026 camping roa
 
 ## Features
 - 3-day itinerary, logistics cards (flights, the Jimny, weather & hazards), and an editable packing list.
-- **Campsites tab** — all 26 drivable main-island campsites with photos, ordered by real road time from Naha Airport, filterable by free / paid / beach / toilet / shower.
-- **Eat tab** — kakigori, cafes and sweets sourced from Japanese guides, each checked open on the trip dates and tagged with the day it fits.
+- **Campsites tab** — all 26 drivable main-island campsites with photos, ordered by real road time from the Evertrail office where the car is collected, filterable by free / paid / beach / toilet / shower.
+- **Worth a Detour** — nature spots, kakigori and cafes at the foot of the itinerary, sourced from Japanese guides and checked open on the trip dates.
 - Works **fully offline** once installed (service worker caches everything).
 - **Metric ⇄ imperial toggle** swaps every distance and temperature; the choice persists.
 - **English ⇄ 日本語 toggle** — the whole app is translated, guidebook-style; the choice persists.
