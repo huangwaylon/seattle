@@ -142,7 +142,8 @@ intact, and the no-JS path still shows a real map with all three days and every 
 - **Data.** Coastline = OSM `natural=coastline` via Overpass, stitched into closed rings, keeping the
   24 rings with area ≥ 18 px² inside the window. Routes = one **OSRM driving leg per pair of
   consecutive stops**, so the lines follow real roads; the two snorkel-boat legs and the airport bus legs
-  are straight dashed lines instead. OSRM's per-leg minutes are also what the itinerary's drive times
+  are straight dashed lines instead, and so is the ~870 m walk between the office and Okinawa Kita IC
+  (`KIND` marks it `'walk'` — its car route loops 13 km onto the expressway and would draw a lie). OSRM's per-leg minutes are also what the itinerary's drive times
   were checked against (all within a minute or two). Both sources need attribution — the footer credits
   OSRM and OpenStreetMap, keep it.
 - **Colour = day.** `--sun` (a new token) is day 3, alongside `--sea` (day 1) and `--coral` (day 2).
@@ -154,18 +155,19 @@ intact, and the no-JS path still shows a real map with all three days and every 
   `data-food`. All the show/hide is CSS keyed off those, scoped under `.js-tabs` so the absence of the
   attributes (the no-JS case) means "show everything". The JS sets nothing else except the state
   classes `.past` / `.now` / `.future` / `.sel`.
-- **The map and its clock pin to the top** (`.mapstick`, `position:sticky`) so the stop list scrolls
-  against them. `svg.map` is capped at `calc(62vh - 60px)` so the pinned pair leaves room for about
-  four rows on a phone — without that cap a tall map fills the viewport and sticky buys nothing. The
-  day and layer chips deliberately scroll away; only the map and clock pin.
-- **The clock** (`#timeScrub`) is a range input over the selected day's first-to-last stop, in minutes.
-  It **starts at the top of the day and resets there on every day switch**, so the opening view is always
-  "here is the day ahead": the first stop gets `.now` (ring + label) and the whole route reads `.future`
-  (faded to .34 — deliberately still legible, since this is the default state, not an edge case). Drag
-  forward and stops behind you go `.past` (hollow) while driven legs come up to full. **Selecting a stop
-  also moves the clock to it** — from the map pin or from the row, since they are the same thing; a
-  candidate pin has no time and leaves the clock alone. During Oct 10–12 2026 the tab opens on today at
-  the current time instead.
+- **The map pins to the top** (`.mapstick`, `position:sticky`) so the stop list scrolls against it.
+  `.mapstick` exists to carry the page background — without it, rows would show through the gutters
+  beside the card. `svg.map` is capped at `max-height:66vh` so the pinned map leaves room for a few
+  rows; without a cap it fills the viewport and sticky buys nothing. The day and layer chips
+  deliberately scroll away.
+- **There is no time slider.** Tapping a stop — a pin on the map or a row in the list — is the only
+  clock. The tapped stop is `.now` (ring + label), everything earlier on the day goes grey
+  (`--faint`) via `.stop.past` / `.leg.done` / `li.past`, and the day's colour is only ever what is
+  still ahead. A day opens at its first stop, so the default view is "here is the day ahead"; during
+  Oct 10–12 2026 it opens at the stop you should be at by now. A candidate pin has no time, so it
+  highlights without disturbing the day. Where a day doubles back — Day 3 drives the west coast south
+  and the bus takes it north again — the ahead leg paints over the done one, which is the more useful
+  of the two.
 - **Pins are not focusable.** The SVG is one `role="img"` with a `<title>`, because 67 tab stops would
   swamp the keyboard order; the stop rows below the map are the keyboard path, and candidate names all
   exist in the Campsites and Nearby cards. Each pin does carry a wide invisible `circle.hit`, so the
@@ -223,8 +225,8 @@ Two constraints worth remembering:
 1. Edit `index.html` directly — itinerary days, logistics cards, campsites, and the packing list's
    seed rows are plain HTML.
    - **Day cards:** `<details class="card day">` inside `#days`, each with an hour-by-hour
-     `<ul class="tl">`. The things that will actually bite us (closing days, the 17:30 airport car
-     return, habu season) go in a plain `<small>` under the line they belong to — there are no callouts.
+     `<ul class="tl">`. The things that will actually bite us (closing days, the 18:00 office close on
+     the car return, habu season) go in a plain `<small>` under the line they belong to — no callouts.
    - **Logistics cards:** `<details class="card travel">` (Flights, The Jimny, Know Before You Go)
      in the second `.spine` under the "Logistics" heading.
    - **Campsite cards:** `<details class="card camp wild|paid f-beach f-toilet f-shower">` in one flat
@@ -250,6 +252,10 @@ Two constraints worth remembering:
 ### Google Maps links — how they were built
 
 Every link points at a real place, never a coordinate. Three tiers, in descending precision:
+
+Every campsite card used to carry a second "Book / official site" link pointing at `#i-tent` — a sprite
+id, not a URL, so 26 dead links. The directory has no per-site page, so they were removed; the Maps link
+is the only one a campsite gets.
 
 1. **Campsites (26)** — the Evertrail directory's own `Google maps` field, i.e. the operator's pin.
    For unnamed wild sites this is the best available; do not "improve" it into a coordinate search.
@@ -351,6 +357,12 @@ new version activates on its own.
 - **iOS storage:** installed Home-Screen PWAs are exempt from Safari's 7-day script-storage cap,
   so the saved packing list persists — but only if opened occasionally. Install a week or two
   pre-trip.
+- **Drive-time buffers were audited leg by leg against OSRM.** Every gap now clears its drive by 18 min
+  or more; the two that did not were Day 3's 76-min run south (4 min of slack) and the 56-min run to the
+  office with a refuel in it (4 min), both rebalanced. Day 3's morning drive is 72 min, so Zanpa moved to
+  09:15. Two stated times were also wrong against the per-leg figures the map is drawn from: the office to
+  King Tacos is 26 min, not 25. Note Kin → Manzamo reads 19 min per-leg but 21 in a chained five-waypoint
+  route — the per-leg figure is the one to quote, since that is what the map draws.
 - **Day 3 has no snorkelling.** Maeda Point came out; 11:00 is **バンタカフェ** (Yomitan, 26.41771,
   127.71400) instead — 6 min on from Senaha Beach, 76 min from there to the tide pool. Alternatives
   considered and listed in its card: トランジットカフェ (Chatan, 2F sea view) and 瀬長島ウミカジテラス
@@ -361,12 +373,14 @@ new version activates on its own.
   14:53** (JMA tide table, station NS: lows 02:33 / 14:53, highs 08:50 / 20:31), which is exactly when the
   drive from Maeda Point lands you there. That forces it to be the day's last stop, which is why
   **Ryujin-no-yu came out** — it is only 23 min on from the pool and 10 min from the airport, so keeping
-  both is possible but leaves about 30 min against the 17:30 car return instead of 45. The card documents
-  that trade. Access was closed in 2020 with no published end date, so check for a current notice.
+  both is no longer possible at all: the car goes back to Okinawa City, 41 min *north* of the onsen, so a
+  bath cannot fit before the office shuts at 18:00. The card says so rather than leaving it as an option. Access was closed in 2020 with no published end date, so check for a current notice.
 - **Trip shape.** The car is collected at the Evertrail office in **Okinawa City**, not the airport: bus 111 or
   117 from Naha Airport, ~1 h, ¥1,330 pp, off at Okinawa Kita IC, then a 10-min walk or a free pickup arranged
-  by email. It is returned to the **airport**, where the cutoff is 17:30. Day 2 is the boat day. The
-  travellers want nature — waterfalls, capes, beaches, reef — and explicitly not
+  by email. **It goes back to the same office, not the airport**, so the bus is a round trip: bus out on
+  Day 1, drop the car by the office's 18:00 close on Day 3, then bus back to Naha. ¥5,320 of fares for
+  two, both ways. Evertrail's ¥10,000 airport shuttle only runs 10:30–16:00, so it cannot cover the
+  return. Day 2 is the boat day. The travellers want nature — waterfalls, capes, beaches, reef — and explicitly not
   shopping, souvenirs, crowds, caves or historical sites, so American Village, the pottery village and the Blue
   Cave were all removed. Don't reintroduce them.
 - **Verified, and what is not.** The content was fact-checked in Sep 2026. Confirmed against primary

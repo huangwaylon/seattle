@@ -364,14 +364,15 @@
      Everything on the map is static markup. JS only sets data-day / data-<layer>
      on #view-map and a few state classes, so without JS all three days and every
      pin are visible and the map is still a map. */
-  /* The map and its clock pin to the top so the stop list can be scrolled against them.
-     max-height keeps the pair inside a short viewport, where sticky would otherwise be useless. */
+  /* The map pins to the top so the stop list scrolls against it. .mapstick carries the page
+     background so rows cannot show through the gutters beside the card. max-height keeps the map
+     inside a short viewport, where sticky would otherwise buy nothing. */
   .mapstick{position:sticky;top:var(--safe-t);z-index:20;background:var(--bg);}
   .mapcard{margin:8px var(--gutter) 12px;background:var(--sea-wash);border:1px solid var(--line);
     border-radius:var(--r);overflow:hidden;box-shadow:var(--sh-card);}
   /* max-height caps the tall island on a desktop screen; the letterbox gap falls on
      .mapcard, which is the same sea colour. */
-  svg.map{display:block;width:100%;height:auto;max-height:calc(62vh - 60px);}
+  svg.map{display:block;width:100%;height:auto;max-height:66vh;}
   .map .sea{fill:var(--sea-wash);}
   .map .land path{fill:var(--bg-2);stroke:var(--sea-d);stroke-width:2.2;stroke-linejoin:round;}
   /* one accent per day, inherited by that day's legs, pins and swatch */
@@ -379,14 +380,16 @@
   .map .cands{--c:var(--sea-d);}
   .map .leg{fill:none;stroke:var(--c);stroke-width:4.6;stroke-linecap:round;stroke-linejoin:round;
     opacity:.9;transition:opacity .2s;}
-  .map .leg.bus,.map .leg.boat{stroke-width:3.6;stroke-dasharray:11 9;opacity:.7;}
-  .map .leg.future{opacity:.34;}
+  .map .leg.bus,.map .leg.boat,.map .leg.walk{stroke-width:3.6;stroke-dasharray:11 9;opacity:.7;}
+  /* Behind us goes grey, so the day's colour is what is still ahead. */
+  .map .leg.done{stroke:var(--faint);}
   .map .pin{cursor:pointer;}
   .map .hit{fill:transparent;}
   .map .ring{fill:none;stroke:var(--c);stroke-width:2.6;opacity:0;transition:opacity .2s;}
   .map .pin.sel .ring,.map .stop.now .ring{opacity:.5;}
   .map .stop .mk{fill:var(--c);stroke:var(--surface);stroke-width:2.6;}
-  .map .stop.past .mk{fill:var(--surface);stroke:var(--c);}
+  .map .stop.past .mk{fill:var(--faint);}
+  .map .stop.past .ring{stroke:var(--faint);}
   .map .cands .mk{fill:var(--surface);stroke:var(--muted);stroke-width:2.3;}
   .map .cands .pin.sel .mk{stroke:var(--sea-d);}
   /* a paint-order halo instead of a background box, so labels read over land and sea */
@@ -409,32 +412,20 @@
     border-left-color:transparent;border-right-color:transparent;}
 
   /* clock */
-  .timebar{display:flex;align-items:center;gap:12px;margin:0 var(--gutter);padding-bottom:12px;}
-  .timebar input{flex:1;min-width:0;-webkit-appearance:none;appearance:none;height:28px;background:none;}
-  .timebar input::-webkit-slider-runnable-track{height:6px;border-radius:3px;background:var(--surface-3);
-    border:1px solid var(--line);}
-  .timebar input::-webkit-slider-thumb{-webkit-appearance:none;width:28px;height:28px;border-radius:50%;
-    margin-top:-12px;background:var(--surface);border:1.5px solid var(--line-strong);box-shadow:var(--sh-card);}
-  .timebar input::-moz-range-track{height:6px;border-radius:3px;background:var(--surface-3);}
-  .timebar input::-moz-range-thumb{width:26px;height:26px;border-radius:50%;background:var(--surface);
-    border:1.5px solid var(--line-strong);}
-  .timebar .tnow{flex:0 0 auto;font-variant-numeric:tabular-nums;font-weight:700;font-size:15px;
-    color:var(--sea-d);background:var(--sea-soft);border:1px solid var(--sea-ring);
-    border-radius:var(--r-chip);padding:6px 13px;}
-
   /* the day's stops — same timeline as the itinerary, two-way linked to the pins */
   .stopcard{padding:4px 18px 12px;}
   ul.tl.stoplist{margin:8px 0 0;}
   ul.tl.stoplist li{cursor:pointer;border-radius:12px;transition:background .15s;}
+  ul.tl.stoplist li:active{background:var(--surface-2);}
   ul.tl.stoplist li.sel{background:var(--sea-soft);}
   ul.tl.stoplist li.past .time,ul.tl.stoplist li.past .txt{color:var(--faint);}
+  ul.tl.stoplist li.past .dot{background:var(--faint);box-shadow:0 0 0 3px var(--surface);}
   ul.tl.stoplist li.now .time{color:var(--coral);}
 
   /* day and layer visibility (JS present only) */
   .js-tabs #view-map[data-day="1"] .d2,.js-tabs #view-map[data-day="1"] .d3,
   .js-tabs #view-map[data-day="2"] .d1,.js-tabs #view-map[data-day="2"] .d3,
   .js-tabs #view-map[data-day="3"] .d1,.js-tabs #view-map[data-day="3"] .d2{display:none;}
-  .js-tabs #view-map[data-day="all"] .timebar{display:none;}
   .js-tabs #view-map .p-camp,.js-tabs #view-map .p-nature,.js-tabs #view-map .p-food{display:none;}
   .js-tabs #view-map[data-camp] .p-camp,.js-tabs #view-map[data-nature] .p-nature,
   .js-tabs #view-map[data-food] .p-food{display:block;}
@@ -526,7 +517,7 @@
             <li><span class="time">09:40</span><span class="dot"></span><span class="txt" data-en="Airport bus 111 or 117<small>&yen;1,330 each &middot; about 1 h via the expressway</small>">空港から路線バス111番／117番<small>1人&yen;1,330 &middot; 高速経由で約1時間</small></span></li>
             <li><span class="time">10:45</span><span class="dot"></span><span class="txt" data-en="Off at Okinawa Kita IC<small>10 min walk, or free pickup on request</small>">沖縄北ICで下車<small>徒歩10分、または希望すれば無料送迎</small></span></li>
             <li><span class="time">11:00</span><span class="dot"></span><span class="txt" data-en="Collect the Jimny &mdash; Ikehara, Okinawa City<small>Office 9:30&ndash;18:00 &middot; luggage storage available</small>">ジムニー受け取り &mdash; 沖縄市池原<small>営業所 9:30&ndash;18:00 &middot; 荷物預かりあり</small></span></li>
-            <li><span class="time">11:55</span><span class="dot"></span><span class="txt" data-en="King Tacos, Kin Town &mdash; taco rice<small>25 min from the office &middot; taco rice originated in Kin, 1984</small>">キングタコス金武町 &mdash; タコライス<small>営業所から25分 &middot; タコライスは1984年に金武町で誕生</small></span></li>
+            <li><span class="time">11:55</span><span class="dot"></span><span class="txt" data-en="King Tacos, Kin Town &mdash; taco rice<small>26 min from the office &middot; taco rice originated in Kin, 1984</small>">キングタコス金武町 &mdash; タコライス<small>営業所から26分 &middot; タコライスは1984年に金武町で誕生</small></span></li>
             <li><span class="time">13:05</span><span class="dot"></span><span class="txt" data-en="Cape Manzamo<small>19 min from Kin &middot; elephant-trunk rock formation</small>">万座毛<small>金武町から19分 &middot; 象の鼻の形の岩</small></span></li>
             <li><span class="time">14:45</span><span class="dot"></span><span class="txt" data-en="Hunga Falls, Makiya, Nago<small>53 min from Manzamo &middot; no phone signal further in &middot; read the posted cautions</small>">フンガー滝（名護市真喜屋）<small>万座毛から53分 &middot; 奥は携帯の電波なし &middot; 現地の注意書きを確認</small></span></li>
             <li><span class="time">16:05</span><span class="dot"></span><span class="txt" data-en="Nago &mdash; groceries<small>19 min from the falls &middot; MaxValu, open 24 h</small>">名護 &mdash; 食料の買い出し<small>滝から19分 &middot; マックスバリュ、24時間営業</small></span></li>
@@ -568,22 +559,25 @@
           <span class="node"></span>
           <div class="lead-chip"><div class="d">12</div><div class="m" data-en="OCT">10月</div><div class="wd" data-en="Mon">月</div></div>
           <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-plane-takeoff"/></svg></span>
-          <div class="ttl"><div class="t" data-en="West Coast, Departure">西海岸、出発</div><div class="sub2" data-en="Zanpa, a cliff cafe, the tide pool">残波岬、崖のカフェ、秘境プール</div></div>
+          <div class="ttl"><div class="t" data-en="West Coast, Departure">西海岸、出発</div><div class="sub2" data-en="Zanpa, a cliff cafe, the tide pool, the bus">残波岬、崖のカフェ、秘境プール、バス</div></div>
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
           <ul class="tl">
             <li><span class="time">06:25</span><span class="dot"></span><span class="txt" data-en="Sunrise, pack up">朝日、撤収</span></li>
             <li><span class="time">07:30</span><span class="dot"></span><span class="txt" data-en="Break camp">テント撤収</span></li>
-            <li><span class="time">09:00</span><span class="dot"></span><span class="txt" data-en="Cape Zanpa<small>2 km of raised-coral cliff</small>">残波岬<small>隆起サンゴの断崖2 km</small></span></li>
+            <li><span class="time">09:15</span><span class="dot"></span><span class="txt" data-en="Cape Zanpa<small>72 min from camp &middot; 2 km of raised-coral cliff</small>">残波岬<small>キャンプ場から72分 &middot; 隆起サンゴの断崖2 km</small></span></li>
             <li><span class="time">10:15</span><span class="dot"></span><span class="txt" data-en="Senaha Beach<small>Unmanaged &middot; no facilities</small>">瀬名波ビーチ<small>管理なし &middot; 設備なし</small></span></li>
             <li><span class="time">11:00</span><span class="dot"></span><span class="txt" data-en="Banta Cafe, Yomitan &mdash; lunch on the rocks<small>6 min from Senaha &middot; 160 outdoor seats on the coastline &middot; opens 08:00</small>">バンタカフェ（読谷村）&mdash; 岩場で昼食<small>瀬名波から6分 &middot; 海岸線に屋外160席 &middot; 08:00開店</small></span></li>
-            <li><span class="time">12:30</span><span class="dot"></span><span class="txt" data-en="South to Itoman<small>76 min from the cafe</small>">糸満へ南下<small>カフェから76分</small></span></li>
+            <li><span class="time">12:20</span><span class="dot"></span><span class="txt" data-en="South to Itoman<small>76 min from the cafe</small>">糸満へ南下<small>カフェから76分</small></span></li>
             <li><span class="time">13:50</span><span class="dot"></span><span class="txt" data-en="Gushikawa Castle ruins &mdash; the tide pool<small>Low tide 14:53 &middot; cliff scramble down &middot; free</small>">具志川城跡 &mdash; 秘境プール<small>干潮14:53 &middot; 崖を下る &middot; 入場無料</small></span></li>
-            <li><span class="time">15:50</span><span class="dot"></span><span class="txt" data-en="Leave for the airport<small>25 min</small>">空港へ出発<small>25分</small></span></li>
-            <li><span class="time">16:20</span><span class="dot"></span><span class="txt" data-en="Refuel">給油</span></li>
-            <li><span class="time">16:45</span><span class="dot"></span><span class="txt" data-en="Return the Jimny at the airport">空港でジムニー返却</span></li>
-            <li><span class="time">18:30</span><span class="dot"></span><span class="txt" data-en="Check in">チェックイン</span></li>
+            <li><span class="time">15:30</span><span class="dot"></span><span class="txt" data-en="Leave the pool<small>56 min to the Evertrail office</small>">プールを出発<small>Evertrail営業所まで56分</small></span></li>
+            <li><span class="time">16:20</span><span class="dot"></span><span class="txt" data-en="Refuel, before the office">給油、営業所の手前で</span></li>
+            <li><span class="time">16:45</span><span class="dot"></span><span class="txt" data-en="Return the Jimny &mdash; Evertrail office, Okinawa City<small>Not the airport &middot; office closes 18:00</small>">ジムニー返却 &mdash; 沖縄市のEvertrail営業所<small>空港ではありません &middot; 営業所は18:00まで</small></span></li>
+            <li><span class="time">17:05</span><span class="dot"></span><span class="txt" data-en="Walk to Okinawa Kita IC<small>10 min, or the free lift from the office</small>">沖縄北ICまで徒歩<small>10分、または営業所の無料送迎</small></span></li>
+            <li><span class="time">17:20</span><span class="dot"></span><span class="txt" data-en="Bus 111 or 117 to Naha Airport<small>&yen;1,330 each &middot; about 1 h via the expressway</small>">路線バス111番／117番で那覇空港へ<small>1人&yen;1,330 &middot; 高速経由で約1時間</small></span></li>
+            <li><span class="time">18:25</span><span class="dot"></span><span class="txt" data-en="Land side at Naha Airport">那覇空港着</span></li>
+            <li><span class="time">18:45</span><span class="dot"></span><span class="txt" data-en="Check in">チェックイン</span></li>
             <li><span class="time">20:25</span><span class="dot"></span><span class="txt" data-en="Naha &rarr; Haneda &mdash; Solaseed SNA 026<small>Seat 14B</small>">那覇 &rarr; 羽田 &mdash; ソラシドエア SNA 026<small>座席 14B</small></span></li>
             <li><span class="time">22:50</span><span class="dot"></span><span class="txt" data-en="Land at Haneda">羽田着</span></li>
           </ul>
@@ -627,9 +621,10 @@
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
-          <p class="desc" data-en="Suzuki Jimny Sierra II, rooftop tent, 2 guests. Collected at the Evertrail office, Ikehara,
-          Okinawa City. Returned to Naha Airport.">スズキ・ジムニーシエラ II、ルーフトップテント、2名。受け取りは沖縄市池原のEvertrail営業所、
-          返却は那覇空港。</p>
+          <p class="desc" data-en="Suzuki Jimny Sierra II, rooftop tent, 2 guests. Collected at and returned to the same place &mdash;
+          the Evertrail office in Ikehara, Okinawa City, not the airport. So the airport bus is a round trip: bus out on day 1,
+          bus back on day 3.">スズキ・ジムニーシエラ II、ルーフトップテント、2名。受け取りも返却も同じ場所 &mdash;
+          沖縄市池原のEvertrail営業所で、空港ではありません。空港バスは往復 &mdash; 1日目に行き、3日目に帰り。</p>
           <div class="stat-grid">
             <div class="stat"><div class="k" data-en="Rent">レンタル料</div><div class="v">&yen;17,000 &times; 3</div></div>
             <div class="stat"><div class="k" data-en="Zero Liability">免責補償</div><div class="v">&yen;9,000</div></div>
@@ -653,9 +648,10 @@
           <div class="subhead" data-en="Getting there and back">行きと帰り</div>
           <ul class="bul">
             <li data-en="Office: 2-11-7 Ikehara, Okinawa City<small>9:30&ndash;18:00 &middot; 080 9104 3373 &middot; parking and luggage storage</small>">営業所：沖縄市池原2-11-7<small>9:30&ndash;18:00 &middot; 080 9104 3373 &middot; 駐車場・荷物預かり</small></li>
-            <li data-en="Bus 111 or 117 from the airport<small>&yen;1,330 each &middot; about 1 h &middot; pay on board</small>">空港から路線バス111番／117番<small>1人&yen;1,330 &middot; 約1時間 &middot; 乗車時に支払い</small></li>
-            <li data-en="Get off at Okinawa Kita IC<small>10 min walk, or free pickup on request</small>">沖縄北ICで下車<small>徒歩10分、または希望すれば無料送迎</small></li>
-            <li data-en="Airport shuttle<small>&yen;10,000 for two, one way &middot; 10:30&ndash;16:00</small>">空港送迎<small>2人で片道&yen;10,000 &middot; 10:30&ndash;16:00</small></li>
+            <li data-en="Day 1, out: bus 111 or 117 from the airport, off at Okinawa Kita IC<small>&yen;1,330 each &middot; about 1 h &middot; pay on board &middot; then 10 min on foot, or a free lift</small>">1日目・行き：空港から路線バス111番／117番、沖縄北ICで下車<small>1人&yen;1,330 &middot; 約1時間 &middot; 乗車時に支払い &middot; そこから徒歩10分、または無料送迎</small></li>
+            <li data-en="Day 3, back: the same in reverse<small>Drop the car at the office by 18:00, 10 min to the IC, bus to the airport &middot; &yen;1,330 each &middot; about 1 h</small>">3日目・帰り：同じ経路を逆に<small>18:00までに営業所で返却、ICまで10分、バスで空港 &middot; 1人&yen;1,330 &middot; 約1時間</small></li>
+            <li data-en="&yen;5,320 of bus fares in total, for two, both ways">バス代は2人往復で合計&yen;5,320</li>
+            <li data-en="Airport shuttle instead, if the bus is tight<small>&yen;10,000 for two, one way &middot; 10:30&ndash;16:00, so it cannot do the return after the pool</small>">バスが厳しければ空港送迎<small>2人で片道&yen;10,000 &middot; 10:30&ndash;16:00なので、プールのあとの帰りには使えません</small></li>
           </ul>
           <div class="subhead" data-en="If a typhoon comes">台風が来たら</div>
           <ul class="bul">
@@ -824,7 +820,7 @@
           </ul>
           <div class="subhead" data-en="Instead of">代わりに外した予定</div>
           <ul class="bul">
-            <li data-en="Ryujin-no-yu onsen, Senagajima<small>6:00&ndash;24:00 &middot; ~&yen;1,570 &middot; 23 min from the pool, 10 min on to the airport &mdash; doable after the pool, but it leaves about 30 min against the 17:30 car return</small>">琉球温泉 龍神の湯（瀬長島）<small>6:00&ndash;24:00 &middot; 約&yen;1,570 &middot; プールから23分、空港まであと10分 &mdash; プールのあとでも回れますが、17:30の返却時刻に対して余裕は30分ほど</small></li>
+            <li data-en="Ryujin-no-yu onsen, Senagajima<small>6:00&ndash;24:00 &middot; ~&yen;1,570 &middot; 23 min from the pool &mdash; but the car goes back to Okinawa City, 41 min north of the onsen, so a bath no longer fits before the office shuts at 18:00</small>">琉球温泉 龍神の湯（瀬長島）<small>6:00&ndash;24:00 &middot; 約&yen;1,570 &middot; プールから23分 &mdash; ただし返却は沖縄市で、温泉から41分北。18:00の営業所閉店前には入れません</small></li>
           </ul>
           <a class="maplink" href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x34e5673751048627:0xfaeab207a3fb6970" target="_blank" rel="noopener"><span data-en="Open in Maps">マップで開く</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
           <a class="maplink alt" href="https://note.com/asahinode23/n/n27001e4c1ea3" target="_blank" rel="noopener"><span data-en="The note.com article &mdash; photos by asahi23">出典 note.com &mdash; 写真は asahi23 さん</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
@@ -880,27 +876,6 @@
         </div>
       </details>
 
-      <details class="card travel">
-        <summary class="head">
-          <span class="node"></span>
-          <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-waves"/></svg></span>
-          <div class="ttl"><div class="t" data-en="Nature">自然</div><div class="sub2" data-en="9 spots">9か所</div></div>
-          <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
-        </summary>
-        <div class="content">
-          <ul class="bul">
-            <li data-en="<a href=&quot;https://www.google.com/maps/place//data=!4m2!3m1!1s0x34e44481b80a403b:0x7149b317e35049cd&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>Hiji Falls, Kunigami</a><small>1.5 km each way &middot; suspension bridge</small>"><a href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x34e44481b80a403b:0x7149b317e35049cd" target="_blank" rel="noopener">比地大滝（国頭村）</a><small>片道1.5 km &middot; つり橋</small></li>
-            <li data-en="<a href=&quot;https://www.google.com/maps/place//data=!4m2!3m1!1s0x34e4509229f69953:0x9fd02fa2eae0c2a1&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>Ta Falls, Ogimi</a><small>Short walk in &middot; plunge pool</small>"><a href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x34e4509229f69953:0x9fd02fa2eae0c2a1" target="_blank" rel="noopener">ター滝（大宜味村）</a><small>歩いてすぐ &middot; 滝壺</small></li>
-            <li data-en="<a href=&quot;https://www.google.com/maps/place//data=!4m2!3m1!1s0x34e46d892efb8607:0x3670f194684579ba&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>Kayauchi Banta, Kunigami</a><small>Cliff over a river mouth</small>"><a href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x34e46d892efb8607:0x3670f194684579ba" target="_blank" rel="noopener">カヤウチバンタ（国頭村）</a><small>河口を見下ろす断崖</small></li>
-            <li data-en="<a href=&quot;https://www.google.com/maps/search/?api=1&amp;query=%E8%BE%BA%E6%88%B8%E5%B2%AC&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>Cape Hedo, Kunigami</a><small>Northernmost point &middot; 90 min beyond Motobu</small>"><a href="https://www.google.com/maps/search/?api=1&amp;query=%E8%BE%BA%E6%88%B8%E5%B2%AC" target="_blank" rel="noopener">辺戸岬（国頭村）</a><small>本島最北端 &middot; 本部から90分</small></li>
-            <li data-en="<a href=&quot;https://www.google.com/maps/place//data=!4m2!3m1!1s0x34e4fc0ffcdaaaab:0x32b298a190e3a128&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>Gorilla Chop, Motobu</a><small>Walk-in reef &middot; calm and shallow</small>"><a href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x34e4fc0ffcdaaaab:0x32b298a190e3a128" target="_blank" rel="noopener">ゴリラチョップ（本部町）</a><small>ビーチエントリーのリーフ &middot; 穏やかで浅い</small></li>
-            <li data-en="<a href=&quot;https://www.google.com/maps/place//data=!4m2!3m1!1s0x34e451d4dec17c9f:0xf4d55daa3d78974d&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>Yagaji mangroves</a><small>Boardwalk or canoe at Fureai, Higashi</small>"><a href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x34e451d4dec17c9f:0xf4d55daa3d78974d" target="_blank" rel="noopener">屋我地のマングローブ</a><small>東村ふれあいヒルギ公園の木道かカヌー</small></li>
-            <li data-en="<a href=&quot;https://www.google.com/maps/place//data=!4m2!3m1!1s0x34e503ea1f7eabb1:0x89d5231ba75e0d40&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>Diamond Beach, Onna</a><small>Turtles, eagle rays &middot; calm water</small>"><a href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x34e503ea1f7eabb1:0x89d5231ba75e0d40" target="_blank" rel="noopener">ダイヤモンドビーチ（恩納村）</a><small>ウミガメ、マダラトビエイ &middot; 穏やかな海</small></li>
-            <li data-en="<a href=&quot;https://www.google.com/maps/place//data=!4m2!3m1!1s0x34e45834628fc6c1:0xfe464c1009cf4372&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>Kouri Island</a><small>Circumference walkable in about an hour</small>"><a href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x34e45834628fc6c1:0xfe464c1009cf4372" target="_blank" rel="noopener">古宇利島</a><small>一周徒歩約1時間</small></li>
-            <li data-en="<a href=&quot;https://www.google.com/maps/place//data=!4m2!3m1!1s0x34e4fa3bb2e83feb:0xa38ab5013a129a36&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>Bise Fukugi tree road, Motobu</a><small>Sand lanes under 20,000 trees, to the beach</small>"><a href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x34e4fa3bb2e83feb:0xa38ab5013a129a36" target="_blank" rel="noopener">備瀬のフクギ並木（本部町）</a><small>2万本の木の下の砂道、ビーチまで</small></li>
-          </ul>
-        </div>
-      </details>
 
       <details class="card travel">
         <summary class="head">
@@ -1009,6 +984,27 @@
         </div>
       </details>
 
+      <details class="card travel">
+        <summary class="head">
+          <span class="node"></span>
+          <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-waves"/></svg></span>
+          <div class="ttl"><div class="t" data-en="Nature">自然</div><div class="sub2" data-en="9 spots">9か所</div></div>
+          <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
+        </summary>
+        <div class="content">
+          <ul class="bul">
+            <li data-en="<a href=&quot;https://www.google.com/maps/place//data=!4m2!3m1!1s0x34e44481b80a403b:0x7149b317e35049cd&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>Hiji Falls, Kunigami</a><small>1.5 km each way &middot; suspension bridge</small>"><a href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x34e44481b80a403b:0x7149b317e35049cd" target="_blank" rel="noopener">比地大滝（国頭村）</a><small>片道1.5 km &middot; つり橋</small></li>
+            <li data-en="<a href=&quot;https://www.google.com/maps/place//data=!4m2!3m1!1s0x34e4509229f69953:0x9fd02fa2eae0c2a1&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>Ta Falls, Ogimi</a><small>Short walk in &middot; plunge pool</small>"><a href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x34e4509229f69953:0x9fd02fa2eae0c2a1" target="_blank" rel="noopener">ター滝（大宜味村）</a><small>歩いてすぐ &middot; 滝壺</small></li>
+            <li data-en="<a href=&quot;https://www.google.com/maps/place//data=!4m2!3m1!1s0x34e46d892efb8607:0x3670f194684579ba&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>Kayauchi Banta, Kunigami</a><small>Cliff over a river mouth</small>"><a href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x34e46d892efb8607:0x3670f194684579ba" target="_blank" rel="noopener">カヤウチバンタ（国頭村）</a><small>河口を見下ろす断崖</small></li>
+            <li data-en="<a href=&quot;https://www.google.com/maps/search/?api=1&amp;query=%E8%BE%BA%E6%88%B8%E5%B2%AC&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>Cape Hedo, Kunigami</a><small>Northernmost point &middot; 90 min beyond Motobu</small>"><a href="https://www.google.com/maps/search/?api=1&amp;query=%E8%BE%BA%E6%88%B8%E5%B2%AC" target="_blank" rel="noopener">辺戸岬（国頭村）</a><small>本島最北端 &middot; 本部から90分</small></li>
+            <li data-en="<a href=&quot;https://www.google.com/maps/place//data=!4m2!3m1!1s0x34e4fc0ffcdaaaab:0x32b298a190e3a128&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>Gorilla Chop, Motobu</a><small>Walk-in reef &middot; calm and shallow</small>"><a href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x34e4fc0ffcdaaaab:0x32b298a190e3a128" target="_blank" rel="noopener">ゴリラチョップ（本部町）</a><small>ビーチエントリーのリーフ &middot; 穏やかで浅い</small></li>
+            <li data-en="<a href=&quot;https://www.google.com/maps/place//data=!4m2!3m1!1s0x34e451d4dec17c9f:0xf4d55daa3d78974d&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>Yagaji mangroves</a><small>Boardwalk or canoe at Fureai, Higashi</small>"><a href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x34e451d4dec17c9f:0xf4d55daa3d78974d" target="_blank" rel="noopener">屋我地のマングローブ</a><small>東村ふれあいヒルギ公園の木道かカヌー</small></li>
+            <li data-en="<a href=&quot;https://www.google.com/maps/place//data=!4m2!3m1!1s0x34e503ea1f7eabb1:0x89d5231ba75e0d40&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>Diamond Beach, Onna</a><small>Turtles, eagle rays &middot; calm water</small>"><a href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x34e503ea1f7eabb1:0x89d5231ba75e0d40" target="_blank" rel="noopener">ダイヤモンドビーチ（恩納村）</a><small>ウミガメ、マダラトビエイ &middot; 穏やかな海</small></li>
+            <li data-en="<a href=&quot;https://www.google.com/maps/place//data=!4m2!3m1!1s0x34e45834628fc6c1:0xfe464c1009cf4372&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>Kouri Island</a><small>Circumference walkable in about an hour</small>"><a href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x34e45834628fc6c1:0xfe464c1009cf4372" target="_blank" rel="noopener">古宇利島</a><small>一周徒歩約1時間</small></li>
+            <li data-en="<a href=&quot;https://www.google.com/maps/place//data=!4m2!3m1!1s0x34e4fa3bb2e83feb:0xa38ab5013a129a36&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>Bise Fukugi tree road, Motobu</a><small>Sand lanes under 20,000 trees, to the beach</small>"><a href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x34e4fa3bb2e83feb:0xa38ab5013a129a36" target="_blank" rel="noopener">備瀬のフクギ並木（本部町）</a><small>2万本の木の下の砂道、ビーチまで</small></li>
+          </ul>
+        </div>
+      </details>
     </div>
     <div class="footer" data-en="All times JST">時刻はすべて日本時間</div>
   </section>
@@ -1059,7 +1055,7 @@
 </g>
 <g class="routes">
 <path class="leg d1 bus" data-day="1" data-min="645" d="M37.3 831.1L37.4 832.8L47.0 832.6L47.6 835.6L63.7 826.7L65.5 831.8L70.3 833.8L87.6 834.9L95.7 837.3L103.3 832.8L106.9 826.1L112.8 823.8L116.2 812.6L125.4 811.9L131.3 809.1L131.7 793.6L136.4 778.2L143.3 770.9L153.7 767.6L166.4 754.7L172.5 742.5L181.9 729.9L188.8 711.7L188.9 707.1L184.3 695.9L185.8 683.2L180.5 672.6L180.6 668.9L193.0 661.9L199.7 649.5L204.2 634.0L214.8 622.2L215.4 619.1L216.6 620.6L218.9 619.3"/>
-<path class="leg d1 bus" data-day="1" data-min="660" d="M218.9 619.3L204.3 634.0L199.8 649.5L192.5 662.6L187.7 665.2L185.5 664.1L185.1 666.7L184.2 665.4L185.9 663.8L190.4 664.0L193.5 661.2L199.7 649.5L204.8 633.0L214.8 622.2L215.4 619.1L218.1 620.2L225.3 612.8"/>
+<path class="leg d1 walk" data-day="1" data-min="660" d="M218.9 619.3L225.3 612.5"/>
 <path class="leg d1" data-day="1" data-min="715" d="M225.3 612.8L219.7 619.3L215.3 619.8L217.3 617.4L222.5 596.0L219.3 587.0L210.8 576.4L208.6 569.7L210.7 558.7L217.7 549.1L225.5 544.4L240.5 539.7L250.0 523.7L258.9 518.2L281.1 516.2L297.9 521.2L305.2 518.9L303.6 527.4L300.1 528.2L305.9 530.5L312.9 530.2L322.1 525.9"/>
 <path class="leg d1" data-day="1" data-min="785" d="M322.1 525.9L331.3 524.4L336.7 515.5L327.0 506.1L311.5 484.8L310.0 480.1L295.6 477.6L296.9 470.4L292.5 467.6L288.9 469.1L273.9 464.5L261.9 473.5L258.5 471.0L255.6 471.6L250.1 465.5"/>
 <path class="leg d1" data-day="1" data-min="885" d="M250.1 465.5L255.6 471.6L258.5 471.0L262.0 473.5L274.1 464.5L290.8 468.9L293.3 466.5L297.0 455.9L303.1 456.5L311.8 448.5L322.6 451.9L327.6 441.4L335.6 434.5L339.3 427.2L351.0 428.4L361.7 416.5L366.0 416.5L367.6 421.2L371.5 421.9L375.5 409.4L394.6 393.4L400.0 381.0L408.4 370.2L410.5 354.8L408.4 341.5L418.5 332.9L426.2 331.1L433.0 323.0L437.3 325.7L450.5 319.1L451.1 321.1L454.7 320.2L457.0 323.5L460.9 324.4L460.6 327.3L465.4 331.5L467.7 341.5"/>
@@ -1071,11 +1067,13 @@
 <path class="leg d2" data-day="2" data-min="870" d="M371.1 326.5L372.9 327.5L374.1 324.9L377.6 331.4L379.3 338.9L378.3 341.5L381.8 344.8"/>
 <path class="leg d2" data-day="2" data-min="930" d="M381.8 344.8L383.5 346.3L388.7 343.4"/>
 <path class="leg d2" data-day="2" data-min="980" d="M388.7 343.4L394.1 340.9L409.0 341.4L418.5 332.9L426.5 330.8L432.5 323.4L447.6 311.3L445.0 305.3L445.5 294.2"/>
-<path class="leg d3" data-day="3" data-min="540" d="M445.5 294.2L445.0 305.3L447.6 311.3L432.5 323.4L426.5 330.8L418.5 332.9L408.6 341.7L410.5 355.7L407.9 371.2L400.0 381.0L394.6 393.4L375.5 409.5L372.6 421.0L365.3 421.1L362.3 424.0L364.3 428.9L378.8 431.6L386.4 439.1L388.2 454.7L393.2 468.4L391.6 474.7L387.1 479.8L366.1 484.1L355.1 495.7L343.0 499.9L335.9 510.5L318.2 513.9L305.0 520.3L294.9 521.0L280.5 516.3L256.6 519.0L249.6 524.4L242.6 538.1L228.8 543.9L228.4 548.0L220.9 546.4L213.2 549.5L203.5 543.4L196.7 546.6L189.7 544.9L185.0 547.9L179.6 548.0L175.7 544.9L162.2 543.0L137.6 562.4L130.6 562.9L122.9 560.5L119.6 550.9L115.9 548.8L110.0 549.6L105.1 542.1"/>
+<path class="leg d3" data-day="3" data-min="555" d="M445.5 294.2L445.0 305.3L447.6 311.3L432.5 323.4L426.5 330.8L418.5 332.9L408.6 341.7L410.5 355.7L407.9 371.2L400.0 381.0L394.6 393.4L375.5 409.5L372.6 421.0L365.3 421.1L362.3 424.0L364.3 428.9L378.8 431.6L386.4 439.1L388.2 454.7L393.2 468.4L391.6 474.7L387.1 479.8L366.1 484.1L355.1 495.7L343.0 499.9L335.9 510.5L318.2 513.9L305.0 520.3L294.9 521.0L280.5 516.3L256.6 519.0L249.6 524.4L242.6 538.1L228.8 543.9L228.4 548.0L220.9 546.4L213.2 549.5L203.5 543.4L196.7 546.6L189.7 544.9L185.0 547.9L179.6 548.0L175.7 544.9L162.2 543.0L137.6 562.4L130.6 562.9L122.9 560.5L119.6 550.9L115.9 548.8L110.0 549.6L105.1 542.1"/>
 <path class="leg d3" data-day="3" data-min="615" d="M105.1 542.1L110.0 549.6L115.7 548.7L118.9 550.3L122.9 560.3L126.7 561.2"/>
 <path class="leg d3" data-day="3" data-min="660" d="M126.7 561.2L123.3 560.2L121.1 566.1L107.2 566.3L105.8 568.3"/>
 <path class="leg d3" data-day="3" data-min="830" d="M105.8 568.3L111.6 568.9L112.2 588.2L116.4 595.8L118.0 594.9L123.6 604.0L139.2 610.0L139.8 624.1L143.2 635.6L139.1 642.2L140.9 653.0L145.2 662.8L146.0 673.7L153.5 684.0L158.8 699.2L153.3 717.5L134.0 731.8L125.9 734.4L119.4 739.8L119.0 747.7L107.2 748.4L101.3 758.2L77.9 781.4L75.4 787.4L75.5 795.7L71.7 803.7L64.9 811.5L62.3 820.7L58.6 822.4L53.1 820.5L50.6 823.0L47.0 838.4L43.8 843.5L38.9 867.4L46.0 881.7L57.0 924.7L56.5 935.3L52.9 939.1L55.1 942.7L51.4 955.8L54.5 964.0L52.9 969.1"/>
-<path class="leg d3" data-day="3" data-min="1005" d="M52.9 969.1L54.5 964.0L51.4 955.8L55.1 942.7L52.9 939.1L56.5 935.3L56.9 924.7L45.7 881.2L38.8 867.7L47.0 832.6L37.4 832.8L37.3 831.1"/>
+<path class="leg d3" data-day="3" data-min="1005" d="M52.9 969.1L54.5 964.3L51.5 956.0L52.6 952.6L62.6 953.4L67.4 943.3L69.7 943.0L70.2 928.4L74.4 924.7L76.4 919.5L74.5 907.4L83.5 895.0L82.9 890.1L88.6 882.4L87.9 880.9L98.1 869.0L99.8 863.3L108.7 849.7L122.8 849.5L130.5 842.5L133.0 830.2L130.3 816.7L132.9 808.0L131.2 797.4L136.1 778.7L142.8 771.2L153.7 767.6L158.1 761.5L165.7 755.6L182.6 728.4L189.2 708.8L184.4 696.5L185.8 683.2L180.5 672.6L180.6 668.9L193.0 661.9L199.7 649.5L204.8 633.0L214.8 622.2L215.4 619.1L218.1 620.2L225.3 612.8"/>
+<path class="leg d3 walk" data-day="3" data-min="1025" d="M225.3 612.5L218.9 619.3"/>
+<path class="leg d3 bus" data-day="3" data-min="1105" d="M218.9 619.3L204.3 634.0L199.8 649.5L193.1 661.9L180.7 669.0L180.6 672.5L186.1 683.8L184.4 695.9L188.9 706.8L188.8 712.0L182.2 729.6L172.2 743.2L166.5 754.8L153.8 767.6L143.1 771.2L136.2 778.7L131.8 794.0L131.4 809.1L125.7 812.0L116.0 813.2L112.9 823.9L107.1 826.1L103.7 832.8L96.1 837.4L71.2 833.1L68.9 830.4L69.2 825.1L47.8 835.6L47.0 832.6L37.4 832.8L37.3 831.1"/>
 <path class="leg d2" data-day="2" data-min="790" d="M264.5 301.2L269.7 294.9L283.4 291.1L284.1 303.7L289.4 313.5L290.3 321.2L298.6 333.5L299.0 342.8L315.7 349.1L319.3 348.6L323.9 341.0L328.9 339.3L335.0 341.3L340.7 346.3L350.3 347.5L354.8 344.0L353.8 341.8L361.0 333.1L361.6 329.0L371.1 326.5"/>
 </g>
 <g class="cands">
@@ -1147,17 +1145,15 @@
 <g class="pin stop d2" data-day="2" data-i="5" data-min="930"><circle class="hit" cx="388.3" cy="342.9" r="24"/><circle class="ring" cx="388.3" cy="342.9" r="20"/><circle class="mk" cx="388.3" cy="342.9" r="11"/><text class="lab" text-anchor="end" x="364.3" y="351.9" data-en="Nago groceries">名護 買い出し</text></g>
 <g class="pin stop d2" data-day="2" data-i="6" data-min="980"><circle class="hit" cx="446.2" cy="293.8" r="24"/><circle class="ring" cx="446.2" cy="293.8" r="20"/><circle class="mk" cx="446.2" cy="293.8" r="11"/><text class="lab" text-anchor="end" x="422.2" y="302.8" data-en="Camp, Yagaji">キャンプ 屋我地</text></g>
 <g class="pin stop d3" data-day="3" data-i="0" data-min="450"><circle class="hit" cx="446.2" cy="293.8" r="24"/><circle class="ring" cx="446.2" cy="293.8" r="20"/><circle class="mk" cx="446.2" cy="293.8" r="11"/><text class="lab" text-anchor="end" x="422.2" y="302.8" data-en="Camp, Yagaji">キャンプ 屋我地</text></g>
-<g class="pin stop d3" data-day="3" data-i="1" data-min="540"><circle class="hit" cx="103.3" cy="541.1" r="24"/><circle class="ring" cx="103.3" cy="541.1" r="20"/><circle class="mk" cx="103.3" cy="541.1" r="11"/><text class="lab" x="127.3" y="550.1" data-en="Cape Zanpa">残波岬</text></g>
+<g class="pin stop d3" data-day="3" data-i="1" data-min="555"><circle class="hit" cx="103.3" cy="541.1" r="24"/><circle class="ring" cx="103.3" cy="541.1" r="20"/><circle class="mk" cx="103.3" cy="541.1" r="11"/><text class="lab" x="127.3" y="550.1" data-en="Cape Zanpa">残波岬</text></g>
 <g class="pin stop d3" data-day="3" data-i="2" data-min="615"><circle class="hit" cx="126.7" cy="559.9" r="24"/><circle class="ring" cx="126.7" cy="559.9" r="20"/><circle class="mk" cx="126.7" cy="559.9" r="11"/><text class="lab" x="150.7" y="568.9" data-en="Senaha Beach">瀬名波ビーチ</text></g>
 <g class="pin stop d3" data-day="3" data-i="3" data-min="660"><circle class="hit" cx="105.5" cy="568.2" r="24"/><circle class="ring" cx="105.5" cy="568.2" r="20"/><circle class="mk" cx="105.5" cy="568.2" r="11"/><text class="lab" x="129.5" y="577.2" data-en="Banta Cafe">バンタカフェ</text></g>
 <g class="pin stop d3" data-day="3" data-i="4" data-min="830"><circle class="hit" cx="52.8" cy="969.8" r="24"/><circle class="ring" cx="52.8" cy="969.8" r="20"/><circle class="mk" cx="52.8" cy="969.8" r="11"/><text class="lab" x="76.8" y="978.8" data-en="Gushikawa tide pool">具志川城跡 秘境プール</text></g>
-<g class="pin stop d3" data-day="3" data-i="5" data-min="1005"><circle class="hit" cx="36.2" cy="831.3" r="24"/><circle class="ring" cx="36.2" cy="831.3" r="20"/><circle class="mk" cx="36.2" cy="831.3" r="11"/><text class="lab" x="60.2" y="840.3" data-en="Naha Airport, car back">那覇空港 返却</text></g>
+<g class="pin stop d3" data-day="3" data-i="5" data-min="1005"><circle class="hit" cx="225.3" cy="612.5" r="24"/><circle class="ring" cx="225.3" cy="612.5" r="20"/><circle class="mk" cx="225.3" cy="612.5" r="11"/><text class="lab" x="249.3" y="621.5" data-en="Evertrail office, car back">Evertrail営業所 返却</text></g>
+<g class="pin stop d3" data-day="3" data-i="6" data-min="1025"><circle class="hit" cx="218.9" cy="619.3" r="24"/><circle class="ring" cx="218.9" cy="619.3" r="20"/><circle class="mk" cx="218.9" cy="619.3" r="11"/><text class="lab" x="242.9" y="628.3" data-en="Okinawa Kita IC">沖縄北IC</text></g>
+<g class="pin stop d3" data-day="3" data-i="7" data-min="1105"><circle class="hit" cx="36.2" cy="831.3" r="24"/><circle class="ring" cx="36.2" cy="831.3" r="20"/><circle class="mk" cx="36.2" cy="831.3" r="11"/><text class="lab" x="60.2" y="840.3" data-en="Naha Airport">那覇空港</text></g>
 </g>
 </svg></div>
-    <div class="timebar jsonly">
-      <input type="range" id="timeScrub" min="535" max="1010" step="5" value="535" aria-label="Time of day">
-      <output class="tnow" id="timeNow" for="timeScrub">08:55</output>
-    </div>
     </div>
     <div class="group stopcard">
 <ul class="tl stoplist d1" data-day="1">
@@ -1181,11 +1177,13 @@
       </ul>
       <ul class="tl stoplist d3" data-day="3">
         <li data-i="0" data-min="450" tabindex="0" role="button"><span class="time">07:30</span><span class="dot"></span><span class="txt" data-en="Camp, Yagaji">キャンプ 屋我地</span></li>
-        <li data-i="1" data-min="540" tabindex="0" role="button"><span class="time">09:00</span><span class="dot"></span><span class="txt" data-en="Cape Zanpa">残波岬</span></li>
+        <li data-i="1" data-min="555" tabindex="0" role="button"><span class="time">09:15</span><span class="dot"></span><span class="txt" data-en="Cape Zanpa">残波岬</span></li>
         <li data-i="2" data-min="615" tabindex="0" role="button"><span class="time">10:15</span><span class="dot"></span><span class="txt" data-en="Senaha Beach">瀬名波ビーチ</span></li>
         <li data-i="3" data-min="660" tabindex="0" role="button"><span class="time">11:00</span><span class="dot"></span><span class="txt" data-en="Banta Cafe">バンタカフェ</span></li>
         <li data-i="4" data-min="830" tabindex="0" role="button"><span class="time">13:50</span><span class="dot"></span><span class="txt" data-en="Gushikawa tide pool">具志川城跡 秘境プール</span></li>
-        <li data-i="5" data-min="1005" tabindex="0" role="button"><span class="time">16:45</span><span class="dot"></span><span class="txt" data-en="Naha Airport, car back">那覇空港 返却</span></li>
+        <li data-i="5" data-min="1005" tabindex="0" role="button"><span class="time">16:45</span><span class="dot"></span><span class="txt" data-en="Evertrail office, car back">Evertrail営業所 返却</span></li>
+        <li data-i="6" data-min="1025" tabindex="0" role="button"><span class="time">17:05</span><span class="dot"></span><span class="txt" data-en="Okinawa Kita IC">沖縄北IC</span></li>
+        <li data-i="7" data-min="1105" tabindex="0" role="button"><span class="time">18:25</span><span class="dot"></span><span class="txt" data-en="Naha Airport">那覇空港</span></li>
       </ul>
     </div>
     <div class="footer" data-en="Road routes from OSRM, coastline from OpenStreetMap">ルートはOSRM、海岸線はOpenStreetMap</div>
@@ -1224,7 +1222,6 @@
             <div class="stat"><div class="k" data-en="Fee">料金</div><div class="v" data-en="None posted">記載なし</div></div>
           </div>
           <a class="maplink" href="https://maps.app.goo.gl/Uvd7dxm7JLn6nKsF6" target="_blank" rel="noopener"><span data-en="Open in Maps">マップで開く</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-          <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-en="Book / official site">予約・公式サイト</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
       </details>
       <details class="card camp paid f-toilet f-shower">
@@ -1244,7 +1241,6 @@
             <div class="stat"><div class="k" data-en="Fee">料金</div><div class="v" data-en="Ask on site">現地で確認</div></div>
           </div>
           <a class="maplink" href="https://maps.app.goo.gl/2y2mMv4doqEGUonM7" target="_blank" rel="noopener"><span data-en="Open in Maps">マップで開く</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-          <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-en="Book / official site">予約・公式サイト</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
       </details>
       <details class="card camp wild f-beach">
@@ -1264,7 +1260,6 @@
             <div class="stat"><div class="k" data-en="Fee">料金</div><div class="v" data-en="None posted">記載なし</div></div>
           </div>
           <a class="maplink" href="https://www.google.com/maps/place/26%C2%B032'36.8%22N+127%C2%B057'36.0%22E/@26.5437855,127.9584414,262m/data=!3m1!1e3!4m8!1m3!11m2!2skItwiim2KGlHKzS9245Y_LOdxVctbQ!3e3!3m3!8m2!3d26.5435556!4d127.96?entry=ttu" target="_blank" rel="noopener"><span data-en="Open in Maps">マップで開く</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-          <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-en="Book / official site">予約・公式サイト</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
       </details>
       <details class="card camp wild f-toilet">
@@ -1284,7 +1279,6 @@
             <div class="stat"><div class="k" data-en="Fee">料金</div><div class="v" data-en="None posted">記載なし</div></div>
           </div>
           <a class="maplink" href="https://maps.app.goo.gl/4DiHnCXi4Fi8L97i8" target="_blank" rel="noopener"><span data-en="Open in Maps">マップで開く</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-          <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-en="Book / official site">予約・公式サイト</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
       </details>
       <details class="card camp paid f-beach f-toilet f-shower">
@@ -1304,7 +1298,6 @@
             <div class="stat"><div class="k" data-en="Fee">料金</div><div class="v" data-en="Ask on site">現地で確認</div></div>
           </div>
           <a class="maplink" href="https://www.google.com/maps/place/26%C2%B008'53.9%22N+127%C2%B048'18.5%22E/@26.1482968,127.8025511,590m/data=!3m2!1e3!4b1!4m4!3m3!8m2!3d26.148292!4d127.805126?entry=ttu&g_ep=EgoyMDI0MDgyMC4xIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener"><span data-en="Open in Maps">マップで開く</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-          <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-en="Book / official site">予約・公式サイト</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
       </details>
       <details class="card camp paid f-beach f-toilet f-shower">
@@ -1324,7 +1317,6 @@
             <div class="stat"><div class="k" data-en="Fee">料金</div><div class="v" data-en="Ask on site">現地で確認</div></div>
           </div>
           <a class="maplink" href="https://maps.app.goo.gl/ykBFkzo8djM3RUap9" target="_blank" rel="noopener"><span data-en="Open in Maps">マップで開く</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-          <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-en="Book / official site">予約・公式サイト</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
       </details>
       <details class="card camp wild f-beach f-toilet">
@@ -1344,7 +1336,6 @@
             <div class="stat"><div class="k" data-en="Fee">料金</div><div class="v" data-en="None posted">記載なし</div></div>
           </div>
           <a class="maplink" href="https://www.google.com/maps/place/26%C2%B006'28.8%22N+127%C2%B039'42.0%22E/@26.1574819,127.6575679,12.5z/data=!4m4!3m3!8m2!3d26.108003!4d127.661654?authuser=1&entry=ttu" target="_blank" rel="noopener"><span data-en="Open in Maps">マップで開く</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-          <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-en="Book / official site">予約・公式サイト</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
       </details>
       <details class="card camp wild f-beach">
@@ -1364,7 +1355,6 @@
             <div class="stat"><div class="k" data-en="Fee">料金</div><div class="v" data-en="None posted">記載なし</div></div>
           </div>
           <a class="maplink" href="https://maps.app.goo.gl/fSZv7eJ8s4uF77ny7" target="_blank" rel="noopener"><span data-en="Open in Maps">マップで開く</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-          <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-en="Book / official site">予約・公式サイト</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
       </details>
       <details class="card camp paid f-toilet f-shower">
@@ -1384,7 +1374,6 @@
             <div class="stat"><div class="k" data-en="Fee">料金</div><div class="v" data-en="Ask on site">現地で確認</div></div>
           </div>
           <a class="maplink" href="https://maps.app.goo.gl/1z98EaKALKR9ubxR9" target="_blank" rel="noopener"><span data-en="Open in Maps">マップで開く</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-          <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-en="Book / official site">予約・公式サイト</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
       </details>
       <details class="card camp paid f-beach f-toilet f-shower">
@@ -1404,7 +1393,6 @@
             <div class="stat"><div class="k" data-en="Fee">料金</div><div class="v">¥1,000</div></div>
           </div>
           <a class="maplink" href="https://www.google.com/maps/search/yagaji+beach+camping/@26.6481261,128.0308987,17z/data=!3m1!4b1?entry=ttu" target="_blank" rel="noopener"><span data-en="Open in Maps">マップで開く</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-          <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-en="Book / official site">予約・公式サイト</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
       </details>
       <details class="card camp wild f-beach">
@@ -1424,7 +1412,6 @@
             <div class="stat"><div class="k" data-en="Fee">料金</div><div class="v" data-en="None posted">記載なし</div></div>
           </div>
           <a class="maplink" href="https://maps.app.goo.gl/9fTpH1cCbHkFpprV9" target="_blank" rel="noopener"><span data-en="Open in Maps">マップで開く</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-          <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-en="Book / official site">予約・公式サイト</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
       </details>
       <details class="card camp wild f-beach">
@@ -1444,7 +1431,6 @@
             <div class="stat"><div class="k" data-en="Fee">料金</div><div class="v" data-en="None posted">記載なし</div></div>
           </div>
           <a class="maplink" href="https://maps.app.goo.gl/HrZcLm1K6aRrayb26" target="_blank" rel="noopener"><span data-en="Open in Maps">マップで開く</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-          <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-en="Book / official site">予約・公式サイト</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
       </details>
       <details class="card camp wild f-beach">
@@ -1465,7 +1451,6 @@
           </div>
           <p class="desc note-sm" data-en="In Yanbaru National Park &mdash; check posted fire rules.">やんばる国立公園内 &mdash; 掲示の火気ルールを確認</p>
           <a class="maplink" href="https://www.google.com/maps/place/26%C2%B038'59.4%22N+128%C2%B005'15.7%22E/@26.6497186,128.0874132,67m/data=!3m1!1e3!4m4!3m3!8m2!3d26.649824!4d128.087702?authuser=1&entry=ttu" target="_blank" rel="noopener"><span data-en="Open in Maps">マップで開く</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-          <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-en="Book / official site">予約・公式サイト</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
       </details>
       <details class="card camp wild f-beach f-toilet">
@@ -1486,7 +1471,6 @@
           </div>
           <p class="desc note-sm" data-en="In Yanbaru National Park &mdash; check posted fire rules.">やんばる国立公園内 &mdash; 掲示の火気ルールを確認</p>
           <a class="maplink" href="https://www.google.com/maps/place/26%C2%B039'41.3%22N+128%C2%B006'05.3%22E/@26.6614431,128.1009642,139m/data=!3m1!1e3!4m4!3m3!8m2!3d26.661466!4d128.101462?authuser=1&entry=ttu" target="_blank" rel="noopener"><span data-en="Open in Maps">マップで開く</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-          <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-en="Book / official site">予約・公式サイト</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
       </details>
       <details class="card camp paid f-beach f-toilet f-shower">
@@ -1507,7 +1491,6 @@
           </div>
           <p class="desc note-sm" data-en="In Yanbaru National Park &mdash; check posted fire rules.">やんばる国立公園内 &mdash; 掲示の火気ルールを確認</p>
           <a class="maplink" href="https://maps.app.goo.gl/w5TqEBiigaZwMsPS9" target="_blank" rel="noopener"><span data-en="Open in Maps">マップで開く</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-          <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-en="Book / official site">予約・公式サイト</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
       </details>
       <details class="card camp paid f-toilet f-shower">
@@ -1527,7 +1510,6 @@
             <div class="stat"><div class="k" data-en="Fee">料金</div><div class="v" data-en="Ask on site">現地で確認</div></div>
           </div>
           <a class="maplink" href="https://maps.app.goo.gl/Vk5gPnS14gfpJqYJ8" target="_blank" rel="noopener"><span data-en="Open in Maps">マップで開く</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-          <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-en="Book / official site">予約・公式サイト</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
       </details>
       <details class="card camp wild">
@@ -1548,7 +1530,6 @@
           </div>
           <p class="desc note-sm" data-en="In Yanbaru National Park &mdash; check posted fire rules.">やんばる国立公園内 &mdash; 掲示の火気ルールを確認</p>
           <a class="maplink" href="https://maps.app.goo.gl/HtPGd8hyqt3myoMw6" target="_blank" rel="noopener"><span data-en="Open in Maps">マップで開く</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-          <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-en="Book / official site">予約・公式サイト</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
       </details>
       <details class="card camp paid f-beach f-toilet f-shower">
@@ -1569,7 +1550,6 @@
           </div>
           <p class="desc note-sm" data-en="In Yanbaru National Park &mdash; check posted fire rules.">やんばる国立公園内 &mdash; 掲示の火気ルールを確認</p>
           <a class="maplink" href="https://maps.app.goo.gl/zXJEK7k2b2BVBgJr8" target="_blank" rel="noopener"><span data-en="Open in Maps">マップで開く</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-          <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-en="Book / official site">予約・公式サイト</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
       </details>
       <details class="card camp wild f-beach f-toilet f-shower">
@@ -1590,7 +1570,6 @@
           </div>
           <p class="desc note-sm" data-en="In Yanbaru National Park &mdash; check posted fire rules.">やんばる国立公園内 &mdash; 掲示の火気ルールを確認</p>
           <a class="maplink" href="https://www.google.com/maps/place/26%C2%B044'47.6%22N+128%C2%B010'19.0%22E/@26.7465407,128.1711413,227m/data=!3m1!1e3!4m4!3m3!8m2!3d26.746565!4d128.171939?authuser=1&entry=ttu" target="_blank" rel="noopener"><span data-en="Open in Maps">マップで開く</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-          <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-en="Book / official site">予約・公式サイト</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
       </details>
       <details class="card camp wild f-beach">
@@ -1611,7 +1590,6 @@
           </div>
           <p class="desc note-sm" data-en="In Yanbaru National Park &mdash; check posted fire rules.">やんばる国立公園内 &mdash; 掲示の火気ルールを確認</p>
           <a class="maplink" href="https://www.google.com/maps/place/26%C2%B045'02.0%22N+128%C2%B011'05.8%22E/@26.7500591,128.1839969,370m/data=!3m1!1e3!4m10!1m5!3m4!2zMjbCsDQ3JzU0LjIiTiAxMjjCsDEzJzU1LjciRQ!8m2!3d26.7983889!4d128.2321389!3m3!8m2!3d26.750541!4d128.184956?authuser=1&entry=ttu" target="_blank" rel="noopener"><span data-en="Open in Maps">マップで開く</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-          <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-en="Book / official site">予約・公式サイト</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
       </details>
       <details class="card camp paid f-toilet f-shower">
@@ -1632,7 +1610,6 @@
           </div>
           <p class="desc note-sm" data-en="In Yanbaru National Park &mdash; check posted fire rules.">やんばる国立公園内 &mdash; 掲示の火気ルールを確認</p>
           <a class="maplink" href="https://maps.app.goo.gl/NmPtRRuQFPK5Qb7b9" target="_blank" rel="noopener"><span data-en="Open in Maps">マップで開く</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-          <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-en="Book / official site">予約・公式サイト</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
       </details>
       <details class="card camp wild">
@@ -1653,7 +1630,6 @@
           </div>
           <p class="desc note-sm" data-en="In Yanbaru National Park &mdash; check posted fire rules.">やんばる国立公園内 &mdash; 掲示の火気ルールを確認</p>
           <a class="maplink" href="https://www.google.com/maps/place/26%C2%B047'54.2%22N+128%C2%B013'55.7%22E/@26.7985574,128.2321175,156m/data=!3m1!1e3!4m4!3m3!8m2!3d26.798378!4d128.232139?authuser=1&entry=ttu" target="_blank" rel="noopener"><span data-en="Open in Maps">マップで開く</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-          <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-en="Book / official site">予約・公式サイト</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
       </details>
       <details class="card camp paid f-toilet f-shower">
@@ -1674,7 +1650,6 @@
           </div>
           <p class="desc note-sm" data-en="In Yanbaru National Park &mdash; check posted fire rules.">やんばる国立公園内 &mdash; 掲示の火気ルールを確認</p>
           <a class="maplink" href="https://maps.app.goo.gl/zYafRAvFhUYwAG3fA" target="_blank" rel="noopener"><span data-en="Open in Maps">マップで開く</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-          <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-en="Book / official site">予約・公式サイト</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
       </details>
       <details class="card camp wild f-beach">
@@ -1695,7 +1670,6 @@
           </div>
           <p class="desc note-sm" data-en="In Yanbaru National Park &mdash; check posted fire rules.">やんばる国立公園内 &mdash; 掲示の火気ルールを確認</p>
           <a class="maplink" href="https://www.google.com/maps/place/26%C2%B042'57.2%22N+128%C2%B017'38.4%22E/@26.7149311,128.2914264,17.75z/data=!4m4!3m3!8m2!3d26.715876!4d128.293995?authuser=1&entry=ttu" target="_blank" rel="noopener"><span data-en="Open in Maps">マップで開く</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-          <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-en="Book / official site">予約・公式サイト</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
       </details>
       <details class="card camp wild f-beach">
@@ -1716,7 +1690,6 @@
           </div>
           <p class="desc note-sm" data-en="In Yanbaru National Park &mdash; check posted fire rules.">やんばる国立公園内 &mdash; 掲示の火気ルールを確認</p>
           <a class="maplink" href="https://www.google.com/maps/place/26%C2%B050'45.8%22N+128%C2%B017'08.5%22E/@26.8452102,128.2842858,523m/data=!3m1!1e3!4m4!3m3!8m2!3d26.846056!4d128.285682?authuser=1&entry=ttu" target="_blank" rel="noopener"><span data-en="Open in Maps">マップで開く</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-          <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-en="Book / official site">予約・公式サイト</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
       </details>
       <details class="card camp paid f-beach f-toilet f-shower">
@@ -1737,7 +1710,6 @@
           </div>
           <p class="desc note-sm" data-en="In Yanbaru National Park &mdash; check posted fire rules.">やんばる国立公園内 &mdash; 掲示の火気ルールを確認</p>
           <a class="maplink" href="https://maps.app.goo.gl/NFrjgX2ypCiQRxbq8" target="_blank" rel="noopener"><span data-en="Open in Maps">マップで開く</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-          <a class="maplink alt" href="#i-tent" target="_blank" rel="noopener"><span data-en="Book / official site">予約・公式サイト</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
       </details>
     </div>
@@ -2081,73 +2053,70 @@ var T=(function(){
 })();
 </script>
 <script>
-/* MAP — the island, the routes and all 67 pins are static SVG. This only switches state:
-   data-day and data-camp/nature/food on #view-map, the selected pin, and the clock. The
-   show/hide is all CSS, so with JS off the map shows every day and every pin. */
+/* MAP — the island, the routes and all 69 pins are static SVG. This only switches state:
+   data-day and data-camp/nature/food on #view-map, plus which stop we are "at". The show/hide
+   is all CSS, so with JS off the map shows every day and every pin. */
 (function(){
   var view=document.getElementById('view-map'); if(!view) return;
   var svg=view.querySelector('svg.map');
-  var scrub=document.getElementById('timeScrub'), out=document.getElementById('timeNow');
   var pins=svg.querySelectorAll('.pin'), stops=svg.querySelectorAll('.stop'), legs=svg.querySelectorAll('.leg');
   var rows=view.querySelectorAll('.stoplist li');
-  var day='1';
-  function hhmm(m){return ('0'+Math.floor(m/60)).slice(-2)+':'+('0'+m%60).slice(-2);}
+  var day='1', at=null;          /* at = the minute of the stop we are at, null for none */
   function mine(el){return el.classList.contains('d'+day);}
 
-  /* The latest stop at or before the slider is "now", earlier ones are behind us, and legs
-     not yet driven fade. Starts at the top of the day; "all" has no clock and clears it. */
+  /* The stop we are at is "now"; everything before it on the day is behind us and goes grey,
+     so the day's colour is only ever what is still ahead. */
   function paint(){
-    var t=+scrub.value, live=day!=='all', now=-1;
-    if(live){
-      out.textContent=hhmm(t);
-      rows.forEach(function(li){
-        var m=+li.dataset.min;
-        if(mine(li.parentNode)&&m<=t&&m>now) now=m;
-      });
-    }
     rows.forEach(function(li){
-      var m=+li.dataset.min, on=live&&mine(li.parentNode);
-      li.classList.toggle('past',on&&m<now);
-      li.classList.toggle('now',on&&m===now);
+      var on=at!==null&&li.parentNode.dataset.day===day, m=+li.dataset.min;
+      li.classList.toggle('past',on&&m<at);
+      li.classList.toggle('now',on&&m===at);
     });
     stops.forEach(function(g){
-      var m=+g.dataset.min, on=live&&mine(g);
-      g.classList.toggle('past',on&&m<now);
-      g.classList.toggle('now',on&&m===now);
+      var on=at!==null&&mine(g), m=+g.dataset.min;
+      g.classList.toggle('past',on&&m<at);
+      g.classList.toggle('now',on&&m===at);
     });
-    legs.forEach(function(p){p.classList.toggle('future',live&&mine(p)&&+p.dataset.min>t);});
+    legs.forEach(function(p){p.classList.toggle('done',at!==null&&mine(p)&&+p.dataset.min<=at);});
   }
 
-  /* Mirror the selection onto the row, and walk the clock to it. A candidate pin has no
-     time, so it leaves the clock alone. */
+  /* Tapping a stop — on the map or in the list — moves "now" to it. A candidate pin has no
+     time, so it highlights without disturbing the day. */
   function select(pin){
     pins.forEach(function(p){p.classList.toggle('sel',p===pin);});
     var d=pin&&pin.dataset.day, i=pin&&pin.dataset.i;
     rows.forEach(function(li){
       li.classList.toggle('sel',!!d&&li.parentNode.dataset.day===d&&li.dataset.i===i);
     });
-    if(d===day && pin.dataset.min!==undefined){ scrub.value=pin.dataset.min; paint(); }
+    if(d===day&&pin.dataset.min!==undefined){ at=+pin.dataset.min; paint(); }
   }
   function pinFor(li){
     return svg.querySelector('.stop.d'+li.parentNode.dataset.day+'[data-i="'+li.dataset.i+'"]');
   }
+  function mins(d){
+    var ms=[]; view.querySelectorAll('.stoplist.d'+d+' li').forEach(function(li){ms.push(+li.dataset.min);});
+    return ms;
+  }
 
-  function setDay(d){
+  /* A day opens at its first stop, so the view is always "here is the day ahead". */
+  function setDay(d,from){
     day=d; view.dataset.day=d;
     view.querySelectorAll('#mapDays button').forEach(function(b){
       var on=b.dataset.day===d;
       b.classList.toggle('active',on); b.setAttribute('aria-pressed',String(on));
     });
+    at=null;
     if(d!=='all'){
-      var ms=[]; view.querySelectorAll('.stoplist.d'+d+' li').forEach(function(li){ms.push(+li.dataset.min);});
-      scrub.min=ms[0]; scrub.max=ms[ms.length-1]; scrub.value=ms[0];
+      var ms=mins(d), i=0;
+      while(i+1<ms.length&&ms[i+1]<=(from===undefined?ms[0]:from)) i++;
+      at=ms[i];
     }
     select(null); paint();
   }
 
   view.addEventListener('click',function(e){
-    var pin=e.target.closest('.pin');            if(pin){select(pin); return;}
-    var dayBtn=e.target.closest('#mapDays button'); if(dayBtn){setDay(dayBtn.dataset.day); return;}
+    var pin=e.target.closest('.pin');                if(pin){select(pin); return;}
+    var dayBtn=e.target.closest('#mapDays button');  if(dayBtn){setDay(dayBtn.dataset.day); return;}
     var lay=e.target.closest('#mapLayers button');
     if(lay){
       var k='data-'+lay.dataset.layer, on=!view.hasAttribute(k);
@@ -2157,22 +2126,17 @@ var T=(function(){
     }
     var row=e.target.closest('.stoplist li'); if(row) select(pinFor(row));
   });
-  /* Pins are not focusable (67 tab stops would swamp the order) — the rows are. */
+  /* Pins are not focusable (69 tab stops would swamp the order) — the rows are. */
   view.addEventListener('keydown',function(e){
     if(e.key!=='Enter'&&e.key!==' ') return;
     var row=e.target.closest('.stoplist li'); if(!row) return;
     e.preventDefault(); select(pinFor(row));
   });
-  scrub.addEventListener('input',paint);
 
-  /* During the trip, open on today at the current time. */
-  var now=new Date(), d=now.getDate();
-  var trip=(now.getFullYear()===2026&&now.getMonth()===9&&d>=10&&d<=12)?d-9:0;
-  setDay(String(trip||1));
-  if(trip){
-    scrub.value=Math.min(Math.max(now.getHours()*60+now.getMinutes(),+scrub.min),+scrub.max);
-    paint();
-  }
+  /* During the trip, open on today at the stop we should be at by now. */
+  var now=new Date(), date=now.getDate();
+  var trip=(now.getFullYear()===2026&&now.getMonth()===9&&date>=10&&date<=12)?date-9:0;
+  setDay(String(trip||1), trip?now.getHours()*60+now.getMinutes():undefined);
 })();
 </script>
 <script>

@@ -93,14 +93,16 @@ DAYS={
     ('15:30','名護 買い出し','Nago groceries',26.60700,127.97942),
     ('16:20','キャンプ 屋我地','Camp, Yagaji',26.64820,128.03368)],
  3:[('07:30','キャンプ 屋我地','Camp, Yagaji',26.64820,128.03368),
-    ('09:00','残波岬','Cape Zanpa',26.44050,127.71192),
+    ('09:15','残波岬','Cape Zanpa',26.44050,127.71192),
     ('10:15','瀬名波ビーチ','Senaha Beach',26.42465,127.73394),
     ('11:00','バンタカフェ','Banta Cafe',26.41771,127.71400),
     ('13:50','具志川城跡 秘境プール','Gushikawa tide pool',26.08036,127.66452),
-    ('16:45','那覇空港 返却','Naha Airport, car back',26.19670,127.64895)],
+    ('16:45','Evertrail営業所 返却','Evertrail office, car back',26.38051,127.82639),
+    ('17:05','沖縄北IC','Okinawa Kita IC',26.37480,127.82040),
+    ('18:25','那覇空港','Naha Airport',26.19670,127.64895)],
 }
 # leg kinds by (day, destination index)
-KIND={(1,1):'bus',(1,2):'bus',(2,2):'boat',(2,3):'boat'}
+KIND={(1,1):'bus',(1,2):'walk',(2,2):'boat',(2,3):'boat',(3,6):'walk',(3,7):'bus'}
 
 CAMPS=[('勝連ビーチ','Katsuren Beach',26.32630,127.87750),
  ('沖縄県民の森',"Okinawa Prefectural People's Forrest",26.51170,127.90640),
@@ -173,9 +175,9 @@ for d,stops in DAYS.items():
         kind=KIND.get((d,i),'')
         dest=stops[i]; m=mins(dest[0])
         cls='leg d%d%s'%(d,' '+kind if kind else '')
-        if kind=='boat':
-            # out to Minna, then the same line back to the shop
-            a,b = (stops[1],stops[2]) if i==2 else (stops[2],stops[1])
+        if kind in ('boat','walk'):
+            # straight line: the boat out to Minna and back, and the walk to the bus stop
+            a,b = ((stops[1],stops[2]) if i==2 else (stops[2],stops[1])) if kind=='boat' else (stops[i-1],dest)
             pts=[prj(a[3],a[4]),prj(b[3],b[4])]
             rt.append('<path class="%s" data-day="%d" data-min="%d" d="%s"/>'%(cls,d,m,path(pts)))
             continue
