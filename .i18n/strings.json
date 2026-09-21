@@ -1,0 +1,2157 @@
+[
+ {
+  "slot": "txt",
+  "en": "Haneda &rarr; Naha &mdash; Solaseed SNA 021",
+  "id": "a441298923"
+ },
+ {
+  "slot": "txt-note",
+  "en": "Seat 14B &middot; ticket 2052520018908",
+  "id": "e26d6bdf93"
+ },
+ {
+  "slot": "txt",
+  "en": "Land at Naha (OKA)",
+  "id": "88b9daf48c"
+ },
+ {
+  "slot": "txt",
+  "en": "Breakfast, cash, SIM",
+  "id": "d77d7a0732"
+ },
+ {
+  "slot": "txt",
+  "en": "Pick up the Jimny &mdash; Evertrail office",
+  "id": "614120a216"
+ },
+ {
+  "slot": "txt-note",
+  "en": "Airport pickup window 10:30&ndash;16:30 &middot; booking #260096",
+  "id": "ca20a2bf6b"
+ },
+ {
+  "slot": "txt",
+  "en": "North on the Okinawa Expressway",
+  "id": "99857e6b05"
+ },
+ {
+  "slot": "txt-note",
+  "en": "Naha IC &rarr; Kin IC &mdash; about <span class=\"u\" data-metric=\"40 km\" data-imperial=\"25 mi\">40 km</span> of the 57 km line",
+  "id": "fe89acbf63"
+ },
+ {
+  "slot": "txt",
+  "en": "King Tacos, Kin Town &mdash; taco rice",
+  "id": "8a3ea73580"
+ },
+ {
+  "slot": "txt-note",
+  "en": "Taco rice was invented in Kin in 1984 at Parlour Senri; King Tacos is the chain that spread it",
+  "id": "70499e2aa3"
+ },
+ {
+  "slot": "txt",
+  "en": "Michi-no-eki Kyoda, off Kyoda IC",
+  "id": "6e88489309"
+ },
+ {
+  "slot": "txt-note",
+  "en": "8:30&ndash;19:00 &middot; produce, tempura counter, discounted Churaumi tickets",
+  "id": "9bdb802b24"
+ },
+ {
+  "slot": "txt",
+  "en": "Nago &mdash; burner, gas, two nights of food",
+  "id": "5194d692ed"
+ },
+ {
+  "slot": "txt-note",
+  "en": "MaxValu is open 24 h &middot; San-A Bijimata for agu pork cut to order",
+  "id": "5fe9d71bbb"
+ },
+ {
+  "slot": "txt",
+  "en": "Reach camp, pop the rooftop tent",
+  "id": "0eacabe080"
+ },
+ {
+  "slot": "txt",
+  "en": "Sunset",
+  "id": "f936cf599a"
+ },
+ {
+  "slot": "txt",
+  "en": "BBQ night 1 &mdash; agu pork &amp; Okinawa beef",
+  "id": "338a07ea34"
+ },
+ {
+  "slot": "txt",
+  "en": "Sunrise over the water",
+  "id": "6bad7d1af5"
+ },
+ {
+  "slot": "txt",
+  "en": "Coffee, break camp",
+  "id": "f2c40dc120"
+ },
+ {
+  "slot": "txt",
+  "en": "Cape Hedo &mdash; the island's northern tip",
+  "id": "f607fd7502"
+ },
+ {
+  "slot": "txt",
+  "en": "ASMUI Spiritual Hikes",
+  "id": "0174ad695a"
+ },
+ {
+  "slot": "txt-note",
+  "en": "Renamed from Daisekirinzan in 2024 &middot; &yen;2,500 adult &middot; loops 30&ndash;80 min",
+  "id": "a85a61393b"
+ },
+ {
+  "slot": "txt",
+  "en": "Drive south to Motobu",
+  "id": "481834bd0c"
+ },
+ {
+  "slot": "txt-note",
+  "en": "90 min &mdash; the long leg of the day, so leave on time",
+  "id": "db1a2c7166"
+ },
+ {
+  "slot": "txt",
+  "en": "Snorkel at Gorilla Chop, Motobu",
+  "id": "87a63ebb2e"
+ },
+ {
+  "slot": "txt-note",
+  "en": "Sheltered, walk-in entry &middot; sea &asymp; <span class=\"u\" data-metric=\"29 &deg;C\" data-imperial=\"84 &deg;F\">29 &deg;C</span>",
+  "id": "bee9b9f402"
+ },
+ {
+  "slot": "txt",
+  "en": "Kishimoto Shokudo &mdash; Okinawa soba",
+  "id": "5e6ebf5ee6"
+ },
+ {
+  "slot": "txt-note",
+  "en": "11:00&ndash;17:30 &middot; closed Wed &middot; cash only &middot; closes when sold out",
+  "id": "db0a3aba9e"
+ },
+ {
+  "slot": "txt",
+  "en": "Churaumi Aquarium &mdash; 15 min away",
+  "id": "5c468aeff5"
+ },
+ {
+  "slot": "txt-note",
+  "en": "8:30&ndash;18:30, last entry 17:30 &middot; &yen;2,180 adult",
+  "id": "062cf9cd58"
+ },
+ {
+  "slot": "txt",
+  "en": "Groceries in Motobu for tonight",
+  "id": "12ac39e55d"
+ },
+ {
+  "slot": "txt-note",
+  "en": "The Big Express Motobu until 22:00 &mdash; Kouri Island has no supermarket",
+  "id": "ab457bcfb5"
+ },
+ {
+  "slot": "txt",
+  "en": "Reach camp &mdash; Yagaji or Kouri",
+  "id": "24a44c13d5"
+ },
+ {
+  "slot": "txt",
+  "en": "BBQ night 2 at camp",
+  "id": "f118ecc306"
+ },
+ {
+  "slot": "txt",
+  "en": "Sunrise, pack up",
+  "id": "9ff01c4b23"
+ },
+ {
+  "slot": "txt",
+  "en": "Break camp and drive south",
+  "id": "c1ccbf0817"
+ },
+ {
+  "slot": "txt-note",
+  "en": "95 min from Motobu &mdash; the whole day depends on leaving now",
+  "id": "ad77427c56"
+ },
+ {
+  "slot": "txt",
+  "en": "Cape Manzamo, Onna",
+  "id": "e437dbe272"
+ },
+ {
+  "slot": "txt",
+  "en": "Cape Zanpa lighthouse, Yomitan",
+  "id": "259043b2ce"
+ },
+ {
+  "slot": "txt",
+  "en": "Yachimun Pottery Village",
+  "id": "b9282297fa"
+ },
+ {
+  "slot": "txt",
+  "en": "Blue Cave snorkel, Maeda Point",
+  "id": "fea9941254"
+ },
+ {
+  "slot": "txt-note",
+  "en": "Low water 13:50, so the tide falls right through this window &middot; the stairway shuts in high surf",
+  "id": "4299c4866e"
+ },
+ {
+  "slot": "txt",
+  "en": "Chatan / American Village",
+  "id": "42cfe3d238"
+ },
+ {
+  "slot": "txt-note",
+  "en": "A&amp;W for a frozen mug of root beer &mdash; refills are free",
+  "id": "0260f4b3b2"
+ },
+ {
+  "slot": "txt",
+  "en": "Refuel, empty the car, bin the rubbish",
+  "id": "8b1e3649b6"
+ },
+ {
+  "slot": "txt",
+  "en": "Ryujin-no-yu onsen, Senagajima",
+  "id": "ec814a4d3c"
+ },
+ {
+  "slot": "txt-note",
+  "en": "6:00&ndash;24:00 &middot; about &yen;1,570 on a holiday &middot; towels included &middot; 12 min from OKA",
+  "id": "8cf8adea2b"
+ },
+ {
+  "slot": "txt",
+  "en": "Return the Jimny at the airport",
+  "id": "52121d9f88"
+ },
+ {
+  "slot": "txt",
+  "en": "Check in, last Blue Seal, souvenirs",
+  "id": "8a9fc2cddd"
+ },
+ {
+  "slot": "txt",
+  "en": "Naha &rarr; Haneda &mdash; Solaseed SNA 026",
+  "id": "a1462324b7"
+ },
+ {
+  "slot": "txt-note",
+  "en": "Seat 14B",
+  "id": "767bcb0895"
+ },
+ {
+  "slot": "txt",
+  "en": "Land at Haneda",
+  "id": "010656042c"
+ },
+ {
+  "slot": "bul",
+  "en": "<span class=\"time\">06:10</span><span class=\"dot\"></span><span class=\"txt\">Haneda &rarr; Naha &mdash; Solaseed SNA 021",
+  "id": "e48a42f38b"
+ },
+ {
+  "slot": "bul-note",
+  "en": "Seat 14B &middot; ticket 2052520018908",
+  "id": "6a94676bcc"
+ },
+ {
+  "slot": "bul",
+  "en": "<span class=\"time\">08:55</span><span class=\"dot\"></span><span class=\"txt\">Land at Naha (OKA)</span>",
+  "id": "4ab26d0ebc"
+ },
+ {
+  "slot": "bul",
+  "en": "<span class=\"time\">09:30</span><span class=\"dot\"></span><span class=\"txt\">Breakfast, cash, SIM</span>",
+  "id": "6744d0f837"
+ },
+ {
+  "slot": "bul",
+  "en": "<span class=\"time\">11:00</span><span class=\"dot\"></span><span class=\"txt\">Pick up the Jimny &mdash; Evertrail office",
+  "id": "24f34ec45c"
+ },
+ {
+  "slot": "bul-note",
+  "en": "Airport pickup window 10:30&ndash;16:30 &middot; booking #260096",
+  "id": "f5dc23ffed"
+ },
+ {
+  "slot": "bul",
+  "en": "<span class=\"time\">12:00</span><span class=\"dot\"></span><span class=\"txt\">North on the Okinawa Expressway",
+  "id": "ce18f88c24"
+ },
+ {
+  "slot": "bul-note",
+  "en": "Naha IC &rarr; Kin IC &mdash; about <span class=\"u\" data-metric=\"40 km\" data-imperial=\"25 mi\">40 km</span> of the 57 km line",
+  "id": "8dbec24168"
+ },
+ {
+  "slot": "bul",
+  "en": "<span class=\"time\">13:10</span><span class=\"dot\"></span><span class=\"txt\">King Tacos, Kin Town &mdash; taco rice",
+  "id": "9f7a845e7d"
+ },
+ {
+  "slot": "bul-note",
+  "en": "Taco rice was invented in Kin in 1984 at Parlour Senri; King Tacos is the chain that spread it",
+  "id": "bd45c6bcc6"
+ },
+ {
+  "slot": "bul",
+  "en": "<span class=\"time\">14:30</span><span class=\"dot\"></span><span class=\"txt\">Michi-no-eki Kyoda, off Kyoda IC",
+  "id": "9464428603"
+ },
+ {
+  "slot": "bul-note",
+  "en": "8:30&ndash;19:00 &middot; produce, tempura counter, discounted Churaumi tickets",
+  "id": "05ee3d564c"
+ },
+ {
+  "slot": "bul",
+  "en": "<span class=\"time\">15:15</span><span class=\"dot\"></span><span class=\"txt\">Nago &mdash; burner, gas, two nights of food",
+  "id": "2e716f361e"
+ },
+ {
+  "slot": "bul-note",
+  "en": "MaxValu is open 24 h &middot; San-A Bijimata for agu pork cut to order",
+  "id": "f10453aa27"
+ },
+ {
+  "slot": "bul",
+  "en": "<span class=\"time\">16:45</span><span class=\"dot\"></span><span class=\"txt\">Reach camp, pop the rooftop tent</span>",
+  "id": "02185a0d4e"
+ },
+ {
+  "slot": "bul",
+  "en": "<span class=\"time\">18:08</span><span class=\"dot\"></span><span class=\"txt\">Sunset</span>",
+  "id": "f57061559b"
+ },
+ {
+  "slot": "bul",
+  "en": "<span class=\"time\">19:00</span><span class=\"dot\"></span><span class=\"txt\">BBQ night 1 &mdash; agu pork &amp; Okinawa beef</span>",
+  "id": "5f10dcaaf2"
+ },
+ {
+  "slot": "bul",
+  "en": "MaxValu Nago &mdash; open 24 h",
+  "id": "cb984c11d6"
+ },
+ {
+  "slot": "bul-note",
+  "en": "The reliable all-night stop in the north",
+  "id": "191b4f55d4"
+ },
+ {
+  "slot": "bul",
+  "en": "San-A Bijimata, Nago",
+  "id": "e93d732f6b"
+ },
+ {
+  "slot": "bul-note",
+  "en": "Biggest selection &middot; butcher counter for agu pork",
+  "id": "099b1fe371"
+ },
+ {
+  "slot": "bul",
+  "en": "Michi-no-eki Kyoda, off Kyoda IC",
+  "id": "374b883e7f"
+ },
+ {
+  "slot": "bul-note",
+  "en": "8:30&ndash;19:00 &middot; produce and bento, not a full grocery",
+  "id": "23055f7e14"
+ },
+ {
+  "slot": "bul",
+  "en": "Kafu Banta &amp; Kouri Island bridge for the golden hour",
+  "id": "fb903b13fb"
+ },
+ {
+  "slot": "bul",
+  "en": "<span class=\"time\">06:25</span><span class=\"dot\"></span><span class=\"txt\">Sunrise over the water</span>",
+  "id": "19e69b0b33"
+ },
+ {
+  "slot": "bul",
+  "en": "<span class=\"time\">08:00</span><span class=\"dot\"></span><span class=\"txt\">Coffee, break camp</span>",
+  "id": "a0684108d1"
+ },
+ {
+  "slot": "bul",
+  "en": "<span class=\"time\">08:40</span><span class=\"dot\"></span><span class=\"txt\">Cape Hedo &mdash; the island's northern tip</span>",
+  "id": "9476ff7a1f"
+ },
+ {
+  "slot": "bul",
+  "en": "<span class=\"time\">09:30</span><span class=\"dot\"></span><span class=\"txt\">ASMUI Spiritual Hikes",
+  "id": "46582ca224"
+ },
+ {
+  "slot": "bul-note",
+  "en": "Renamed from Daisekirinzan in 2024 &middot; &yen;2,500 adult &middot; loops 30&ndash;80 min",
+  "id": "6ae3d6b717"
+ },
+ {
+  "slot": "bul",
+  "en": "<span class=\"time\">11:00</span><span class=\"dot\"></span><span class=\"txt\">Drive south to Motobu",
+  "id": "8f52572ea9"
+ },
+ {
+  "slot": "bul-note",
+  "en": "90 min &mdash; the long leg of the day, so leave on time",
+  "id": "7d56bb7cee"
+ },
+ {
+  "slot": "bul",
+  "en": "<span class=\"time\">12:35</span><span class=\"dot\"></span><span class=\"txt\">Snorkel at Gorilla Chop, Motobu",
+  "id": "1ebc75fb6c"
+ },
+ {
+  "slot": "bul-note",
+  "en": "Sheltered, walk-in entry &middot; sea &asymp; <span class=\"u\" data-metric=\"29 &deg;C\" data-imperial=\"84 &deg;F\">29 &deg;C</span>",
+  "id": "bbbc2a0f4e"
+ },
+ {
+  "slot": "bul",
+  "en": "<span class=\"time\">14:00</span><span class=\"dot\"></span><span class=\"txt\">Kishimoto Shokudo &mdash; Okinawa soba",
+  "id": "0b6d2fc049"
+ },
+ {
+  "slot": "bul-note",
+  "en": "11:00&ndash;17:30 &middot; closed Wed &middot; cash only &middot; closes when sold out",
+  "id": "63e6064569"
+ },
+ {
+  "slot": "bul",
+  "en": "<span class=\"time\">15:15</span><span class=\"dot\"></span><span class=\"txt\">Churaumi Aquarium &mdash; 15 min away",
+  "id": "272526c40d"
+ },
+ {
+  "slot": "bul-note",
+  "en": "8:30&ndash;18:30, last entry 17:30 &middot; &yen;2,180 adult",
+  "id": "3b48e3f399"
+ },
+ {
+  "slot": "bul",
+  "en": "<span class=\"time\">17:00</span><span class=\"dot\"></span><span class=\"txt\">Groceries in Motobu for tonight",
+  "id": "4997c5c322"
+ },
+ {
+  "slot": "bul-note",
+  "en": "The Big Express Motobu until 22:00 &mdash; Kouri Island has no supermarket",
+  "id": "3bcf030e84"
+ },
+ {
+  "slot": "bul",
+  "en": "<span class=\"time\">17:45</span><span class=\"dot\"></span><span class=\"txt\">Reach camp &mdash; Yagaji or Kouri</span>",
+  "id": "db4f286568"
+ },
+ {
+  "slot": "bul",
+  "en": "<span class=\"time\">18:07</span><span class=\"dot\"></span><span class=\"txt\">Sunset</span>",
+  "id": "853805f6da"
+ },
+ {
+  "slot": "bul",
+  "en": "<span class=\"time\">19:00</span><span class=\"dot\"></span><span class=\"txt\">BBQ night 2 at camp</span>",
+  "id": "730797f47c"
+ },
+ {
+  "slot": "bul",
+  "en": "Aragaki Zenzai, next door to Kishimoto",
+  "id": "83005efc58"
+ },
+ {
+  "slot": "bul-note",
+  "en": "Shaved ice over sweet beans &middot; closed Mondays, so today is the day",
+  "id": "2fa60e15eb"
+ },
+ {
+  "slot": "bul",
+  "en": "Bise Fukugi tree road, or the Kouri bridge viewpoint",
+  "id": "48d4b1054b"
+ },
+ {
+  "slot": "bul",
+  "en": "<span class=\"time\">06:25</span><span class=\"dot\"></span><span class=\"txt\">Sunrise, pack up</span>",
+  "id": "d331253994"
+ },
+ {
+  "slot": "bul",
+  "en": "<span class=\"time\">07:30</span><span class=\"dot\"></span><span class=\"txt\">Break camp and drive south",
+  "id": "9e02814700"
+ },
+ {
+  "slot": "bul-note",
+  "en": "95 min from Motobu &mdash; the whole day depends on leaving now",
+  "id": "4d9d659d7c"
+ },
+ {
+  "slot": "bul",
+  "en": "<span class=\"time\">09:10</span><span class=\"dot\"></span><span class=\"txt\">Cape Manzamo, Onna</span>",
+  "id": "f7cf37ff32"
+ },
+ {
+  "slot": "bul",
+  "en": "<span class=\"time\">10:00</span><span class=\"dot\"></span><span class=\"txt\">Cape Zanpa lighthouse, Yomitan</span>",
+  "id": "918057a66a"
+ },
+ {
+  "slot": "bul",
+  "en": "<span class=\"time\">10:40</span><span class=\"dot\"></span><span class=\"txt\">Yachimun Pottery Village</span>",
+  "id": "4f7c800cf9"
+ },
+ {
+  "slot": "bul",
+  "en": "<span class=\"time\">12:30</span><span class=\"dot\"></span><span class=\"txt\">Blue Cave snorkel, Maeda Point",
+  "id": "14f4b2b764"
+ },
+ {
+  "slot": "bul-note",
+  "en": "Low water 13:50, so the tide falls right through this window &middot; the stairway shuts in high surf",
+  "id": "ff804074b0"
+ },
+ {
+  "slot": "bul",
+  "en": "<span class=\"time\">14:15</span><span class=\"dot\"></span><span class=\"txt\">Chatan / American Village",
+  "id": "10bd698b81"
+ },
+ {
+  "slot": "bul-note",
+  "en": "A&amp;W for a frozen mug of root beer &mdash; refills are free",
+  "id": "266b28f8d9"
+ },
+ {
+  "slot": "bul",
+  "en": "<span class=\"time\">15:15</span><span class=\"dot\"></span><span class=\"txt\">Refuel, empty the car, bin the rubbish</span>",
+  "id": "6817dd6a7c"
+ },
+ {
+  "slot": "bul",
+  "en": "<span class=\"time\">15:55</span><span class=\"dot\"></span><span class=\"txt\">Ryujin-no-yu onsen, Senagajima",
+  "id": "d689775273"
+ },
+ {
+  "slot": "bul-note",
+  "en": "6:00&ndash;24:00 &middot; about &yen;1,570 on a holiday &middot; towels included &middot; 12 min from OKA",
+  "id": "8d89bd0978"
+ },
+ {
+  "slot": "bul",
+  "en": "<span class=\"time\">17:00</span><span class=\"dot\"></span><span class=\"txt\">Return the Jimny at the airport</span>",
+  "id": "4e95e11bcb"
+ },
+ {
+  "slot": "bul",
+  "en": "<span class=\"time\">18:30</span><span class=\"dot\"></span><span class=\"txt\">Check in, last Blue Seal, souvenirs</span>",
+  "id": "9cd4a8b3f2"
+ },
+ {
+  "slot": "bul",
+  "en": "<span class=\"time\">20:25</span><span class=\"dot\"></span><span class=\"txt\">Naha &rarr; Haneda &mdash; Solaseed SNA 026",
+  "id": "b465911a18"
+ },
+ {
+  "slot": "bul-note",
+  "en": "Seat 14B",
+  "id": "39e04ca194"
+ },
+ {
+  "slot": "bul",
+  "en": "<span class=\"time\">22:50</span><span class=\"dot\"></span><span class=\"txt\">Land at Haneda</span>",
+  "id": "bfa98c53f8"
+ },
+ {
+  "slot": "bul",
+  "en": "Booking F9NE38 &middot; ticket 2052520018908",
+  "id": "cdc226b759"
+ },
+ {
+  "slot": "bul-note",
+  "en": "Waylon Huang &middot; Haneda &harr; Naha, all times JST",
+  "id": "10f1445a43"
+ },
+ {
+  "slot": "bul",
+  "en": "06:10 departure means leaving home around 04:00",
+  "id": "4863c6655c"
+ },
+ {
+  "slot": "bul",
+  "en": "Teppan grill + gas canister",
+  "id": "337aae7262"
+ },
+ {
+  "slot": "bul-note",
+  "en": "Bundled with the meat platter &mdash; the one thing we cannot improvise",
+  "id": "9f418bc4be"
+ },
+ {
+  "slot": "bul",
+  "en": "BBQ meat platter",
+  "id": "e55c41c532"
+ },
+ {
+  "slot": "bul-note",
+  "en": "Buy agu pork and Okinawa beef at MaxValu Nago or San-A Bijimata instead",
+  "id": "fe6400f71f"
+ },
+ {
+  "slot": "bul",
+  "en": "Mask, snorkel and fins",
+  "id": "3a1e18e3ab"
+ },
+ {
+  "slot": "bul-note",
+  "en": "Pack our own &mdash; we are snorkelling twice",
+  "id": "356704499d"
+ },
+ {
+  "slot": "bul",
+  "en": "Mosquito coils",
+  "id": "698e256847"
+ },
+ {
+  "slot": "bul-note",
+  "en": "Any konbini has katori-senko",
+  "id": "8145d2755a"
+ },
+ {
+  "slot": "bul",
+  "en": "Life jacket &middot; projector",
+  "id": "b93b0fc807"
+ },
+ {
+  "slot": "bul",
+  "en": "Japanese licences &mdash; nothing else needed",
+  "id": "6ed419d4e9"
+ },
+ {
+  "slot": "bul-note",
+  "en": "No International Driving Permit required for us",
+  "id": "950800bc6c"
+ },
+ {
+  "slot": "bul",
+  "en": "Okinawa Expressway, Naha IC &harr; Kyoda IC",
+  "id": "6df61806cc"
+ },
+ {
+  "slot": "bul-note",
+  "en": "<span class=\"u\" data-metric=\"57 km\" data-imperial=\"36 mi\">57 km</span> &middot; &yen;1,040 with an ETC card against &yen;1,610 in cash &mdash; the 35% discount is ETC-only now",
+  "id": "04eef83aca"
+ },
+ {
+  "slot": "bul",
+  "en": "Route 58 is the slow, scenic alternative",
+  "id": "05e3111045"
+ },
+ {
+  "slot": "bul-note",
+  "en": "Naha to Nago takes roughly twice as long",
+  "id": "17e1005d90"
+ },
+ {
+  "slot": "bul",
+  "en": "Drive on the left &middot; no turn on red &middot; watch the bus-only lanes in central Naha at rush hour",
+  "id": "1a0c36bfb7"
+ },
+ {
+  "slot": "bul",
+  "en": "Habu vipers &mdash; high-risk season, nocturnal",
+  "id": "c09b4dfbf8"
+ },
+ {
+  "slot": "bul-note",
+  "en": "The prefecture's campaign runs Sep&ndash;Nov and they do not hibernate. Torch after dark, closed shoes, stay off stone walls and long grass. Keep 1.5 m back &mdash; they cannot jump. If bitten: keep still, call 119, no tourniquet and no cutting",
+  "id": "b65e50db33"
+ },
+ {
+  "slot": "bul",
+  "en": "Jellyfish &mdash; assume no nets and no lifeguard",
+  "id": "b3ea9ea05e"
+ },
+ {
+  "slot": "bul-note",
+  "en": "The box-jellyfish advisory runs Jun&ndash;Sep, so nets are likely already down, and Gorilla Chop and Maeda are unpatrolled anyway. A long-sleeve rash guard beats any first aid",
+  "id": "f014768369"
+ },
+ {
+  "slot": "bul",
+  "en": "Stings: rinse with seawater, never fresh water",
+  "id": "c121ed01d9"
+ },
+ {
+  "slot": "bul-note",
+  "en": "Vinegar is <strong>only</strong> for habu-kurage (cube-shaped bell, pale tentacles). On a Portuguese man o' war &mdash; blue float, long blue threads &mdash; vinegar makes it worse. Lift tentacles off, then cool it",
+  "id": "8d16d97b42"
+ },
+ {
+  "slot": "bul",
+  "en": "Centipedes get into boots and tents",
+  "id": "ddfb209484"
+ },
+ {
+  "slot": "bul-note",
+  "en": "Shake out footwear, zip the tent, don't pitch on leaf litter",
+  "id": "a5a38a7d6b"
+ },
+ {
+  "slot": "bul",
+  "en": "No open fires or charcoal on sand",
+  "id": "7afdac2a94"
+ },
+ {
+  "slot": "bul-note",
+  "en": "Onna Village asks visitors to use neither, and most sites require a fire pan. A gas burner sidesteps all of it",
+  "id": "ab27e11694"
+ },
+ {
+  "slot": "bul",
+  "en": "Tap water is safe to drink",
+  "id": "30691e61f4"
+ },
+ {
+  "slot": "bul-note",
+  "en": "Hard in the centre and south, softer up north off the Yanbaru dams. Carry <span class=\"u\" data-metric=\"5&ndash;10 L\" data-imperial=\"1&ndash;3 gal\">5&ndash;10 L</span> anyway &mdash; wild sites often have no tap",
+  "id": "a6874ae62c"
+ },
+ {
+  "slot": "bul",
+  "en": "Supermarkets north of Nago shut by ~19:00",
+  "id": "7f1f0d7559"
+ },
+ {
+  "slot": "bul-note",
+  "en": "Kunigami and Ogimi have no chain supermarket at all &mdash; only 24 h konbini on Route 58 after that",
+  "id": "229b9f45b6"
+ },
+ {
+  "slot": "bul",
+  "en": "Carry cash &mdash; the best soba shops and Union supermarkets are cash-only",
+  "id": "fb0804d14b"
+ },
+ {
+  "slot": "bul",
+  "en": "Mon Oct 12 is Sports Day",
+  "id": "e323d1b5e7"
+ },
+ {
+  "slot": "bul-note",
+  "en": "A three-day weekend: book campsites early, expect crowds",
+  "id": "a2678723ec"
+ },
+ {
+  "slot": "title",
+  "en": "Land &amp; Drive North",
+  "id": "3c35072390"
+ },
+ {
+  "slot": "title",
+  "en": "Yanbaru &amp; Motobu",
+  "id": "66ac8cd5b6"
+ },
+ {
+  "slot": "title",
+  "en": "South Coast &amp; Fly Home",
+  "id": "3008f72cc8"
+ },
+ {
+  "slot": "title",
+  "en": "Flights",
+  "id": "82fa1a9ac2"
+ },
+ {
+  "slot": "title",
+  "en": "The Jimny",
+  "id": "3ebc5f0c2c"
+ },
+ {
+  "slot": "title",
+  "en": "Know Before You Go",
+  "id": "6f186efbcb"
+ },
+ {
+  "slot": "title",
+  "en": "Kita Nashiro Beach",
+  "id": "380ae71f94"
+ },
+ {
+  "slot": "title",
+  "en": "NEOS Outdoor Park",
+  "id": "230c5aa162"
+ },
+ {
+  "slot": "title",
+  "en": "Azama Sun Beach Camping Ground",
+  "id": "ef2f5ccbf0"
+ },
+ {
+  "slot": "title",
+  "en": "Kudeken Beach",
+  "id": "7206900ad3"
+ },
+ {
+  "slot": "title",
+  "en": "Katsuren Beach",
+  "id": "0c514da099"
+ },
+ {
+  "slot": "title",
+  "en": "Okinawa Prefectural People&#x27;s Forrest",
+  "id": "67830f905c"
+ },
+ {
+  "slot": "title",
+  "en": "Koki Camp Spot",
+  "id": "5fe6eb3021"
+ },
+ {
+  "slot": "title",
+  "en": "Nago Castle Bridge Spot",
+  "id": "e60cd19bc0"
+ },
+ {
+  "slot": "title",
+  "en": "Base Camp",
+  "id": "ef8767973d"
+ },
+ {
+  "slot": "title",
+  "en": "Yagaji Beach Campsite",
+  "id": "44dbd63751"
+ },
+ {
+  "slot": "title",
+  "en": "Inamine Camp Spot",
+  "id": "40d90ce59e"
+ },
+ {
+  "slot": "title",
+  "en": "Yagajima Spot",
+  "id": "cac46db75f"
+ },
+ {
+  "slot": "title",
+  "en": "Kouri Island Camp Ground",
+  "id": "c16bb0d6b3"
+ },
+ {
+  "slot": "title",
+  "en": "Henan Bridge",
+  "id": "f87ca77d5b"
+ },
+ {
+  "slot": "title",
+  "en": "Tsuha Beach Camp Spot",
+  "id": "e88a87d32e"
+ },
+ {
+  "slot": "title",
+  "en": "Tonokiya Campsite",
+  "id": "28eb510706"
+ },
+ {
+  "slot": "title",
+  "en": "Daiboo River Camp",
+  "id": "bebf685826"
+ },
+ {
+  "slot": "title",
+  "en": "Fukuchi River Seaside Park",
+  "id": "3e47b009b4"
+ },
+ {
+  "slot": "title",
+  "en": "Kokyono Beach",
+  "id": "f6ee02c285"
+ },
+ {
+  "slot": "title",
+  "en": "Hentona Camp Spot",
+  "id": "655ab49f01"
+ },
+ {
+  "slot": "title",
+  "en": "Okuma Mountains",
+  "id": "dfc1ba1c14"
+ },
+ {
+  "slot": "title",
+  "en": "Benoki Camp Spot",
+  "id": "0ca3d49b4f"
+ },
+ {
+  "slot": "title",
+  "en": "Yanbaru Discovery Forest",
+  "id": "77aad5acbe"
+ },
+ {
+  "slot": "title",
+  "en": "Aha, Yanbaru",
+  "id": "7869d5b338"
+ },
+ {
+  "slot": "title",
+  "en": "Oku Beach Road",
+  "id": "91a5a97ef8"
+ },
+ {
+  "slot": "title",
+  "en": "Adan Beach Campsite",
+  "id": "5507bdf20c"
+ },
+ {
+  "slot": "subtitle",
+  "en": "Naha &rarr; Kin &rarr; Yanbaru",
+  "id": "a90297f2ff"
+ },
+ {
+  "slot": "subtitle",
+  "en": "Cape Hedo, snorkel, soba",
+  "id": "b07563902b"
+ },
+ {
+  "slot": "subtitle",
+  "en": "Yomitan, Chatan, onsen, OKA",
+  "id": "2e149d09e2"
+ },
+ {
+  "slot": "subtitle",
+  "en": "Solaseed Air &middot; ref F9NE38",
+  "id": "dc7bbca800"
+ },
+ {
+  "slot": "subtitle",
+  "en": "Evertrail &middot; booking #260096",
+  "id": "aef4c86186"
+ },
+ {
+  "slot": "subtitle",
+  "en": "Weather, tolls, hazards",
+  "id": "75af99ceb7"
+ },
+ {
+  "slot": "subtitle",
+  "en": "Wild camp &middot; Itoman &middot; <span class=\"u\" data-metric=\"11.5 km\" data-imperial=\"7 mi\">11.5 km</span>",
+  "id": "3be409c98d"
+ },
+ {
+  "slot": "subtitle",
+  "en": "Paid camp &middot; Nanjō &middot; <span class=\"u\" data-metric=\"22.1 km\" data-imperial=\"14 mi\">22.1 km</span>",
+  "id": "501b9e4a9d"
+ },
+ {
+  "slot": "subtitle",
+  "en": "Paid camp &middot; Nanjō &middot; <span class=\"u\" data-metric=\"26.2 km\" data-imperial=\"16 mi\">26.2 km</span>",
+  "id": "da70d92ec4"
+ },
+ {
+  "slot": "subtitle",
+  "en": "Wild camp &middot; Nanjō &middot; <span class=\"u\" data-metric=\"24.6 km\" data-imperial=\"15 mi\">24.6 km</span>",
+  "id": "92da73229a"
+ },
+ {
+  "slot": "subtitle",
+  "en": "Wild camp &middot; Uruma &middot; <span class=\"u\" data-metric=\"40.4 km\" data-imperial=\"25 mi\">40.4 km</span>",
+  "id": "33f02d4832"
+ },
+ {
+  "slot": "subtitle",
+  "en": "Paid camp &middot; Onna &middot; <span class=\"u\" data-metric=\"60.4 km\" data-imperial=\"38 mi\">60.4 km</span>",
+  "id": "5af631a3d4"
+ },
+ {
+  "slot": "subtitle",
+  "en": "Wild camp &middot; Nago &middot; <span class=\"u\" data-metric=\"70.9 km\" data-imperial=\"44 mi\">70.9 km</span>",
+  "id": "49981baaea"
+ },
+ {
+  "slot": "subtitle",
+  "en": "Wild camp &middot; Nago &middot; <span class=\"u\" data-metric=\"77.5 km\" data-imperial=\"48 mi\">77.5 km</span>",
+  "id": "01d09004f5"
+ },
+ {
+  "slot": "subtitle",
+  "en": "Paid camp &middot; Nago &middot; <span class=\"u\" data-metric=\"83.8 km\" data-imperial=\"52 mi\">83.8 km</span>",
+  "id": "dde1c3a809"
+ },
+ {
+  "slot": "subtitle",
+  "en": "Paid camp &middot; Nago &middot; <span class=\"u\" data-metric=\"86.3 km\" data-imperial=\"54 mi\">86.3 km</span>",
+  "id": "98e022a655"
+ },
+ {
+  "slot": "subtitle",
+  "en": "Wild camp &middot; Nago &middot; <span class=\"u\" data-metric=\"86.2 km\" data-imperial=\"54 mi\">86.2 km</span>",
+  "id": "909174d85d"
+ },
+ {
+  "slot": "subtitle",
+  "en": "Wild camp &middot; Nago &middot; <span class=\"u\" data-metric=\"87.4 km\" data-imperial=\"54 mi\">87.4 km</span>",
+  "id": "9f1e0f2111"
+ },
+ {
+  "slot": "subtitle",
+  "en": "Paid camp &middot; Nakijin &middot; <span class=\"u\" data-metric=\"95.7 km\" data-imperial=\"59 mi\">95.7 km</span>",
+  "id": "e8ac705141"
+ },
+ {
+  "slot": "subtitle",
+  "en": "Wild camp &middot; Ogimi &middot; <span class=\"u\" data-metric=\"90.6 km\" data-imperial=\"56 mi\">90.6 km</span>",
+  "id": "a638f0627d"
+ },
+ {
+  "slot": "subtitle",
+  "en": "Wild camp &middot; Ogimi &middot; <span class=\"u\" data-metric=\"92.7 km\" data-imperial=\"58 mi\">92.7 km</span>",
+  "id": "4eaae1ff02"
+ },
+ {
+  "slot": "subtitle",
+  "en": "Paid camp &middot; Ogimi &middot; <span class=\"u\" data-metric=\"93.6 km\" data-imperial=\"58 mi\">93.6 km</span>",
+  "id": "4bddf0f3fb"
+ },
+ {
+  "slot": "subtitle",
+  "en": "Wild camp &middot; Ogimi &middot; <span class=\"u\" data-metric=\"97.5 km\" data-imperial=\"61 mi\">97.5 km</span>",
+  "id": "2172fe0b27"
+ },
+ {
+  "slot": "subtitle",
+  "en": "Paid camp &middot; Higashi &middot; <span class=\"u\" data-metric=\"101.9 km\" data-imperial=\"63 mi\">101.9 km</span>",
+  "id": "fcbce50280"
+ },
+ {
+  "slot": "subtitle",
+  "en": "Wild camp &middot; Kunigami &middot; <span class=\"u\" data-metric=\"106.5 km\" data-imperial=\"66 mi\">106.5 km</span>",
+  "id": "ea22269bcf"
+ },
+ {
+  "slot": "subtitle",
+  "en": "Wild camp &middot; Kunigami &middot; <span class=\"u\" data-metric=\"107.3 km\" data-imperial=\"67 mi\">107.3 km</span>",
+  "id": "8304127b05"
+ },
+ {
+  "slot": "subtitle",
+  "en": "Paid camp &middot; Kunigami &middot; <span class=\"u\" data-metric=\"107.6 km\" data-imperial=\"67 mi\">107.6 km</span>",
+  "id": "f8561d5a0d"
+ },
+ {
+  "slot": "subtitle",
+  "en": "Wild camp &middot; Kunigami &middot; <span class=\"u\" data-metric=\"115.3 km\" data-imperial=\"72 mi\">115.3 km</span>",
+  "id": "715babbf05"
+ },
+ {
+  "slot": "subtitle",
+  "en": "Paid camp &middot; Kunigami &middot; <span class=\"u\" data-metric=\"123.4 km\" data-imperial=\"77 mi\">123.4 km</span>",
+  "id": "7763d91151"
+ },
+ {
+  "slot": "subtitle",
+  "en": "Wild camp &middot; Kunigami &middot; <span class=\"u\" data-metric=\"126.1 km\" data-imperial=\"78 mi\">126.1 km</span>",
+  "id": "090143d993"
+ },
+ {
+  "slot": "subtitle",
+  "en": "Wild camp &middot; Kunigami &middot; <span class=\"u\" data-metric=\"132.6 km\" data-imperial=\"82 mi\">132.6 km</span>",
+  "id": "56f3eaf16f"
+ },
+ {
+  "slot": "subtitle",
+  "en": "Paid camp &middot; Kunigami &middot; <span class=\"u\" data-metric=\"131.1 km\" data-imperial=\"81 mi\">131.1 km</span>",
+  "id": "384a498559"
+ },
+ {
+  "slot": "statk",
+  "en": "Outbound",
+  "id": "b7bb66b8a2"
+ },
+ {
+  "slot": "statk",
+  "en": "Oct 10",
+  "id": "d1d5f96238"
+ },
+ {
+  "slot": "statk",
+  "en": "Return",
+  "id": "306504d686"
+ },
+ {
+  "slot": "statk",
+  "en": "Oct 12",
+  "id": "7ad0554a20"
+ },
+ {
+  "slot": "statk",
+  "en": "Seat",
+  "id": "4b5ff65ba0"
+ },
+ {
+  "slot": "statk",
+  "en": "Fare",
+  "id": "b58f53fee0"
+ },
+ {
+  "slot": "statk",
+  "en": "Rent",
+  "id": "73a4197bac"
+ },
+ {
+  "slot": "statk",
+  "en": "Zero Liability",
+  "id": "81b27791f6"
+ },
+ {
+  "slot": "statk",
+  "en": "Cleaning",
+  "id": "0d9c048045"
+ },
+ {
+  "slot": "statk",
+  "en": "Card fee 3.6%",
+  "id": "e46fee3d80"
+ },
+ {
+  "slot": "statk",
+  "en": "Tax 10%",
+  "id": "0cccab51b7"
+ },
+ {
+  "slot": "statk",
+  "en": "Total paid",
+  "id": "6fcd89e2c9"
+ },
+ {
+  "slot": "statk",
+  "en": "Daily high",
+  "id": "bcc8b223a1"
+ },
+ {
+  "slot": "statk",
+  "en": "Overnight low",
+  "id": "68781bd064"
+ },
+ {
+  "slot": "statk",
+  "en": "Sea temp",
+  "id": "7f7e9ccbb4"
+ },
+ {
+  "slot": "statk",
+  "en": "Humidity",
+  "id": "e09dd77a84"
+ },
+ {
+  "slot": "statk",
+  "en": "Rain",
+  "id": "8355ade4e6"
+ },
+ {
+  "slot": "statk",
+  "en": "Daylight",
+  "id": "4b04f17020"
+ },
+ {
+  "slot": "statk",
+  "en": "Type",
+  "id": "9844e895c6"
+ },
+ {
+  "slot": "statk",
+  "en": "Fee",
+  "id": "e4f5c5ee52"
+ },
+ {
+  "slot": "statv",
+  "en": "SNA 021",
+  "id": "4b66188842"
+ },
+ {
+  "slot": "statv",
+  "en": "06:10 &rarr; 08:55",
+  "id": "89350a73fb"
+ },
+ {
+  "slot": "statv",
+  "en": "SNA 026",
+  "id": "5019728a55"
+ },
+ {
+  "slot": "statv",
+  "en": "20:25 &rarr; 22:50",
+  "id": "c2fd9122e8"
+ },
+ {
+  "slot": "statv",
+  "en": "14B both ways",
+  "id": "636b180348"
+ },
+ {
+  "slot": "statv",
+  "en": "Early Sora Value",
+  "id": "eabeda0f4b"
+ },
+ {
+  "slot": "statv",
+  "en": "&yen;17,000 &times; 3",
+  "id": "66136ef44a"
+ },
+ {
+  "slot": "statv",
+  "en": "&yen;9,000",
+  "id": "c6a954e074"
+ },
+ {
+  "slot": "statv",
+  "en": "Waived at 3 days",
+  "id": "7e0291ad73"
+ },
+ {
+  "slot": "statv",
+  "en": "&yen;2,160",
+  "id": "d97fcc5e7a"
+ },
+ {
+  "slot": "statv",
+  "en": "&yen;6,000",
+  "id": "85c230f018"
+ },
+ {
+  "slot": "statv",
+  "en": "&yen;68,160",
+  "id": "fb20336ad1"
+ },
+ {
+  "slot": "statv",
+  "en": "<span class=\"u\" data-metric=\"28 &deg;C\" data-imperial=\"82 &deg;F\">28 &deg;C</span>",
+  "id": "0f37b5141a"
+ },
+ {
+  "slot": "statv",
+  "en": "<span class=\"u\" data-metric=\"24 &deg;C\" data-imperial=\"76 &deg;F\">24 &deg;C</span>",
+  "id": "fed5172a3d"
+ },
+ {
+  "slot": "statv",
+  "en": "<span class=\"u\" data-metric=\"29 &deg;C\" data-imperial=\"84 &deg;F\">29 &deg;C</span>",
+  "id": "b370451bb7"
+ },
+ {
+  "slot": "statv",
+  "en": "~72%",
+  "id": "93f6a0d36c"
+ },
+ {
+  "slot": "statv",
+  "en": "4 days in 10",
+  "id": "f0f5709516"
+ },
+ {
+  "slot": "statv",
+  "en": "06:25&ndash;18:07",
+  "id": "c9f34b606e"
+ },
+ {
+  "slot": "statv",
+  "en": "Wild camp",
+  "id": "086862b8ca"
+ },
+ {
+  "slot": "statv",
+  "en": "None posted",
+  "id": "d55fd469f6"
+ },
+ {
+  "slot": "statv",
+  "en": "Paid camp",
+  "id": "3d03cedbe8"
+ },
+ {
+  "slot": "statv",
+  "en": "Ask on site",
+  "id": "27d9077975"
+ },
+ {
+  "slot": "statv",
+  "en": "&yen;1,000",
+  "id": "52121bbb0e"
+ },
+ {
+  "slot": "statv",
+  "en": "&yen;2,000",
+  "id": "2b3bc85e20"
+ },
+ {
+  "slot": "desc",
+  "en": "Suzuki Jimny Sierra II with a rooftop tent, 2 guests, Oct 10&ndash;12. Booked under Asuka Umeda.\n          Pick up 11:00, drop off 18:00 &mdash; but airport return closes 17:30.",
+  "id": "f9b86e7ff6"
+ },
+ {
+  "slot": "desc",
+  "en": "Still properly warm and swimmable, with nights staying near\n          <span class=\"u\" data-metric=\"24 &deg;C\" data-imperial=\"76 &deg;F\">24 &deg;C</span> &mdash; the rental's bedding is\n          plenty. Showers blow through quickly. Wind is the real threat on an exposed pitch, and it will also make a\n          cassette burner useless, so pick somewhere sheltered. October is still typhoon season: roughly a 1-in-10\n          chance of one tracking within 300 km during a three-day window, so keep a wet-weather fallback in mind.",
+  "id": "9082ebd396"
+ },
+ {
+  "slot": "desc",
+  "en": "Experience beachside camping where you can set up right by the shore and enjoy stunning sunsets. Located on the southern side of the island and conveniently close to the airport, this free campsite offers access to toilet facilities at no cost. Please note that it can be crowded on weekends. Please avoid driving your car on the beach, respect other campers, and leave no trace behind.",
+  "id": "5e698f575b"
+ },
+ {
+  "slot": "desc",
+  "en": "Neos Outdoor Park in Nanjo, Okinawa, offers a variety of camping options, including family, solo, and pet-friendly sites, as well as car camping. With direct access to the beach, visitors can enjoy activities like kayaking and paddleboarding, or explore the area on electric bikes. The park is designed to provide a relaxing experience with stunning ocean views and starry skies.",
+  "id": "c5717b8d71"
+ },
+ {
+  "slot": "desc",
+  "en": "Nestled along the serene shores of Azama Beach, this campsite offers an idyllic retreat with its expansive, well-maintained grassy areas perfect for family fun. Wake up to breathtaking sunrises over Kudaka Island, and enjoy amenities such as clean restrooms and six cozy pavilions for dining or relaxation. The site is equipped with designated areas for bonfires and fireworks, making it an excellent spot for a classic campfire night.",
+  "id": "e230e3e102"
+ },
+ {
+  "slot": "desc",
+  "en": "Kudeken Beach is a beautiful, free campsite located on the sunrise side, offering a perfect spot for beach camping and stargazing. The peaceful surroundings make it an ideal place to enjoy nature, with stunning views of Cape Chinen just a short drive away. As this is a free campsite, it&#x27;s important to be courteous to the locals and practice &quot;leave no trace&quot; principles to help preserve its natural beauty for everyone.",
+  "id": "2edf8712dd"
+ },
+ {
+  "slot": "desc",
+  "en": "Enjoy a picturesque beachside camping experience sheltered from the north wind, making it ideal for winter. Most of the time, the ocean conditions are very calm, and you can witness stunning sunsets over the city. However, please note that there are no toilet facilities, and this spot is popular among fishermen and sunset enthusiasts. As always please respect other users of the spot and leave no trace behind.",
+  "id": "fdf9240eb0"
+ },
+ {
+  "slot": "desc",
+  "en": "Kenmin no Mori (Okinawa Prefectural People&#x27;s Forrest) campsite offers an idyllic retreat in Okinawa&#x27;s lush forests. Nestled amidst towering trees, the campsite provides spacious plots, perfect for both day trips and overnight stays. With amenities like cooking facilities, toilets and showers, recreational gear for rental, it caters to both adventurers and relaxation seekers. The serene setting is ideal for immersing in nature, whether you&#x27;re exploring forest trails or simply enjoying a peaceful night under the stars. Unplug and reconnect with nature at Kenmin no Mori, where tranquility meets adventure.",
+  "id": "23b01551d0"
+ },
+ {
+  "slot": "desc",
+  "en": "Set up your camp along the beach for a scenic stay and enjoy beautiful sunsets from this secluded area. The bay usually has calm waters and doesn&#x27;t get too crowded. However, be aware that there are no toilet facilities on-site, and finding the exact location might require some effort. Please respect others around you, and leave no trace behind.",
+  "id": "9e059a1723"
+ },
+ {
+  "slot": "desc",
+  "en": "Nago Bridge offers a cozy, sheltered camping spot perfect for a peaceful escape. Nestled by a scenic river, this location provides the essentials with nearby running water and clean restroom facilities, making it both convenient and comfortable. Thanks to its natural protection from wind and rain, it’s an ideal refuge for those looking to enjoy the outdoors, even in less-than-perfect weather. While camping at Nago Bridge, be sure to avoid the off-road path nearby, as it can be challenging and may lead to unexpected trouble. Remember to practice Leave No Trace principles and show respect for the local community, preserving this beautiful spot for others to enjoy.",
+  "id": "bc4999bb18"
+ },
+ {
+  "slot": "desc",
+  "en": "Base Camp Okinawa, located near Nago city, offers a serene camping experience surrounded by nature. It’s ideal for both beginners and seasoned campers, featuring amenities like showers, toilets, and free Wi-Fi in the bar and glamping areas. The lower sites are well sheltered from winds and rain and is a popular spot for less favorable conditions. The camp&#x27;s on-site bar serves cocktails made from local fruits, adding a special touch to your stay. While tents aren’t available for rent, staff are on hand to help with setup, ensuring a comfortable experience for all.",
+  "id": "cdf5af5d09"
+ },
+ {
+  "slot": "desc",
+  "en": "Yagaji Beach in Okinawa offers an unforgettable beach camping experience, perfect for families and groups. Enjoy auto camping and bungalow stays, with options for boat and kayak rentals to explore the pristine waters. The beach provides barbecue facilities with delicious meat selections, making it an ideal spot for seaside feasts and group gatherings.",
+  "id": "b51bafe385"
+ },
+ {
+  "slot": "desc",
+  "en": "Inamine Camp Spot is a secluded beachside retreat with space for just one car, so be sure to arrive early. Enjoy stunning views of Kori Bridge and sunsets over the ocean, and take a short ten-minute walk to the local karaoke spot for some evening entertainment.",
+  "id": "3f0841fd26"
+ },
+ {
+  "slot": "desc",
+  "en": "Tucked away beside the ocean, Yagajima Spot is a hidden wild camping gem perfect for those seeking seclusion and coastal beauty. With very limited parking, it often feels like your own private beachfront—ideal for a quiet night under the stars or a small gathering with friends. Expect stunning ocean views and a front-row seat to a beautiful Okinawan sunset. Please note: The road ends at the spot, so you’ll need to either reverse out or carefully perform a 3-point turn to exit. With the help of a passenger, this is manageable in a compact camper. As always, please respect the land and leave no trace.",
+  "id": "ea017b65ef"
+ },
+ {
+  "slot": "desc",
+  "en": "Kourijima Camp Garden on Kouri Island offers a spectacular camping experience with beachside, mountain, and VIP options. This scenic spot boasts breathtaking views of emerald waters and lush landscapes, creating a serene and artistic atmosphere. It&#x27;s perfect for families and groups, with various amenities and rental services to enhance your stay. Also, because of the little light pollution, you can regularly see amazing stars at night.",
+  "id": "903a3f1d52"
+ },
+ {
+  "slot": "desc",
+  "en": "Discover the Henan Bridge camp spot, perfectly situated on the sunset side with breathtaking views of the iconic Kori Bridge. Set up your beach camp in a spot that offers ample shade from the sun, rain, and north winds during winter. Remember to respect the locals and fellow campers by leaving no trace behind. And always park at a safe distance from the water to avoid flooding during high tide.",
+  "id": "4fecf8fe90"
+ },
+ {
+  "slot": "desc",
+  "en": "Set up your beach camp at Tsuha Beach in Ogimi, where you&#x27;ll be treated to stunning sunset views. Enjoy the convenience of having a Michi no Eki and a convenience store adjacent to the campsite. Remember to respect the locals and fellow campers, and always leave no trace behind.",
+  "id": "b1b1da613c"
+ },
+ {
+  "slot": "desc",
+  "en": "Tonokiya Camping Ground is a peaceful campsite in Ogimi Village with simple, practical facilities like toilets, showers, grills, and fire pits. It is a great place to slow down, enjoy the calm surroundings, and spend a quiet night under the stars. The owner, Oyakawa, is known for being especially friendly and makes the whole place feel warm and welcoming.",
+  "id": "de2eeb9404"
+ },
+ {
+  "slot": "desc",
+  "en": "Tucked away beside a gentle-flowing river, Daiboo River Camp is a wild, off-the-beaten-path campsite perfect for nature lovers. Surrounded by tall trees that shield you from the wind, this grassy riverside patch offers a serene place to park up and set up camp. With nothing but the sounds of nature around you, it&#x27;s the ideal escape for those seeking peace and solitude. Please respect this untouched environment by taking all your rubbish with you and following common camping etiquette. Let’s keep Daiboo wild and beautiful for everyone to enjoy.",
+  "id": "24f847db6c"
+ },
+ {
+  "slot": "desc",
+  "en": "Fukujigawa Seaside Park in Okinawa offers diverse camping options, including beachside, riverside, and VIP sites. Ideal for outdoor enthusiasts, the park provides access to marine activities and a serene natural environment, perfect for families and groups seeking a memorable camping experience.",
+  "id": "007b630edd"
+ },
+ {
+  "slot": "desc",
+  "en": "Experience the allure of Kokyono Beach on the sunset side, where you can set up a beach camp by the beautiful ocean. Enjoy the convenience of free toilets and showers. On weekends and holidays, you&#x27;ll find fellow campers and beachgoers, so be considerate by not taking up too much space. Plus, there&#x27;s a cozy local restaurant (a Japanese Izakaya) just a stone&#x27;s throw away, perfect for enjoying dinner and drinks before returning to your camp spot. Always respect other campers and leave no trace behind.",
+  "id": "371748bb78"
+ },
+ {
+  "slot": "desc",
+  "en": "Discover the Hentona camp spot, a perfect location for beach camping with beautiful scenery. On clear nights, enjoy a sky full of stars and stunning sunsets. Please respect the locals and ensure you leave no trace behind.",
+  "id": "9d49c43efc"
+ },
+ {
+  "slot": "desc",
+  "en": "Discover a paid campsite where the sunsets are nothing short of breathtaking. This gem offers one of the finest stargazing spots on clear nights. With toilets, showers, and a kitchen available, you&#x27;ll be surrounded by the serene beauty of nature at every turn. Plus, on days when the weather isn&#x27;t cooperating, you have the option to sleep indoors for a small extra fee.",
+  "id": "aaca046089"
+ },
+ {
+  "slot": "desc",
+  "en": "In the northern region of Okinawa, just a 15-minute drive from Cape Hedo, you&#x27;ll find a beautiful spot where the ocean meets the Benoki River. This area offers stunning sunsets and minimal light pollution, making it perfect for stargazing. Nearby, you can visit the Yanbaru Soba Bar. Please respect the locals and ensure you leave no trash behind.",
+  "id": "0c2b6e8116"
+ },
+ {
+  "slot": "desc",
+  "en": "At Yanbaru Discovery Forest Camp Ground, immerse yourself in the untouched beauty of Okinawa’s natural wonders. Imagine pitching your tent beneath a canopy of towering trees, where the air is filled with the scent of fresh foliage and the melodies of local wildlife. This campsite offers a perfect blend of adventure and tranquility, with scenic trails, serene streams, and a vibrant ecosystem waiting to be explored. After a day of adventure, indulge in the on-site dine-in restaurant and unwind in the onsen-style baths, enhancing your wilderness experience with a touch of luxury.",
+  "id": "239b3dd3da"
+ },
+ {
+  "slot": "desc",
+  "en": "Nestled in a local camp spot with a mesmerizing ocean view, this site offers breathtaking sunrises and the most beautiful stars on clear nights. Enjoy the perfect blend of nature&#x27;s finest views with the convenience of modern amenities. Please note this spot may be busy on weekends and to use the spot located on the map pin. Please always clean up after yourself, respect other campers, and leave no trace behind.",
+  "id": "4c85275d05"
+ },
+ {
+  "slot": "desc",
+  "en": "At the north-east coast, about 3 km south of Cape Hedo, you’ll discover Oku Beach Road, a hidden gem for camping. This beautifully shaded area is perfect for escaping the sun while you set up your camp. Immerse yourself in nature as you relax on the stunning beach, surrounded by vibrant coral reefs. Please respect this breathtaking spot by not taking up too much space and ensuring you leave no trace behind.",
+  "id": "230cb72481"
+ },
+ {
+  "slot": "desc",
+  "en": "Just a 10-minute drive from Cape Hedo, Adan Beach is a secluded paradise on Okinawa&#x27;s northeastern coast. With its clear turquoise waters, soft sands, and vibrant marine life, this hidden gem offers a tranquil escape. Basic amenities like parking and showers add convenience, and being so far up north makes for amazing star gazing. There is no website, and the beach is run by an elderly local.",
+  "id": "7276cef7a8"
+ },
+ {
+  "slot": "intro",
+  "en": "Every drivable campsite in the Evertrail directory &mdash; 26 sites on the main island,\n      ordered by road time from Naha Airport within each region. Ferry-only islands are left out. The directory\n      lists a fee for only two of them, so treat &ldquo;none posted&rdquo; as unknown rather than free, and book the\n      paid sites &mdash; Oct 10&ndash;12 is the Sports Day long weekend.",
+  "id": "2bb1f2a294"
+ },
+ {
+  "slot": "intro",
+  "en": "One backpack each, three days, hot and humid. Bedding comes with the rooftop tent, so this is\n      only what we carry plus what we buy on landing &mdash; and we land with no stove, no gas and no food. Tap a row\n      to check it off, or <strong>Edit list</strong> to change it. Everything saves on your phone.",
+  "id": "cb19239bc7"
+ },
+ {
+  "slot": "subhead",
+  "en": "Shopping stops, in order of usefulness",
+  "id": "1919ae701a"
+ },
+ {
+  "slot": "subhead",
+  "en": "Also nearby",
+  "id": "6681238c99"
+ },
+ {
+  "slot": "subhead",
+  "en": "If there is time",
+  "id": "b9dcfdd58d"
+ },
+ {
+  "slot": "subhead",
+  "en": "Reference",
+  "id": "d702a63da3"
+ },
+ {
+  "slot": "subhead",
+  "en": "Add-ons we declined &mdash; bring or buy these",
+  "id": "0dfec3d5e7"
+ },
+ {
+  "slot": "subhead",
+  "en": "Driving licence",
+  "id": "40f3da1788"
+ },
+ {
+  "slot": "subhead",
+  "en": "Mid-October on the island",
+  "id": "7567e88d53"
+ },
+ {
+  "slot": "subhead",
+  "en": "Driving",
+  "id": "ac988a71b7"
+ },
+ {
+  "slot": "subhead",
+  "en": "Hazards worth taking seriously",
+  "id": "6bed210126"
+ },
+ {
+  "slot": "subhead",
+  "en": "Practical",
+  "id": "c394ecb99a"
+ },
+ {
+  "slot": "chip",
+  "en": "Beach",
+  "id": "1d8c7a538b"
+ },
+ {
+  "slot": "chip",
+  "en": "Ocean view",
+  "id": "0d4cb0eacc"
+ },
+ {
+  "slot": "chip",
+  "en": "Sunset",
+  "id": "4dd582511a"
+ },
+ {
+  "slot": "chip",
+  "en": "Toilet",
+  "id": "2c3a884847"
+ },
+ {
+  "slot": "chip",
+  "en": "Sunrise",
+  "id": "1e870d7e47"
+ },
+ {
+  "slot": "chip",
+  "en": "Stargazing",
+  "id": "c6713e00e0"
+ },
+ {
+  "slot": "chip",
+  "en": "Shower",
+  "id": "fd042def48"
+ },
+ {
+  "slot": "note",
+  "en": "<strong>Buy a burner today.</strong> The teppan grill and gas canister were bundled with the meat\n            platter we declined, so we land with no way to cook. Gas cannot fly, so it has to be bought here &mdash;\n            and charcoal is no fallback, since most sites ban it and Onna Village asks visitors not to use it.",
+  "id": "e9ee04f7f5"
+ },
+ {
+  "slot": "note",
+  "en": "<strong>Habu season.</strong> The prefecture runs its snake-bite campaign 1 Sep&ndash;30 Nov &mdash; October\n            is peak activity, and Yanbaru is core habitat. Torch after dark, closed shoes off-trail, never reach into\n            long grass or stone walls, and shake out your boots in the morning.",
+  "id": "6865ad9ca3"
+ },
+ {
+  "slot": "note",
+  "en": "<strong>Return the car by 17:30, not 18:00.</strong> The booking's 18:00 slot is the Evertrail office;\n            <em>airport</em> return closes at <strong>17:30</strong>. Today is also Sports Day, a national holiday &mdash;\n            expect traffic on Route 58 and a busy terminal.",
+  "id": "fa26515277"
+ },
+ {
+  "slot": "note",
+  "en": "<strong>Every add-on was declined.</strong> The invoice lists only rent, insurance and cleaning &mdash;\n            so the grill, gas canister and meat all have to come from us. Sort the burner out before the first dinner.",
+  "id": "ada4b59893"
+ },
+ {
+  "slot": "note",
+  "en": "The published coordinate snaps to the expressway 50 m away, so this drive time is unreliable and access is unclear. Scout it before committing.",
+  "id": "c42ad32dba"
+ },
+ {
+  "slot": "note",
+  "en": "A riverside pull-in under a road bridge in urban Nago &mdash; no beach and no view. Not recommended.",
+  "id": "732206956d"
+ },
+ {
+  "slot": "note",
+  "en": "Room for a single car. Risky on a holiday weekend when a rooftop tent cannot be moved once pitched.",
+  "id": "8045a8cab4"
+ },
+ {
+  "slot": "note",
+  "en": "Dead-end track with very little room &mdash; you have to reverse back out.",
+  "id": "4f95eec096"
+ },
+ {
+  "slot": "note",
+  "en": "No facilities, 180 m from the nearest road, and riverside in typhoon season. Not recommended.",
+  "id": "0d54dc4f76"
+ },
+ {
+  "slot": "note",
+  "en": "Routing runs over the Okuyona and Soshu forest roads &mdash; narrow, unsealed and closed after storms. Allow longer via Route 70.",
+  "id": "82b9a3ba47"
+ },
+ {
+  "slot": "section",
+  "en": "Logistics",
+  "id": "1ad0c2f241"
+ },
+ {
+  "slot": "section",
+  "en": "Campsites",
+  "id": "f4faf1f94d"
+ },
+ {
+  "slot": "section",
+  "en": "Packing",
+  "id": "9a90fa6850"
+ },
+ {
+  "slot": "region",
+  "en": "South",
+  "id": "d9c05bdb4c"
+ },
+ {
+  "slot": "region",
+  "en": "Central",
+  "id": "78524d445d"
+ },
+ {
+  "slot": "region",
+  "en": "Nago &amp; Nakijin",
+  "id": "2462ee38ad"
+ },
+ {
+  "slot": "region",
+  "en": "Ogimi &amp; Higashi",
+  "id": "99898ded73"
+ },
+ {
+  "slot": "region",
+  "en": "Yanbaru",
+  "id": "344d94c325"
+ },
+ {
+  "slot": "regionsub",
+  "en": "Itoman &amp; Nanjo &middot; 4 sites",
+  "id": "081d2454f5"
+ },
+ {
+  "slot": "regionsub",
+  "en": "Uruma &amp; Onna &middot; 2 sites",
+  "id": "f1743ef002"
+ },
+ {
+  "slot": "regionsub",
+  "en": "Nago, Yagaji &amp; Kouri &middot; 7 sites",
+  "id": "8eeedb4b7b"
+ },
+ {
+  "slot": "regionsub",
+  "en": "North-east coast &middot; 5 sites",
+  "id": "b1e0779b4a"
+ },
+ {
+  "slot": "regionsub",
+  "en": "Kunigami &amp; Cape Hedo &middot; 8 sites",
+  "id": "0b28c1fd04"
+ },
+ {
+  "slot": "eyebrow",
+  "en": "Okinawa Main Island &middot; 3 days",
+  "id": "7cbb62896b"
+ },
+ {
+  "slot": "h1",
+  "en": "Okinawa 2026",
+  "id": "ee4f165608"
+ },
+ {
+  "slot": "herosub",
+  "en": "Oct 10 &ndash; Oct 12 &middot; Jimny &amp; rooftop tent",
+  "id": "add7094d7c"
+ },
+ {
+  "slot": "mon",
+  "en": "OCT",
+  "id": "8ab6d9103d"
+ },
+ {
+  "slot": "mon",
+  "en": "FLTS",
+  "id": "ff43a47c57"
+ },
+ {
+  "slot": "mon",
+  "en": "DAYS",
+  "id": "66dd1cccc3"
+ },
+ {
+  "slot": "mon",
+  "en": "&deg;C",
+  "id": "90d0f55efb"
+ },
+ {
+  "slot": "mon",
+  "en": "MIN",
+  "id": "3c9042871b"
+ },
+ {
+  "slot": "wd",
+  "en": "Sat",
+  "id": "c8d04a270d"
+ },
+ {
+  "slot": "wd",
+  "en": "Sun",
+  "id": "04a30284e4"
+ },
+ {
+  "slot": "wd",
+  "en": "Mon",
+  "id": "306d6a844d"
+ },
+ {
+  "slot": "maplink",
+  "en": "Evertrail onboarding",
+  "id": "4602907b79"
+ },
+ {
+  "slot": "maplink",
+  "en": "Open in Maps",
+  "id": "61449fb0af"
+ },
+ {
+  "slot": "maplink",
+  "en": "Evertrail listing",
+  "id": "1c4ddb534e"
+ },
+ {
+  "slot": "maplink",
+  "en": "Book / official site",
+  "id": "5a06abf702"
+ },
+ {
+  "slot": "footer",
+  "en": "All times JST",
+  "id": "8d4069caeb"
+ },
+ {
+  "slot": "footer",
+  "en": "Free-flow drive times via OSRM &mdash; add 20&ndash;40 min in holiday traffic, and budget\n      about &yen;1,000 each way in expressway tolls. Data from directory.evertrailokinawa.com",
+  "id": "3852719548"
+ },
+ {
+  "slot": "btnplain",
+  "en": "Reset checks",
+  "id": "5f3aceeaa4"
+ },
+ {
+  "slot": "filter",
+  "en": "All 26",
+  "id": "9fc699eadf"
+ },
+ {
+  "slot": "filter",
+  "en": "Free",
+  "id": "ad712a4f0c"
+ },
+ {
+  "slot": "filter",
+  "en": "Paid",
+  "id": "6a863cee51"
+ },
+ {
+  "slot": "filter",
+  "en": "Beach",
+  "id": "e18d7f23b7"
+ },
+ {
+  "slot": "filter",
+  "en": "Toilet",
+  "id": "f91cac5742"
+ },
+ {
+  "slot": "filter",
+  "en": "Shower",
+  "id": "698e43c1a1"
+ },
+ {
+  "slot": "unitbtn",
+  "en": "METRIC",
+  "id": "078c09ea33"
+ },
+ {
+  "slot": "unitbtn",
+  "en": "IMPERIAL",
+  "id": "d7be58507a"
+ },
+ {
+  "slot": "tablabel",
+  "en": "Itinerary",
+  "id": "f0d94383d6"
+ },
+ {
+  "slot": "tablabel",
+  "en": "Camps",
+  "id": "b700aee888"
+ },
+ {
+  "slot": "tablabel",
+  "en": "Packing",
+  "id": "54d12f78b9"
+ },
+ {
+  "slot": "ubtxt",
+  "en": "New version available",
+  "id": "933ed5e22b"
+ },
+ {
+  "slot": "ubbtn",
+  "en": "Refresh",
+  "id": "ddafa50dda"
+ },
+ {
+  "slot": "emptynote",
+  "en": "No campsites match that filter.",
+  "id": "45adb98289"
+ },
+ {
+  "slot": "packitem",
+  "en": "Photo ID",
+  "id": "3f7b9f829b"
+ },
+ {
+  "slot": "packitem-note",
+  "en": "Domestic flight &mdash; boarding pass on the phone",
+  "id": "599e89206d"
+ },
+ {
+  "slot": "packitem",
+  "en": "Driver's licence",
+  "id": "1d36cac0f5"
+ },
+ {
+  "slot": "packitem-note",
+  "en": "Japanese licence is all we need",
+  "id": "8282fd68b2"
+ },
+ {
+  "slot": "packitem",
+  "en": "Cash, about &yen;30,000",
+  "id": "1331bef101"
+ },
+ {
+  "slot": "packitem-note",
+  "en": "Campsite fees, soba shops and ice are all cash",
+  "id": "711f18f501"
+ },
+ {
+  "slot": "packitem",
+  "en": "Credit card &amp; ETC card",
+  "id": "0d059f44e4"
+ },
+ {
+  "slot": "packitem-note",
+  "en": "ETC saves 35% on the toll &mdash; &yen;1,040 against &yen;1,610",
+  "id": "e6b1102314"
+ },
+ {
+  "slot": "packitem",
+  "en": "2 quick-dry tees",
+  "id": "a01c5ead6e"
+ },
+ {
+  "slot": "packitem-note",
+  "en": "Nothing cotton &mdash; humid and 28 &deg;C",
+  "id": "29121873eb"
+ },
+ {
+  "slot": "packitem",
+  "en": "Shorts + light trousers",
+  "id": "bdc5c51846"
+ },
+ {
+  "slot": "packitem",
+  "en": "Light long sleeve",
+  "id": "a4772f502c"
+ },
+ {
+  "slot": "packitem-note",
+  "en": "Sun by day, mosquitoes at dusk",
+  "id": "5b0d57cf8f"
+ },
+ {
+  "slot": "packitem",
+  "en": "Packable rain shell",
+  "id": "718e257ab0"
+ },
+ {
+  "slot": "packitem-note",
+  "en": "Rain on about 4 days in 10",
+  "id": "3d0e434308"
+ },
+ {
+  "slot": "packitem",
+  "en": "Closed shoes + sandals",
+  "id": "66ca6d1ff0"
+ },
+ {
+  "slot": "packitem-note",
+  "en": "Closed shoes for Yanbaru &mdash; habu country",
+  "id": "4cb366dd8a"
+ },
+ {
+  "slot": "packitem",
+  "en": "Cap + sunglasses",
+  "id": "ce44a2f13c"
+ },
+ {
+  "slot": "packitem",
+  "en": "Mask + snorkel",
+  "id": "217af8f3d2"
+ },
+ {
+  "slot": "packitem-note",
+  "en": "Declined on the rental &mdash; bring our own",
+  "id": "1b863ca3a1"
+ },
+ {
+  "slot": "packitem",
+  "en": "Swimsuit + long-sleeve rash guard",
+  "id": "c23afbafda"
+ },
+ {
+  "slot": "packitem-note",
+  "en": "Sun, and the real answer to jellyfish",
+  "id": "28a77da29b"
+ },
+ {
+  "slot": "packitem",
+  "en": "Water shoes",
+  "id": "5018e04c8c"
+ },
+ {
+  "slot": "packitem-note",
+  "en": "Reef, rock entries and urchins",
+  "id": "e770723c90"
+ },
+ {
+  "slot": "packitem",
+  "en": "Microfibre towel",
+  "id": "0da3cbfda4"
+ },
+ {
+  "slot": "packitem",
+  "en": "Dry bag",
+  "id": "c902760ca9"
+ },
+ {
+  "slot": "packitem",
+  "en": "Reef-safe sunscreen + lip balm",
+  "id": "0776959bbb"
+ },
+ {
+  "slot": "packitem",
+  "en": "Cassette-gas (CB) burner",
+  "id": "a8848e5d65"
+ },
+ {
+  "slot": "packitem-note",
+  "en": "CB cartridges are on every konbini shelf; screw-thread OD ones are not",
+  "id": "34b2ae1e9e"
+ },
+ {
+  "slot": "packitem",
+  "en": "Lighter &times; 2",
+  "id": "6c5a0c9ed9"
+ },
+ {
+  "slot": "packitem-note",
+  "en": "Carry on the body &mdash; never in checked bags, and jet lighters are banned outright",
+  "id": "838ff66078"
+ },
+ {
+  "slot": "packitem",
+  "en": "Windshield for the burner",
+  "id": "5ce0979636"
+ },
+ {
+  "slot": "packitem-note",
+  "en": "Wind will otherwise beat it on an exposed pitch",
+  "id": "d0fe3896ee"
+ },
+ {
+  "slot": "packitem",
+  "en": "Pot, 2 bowls, chopsticks",
+  "id": "dc4223ccaf"
+ },
+ {
+  "slot": "packitem-note",
+  "en": "Rice and coffee both need something to cook in",
+  "id": "38dd80da7f"
+ },
+ {
+  "slot": "packitem",
+  "en": "Tongs + folding knife",
+  "id": "2ab88a6e2d"
+ },
+ {
+  "slot": "packitem",
+  "en": "2 headlamps + spare batteries",
+  "id": "fc47d676e9"
+ },
+ {
+  "slot": "packitem-note",
+  "en": "One light for two people is a single point of failure after dark",
+  "id": "19e1624964"
+ },
+ {
+  "slot": "packitem",
+  "en": "Small first-aid kit",
+  "id": "127ec1ea1a"
+ },
+ {
+  "slot": "packitem-note",
+  "en": "Plasters, antiseptic, tweezers, antihistamine, painkillers, rehydration salts",
+  "id": "e636ac2dd6"
+ },
+ {
+  "slot": "packitem",
+  "en": "Rubbish bags + wet wipes",
+  "id": "4b94691814"
+ },
+ {
+  "slot": "packitem-note",
+  "en": "Carry everything out, food waste included",
+  "id": "99f262592e"
+ },
+ {
+  "slot": "packitem",
+  "en": "Small bottle of vinegar",
+  "id": "7759235d0f"
+ },
+ {
+  "slot": "packitem-note",
+  "en": "Habu-kurage stings only &mdash; never on a Portuguese man o&rsquo; war",
+  "id": "a33c45b907"
+ },
+ {
+  "slot": "packitem",
+  "en": "Foldable cooler bag",
+  "id": "68f6c71d9e"
+ },
+ {
+  "slot": "packitem-note",
+  "en": "Lives in the Jimny &mdash; meat and ice on the drive",
+  "id": "a537a02163"
+ },
+ {
+  "slot": "packitem",
+  "en": "Phone, cable, car charger",
+  "id": "fa0f4a1f54"
+ },
+ {
+  "slot": "packitem",
+  "en": "Power bank",
+  "id": "764f39e59f"
+ },
+ {
+  "slot": "packitem-note",
+  "en": "No mains power at a wild site",
+  "id": "37e7c131ad"
+ },
+ {
+  "slot": "packitem",
+  "en": "Camera, charger, spare card",
+  "id": "6c83811a4c"
+ },
+ {
+  "slot": "packitem",
+  "en": "Offline maps downloaded",
+  "id": "a5b6e62ecd"
+ },
+ {
+  "slot": "packitem-note",
+  "en": "Yanbaru has patchy signal",
+  "id": "cc4ff37133"
+ },
+ {
+  "slot": "packitem",
+  "en": "Gas cartridge for the burner",
+  "id": "f985086121"
+ },
+ {
+  "slot": "packitem-note",
+  "en": "Cannot fly with one &mdash; buy it here",
+  "id": "24fd6c2b73"
+ },
+ {
+  "slot": "packitem",
+  "en": "BBQ meat, night 1 in Nago",
+  "id": "31880c63a3"
+ },
+ {
+  "slot": "packitem-note",
+  "en": "Agu pork and Okinawa beef",
+  "id": "c7cc4f1143"
+ },
+ {
+  "slot": "packitem",
+  "en": "BBQ meat, night 2 in Motobu",
+  "id": "3a1f23dbd0"
+ },
+ {
+  "slot": "packitem-note",
+  "en": "Buy it on day 2 &mdash; a soft cooler will not hold it two days at 28 &deg;C",
+  "id": "1719261095"
+ },
+ {
+  "slot": "packitem",
+  "en": "Veg, rice, coffee, breakfast",
+  "id": "a7d7a6d240"
+ },
+ {
+  "slot": "packitem",
+  "en": "Oil, salt, yakiniku sauce, foil",
+  "id": "81450890ea"
+ },
+ {
+  "slot": "packitem",
+  "en": "Ice or freezer blocks, both days",
+  "id": "e95fbe15aa"
+ },
+ {
+  "slot": "packitem",
+  "en": "Drinking water, 5&ndash;10 L",
+  "id": "d640d4e21d"
+ },
+ {
+  "slot": "packitem",
+  "en": "Insect repellent + mosquito coils",
+  "id": "348d4af985"
+ },
+ {
+  "slot": "packitem-note",
+  "en": "Coils do nothing while walking at dusk &mdash; bring DEET or icaridin too",
+  "id": "5c8ff79381"
+ },
+ {
+  "slot": "packcat",
+  "en": "Documents &amp; Money",
+  "id": "77310b04d0"
+ },
+ {
+  "slot": "packcat",
+  "en": "Wear",
+  "id": "daeab59723"
+ },
+ {
+  "slot": "packcat",
+  "en": "Water",
+  "id": "181ddaef62"
+ },
+ {
+  "slot": "packcat",
+  "en": "Camp &amp; BBQ",
+  "id": "76604e6da2"
+ },
+ {
+  "slot": "packcat",
+  "en": "Tech",
+  "id": "da89b07879"
+ },
+ {
+  "slot": "packcat",
+  "en": "Buy on Arrival",
+  "id": "5df3e75d2a"
+ }
+]

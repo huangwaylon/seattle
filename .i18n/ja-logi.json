@@ -1,0 +1,362 @@
+[
+ {
+  "id": "e48a42f38b",
+  "ja": "<span class=\"time\">06:10</span><span class=\"dot\"></span><span class=\"txt\">羽田 &rarr; 那覇 &mdash; ソラシドエア SNA 021"
+ },
+ {
+  "id": "6a94676bcc",
+  "ja": "座席 14B &middot; 航空券番号 2052520018908"
+ },
+ {
+  "id": "4ab26d0ebc",
+  "ja": "<span class=\"time\">08:55</span><span class=\"dot\"></span><span class=\"txt\">那覇（OKA）着</span>"
+ },
+ {
+  "id": "d4ebd51605",
+  "ja": "<span class=\"time\">09:30</span><span class=\"dot\"></span><span class=\"txt\">朝食、SIMと現金、最初の買い出し</span>"
+ },
+ {
+  "id": "24f34ec45c",
+  "ja": "<span class=\"time\">11:00</span><span class=\"dot\"></span><span class=\"txt\">ジムニー受け取り &mdash; Evertrail営業所"
+ },
+ {
+  "id": "f5dc23ffed",
+  "ja": "空港受け取りは 10:30&ndash;16:30 &middot; 予約番号 #260096"
+ },
+ {
+  "id": "ce18f88c24",
+  "ja": "<span class=\"time\">12:00</span><span class=\"dot\"></span><span class=\"txt\">沖縄自動車道を北上"
+ },
+ {
+  "id": "4e2169cd6b",
+  "ja": "那覇IC &rarr; 金武IC"
+ },
+ {
+  "id": "e33bb005b2",
+  "ja": "<span class=\"time\">13:00</span><span class=\"dot\"></span><span class=\"txt\">キングタコス（金武町）&mdash; タコライス"
+ },
+ {
+  "id": "872071186b",
+  "ja": "1984年創業、元祖の店"
+ },
+ {
+  "id": "df179d23db",
+  "ja": "<span class=\"time\">14:30</span><span class=\"dot\"></span><span class=\"txt\">万座毛・恩納村の海岸線</span>"
+ },
+ {
+  "id": "d400251499",
+  "ja": "<span class=\"time\">15:30</span><span class=\"dot\"></span><span class=\"txt\">買い出し &mdash; マックスバリュ名護店（24時間）"
+ },
+ {
+  "id": "e2ef71da86",
+  "ja": "今夜のバーベキュー用の肉・野菜・氷・水 &middot; やんばるに入る前、確実に買える最後の店"
+ },
+ {
+  "id": "6dc844f09c",
+  "ja": "<span class=\"time\">16:30</span><span class=\"dot\"></span><span class=\"txt\">キャンプ場に到着、ルーフトップテントを展開</span>"
+ },
+ {
+  "id": "f57061559b",
+  "ja": "<span class=\"time\">18:08</span><span class=\"dot\"></span><span class=\"txt\">日没</span>"
+ },
+ {
+  "id": "5f10dcaaf2",
+  "ja": "<span class=\"time\">19:00</span><span class=\"dot\"></span><span class=\"txt\">バーベキュー1日目 &mdash; あぐー豚・沖縄県産牛</span>"
+ },
+ {
+  "id": "cb984c11d6",
+  "ja": "マックスバリュ名護店 &mdash; 24時間営業"
+ },
+ {
+  "id": "d7a285d5c9",
+  "ja": "北部で終夜営業を確認できた唯一のスーパー"
+ },
+ {
+  "id": "e93d732f6b",
+  "ja": "サンエー為又シティ（名護市）"
+ },
+ {
+  "id": "8afc6ffbb4",
+  "ja": "品揃えが一番豊富 &middot; あぐー豚はその場でカットしてもらえる"
+ },
+ {
+  "id": "4a4b40255b",
+  "ja": "道の駅許田、許田ICを降りてすぐ"
+ },
+ {
+  "id": "05ee3d564c",
+  "ja": "8:30&ndash;19:00 &middot; 農産物、天ぷらコーナー、美ら海水族館の割引チケット"
+ },
+ {
+  "id": "fb903b13fb",
+  "ja": "夕暮れどきはカフンジャバンタ・古宇利大橋へ"
+ },
+ {
+  "id": "19e69b0b33",
+  "ja": "<span class=\"time\">06:25</span><span class=\"dot\"></span><span class=\"txt\">海から昇る朝日</span>"
+ },
+ {
+  "id": "a0684108d1",
+  "ja": "<span class=\"time\">08:00</span><span class=\"dot\"></span><span class=\"txt\">コーヒー、テント撤収</span>"
+ },
+ {
+  "id": "34e005d28c",
+  "ja": "<span class=\"time\">09:00</span><span class=\"dot\"></span><span class=\"txt\">辺戸岬 &mdash; 沖縄本島最北端</span>"
+ },
+ {
+  "id": "2e0640dc04",
+  "ja": "<span class=\"time\">10:00</span><span class=\"dot\"></span><span class=\"txt\">大石林山の石灰岩の奇岩群"
+ },
+ {
+  "id": "4e6d18c5c6",
+  "ja": "やんばる国立公園 &middot; 標識の整った歩きやすい周回コース"
+ },
+ {
+  "id": "182700aecc",
+  "ja": "<span class=\"time\">11:30</span><span class=\"dot\"></span><span class=\"txt\">ゴリラチョップ（本部町）でシュノーケリング"
+ },
+ {
+  "id": "bbbc2a0f4e",
+  "ja": "波が穏やかで歩いてエントリー &middot; 海水温 &asymp; <span class=\"u\" data-metric=\"29 &deg;C\" data-imperial=\"84 &deg;F\">29 &deg;C</span>"
+ },
+ {
+  "id": "146c9727df",
+  "ja": "<span class=\"time\">13:00</span><span class=\"dot\"></span><span class=\"txt\">きしもと食堂 &mdash; 沖縄そば"
+ },
+ {
+  "id": "f0ab437ce5",
+  "ja": "1905年創業、木灰そば &middot; 11:00&ndash;17:00 &middot; 現金のみ &middot; 売り切れ次第閉店"
+ },
+ {
+  "id": "8c18ddefa1",
+  "ja": "<span class=\"time\">14:00</span><span class=\"dot\"></span><span class=\"txt\">すぐ隣の新垣ぜんざい屋"
+ },
+ {
+  "id": "8ae51d118d",
+  "ja": "甘く炊いた豆にかき氷、&yen;350 &mdash; メニューはこれ一品だけ"
+ },
+ {
+  "id": "95a2e795d5",
+  "ja": "<span class=\"time\">15:00</span><span class=\"dot\"></span><span class=\"txt\">美ら海水族館、または備瀬のフクギ並木</span>"
+ },
+ {
+  "id": "8cd8b3a040",
+  "ja": "<span class=\"time\">17:00</span><span class=\"dot\"></span><span class=\"txt\">古宇利島 &mdash; ブルーシールの店"
+ },
+ {
+  "id": "7443c974ba",
+  "ja": "紅イモかシークヮーサー &middot; 18:00閉店"
+ },
+ {
+  "id": "4310bbbb65",
+  "ja": "<span class=\"time\">17:30</span><span class=\"dot\"></span><span class=\"txt\">今夜の食材を買い出し"
+ },
+ {
+  "id": "0699e85bf1",
+  "ja": "名護より北は18:00頃を過ぎるとどこも閉まります &mdash; キャンプ場に戻る前に買っておく"
+ },
+ {
+  "id": "853805f6da",
+  "ja": "<span class=\"time\">18:07</span><span class=\"dot\"></span><span class=\"txt\">日没</span>"
+ },
+ {
+  "id": "730797f47c",
+  "ja": "<span class=\"time\">19:00</span><span class=\"dot\"></span><span class=\"txt\">キャンプ場でバーベキュー2日目</span>"
+ },
+ {
+  "id": "722e913c87",
+  "ja": "<span class=\"time\">06:25</span><span class=\"dot\"></span><span class=\"txt\">朝日を見て、ゆっくり撤収</span>"
+ },
+ {
+  "id": "fb3dd8b71a",
+  "ja": "<span class=\"time\">09:00</span><span class=\"dot\"></span><span class=\"txt\">南へドライブ &mdash; 残波岬灯台</span>"
+ },
+ {
+  "id": "0b563214b5",
+  "ja": "<span class=\"time\">10:00</span><span class=\"dot\"></span><span class=\"txt\">やちむんの里（読谷村）</span>"
+ },
+ {
+  "id": "743256a59f",
+  "ja": "<span class=\"time\">11:00</span><span class=\"dot\"></span><span class=\"txt\">真栄田岬で青の洞窟シュノーケリング"
+ },
+ {
+  "id": "8ec2be9077",
+  "ja": "洞窟の奥まで入れるのは干潮時のみ &mdash; 先に潮位を確認"
+ },
+ {
+  "id": "c7f72cad3b",
+  "ja": "<span class=\"time\">12:30</span><span class=\"dot\"></span><span class=\"txt\">北谷町／アメリカンビレッジ"
+ },
+ {
+  "id": "266b28f8d9",
+  "ja": "エンダー（A&amp;W）で凍らせたジョッキのルートビア &mdash; おかわり無料"
+ },
+ {
+  "id": "5d47367514",
+  "ja": "<span class=\"time\">15:00</span><span class=\"dot\"></span><span class=\"txt\">給油、車の荷降ろし、ゴミ処理</span>"
+ },
+ {
+  "id": "83ef3f3bd0",
+  "ja": "<span class=\"time\">16:00</span><span class=\"dot\"></span><span class=\"txt\">琉球温泉 龍神の湯（瀬長島）"
+ },
+ {
+  "id": "f616bddb1f",
+  "ja": "OKAから10分 &middot; 6:00&ndash;24:00 &middot; 休日料金 &yen;1,570 &middot; タオル付き"
+ },
+ {
+  "id": "4e95e11bcb",
+  "ja": "<span class=\"time\">17:00</span><span class=\"dot\"></span><span class=\"txt\">空港でジムニーを返却</span>"
+ },
+ {
+  "id": "9cd4a8b3f2",
+  "ja": "<span class=\"time\">18:30</span><span class=\"dot\"></span><span class=\"txt\">チェックイン、最後のブルーシール、お土産</span>"
+ },
+ {
+  "id": "b465911a18",
+  "ja": "<span class=\"time\">20:25</span><span class=\"dot\"></span><span class=\"txt\">那覇 &rarr; 羽田 &mdash; ソラシドエア SNA 026"
+ },
+ {
+  "id": "39e04ca194",
+  "ja": "座席 14B"
+ },
+ {
+  "id": "bfa98c53f8",
+  "ja": "<span class=\"time\">22:50</span><span class=\"dot\"></span><span class=\"txt\">羽田着</span>"
+ },
+ {
+  "id": "cdc226b759",
+  "ja": "予約番号 F9NE38 &middot; 航空券番号 2052520018908"
+ },
+ {
+  "id": "10f1445a43",
+  "ja": "Waylon Huang &middot; 羽田 &harr; 那覇、時刻はすべて日本時間"
+ },
+ {
+  "id": "4863c6655c",
+  "ja": "06:10発なので、自宅を04:00頃に出発します"
+ },
+ {
+  "id": "337aae7262",
+  "ja": "鉄板グリル＋ガスカートリッジ"
+ },
+ {
+  "id": "9f418bc4be",
+  "ja": "肉盛りセットとのセット扱い &mdash; 現地で代用がきかない唯一のもの"
+ },
+ {
+  "id": "e55c41c532",
+  "ja": "バーベキュー用の肉盛りセット"
+ },
+ {
+  "id": "fe6400f71f",
+  "ja": "代わりにマックスバリュ名護店かサンエー為又シティであぐー豚と沖縄県産牛を購入"
+ },
+ {
+  "id": "3a1e18e3ab",
+  "ja": "マスク・シュノーケル・フィン"
+ },
+ {
+  "id": "356704499d",
+  "ja": "自前で持参 &mdash; シュノーケリングは2回"
+ },
+ {
+  "id": "698e256847",
+  "ja": "蚊取り線香"
+ },
+ {
+  "id": "8145d2755a",
+  "ja": "コンビニならどこでも蚊取り線香あり"
+ },
+ {
+  "id": "b93b0fc807",
+  "ja": "ライフジャケット &middot; プロジェクター"
+ },
+ {
+  "id": "6ed419d4e9",
+  "ja": "日本の運転免許証 &mdash; ほかに必要なものはなし"
+ },
+ {
+  "id": "950800bc6c",
+  "ja": "国際運転免許証は不要"
+ },
+ {
+  "id": "6df61806cc",
+  "ja": "沖縄自動車道、那覇IC &harr; 許田IC"
+ },
+ {
+  "id": "b05f51f095",
+  "ja": "<span class=\"u\" data-metric=\"57 km\" data-imperial=\"36 mi\">57 km</span> &middot; ETCカードで約&yen;1,000、現金なら&yen;1,550 &mdash; 割引は現在ETC限定"
+ },
+ {
+  "id": "05e3111045",
+  "ja": "国道58号はゆっくり景色を楽しむ別ルート"
+ },
+ {
+  "id": "17e1005d90",
+  "ja": "那覇から名護まで、所要時間はおよそ2倍"
+ },
+ {
+  "id": "1a0c36bfb7",
+  "ja": "左側通行 &middot; 赤信号では右左折不可 &middot; 那覇中心部は通勤時間帯のバス専用レーンに注意"
+ },
+ {
+  "id": "cafe6053a1",
+  "ja": "ハブ &mdash; 出没のピーク時期、夜行性"
+ },
+ {
+  "id": "b9e4a665f2",
+  "ja": "暗くなったら懐中電灯、足を覆う靴、石垣や丈の高い草には近づかない"
+ },
+ {
+  "id": "5876b34e49",
+  "ja": "ハブクラゲは10月いっぱい出ます"
+ },
+ {
+  "id": "a36a70307e",
+  "ja": "ビーチの防護ネットはまもなく撤去 &mdash; 車に食酢の小瓶を常備"
+ },
+ {
+  "id": "ddfb209484",
+  "ja": "ムカデが靴やテントに入り込みます"
+ },
+ {
+  "id": "a5a38a7d6b",
+  "ja": "靴は履く前に振って確認、テントは必ず閉める、落ち葉の上に設営しない"
+ },
+ {
+  "id": "7afdac2a94",
+  "ja": "直火も、砂浜での炭の使用も不可"
+ },
+ {
+  "id": "a293e57d76",
+  "ja": "恩納村は両方とも全面禁止。多くのキャンプ場では焚き火台が必須です"
+ },
+ {
+  "id": "adb473c4bc",
+  "ja": "水道水は飲めますが硬水です"
+ },
+ {
+  "id": "a569d5899b",
+  "ja": "それでも車には<span class=\"u\" data-metric=\"5&ndash;10 L\" data-imperial=\"1&ndash;3 gal\">5&ndash;10 L</span>積んでおく"
+ },
+ {
+  "id": "07ae3fa601",
+  "ja": "名護より北は18:00頃以降どこも閉まる"
+ },
+ {
+  "id": "89217b2059",
+  "ja": "国頭村と大宜味村にはチェーン系スーパーが一軒もありません"
+ },
+ {
+  "id": "fb0804d14b",
+  "ja": "現金を用意 &mdash; 評判のいい沖縄そば店やユニオンは現金のみ"
+ },
+ {
+  "id": "e323d1b5e7",
+  "ja": "10月12日（月）はスポーツの日"
+ },
+ {
+  "id": "a2678723ec",
+  "ja": "三連休。キャンプ場は早めに予約、混雑を想定"
+ }
+]

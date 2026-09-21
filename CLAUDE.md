@@ -4,20 +4,24 @@ Guidance for working in this repo. Keep it accurate — update it when the archi
 
 ## What this is
 
-A single-page, **offline-first travel itinerary** for a July 2026 Seattle trip, built as an
-installable **PWA** for iPhone. The whole app (HTML, CSS, JS) lives in one self-contained
-`index.html`; images are real files in `images/`. The service worker makes it work fully
-offline once loaded.
+A single-page, **offline-first travel itinerary** for an October 2026 Okinawa camping road trip,
+built as an installable **PWA** for iPhone. The whole app (HTML, CSS, JS) lives in one
+self-contained `index.html`; the hero photo is a real file in `images/`. The service worker makes
+it work fully offline once loaded.
 
-Live site: https://huangwaylon.github.io/seattle/
+The trip: Oct 10–12 2026, Haneda ⇄ Naha on Solaseed Air, main island only, self-driving a rented
+Suzuki Jimny Sierra with a rooftop tent, camping two nights.
+
+Live site: https://huangwaylon.github.io/seattle/ (the repo is still named `seattle` from the
+previous trip — the URL and remote are unchanged on purpose).
 
 ## Files
 
 | File | Role |
 |------|------|
 | `index.html` | The entire app. Static HTML content + inline `<style>` + inline `<script>`. **Source of truth — edit directly.** |
-| `images/` | Real image files (Mt Rainier hero + 8 hike photos). Linked via `<img>` tags / CSS, not base64-embedded. Precached by the service worker for offline use. |
-| `sw.js` | Service worker. Cache-first; precaches the app shell **and `images/*`** for offline use. Update is **message-driven**: a freshly-installed worker waits (no auto-skipWaiting) until the page tells it to `SKIP_WAITING` via the refresh banner — or until the app is fully closed, when it activates on its own. |
+| `images/okinawa-hero.jpg` | The hero photo (the Jimny + rooftop tent on a coastal bluff). Precached by the service worker. |
+| `sw.js` | Service worker. Cache-first; precaches the app shell **and the hero image**. Update is **message-driven**: a freshly-installed worker waits (no auto-skipWaiting) until the page tells it to `SKIP_WAITING` via the refresh banner — or until the app is fully closed, when it activates on its own. |
 | `manifest.webmanifest` | PWA manifest (name, icons, `standalone` display, theme colors). |
 | `icon-180.png` | iOS `apple-touch-icon` (Home Screen). |
 | `icon-512.png` | Manifest/PWA install icon (also `maskable`). |
@@ -27,26 +31,24 @@ There is no build step or framework. No dependencies. No bundler.
 
 ## Core architecture & conventions
 
-- **Self-contained:** no external CSS/JS/fonts/CDN assets. Only outbound links are the per-hike
-  "View trail map" links into the sibling `gpx/` app (`huangwaylon.github.io/gpx/#/trail/<slug>`)
-  and a few event hyperlinks (open externally, fail gracefully offline). System font stack only.
-  All images are local files in `images/`.
-- **Photo strategy:** real image files in `images/` — `mount-rainier.jpg` is the hero (loaded
-  via `<img class="hero-img">` with `fetchpriority="high"` and a matching `<link rel="preload">`),
-  and each of the 8 hikes uses a `.webp` (`lake-22.webp`, `snow-lake.webp`, `skyline-loop.webp`,
-  `enchantments.webp`, `bridal-veil.webp`, `mount-pilchuck.webp`, `lake-valhalla.webp`,
-  `talapus-lake.webp`) inside `<figure class="hike-thumb">` with `loading="lazy"` +
-  `decoding="async"`. Same image appears once on disk. The service worker precaches all of them
-  on install so the PWA stays fully offline-capable. To swap a photo: drop a same-named file
-  into `images/`, then bump the SW cache.
-- **Units (km / mi):** every distance/elevation is wrapped in
-  `<span class="u" data-km="9.8 km" data-mi="6.1 mi">9.8 km</span>`. The default text is metric
-  (so the no-JS path shows km/m). The `#unitToggle` segmented control (`.jsonly`) swaps every
-  `span.u` to its `data-mi`/`data-km` string and persists the choice in `localStorage['units']`.
-  The imperial strings come verbatim from the `gpx/` trail data (`lengthMi`/`gainFt`); the metric
-  strings are their fixed conversions. Both are stored as literal strings — JS never does live
-  math, avoiding rounding drift. When adding a measurement, always wrap it in a `span.u` with both
-  attributes.
+- **Self-contained:** no external CSS/JS/fonts/CDN assets. The only outbound links are per-campsite
+  Google Maps and Evertrail listing links, plus the Evertrail onboarding link (all open externally
+  and fail gracefully offline). System font stack only.
+- **Three tabs:** Itinerary, Campsites, Packing.
+- **Bilingual (EN / 日本語).** Every translatable element carries a `data-ja` attribute holding its
+  **Japanese inner HTML**; English stays in the markup, so first paint and the no-JS path are English.
+  The language module caches the original into `data-en` on first switch, swaps `innerHTML`, and fires a
+  `langchange` event; the units and packing modules listen and re-apply. `#packing` is excluded from the
+  sweep because it renders from its own bilingual model. Choice persists in `localStorage['lang']`.
+  Strings that JS sets at runtime (button labels, placeholders, `confirm()` text) live in the `T()` table
+  at the top of the script block — not in `data-ja`.
+- **Units (metric / imperial):** every distance *and temperature* is wrapped in
+  `<span class="u" data-metric="11.5 km" data-imperial="7 mi">11.5 km</span>`. The default text is
+  metric (so the no-JS path shows metric). Every `.unit-toggle` on the page swaps all `span.u` to
+  the chosen string and they stay in sync; the choice persists in `localStorage['units']`
+  (`'metric'` | `'imperial'`). Both strings are literals — JS never does live math, avoiding
+  rounding drift. There is one toggle in the Itinerary toolbar and one in the Campsites toolbar.
+  When adding a measurement, always wrap it in a `span.u` with both attributes.
 - **No-JS fallback is required.** Plain file previews (e.g. macOS Quick Look) run the page
   *without* JavaScript. So:
   - All content is **static HTML** — never generated by JS at runtime.
@@ -54,70 +56,123 @@ There is no build step or framework. No dependencies. No bundler.
   - Without JS: every `.view` is `display:block` (all sections stacked, scrollable), the tab bar
     is hidden, and the packing list shows its static seed rows (read-only). Fully usable.
   - With JS (`.js-tabs`): only the selected `.view` shows (CSS `:checked ~` on hidden radios),
-    the tab bar appears, the packing list becomes editable, and the "today" highlight lights the
-    matching itinerary date's spine node during the trip (July 2026).
-- **Tabs = pure CSS.** Two hidden `<input type="radio" name="tab">` (`#tab-itinerary`,
-  `#tab-packing`) at the top of `<body>` drive `#tab-*:checked ~ .views #view-*{display:block}`.
-  The bottom bar uses `<label for=...>`. No JS needed for tab switching.
+    the tab bar appears, the packing list becomes editable, the campsite filter works, and the
+    "today" highlight lights the matching itinerary date's spine node during the trip (Oct 2026).
+  - Quick Look renders `details[open] .content` mid-animation, so open cards can look blank in a
+    `qlmanage` thumbnail. That is a Quick Look artifact only — verify no-JS layout in a browser.
+- **Tabs = pure CSS.** Three hidden `<input type="radio" name="tab">` (`#tab-itinerary`,
+  `#tab-camps`, `#tab-packing`) at the top of `<body>` drive
+  `#tab-*:checked ~ .views #view-*{display:block}`. The bottom bar uses `<label for=...>`.
+  No JS needed for tab switching.
 - **Accordions = native `<details>/<summary>`.** No JS for expand/collapse. The chevron rotates
   via `details[open] > summary .chev`.
 - **Checklists = native `<input type="checkbox" class="cb">` + `<label class="checkrow">`.**
   Checked styling is pure CSS (`.cb:checked + .checkrow ...`).
+- **`.spine`** is the shared vertical-timeline wrapper (a `::before` rule) used by the itinerary
+  days, the logistics cards, and the campsite list. Each card carries an absolutely-positioned
+  `.node` dot; `.lead-chip` is the shared left column (a date on the itinerary, a drive time on
+  campsites).
 - **The packing list is data-driven & user-editable** (the one exception to "static markup").
   The static `.group` blocks inside `#packing` are BOTH the no-JS fallback AND the one-time seed:
-  on load the packing script builds a model from that DOM (migrating any old per-checkbox checks),
-  or restores the saved model, then re-renders `#packing` from the model. An **Edit list** toggle
-  swaps each row into inline inputs with controls to create / rename / delete categories and
-  create / edit / delete items, plus **up/down buttons to reorder the top-level categories**
-  (reordering just permutes the `cats` array, so it's automatically compatible with older saved
-  data); blank rows are pruned on exit. Everything (structure + order + checks)
-  persists. The itinerary stays 100% static HTML — not user-editable.
+  on load the packing script builds a model from that DOM, or restores the saved model, then
+  re-renders `#packing` from the model. An **Edit list** toggle swaps each row into inline inputs
+  with controls to create / rename / delete categories and create / edit / delete items, plus
+  **up/down buttons to reorder the top-level categories** (reordering just permutes the `cats`
+  array, so it's automatically compatible with older saved data); blank rows are pruned on exit.
+  Everything (structure + order + checks) persists. The itinerary and campsites stay 100% static
+  HTML — not user-editable.
 - **Persistence:** the whole packing model saves to `localStorage['packingData']` as
-  `{v, cats:[{id, name, icon, items:[{id, text, note, done}]}]}`, written on every edit/check.
+  `{v:2, cats:[{id, name, nameJa, icon, items:[{id, text, textJa, note, noteJa, done}]}]}`, written on
+  every edit/check. Japanese is seeded from the static rows' `data-ja`; editing writes to whichever
+  language is on screen and falls back to the other when one is blank. A saved model wins over the seed,
+  so a device that already has one will **not** pick up edited defaults — clear the key to re-seed.
   Item/category ids are generated at runtime (`uid()`), so they're stable per device but differ
   across installs — never hard-code them. Only persists in a real browser context (Safari /
   installed PWA), not in ephemeral Quick Look.
-- **`.jsonly` elements** (e.g. "Expand all", "Edit list" / "Reset checks" buttons, group counts)
-  are hidden unless JS runs, via `.nojs .jsonly{display:none}`.
+- **`.jsonly` elements** (e.g. "Expand all", "Edit list" / "Reset checks", the unit toggles, the
+  campsite filter, group counts) are hidden unless JS runs, via `.nojs .jsonly{display:none}`.
 - **Responsive:** content is a centered `max-width:var(--maxw)` (720px) column; the hero height
   is `clamp(...)`. Works phone portrait/landscape, tablet, desktop. Respects safe-area insets.
-- **Theme:** light "Alpine Field Guide" palette (paper-cool neutrals, deep-spruce ink, pine
-  green + warm ember accents), all via CSS custom properties in `:root` — kept in sync with the
-  sibling `gpx/` app's light theme. Keep the variable set tight — there were unused vars before;
-  don't reintroduce dead ones.
+- **Theme:** light "Okinawa Reef" palette (warm sand paper, deep sea-ink text, ocean teal `--sea`
+  + coral `--coral` accents), all via CSS custom properties in `:root`. Keep the variable set
+  tight — don't reintroduce dead ones.
+
+## The Japanese layer
+
+`.i18n/` is the translation source of truth. It is **not** shipped to the browser — `index.html` is still
+self-contained — but keep it, or any future English edit means re-translating from scratch.
+
+| File | Role |
+|------|------|
+| `.i18n/GLOSSARY.md` | Tone spec (ガイドブック調) + fixed place-name and term list. Read this before translating. |
+| `.i18n/strings.json` | Every extracted English string as `{id, slot, en}`. `id` = sha1(`slot|en`)[:10]. |
+| `.i18n/ja-*.json` | The Japanese, keyed by the same `id`. Several files, merged on inject. |
+
+**Workflow when you change English text:**
+1. Edit `index.html` **from a clean base** — strip the layer first with
+   `re.sub(r'( data-ja="[^"]*")+', '', html)`. Do not unwrap the `<span>` wrappers inside `h2.section`,
+   `a.maplink` or `.glabel`; the packing seed reads its category name by selector and breaks without it.
+2. Re-extract, diff against the merged `ja-*.json` by `id`, and translate only the missing ids.
+3. Re-inject onto the clean base. Injecting onto an already-injected file yields duplicate attributes.
+
+Because an `id` is a hash of the English, changing one word orphans its translation — that is the point,
+it surfaces exactly what needs re-translating. Note the extractor's bullet pattern also matches timeline
+`<li>`s, so a few "unresolved" units on every run are expected noise.
+
+Two constraints worth remembering:
+- A `data-ja` value may contain `<small>`/`<strong>`, and must reproduce any nested
+  `<span class="u" …>` **byte-for-byte**, since switching language re-parses it.
+- **Packing rows must not contain inline HTML.** The packing model escapes its strings, so a `<strong>`
+  in a packing item renders as literal text. Keep emphasis out of `.ctxt` and its `<small>`.
 
 ## Editing content
 
-1. Edit `index.html` directly — itinerary days, hikes, and the packing list's seed rows are plain HTML.
-   - Day cards: `<details class="card">` blocks inside `#days`. Hike days add `class="hike"`
-     (which colors the timeline spine `.node`) and a `.subhead`-led `.stat-grid` block.
-   - Hike stat blocks: `.stat-grid` of `.stat` cells; difficulty badge `.diff.{easy|mod|hard|epic}`.
-     Distance, elevation gain, difficulty, route, hike time, and the permit/pass come from the
-     sibling `gpx/trails.js` (the source of truth) — keep them in sync with it. "Drive time" is
-     trip-specific and not in `gpx`. Each hike's "View trail map" link (`a.traillink`) deep-links
-     to that trail in the `gpx/` app via `huangwaylon.github.io/gpx/#/trail/<slug>`.
-   - Checklist items: an `<input class="cb" id="<store>-<group>-<index>">` immediately followed by
-     its `<label class="checkrow" for="...">`. These static rows are the packing list's **seed +
+1. Edit `index.html` directly — itinerary days, logistics cards, campsites, and the packing list's
+   seed rows are plain HTML.
+   - **Day cards:** `<details class="card day">` inside `#days`, each with an hour-by-hour
+     `<ul class="tl">`. Use `.note` callouts for the things that will actually bite us (closing
+     days, the 17:30 airport car return, habu season).
+   - **Logistics cards:** `<details class="card travel">` (Flights, The Jimny, Know Before You Go)
+     in the second `.spine` under the "Logistics" heading.
+   - **Campsite cards:** `<details class="card camp wild|paid f-beach f-toilet f-shower">` grouped
+     under `<h3 class="region">` headings. The `f-*` classes and `wild`/`paid` drive the filter
+     buttons in `#campFilters` — the filter shows one criterion at a time and hides a region
+     heading when all its cards are filtered out. Keep the class list in sync with the chips.
+     A `.chip.pick` ("Good fit") marks the six sites that actually suit a rooftop tent plus BBQ;
+     six sites carry a `.note` warning instead.
+   - **Checklist items:** an `<input class="cb" id="<store>-<group>-<index>">` immediately followed
+     by its `<label class="checkrow" for="...">`. These static rows are the packing list's **seed +
      no-JS fallback** — editing them changes the defaults a *fresh* install starts from. Once a
      device has saved its own `packingData`, that model wins and the static seed is ignored there.
 2. Keep markup static — do not move content rendering into JS. (The packing list is the one
    deliberate exception: its static rows seed a JS-rendered, editable model — see above.)
 3. **After ANY change to `index.html` (or other cached assets): bump the cache name in `sw.js`**
-   (`seattle-2026-v2` → `v3`). Otherwise installed phones keep serving the old cached copy.
+   (`okinawa-2026-v1` → `v2`). Otherwise installed phones keep serving the old cached copy.
 
-### Replacing / adding the photo
+### Where the campsite data came from
 
-The hero is `images/mount-rainier.jpg`; hike photos are `images/<key>.webp`. To swap:
+The 26 campsites are the drivable main-island subset of the **Evertrail Okinawa directory**
+(https://directory.evertrailokinawa.com/). That site is a React SPA backed by Airtable base
+`apph4puq05ed8CGbz`, table `Sites` — the read-only PAT ships in its `assets/App-*.js` bundle, and
+the table also holds `Hot spot` / `Dining` records used to source itinerary stops. Nine ferry-only
+outer-island sites (Iheya, Izena, Tokashiki, Zamami) are deliberately excluded. Drive times are
+real road times from Naha Airport via the public OSRM router, not straight-line estimates.
+
+Note: `WebFetch` and direct `curl` are blocked by the local sandbox, but in-page `fetch()` from
+the chrome-devtools MCP works — that is how this data was retrieved.
+
+### Replacing the hero photo
+
 ```bash
-# Hero — recompress for retina width:
-sips --resampleHeightWidthMax 1600 NEW.jpg --out images/mount-rainier.jpg
-sips -s format jpeg -s formatOptions 70 images/mount-rainier.jpg --out images/mount-rainier.jpg
-
-# Hike — convert to webp (cwebp, q≈70 keeps under ~300 KB):
-cwebp -q 70 NEW.jpg -o images/<key>.webp
+sips --resampleHeightWidthMax 1600 NEW.jpg --out /tmp/hero.jpg
+sips -s format jpeg -s formatOptions 48 /tmp/hero.jpg --out images/okinawa-hero.jpg
+# Icons, cropped square from the same photo:
+sips -c 1280 1280 --cropOffset 200 0 /tmp/hero.jpg --out /tmp/sq.jpg
+sips -z 180 180 -s format png /tmp/sq.jpg --out icon-180.png
+sips -z 512 512 -s format png /tmp/sq.jpg --out icon-512.png
 ```
-Then **bump `CACHE` in `sw.js`** so installed PWAs pick up the new bytes. Regenerate icons
-from a new hero with: `sips -c 900 900 NEW.jpg --out /tmp/sq.jpg` then export 180px + 512px PNGs.
+`--cropOffset` is `<top> <left>`; keep `top + 1280 <=` the image height or you get a black band.
+Then **bump `CACHE` in `sw.js`** so installed PWAs pick up the new bytes.
 
 ## Testing locally
 
@@ -125,9 +180,11 @@ Service workers need a real origin (not `file://`):
 ```bash
 python3 -m http.server 8765      # then open http://localhost:8765/index.html
 ```
-To check offline: load once, confirm the SW is `activated` (DevTools → Application → Service
-Workers), stop the server, reload — it should still load from cache. The no-JS path can be
-sanity-checked with `qlmanage -t -s 1400 -o . index.html` (renders like Quick Look, no JS).
+To check offline: load once, confirm the SW is `activated`, stop the server, reload — it should
+still load from cache. If an old worker from a previous trip is still registered on
+`localhost:8765`, unregister it and clear caches first or you'll be served stale HTML.
+The no-JS path is best checked by forcing `documentElement.classList` to `nojs` in a browser
+(`qlmanage -t -s 1400 -o . index.html` also works but see the animation caveat above).
 
 ## Deploying to GitHub Pages
 
@@ -158,12 +215,22 @@ new version activates on its own.
 
 ## Gotchas & notes
 
-- **Privacy:** the Pages site is public (true even for a private repo on the free tier). The
-  itinerary names family members and reveals when the house is empty (all-day hikes). Flag this
-  before adding more sensitive detail.
+- **Privacy:** the Pages site is public (true even for a private repo on the free tier). It names
+  the travellers, flight/booking references, and seat numbers. Flag this before adding more
+  sensitive detail — and consider whether the ticket and booking numbers should stay.
 - **iOS storage:** installed Home-Screen PWAs are exempt from Safari's 7-day script-storage cap,
-  so the saved packing list (items + checkmarks) persists — but only if opened occasionally.
-  Install a week or two pre-trip.
-- **Don't** add a runtime build/render step or external CDN assets. Don't re-base64 the photos —
-  real files in `images/` are smaller (webp), keep the HTML editable, and are still offline-safe
-  via the service worker precache.
+  so the saved packing list persists — but only if opened occasionally. Install a week or two
+  pre-trip.
+- **Verified, and what is not.** The content was fact-checked in Sep 2026. Confirmed against primary
+  sources: the Solaseed flight times, Naha sunrise/sunset, Oct 12 2026 = Sports Day, the ¥1,040 ETC vs
+  ¥1,610 cash toll and its ETC-only discount, Churaumi's ¥2,180, JMA weather normals, the habu campaign
+  dates, and that a gas canister cannot be flown. **Still unverified** — confirm by phone: King Tacos'
+  hours, Ryujin-no-yu's rate and whether the holiday price applies on Sports Day, Kishimoto's 1905
+  founding and cash-only policy, and every campsite fee (the directory prices only two).
+- **Two claims were wrong and are now corrected** — King Tacos is *not* the 1984 original (taco rice was
+  invented at Parlour Senri in Kin; King Tacos spread it), and Daisekirinzan was renamed **ASMUI** in
+  Dec 2024 and charges ¥2,500. Campsite drive times are OSRM **free-flow** — add 20–40 min in holiday
+  traffic, and note Koki's coordinate snaps to the expressway so its figure is unreliable.
+- **Jellyfish first aid is species-dependent.** Vinegar is correct for habu-kurage and makes a Portuguese
+  man o' war sting **worse**. Do not simplify that bullet into generic "use vinegar" advice.
+- **Don't** add a runtime build/render step or external CDN assets.

@@ -1,15 +1,7 @@
-const CACHE = 'seattle-2026-v15';
+const CACHE = 'okinawa-2026-v2';
 const ASSETS = [
   './', './index.html', './manifest.webmanifest', './icon-180.png', './icon-512.png',
-  './images/mount-rainier.jpg',
-  './images/lake-22.webp',
-  './images/snow-lake.webp',
-  './images/skyline-loop.webp',
-  './images/enchantments.webp',
-  './images/bridal-veil.webp',
-  './images/mount-pilchuck.webp',
-  './images/lake-valhalla.webp',
-  './images/talapus-lake.webp',
+  './images/okinawa-hero.jpg',
 ];
 self.addEventListener('install', function(e){
   // Precache the shell, but DON'T skipWaiting automatically — the page surfaces a
