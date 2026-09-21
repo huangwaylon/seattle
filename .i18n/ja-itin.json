@@ -12,10 +12,6 @@
   "ja": "那覇空港（OKA）着"
  },
  {
-  "id": "fe3097a630",
-  "ja": "朝食、SIM・現金、最初の買い出し"
- },
- {
   "id": "614120a216",
   "ja": "ジムニー受け取り（Evertrailオフィス）"
  },
@@ -28,28 +24,8 @@
   "ja": "沖縄自動車道を北上"
  },
  {
-  "id": "b8f77c5197",
-  "ja": "那覇IC &rarr; 金武IC"
- },
- {
   "id": "8a3ea73580",
   "ja": "キングタコス金武町 &mdash; タコライス"
- },
- {
-  "id": "4136795a9a",
-  "ja": "1984年創業の元祖"
- },
- {
-  "id": "76dbd77871",
-  "ja": "万座毛・恩納の海岸線"
- },
- {
-  "id": "352c545bfe",
-  "ja": "買い出し &mdash; マックスバリュ名護店（24時間）"
- },
- {
-  "id": "63dd56a65e",
-  "ja": "今夜のバーベキュー用の肉・野菜・氷・水 &middot; やんばる手前で最後の頼れる店"
  },
  {
   "id": "0eacabe080",
@@ -76,80 +52,20 @@
   "ja": "辺戸岬 &mdash; 本島最北端"
  },
  {
-  "id": "ba4d212f96",
-  "ja": "大石林山の石灰岩の奇岩群"
- },
- {
-  "id": "c4d6b302bf",
-  "ja": "やんばる国立公園 &middot; 整備された歩きやすい周回コース"
- },
- {
   "id": "87a63ebb2e",
   "ja": "ゴリラチョップでシュノーケリング（本部町）"
  },
  {
   "id": "bee9b9f402",
-  "ja": "波が穏やかで徒歩エントリー &middot; 水温 &asymp; <span class=\"u\" data-metric=\"29 &deg;C\" data-imperial=\"84 &deg;F\">29 &deg;C</span>"
+  "ja": "波が穏やかで歩いてエントリー &middot; 海水温 &asymp; <span class=\"u\" data-metric=\"29 &deg;C\" data-imperial=\"84 &deg;F\">29 &deg;C</span>"
  },
  {
   "id": "5e6ebf5ee6",
   "ja": "きしもと食堂 &mdash; 沖縄そば"
  },
  {
-  "id": "619ae6f410",
-  "ja": "1905年創業、木灰そば &middot; 11:00&ndash;17:00 &middot; 現金のみ &middot; 売り切れ次第終了"
- },
- {
-  "id": "0c094756c5",
-  "ja": "すぐ隣の新垣ぜんざい屋"
- },
- {
-  "id": "572ec0d985",
-  "ja": "甘く煮た金時豆にかき氷、&yen;350 &mdash; メニューはこれ一品のみ"
- },
- {
-  "id": "81ad81cc89",
-  "ja": "美ら海水族館、または備瀬のフクギ並木"
- },
- {
-  "id": "5dc5359468",
-  "ja": "古宇利島 &mdash; ブルーシール"
- },
- {
-  "id": "a4bb8393e7",
-  "ja": "紅イモかシークヮーサー &middot; 18:00閉店"
- },
- {
-  "id": "fe66433271",
-  "ja": "今夜の分の買い出し"
- },
- {
-  "id": "a65abf990f",
-  "ja": "名護より北は18:00頃以降どこも開いていません &mdash; キャンプ場へ戻る前に購入"
- },
- {
   "id": "f118ecc306",
   "ja": "キャンプ場でバーベキュー2日目"
- },
- {
-  "id": "a4e0bfa5ec",
-  "ja": "朝日、ゆっくり撤収"
- },
- {
-  "id": "92c875ad43",
-  "ja": "南へ &mdash; 残波岬灯台"
- },
- {
-  "id": "84d8ef7669",
-  "ja": "やちむんの里（読谷村）"
- },
- {
-  "id": "342a13b322",
-  "ja": "真栄田岬で青の洞窟シュノーケリング"
- },
- {
-  "id": "7aaab62119",
-  "ja": "洞窟の奥まで入れるのは干潮時のみ &mdash; 先に潮位を確認"
  },
  {
   "id": "42cfe3d238",
@@ -166,10 +82,6 @@
  {
   "id": "ec814a4d3c",
   "ja": "琉球温泉 龍神の湯（瀬長島）"
- },
- {
-  "id": "44fe1e1e7b",
-  "ja": "那覇空港から10分 &middot; 6:00&ndash;24:00 &middot; 休日料金 &yen;1,570 &middot; タオル付き"
  },
  {
   "id": "52121d9f88",
@@ -241,7 +153,7 @@
  },
  {
   "id": "5fe6eb3021",
-  "ja": "コキ野営地"
+  "ja": "幸喜（こうき）の野営地"
  },
  {
   "id": "e60cd19bc0",
@@ -320,10 +232,6 @@
   "ja": "アダンビーチ キャンプ場"
  },
  {
-  "id": "4ba6d52630",
-  "ja": "那覇 &rarr; 金武 &rarr; 本部"
- },
- {
   "id": "b07563902b",
   "ja": "辺戸岬、シュノーケリング、沖縄そば"
  },
@@ -344,116 +252,8 @@
   "ja": "天気、通行料、危険生物"
  },
  {
-  "id": "308105ed81",
-  "ja": "野営地 &middot; 無料 &middot; 那覇から<span class=\"u\" data-metric=\"11.5 km\" data-imperial=\"7 mi\">11.5 km</span>"
- },
- {
-  "id": "9999b1eb99",
-  "ja": "有料キャンプ場 &middot; 那覇から<span class=\"u\" data-metric=\"22.1 km\" data-imperial=\"14 mi\">22.1 km</span>"
- },
- {
-  "id": "6face807e6",
-  "ja": "有料キャンプ場 &middot; 那覇から<span class=\"u\" data-metric=\"26.2 km\" data-imperial=\"16 mi\">26.2 km</span>"
- },
- {
-  "id": "0281a86285",
-  "ja": "野営地 &middot; 無料 &middot; 那覇から<span class=\"u\" data-metric=\"24.6 km\" data-imperial=\"15 mi\">24.6 km</span>"
- },
- {
-  "id": "6708b6655d",
-  "ja": "野営地 &middot; 無料 &middot; 那覇から<span class=\"u\" data-metric=\"40.4 km\" data-imperial=\"25 mi\">40.4 km</span>"
- },
- {
-  "id": "be0ff3fac6",
-  "ja": "有料キャンプ場 &middot; 那覇から<span class=\"u\" data-metric=\"60.4 km\" data-imperial=\"38 mi\">60.4 km</span>"
- },
- {
-  "id": "044163d056",
-  "ja": "野営地 &middot; 無料 &middot; 那覇から<span class=\"u\" data-metric=\"70.9 km\" data-imperial=\"44 mi\">70.9 km</span>"
- },
- {
-  "id": "1d2c0bef23",
-  "ja": "野営地 &middot; 無料 &middot; 那覇から<span class=\"u\" data-metric=\"77.5 km\" data-imperial=\"48 mi\">77.5 km</span>"
- },
- {
-  "id": "e06a19c036",
-  "ja": "有料キャンプ場 &middot; 那覇から<span class=\"u\" data-metric=\"83.8 km\" data-imperial=\"52 mi\">83.8 km</span>"
- },
- {
-  "id": "b503be47c9",
-  "ja": "有料キャンプ場 &middot; 那覇から<span class=\"u\" data-metric=\"86.3 km\" data-imperial=\"54 mi\">86.3 km</span>"
- },
- {
-  "id": "7116036271",
-  "ja": "野営地 &middot; 無料 &middot; 那覇から<span class=\"u\" data-metric=\"86.2 km\" data-imperial=\"54 mi\">86.2 km</span>"
- },
- {
-  "id": "86ea03ab5d",
-  "ja": "野営地 &middot; 無料 &middot; 那覇から<span class=\"u\" data-metric=\"87.4 km\" data-imperial=\"54 mi\">87.4 km</span>"
- },
- {
-  "id": "f4d72b1d44",
-  "ja": "野営地 &middot; 無料 &middot; 那覇から<span class=\"u\" data-metric=\"90.6 km\" data-imperial=\"56 mi\">90.6 km</span>"
- },
- {
-  "id": "e1b5981869",
-  "ja": "野営地 &middot; 無料 &middot; 那覇から<span class=\"u\" data-metric=\"92.7 km\" data-imperial=\"58 mi\">92.7 km</span>"
- },
- {
-  "id": "11d23b7f62",
-  "ja": "有料キャンプ場 &middot; 那覇から<span class=\"u\" data-metric=\"93.6 km\" data-imperial=\"58 mi\">93.6 km</span>"
- },
- {
-  "id": "be3e0d3bb4",
-  "ja": "有料キャンプ場 &middot; 那覇から<span class=\"u\" data-metric=\"95.7 km\" data-imperial=\"59 mi\">95.7 km</span>"
- },
- {
-  "id": "e2452851c4",
-  "ja": "野営地 &middot; 無料 &middot; 那覇から<span class=\"u\" data-metric=\"97.5 km\" data-imperial=\"61 mi\">97.5 km</span>"
- },
- {
-  "id": "fd43fddab6",
-  "ja": "有料キャンプ場 &middot; 那覇から<span class=\"u\" data-metric=\"101.9 km\" data-imperial=\"63 mi\">101.9 km</span>"
- },
- {
-  "id": "4687d81a11",
-  "ja": "野営地 &middot; 無料 &middot; 那覇から<span class=\"u\" data-metric=\"106.5 km\" data-imperial=\"66 mi\">106.5 km</span>"
- },
- {
-  "id": "e6359462d3",
-  "ja": "野営地 &middot; 無料 &middot; 那覇から<span class=\"u\" data-metric=\"107.3 km\" data-imperial=\"67 mi\">107.3 km</span>"
- },
- {
-  "id": "fa47e602b6",
-  "ja": "有料キャンプ場 &middot; 那覇から<span class=\"u\" data-metric=\"107.6 km\" data-imperial=\"67 mi\">107.6 km</span>"
- },
- {
-  "id": "95af7de617",
-  "ja": "野営地 &middot; 無料 &middot; 那覇から<span class=\"u\" data-metric=\"115.3 km\" data-imperial=\"72 mi\">115.3 km</span>"
- },
- {
-  "id": "e3196aa1c7",
-  "ja": "有料キャンプ場 &middot; 那覇から<span class=\"u\" data-metric=\"123.4 km\" data-imperial=\"77 mi\">123.4 km</span>"
- },
- {
-  "id": "b7de82e320",
-  "ja": "野営地 &middot; 無料 &middot; 那覇から<span class=\"u\" data-metric=\"126.1 km\" data-imperial=\"78 mi\">126.1 km</span>"
- },
- {
-  "id": "ed596e6b1e",
-  "ja": "野営地 &middot; 無料 &middot; 那覇から<span class=\"u\" data-metric=\"132.6 km\" data-imperial=\"82 mi\">132.6 km</span>"
- },
- {
-  "id": "295ac4944c",
-  "ja": "有料キャンプ場 &middot; 那覇から<span class=\"u\" data-metric=\"131.1 km\" data-imperial=\"81 mi\">131.1 km</span>"
- },
- {
-  "id": "a7f6b8f402",
-  "ja": "<strong>グリルは手元にありません。</strong>鉄板グリルとガスカートリッジは、辞退した肉セットに付属していたものです。初日の夕食までに、バーナーを購入するか持参してください。炭は代わりになりません &mdash; 多くのキャンプ場で禁止されており、恩納村では全域で使用が禁止されています。"
- },
- {
   "id": "6865ad9ca3",
-  "ja": "<strong>ハブの季節です。</strong>沖縄県のハブ咬傷注意報の期間は9月1日&ndash;11月30日 &mdash; 10月は活動が最も活発な時期で、やんばるは主要な生息地です。暗くなったらライトを必ず持ち、道を外れるときはつま先の覆われた靴を履き、草むらや石垣に絶対に手を入れないでください。朝は靴を履く前に振って中を確認しましょう。"
+  "ja": "<strong>ハブの季節です。</strong>沖縄県のハブ咬傷注意報の期間は9月1日&ndash;11月30日 &mdash; 10月は活動が最も活発な時期で、やんばるは主要な生息地です。暗くなったらライトを必ず持ち、道を外れるときは足を覆う靴を履き、草むらや石垣に絶対に手を入れないでください。朝は靴を履く前に振って中を確認しましょう。"
  },
  {
   "id": "fa26515277",
