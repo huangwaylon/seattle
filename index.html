@@ -78,9 +78,9 @@
   @keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
 
   h2.section{display:flex;align-items:center;gap:10px;font-family:var(--font-display);font-size:24px;
-    letter-spacing:-.4px;color:var(--ink);margin:28px var(--gutter) 4px;font-weight:600;line-height:1.1;}
+    letter-spacing:-.4px;color:var(--ink);margin:28px var(--gutter) 6px;font-weight:600;line-height:1.1;}
   h2.section .ic{color:var(--sea);width:20px;height:20px;}
-  .intro{color:var(--muted);font-size:13.5px;margin:8px var(--gutter) 18px;line-height:1.5;}
+  .intro{color:var(--muted);font-size:13.5px;margin:6px var(--gutter) 14px;line-height:1.5;}
 
 
   /* ---- HERO ---- */
@@ -103,8 +103,8 @@
     text-shadow:0 1px 10px rgba(0,0,0,.6);font-variant-numeric:tabular-nums;}
 
   /* ---- Toolbar ---- */
-  .toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:18px var(--gutter) 6px;}
-  #view-itinerary > .toolbar{padding-top:22px;}
+  .toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+  #view-itinerary > .toolbar{padding-top:20px;}
   .toolbar .spacer{flex:1;}
   .btn-sm{background:var(--surface);border:1px solid var(--line);color:var(--ink-2);font-family:inherit;
     font-size:12.5px;font-weight:700;letter-spacing:.02em;padding:8px 14px;border-radius:var(--r-chip);cursor:pointer;
@@ -125,8 +125,8 @@
   .lang-toggle button{letter-spacing:.02em;}
 
   /* ---- Filter chips (campsites) ---- */
-  .filters{display:flex;gap:7px;padding:4px var(--gutter) 6px;overflow-x:auto;scrollbar-width:none;
-    -webkit-overflow-scrolling:touch;}
+  .toolbar,.filters{padding:6px var(--gutter);}
+  .filters{display:flex;gap:7px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;}
   .filters::-webkit-scrollbar{display:none;}
   .filters button{flex:0 0 auto;background:var(--surface);border:1px solid var(--line);color:var(--ink-2);
     font-family:inherit;font-size:12.5px;font-weight:700;letter-spacing:.02em;padding:8px 14px;
@@ -258,6 +258,8 @@
   a.maplink.alt{font-weight:600;font-size:13px;background:none;border-color:var(--line);color:var(--muted);}
   a.maplink.alt .ic{color:var(--muted);}
 
+  #packing{padding-top:8px;}
+
   /* ---- checklists ---- */
   .group{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);
     margin:0 var(--gutter) 14px;overflow:hidden;box-shadow:var(--sh-card),var(--lift);}
@@ -363,7 +365,7 @@
      Everything on the map is static markup. JS only sets data-day / data-<layer>
      on #view-map and a few state classes, so without JS all three days and every
      pin are visible and the map is still a map. */
-  .mapcard{margin:4px var(--gutter) 12px;background:var(--sea-wash);border:1px solid var(--line);
+  .mapcard{margin:8px var(--gutter) 12px;background:var(--sea-wash);border:1px solid var(--line);
     border-radius:var(--r);overflow:hidden;box-shadow:var(--sh-card);}
   /* max-height keeps the (tall) island from running off a desktop screen; the letterbox gap
      falls on .mapcard, which is the same sea colour, so it is invisible. */
@@ -496,8 +498,8 @@
     <div class="toolbar">
       <div class="seg lang-toggle jsonly" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="ja" class="active">日本語</button></div>
       <div class="seg unit-toggle jsonly" role="group" aria-label="Units">
-        <button type="button" data-unit="metric" class="active" data-en="METRIC">キロ</button>
-        <button type="button" data-unit="imperial" data-en="IMPERIAL">マイル</button>
+        <button type="button" data-unit="metric" class="active" data-en="KM">キロ</button>
+        <button type="button" data-unit="imperial" data-en="MI">マイル</button>
       </div>
       <div class="spacer"></div>
       <button class="btn-sm jsonly" id="toggleAll" type="button">
@@ -526,7 +528,7 @@
             <li><span class="time">13:05</span><span class="dot"></span><span class="txt" data-en="Cape Manzamo<small>19 min from Kin &middot; elephant-trunk rock formation</small>">万座毛<small>金武町から19分 &middot; 象の鼻の形の岩</small></span></li>
             <li><span class="time">14:45</span><span class="dot"></span><span class="txt" data-en="Fukugawa Falls<small>52 min from Manzamo &middot; 20&ndash;30 min return on foot</small>">普久川の滝<small>万座毛から52分 &middot; 徒歩で往復20&ndash;30分</small></span></li>
             <li><span class="time">16:05</span><span class="dot"></span><span class="txt" data-en="Nago &mdash; groceries<small>19 min from the falls &middot; MaxValu, open 24 h</small>">名護 &mdash; 食料の買い出し<small>滝から19分 &middot; マックスバリュ、24時間営業</small></span></li>
-            <li><span class="time">16:50</span><span class="dot"></span><span class="txt" data-en="Camp &mdash; Yagaji or Kouri<small>12 min from Nago &middot; 35 min from the dive shop</small>">キャンプ &mdash; 屋我地か古宇利<small>名護から12分 &middot; ダイビングショップから35分</small></span></li>
+            <li><span class="time">16:50</span><span class="dot"></span><span class="txt" data-en="Camp &mdash; Yagaji or Kouri<small>12 min from Nago &middot; 35 min from the shop</small>">キャンプ &mdash; 屋我地か古宇利<small>名護から12分 &middot; ショップから35分</small></span></li>
             <li><span class="time">18:08</span><span class="dot"></span><span class="txt" data-en="Sunset">夕日</span></li>
             <li><span class="time">19:00</span><span class="dot"></span><span class="txt" data-en="BBQ &mdash; Evertrail set">バーベキュー &mdash; Evertrailのセット</span></li>
           </ul>
@@ -842,7 +844,7 @@
             <div class="stat"><div class="k" data-en="Dinner">夜</div><div class="v" data-en="17:30&ndash;21:00, L.O. 20:30">17:30&ndash;21:00 &middot; L.O. 20:30</div></div>
           </div>
           <ul class="bul">
-            <li data-en="Open every day &middot; Day 2, after the dive">定休日なし &middot; 2日目、ダイビングのあと</li>
+            <li data-en="Open every day &middot; Day 2, after the boat">定休日なし &middot; 2日目、ボートのあと</li>
             <li data-en="Also on the menu: ufuya soba, cartilage soki soba, agu shabu-shabu">ほかに大家そば、軟骨ソーキそば、あぐー豚しゃぶしゃぶ</li>
             <li data-en="&yen;1,000&ndash;6,000 per person &middot; 0980-53-0280 &middot; online reservations">1人&yen;1,000&ndash;6,000 &middot; 0980-53-0280 &middot; ネット予約可</li>
           </ul>
@@ -1177,12 +1179,6 @@
       &ldquo;none posted&rdquo; means unknown, not free. Book the paid ones: Oct 10&ndash;12 is the Sports Day weekend.">Evertrail のディレクトリに載る、車で行けるキャンプ場のすべて &mdash; 全26か所を、車を受け取る沖縄市の
       Evertrail営業所からの所要時間順に並べています。料金が明記されているのは2か所だけなので、
       「記載なし」は無料ではなく不明と考えてください。有料キャンプ場は必ず予約を &mdash; 10月10&ndash;12日はスポーツの日の三連休です。</p>
-    <div class="toolbar">
-      <div class="seg unit-toggle jsonly" role="group" aria-label="Units">
-        <button type="button" data-unit="metric" class="active" data-en="METRIC">キロ</button>
-        <button type="button" data-unit="imperial" data-en="IMPERIAL">マイル</button>
-      </div>
-    </div>
     <div class="filters jsonly" id="campFilters" role="group" aria-label="Filter campsites">
       <button type="button" data-filter="all" class="active" data-en="All 26">全26件</button>
       <button type="button" data-filter="wild" data-en="Free">無料</button>
