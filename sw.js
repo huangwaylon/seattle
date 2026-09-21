@@ -1,7 +1,16 @@
-const CACHE = 'okinawa-2026-v22';
+const CACHE = 'guides-v1';
 const ASSETS = [
   './', './index.html', './manifest.webmanifest', './icon-180.png', './icon-512.png',
   './images/okinawa-hero.jpg',
+  './images/mount-rainier.jpg',
+  './images/lake-22.webp',
+  './images/snow-lake.webp',
+  './images/skyline-loop.webp',
+  './images/enchantments.webp',
+  './images/bridal-veil.webp',
+  './images/mount-pilchuck.webp',
+  './images/lake-valhalla.webp',
+  './images/talapus-lake.webp',
   './images/dive/boat.jpg',
   './images/tidepool/pool.jpg',
   './images/tidepool/scramble.jpg',

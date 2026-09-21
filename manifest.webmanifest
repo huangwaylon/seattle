@@ -1,11 +1,11 @@
 {
-  "name": "Okinawa 2026",
-  "short_name": "Okinawa 2026",
+  "name": "うめうぇの旅",
+  "short_name": "うめうぇの旅",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#f7f4ec",
-  "theme_color": "#f7f4ec",
+  "background_color": "#241c17",
+  "theme_color": "#241c17",
   "icons": [
     { "src": "icon-180.png", "sizes": "180x180", "type": "image/png" },
     { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
