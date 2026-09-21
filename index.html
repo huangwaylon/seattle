@@ -997,9 +997,6 @@
   <section class="view" id="view-map">
     <h2 class="section"><svg class="ic" aria-hidden="true"><use href="#i-map"/></svg><span data-en="Map">地図</span></h2>
     <p class="intro" data-en="Real road routes. &#9679; stops, &#9632; campsites, &#9650; nature, &#9670; food. The clock marks how far into the day.">実際の道路に沿ったルート。&#9679;立ち寄り先、&#9632;キャンプ場、&#9650;自然、&#9670;食べる。時刻スライダーで当日の進み具合。</p>
-    <div class="toolbar">
-      <div class="seg lang-toggle jsonly" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="ja" class="active">日本語</button></div>
-    </div>
     <div class="filters jsonly" id="mapDays" role="group" aria-label="Show one day">
       <button type="button" data-day="1" class="active" aria-pressed="true"><span class="sw d1"></span><span data-en="Day 1">1日目</span></button>
       <button type="button" data-day="2" aria-pressed="false"><span class="sw d2"></span><span data-en="Day 2">2日目</span></button>
@@ -1181,7 +1178,6 @@
       Evertrail営業所からの所要時間順に並べています。料金が明記されているのは2か所だけなので、
       「記載なし」は無料ではなく不明と考えてください。有料キャンプ場は必ず予約を &mdash; 10月10&ndash;12日はスポーツの日の三連休です。</p>
     <div class="toolbar">
-      <div class="seg lang-toggle jsonly" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="ja" class="active">日本語</button></div>
       <div class="seg unit-toggle jsonly" role="group" aria-label="Units">
         <button type="button" data-unit="metric" class="active" data-en="METRIC">キロ</button>
         <button type="button" data-unit="imperial" data-en="IMPERIAL">マイル</button>
@@ -1742,7 +1738,6 @@
       what we buy on landing. Tap a row to check it off, or <strong>Edit list</strong> to change it.">ひとりバックパック1つ。寝具とバーベキューセットはレンタルに付いてくるので、ここにあるのは持参する物と
       現地で買う物だけ。行をタップするとチェックが付き、<strong>リスト編集</strong>で内容を変えられます。</p>
     <div class="toolbar jsonly">
-      <div class="seg lang-toggle jsonly" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="ja" class="active">日本語</button></div>
       <button class="btn-sm" id="editPacking" type="button"><svg class="ic" aria-hidden="true"><use href="#i-pencil"/></svg><span data-en="Edit list">リスト編集</span></button>
       <div class="spacer"></div>
       <button class="btn-sm" id="resetPacking" type="button" data-en="Reset checks">チェックをリセット</button>
@@ -2105,13 +2100,16 @@ var T=(function(){
     each(legs,function(p){p.classList.toggle('future',live&&mine(p)&&+p.dataset.min>t);});
   }
 
-  /* Select a pin, and mirror it onto its row in the day's timeline. */
+  /* Select a pin, and mirror it onto its row in the day's timeline. A stop carries a time, so
+     picking one — from the map or from the row — also walks the clock to it. Candidate pins have
+     no time, so they leave the clock where it was. */
   function select(pin){
     each(pins,function(p){p.classList.toggle('sel',p===pin);});
     var d=pin&&pin.dataset.day, i=pin&&pin.dataset.i;
     each(rows,function(li){
       li.classList.toggle('sel',!!d&&li.parentNode.dataset.day===d&&li.dataset.i===i);
     });
+    if(d===day && pin.dataset.min!==undefined){ scrub.value=pin.dataset.min; paint(); }
   }
   function pinFor(li){
     return svg.querySelector('.stop.d'+li.parentNode.dataset.day+'[data-i="'+li.dataset.i+'"]');

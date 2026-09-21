@@ -53,6 +53,9 @@ There is no build step or framework. No dependencies. No bundler.
   inner HTML**; the language module caches the Japanese into `data-ja` the first time you switch away,
   swaps `innerHTML`, and fires a `langchange` event that the units and packing modules listen for.
   `#packing` is excluded from the sweep because it renders from its own bilingual model.
+  **There is exactly one language toggle, in the Itinerary toolbar** — it is global, so repeating it on
+  every tab was noise. The module still binds `querySelectorAll('.lang-toggle')`, so adding a second one
+  back would just work.
   **The flag is `lang-en` on `<html>`, and its absence means Japanese** — so `T()` and the packing model
   test `!contains('lang-en')`. Choice persists in `localStorage['lang']`; only `'en'` does any work on load.
   Strings JS sets at runtime (button labels, placeholders, `confirm()` text) live in the `T()` table at the
@@ -146,8 +149,10 @@ intact, and the no-JS path still shows a real map with all three days and every 
   It **starts at the top of the day and resets there on every day switch**, so the opening view is always
   "here is the day ahead": the first stop gets `.now` (ring + label) and the whole route reads `.future`
   (faded to .34 — deliberately still legible, since this is the default state, not an edge case). Drag
-  forward and stops behind you go `.past` (hollow) while driven legs come up to full. During Oct 10–12
-  2026 the tab opens on today at the current time instead.
+  forward and stops behind you go `.past` (hollow) while driven legs come up to full. **Selecting a stop
+  also moves the clock to it** — from the map pin or from the row, since they are the same thing; a
+  candidate pin has no time and leaves the clock alone. During Oct 10–12 2026 the tab opens on today at
+  the current time instead.
 - **Pins are not focusable.** The SVG is one `role="img"` with a `<title>`, because 67 tab stops would
   swamp the keyboard order; the stop rows below the map are the keyboard path, and candidate names all
   exist in the Campsites and Nearby cards. Each pin does carry a wide invisible `circle.hit`, so the
