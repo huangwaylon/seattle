@@ -45,13 +45,16 @@ There is no build step or framework. No dependencies. No bundler.
   or a stat tile.
 - **`.lead-chip` appears only on the three day cards** (the date). Every other card — logistics, Nearby,
   campsites — has no leading number. A campsite's drive time lives in a `From office` stat tile instead.
-- **Bilingual (EN / 日本語).** Every translatable element carries a `data-ja` attribute holding its
-  **Japanese inner HTML**; English stays in the markup, so first paint and the no-JS path are English.
-  The language module caches the original into `data-en` on first switch, swaps `innerHTML`, and fires a
-  `langchange` event; the units and packing modules listen and re-apply. `#packing` is excluded from the
-  sweep because it renders from its own bilingual model. Choice persists in `localStorage['lang']`.
-  Strings that JS sets at runtime (button labels, placeholders, `confirm()` text) live in the `T()` table
-  at the top of the script block — not in `data-ja`.
+- **Bilingual, Japanese-first.** **Japanese is the markup**, so first paint and the no-JS path are
+  Japanese with no flash. Every translatable element carries a `data-en` attribute holding its **English
+  inner HTML**; the language module caches the Japanese into `data-ja` the first time you switch away,
+  swaps `innerHTML`, and fires a `langchange` event that the units and packing modules listen for.
+  `#packing` is excluded from the sweep because it renders from its own bilingual model.
+  **The flag is `lang-en` on `<html>`, and its absence means Japanese** — so `T()` and the packing model
+  test `!contains('lang-en')`. Choice persists in `localStorage['lang']`; only `'en'` does any work on load.
+  Strings JS sets at runtime (button labels, placeholders, `confirm()` text) live in the `T()` table at the
+  top of the script block — keep its Japanese wording identical to the markup, or a label will change
+  the first time the user toggles.
 - **Units (metric / imperial):** every distance *and temperature* is wrapped in
   `<span class="u" data-metric="11.5 km" data-imperial="7 mi">11.5 km</span>`. The default text is
   metric (so the no-JS path shows metric). Every `.unit-toggle` on the page swaps all `span.u` to
@@ -118,9 +121,14 @@ self-contained — but keep it, or any future English edit means re-translating 
 | `.i18n/strings.json` | Every extracted English string as `{id, slot, en}`. `id` = sha1(`slot|en`)[:10]. |
 | `.i18n/ja-*.json` | The Japanese, keyed by the same `id`. Several files, merged on inject. |
 
+Note the direction: `.i18n` holds **English** as the keying language (`strings.json`) with Japanese in
+`ja-*.json`, but the **shipped markup is Japanese with English in `data-en`**. The extract/inject scripts
+were written against an English-base file, so regenerating means flipping the file back to English-base
+first (swap each `data-en` value with its element's content), re-running them, then flipping again.
+
 **Workflow when you change English text:**
 1. Edit `index.html` **from a clean base** — strip the layer first with
-   `re.sub(r'( data-ja="[^"]*")+', '', html)`. **Strip the attribute only, never unwrap a `<span>`.**
+   `re.sub(r'( data-en="[^"]*")+', '', html)`. **Strip the attribute only, never unwrap a `<span>`.**
    Wrapper spans inside `h2.section`, `a.maplink`, `.glabel` and the `#editPacking` button are load-bearing:
    the packing seed reads its category name by selector, and the JS sets button labels through
    `querySelector('span')`. An earlier regex that unwrapped `<span data-ja="…">x</span>` silently broke
