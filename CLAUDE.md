@@ -6,8 +6,9 @@ Guidance for working in this repo. Keep it accurate — update it when the archi
 
 A single-page, **offline-first travel itinerary** for an October 2026 Okinawa camping road trip,
 built as an installable **PWA** for iPhone. The whole app (HTML, CSS, JS) lives in one
-self-contained `index.html`; the hero photo is a real file in `images/`. The service worker makes
-it work fully offline once loaded.
+self-contained `index.html` — including an inline-SVG map of the island, so there are no map tiles
+and no network dependency. The hero photo is a real file in `images/`. The service worker makes it
+work fully offline once loaded.
 
 The trip: Oct 10–12 2026, Haneda ⇄ Naha on Solaseed Air, main island only, self-driving a rented
 Suzuki Jimny Sierra with a rooftop tent, camping two nights.
@@ -26,6 +27,7 @@ previous trip — the URL and remote are unchanged on purpose).
 | `manifest.webmanifest` | PWA manifest (name, icons, `standalone` display, theme colors). |
 | `icon-180.png` | iOS `apple-touch-icon` (Home Screen). |
 | `icon-512.png` | Manifest/PWA install icon (also `maskable`). |
+| `.map/build.py` | Generator for the map tab's SVG geometry. **Not shipped** — see "The map tab". |
 | `README.md` | User-facing description + install steps. |
 
 There is no build step or framework. No dependencies. No bundler.
@@ -35,7 +37,7 @@ There is no build step or framework. No dependencies. No bundler.
 - **Self-contained:** no external CSS/JS/fonts/CDN assets. The only outbound links are per-campsite
   Google Maps and Evertrail listing links, plus the Evertrail onboarding link (all open externally
   and fail gracefully offline). System font stack only.
-- **Three tabs:** Itinerary, Campsites, Packing. Nature, kakigori and cafe recommendations sit in
+- **Four tabs:** Itinerary, Map, Campsites, Packing. Nature, kakigori and cafe recommendations sit in
   `details.card.travel` cards under a "Nearby" heading at the bottom of the Itinerary tab — there is
   deliberately no separate Eat tab.
 - **Voice: factual only.** No tone, no evaluation, no explanation, no persuasion. Entries are clipped
@@ -73,10 +75,12 @@ There is no build step or framework. No dependencies. No bundler.
     "today" highlight lights the matching itinerary date's spine node during the trip (Oct 2026).
   - Quick Look renders `details[open] .content` mid-animation, so open cards can look blank in a
     `qlmanage` thumbnail. That is a Quick Look artifact only — verify no-JS layout in a browser.
-- **Tabs = pure CSS.** Three hidden `<input type="radio" name="tab">` (`#tab-itinerary`,
+- **Tabs = pure CSS.** Four hidden `<input type="radio" name="tab">` (`#tab-itinerary`, `#tab-map`,
   `#tab-camps`, `#tab-packing`) at the top of `<body>` drive
   `#tab-*:checked ~ .views #view-*{display:block}`. The bottom bar uses `<label for=...>`.
-  No JS needed for tab switching.
+  No JS needed for tab switching. Adding a tab means touching four rule blocks — the
+  `:checked ~ .views` show rule, the two `.tabbar` colour/underline rules, and the
+  `padding-top:var(--safe-t)` list.
 - **Accordions = native `<details>/<summary>`.** No JS for expand/collapse. The chevron rotates
   via `details[open] > summary .chev`.
 - **Checklists = native `<input type="checkbox" class="cb">` + `<label class="checkrow">`.**
@@ -110,6 +114,47 @@ There is no build step or framework. No dependencies. No bundler.
   + coral `--coral` accents), all via CSS custom properties in `:root`. Keep the variable set
   tight — don't reintroduce dead ones.
 
+## The map tab
+
+`#view-map` is an inline SVG — no tiles, no library, no network. Everything in it (the island, the
+route, all 67 pins, the three stop timelines) is **static markup generated at authoring time** by
+`.map/build.py`; the JS module only toggles state. That keeps the "all content is static HTML" rule
+intact, and the no-JS path still shows a real map with all three days and every pin on it.
+
+- **Projection** is plain equirectangular with a `cos(lat)` correction, window
+  `lat 26.055–26.895 / lon 127.615–128.345`, giving `viewBox="0 0 778 1000"`. North is up and the
+  frame is **the same for every day** on purpose — day 2 only fills the north of it, but the island
+  never moves, so you always know where you are. Geometry is Douglas-Peucker simplified (coastline
+  tol 1.8 / 1.1 user units, routes 1.2) and rounded to 1 dp.
+- **Data.** Coastline = OSM `natural=coastline` via Overpass, stitched into closed rings, keeping the
+  24 rings with area ≥ 18 px² inside the window. Routes = one **OSRM driving leg per pair of
+  consecutive stops**, so the lines follow real roads; the two snorkel-boat legs and the airport bus legs
+  are straight dashed lines instead. OSRM's per-leg minutes are also what the itinerary's drive times
+  were checked against (all within a minute or two). Both sources need attribution — the footer credits
+  OSRM and OpenStreetMap, keep it.
+- **Colour = day.** `--sun` (a new token) is day 3, alongside `--sea` (day 1) and `--coral` (day 2).
+  Each day's paths and pins carry `.d1`/`.d2`/`.d3`, which set `--c`; every fill and stroke reads
+  `var(--c)`. The day and layer chips carry a matching `.sw` swatch, so **the chips are the legend** —
+  there is deliberately no separate legend block. Candidate layers are told apart by **shape**, not
+  colour: ■ campsite, ▲ nature, ◆ food.
+- **State lives in attributes on `#view-map`:** `data-day="1|2|3|all"` and `data-camp` / `data-nature` /
+  `data-food`. All the show/hide is CSS keyed off those, scoped under `.js-tabs` so the absence of the
+  attributes (the no-JS case) means "show everything". The JS sets nothing else except the state
+  classes `.past` / `.now` / `.future` / `.sel`.
+- **The clock** (`#timeScrub`) is a range input over the selected day's first-to-last stop, in minutes.
+  Parked at the day's end it clears all clock classes, so the default view is the whole day; drag back
+  and the stop you are at gets `.now` (ring + label), earlier ones `.past` (hollow), and legs you have
+  not driven yet `.future` (faded). During Oct 10–12 2026 the tab opens on today at the current time.
+- **Pins are not focusable.** The SVG is one `role="img"` with a `<title>`, because 67 tab stops would
+  swamp the keyboard order; the stop rows below the map are the keyboard path, and candidate names all
+  exist in the Campsites and Nearby cards. Each pin does carry a wide invisible `circle.hit`, so the
+  visible dot can stay small without being unhittable.
+- **Regenerating.** `python3 .map/build.py` needs `.map/coast.json` and `.map/legs.json` (gitignored —
+  the header in `build.py` has the exact Overpass and OSRM calls, run from an in-page `fetch()`). It
+  writes `.map/map.svg.html` and `.map/map.lists.html`; splice those over the `<svg class="map">` block
+  and the three `<ul class="tl stoplist">` blocks, then bump `CACHE` in `sw.js`. Edit the place tables
+  in `build.py`, never the generated coordinates by hand.
+
 ## The Japanese layer
 
 `.i18n/` is the translation source of truth. It is **not** shipped to the browser — `index.html` is still
@@ -137,6 +182,11 @@ first (swap each `data-en` value with its element's content), re-running them, t
 2. Re-extract, diff against the merged `ja-*.json` by `id`, and translate only the missing ids.
 3. Re-inject onto the clean base. Injecting onto an already-injected file yields duplicate attributes.
 
+**Known drift:** the map tab and the Day 2 snorkelling rewrite added English strings that have never been
+through the extractor, so `.i18n/strings.json` is behind `index.html` for those. The shipped markup carries
+both languages (Japanese inline, English in `data-en`), so nothing is broken at runtime — but re-extract
+before the next translation pass or those strings will look "new" twice.
+
 Because an `id` is a hash of the English, changing one word orphans its translation — that is the point,
 it surfaces exactly what needs re-translating. Note the extractor's bullet pattern also matches timeline
 `<li>`s, so a few "unresolved" units on every run are expected noise.
@@ -152,18 +202,18 @@ Two constraints worth remembering:
 1. Edit `index.html` directly — itinerary days, logistics cards, campsites, and the packing list's
    seed rows are plain HTML.
    - **Day cards:** `<details class="card day">` inside `#days`, each with an hour-by-hour
-     `<ul class="tl">`. Use `.note` callouts for the things that will actually bite us (closing
-     days, the 17:30 airport car return, habu season).
+     `<ul class="tl">`. The things that will actually bite us (closing days, the 17:30 airport car
+     return, habu season) go in a plain `<small>` under the line they belong to — there are no callouts.
    - **Logistics cards:** `<details class="card travel">` (Flights, The Jimny, Know Before You Go)
      in the second `.spine` under the "Logistics" heading.
-   - **Campsite cards:** `<details class="card camp wild|paid f-beach f-toilet f-shower">` grouped
-     under `<h3 class="region">` headings. The `f-*` classes and `wild`/`paid` drive the filter
-     buttons in `#campFilters` — the filter shows one criterion at a time and hides a region
-     heading when all its cards are filtered out. Keep the class list in sync with the chips.
-     A `.chip.pick` ("Good fit") marks the six sites that actually suit a rooftop tent plus BBQ;
-     six sites carry a `.note` warning instead. The list is a **flat ordering by road time from the Evertrail
+   - **Campsite cards:** `<details class="card camp wild|paid f-beach f-toilet f-shower">` in one flat
+     list. The `f-*` classes and `wild`/`paid` drive the filter buttons in `#campFilters` — the filter
+     shows one criterion at a time and reveals `#campEmpty` if nothing matches. Keep the class list in
+     sync with the chips. The list is a **flat ordering by road time from the Evertrail
      office** (Ikehara, Okinawa City — 26.3794, 127.8257), which is where the car is collected. It is *not*
-     measured from Naha Airport, and there are no region headings.
+     measured from Naha Airport.
+   - **Map:** do not hand-edit `#view-map`'s SVG — change the tables in `.map/build.py` and regenerate.
+     A new or moved itinerary stop needs its OSRM leg refetched too, or the line will not reach its pin.
    - **Checklist items:** an `<input class="cb" id="<store>-<group>-<index>">` immediately followed
      by its `<label class="checkrow" for="...">`. These static rows are the packing list's **seed +
      no-JS fallback** — editing them changes the defaults a *fresh* install starts from. Once a
@@ -279,16 +329,28 @@ new version activates on its own.
   pre-trip.
 - **Trip shape.** The car is collected at the Evertrail office in **Okinawa City**, not the airport: bus 111 or
   117 from Naha Airport, ~1 h, ¥1,330 pp, off at Okinawa Kita IC, then a 10-min walk or a free pickup arranged
-  by email. It is returned to the **airport**, where the cutoff is 17:30. Day 2 is the dive day for
-  surface-interval reasons. The travellers want nature — waterfalls, capes, beaches, reef — and explicitly not
+  by email. It is returned to the **airport**, where the cutoff is 17:30. Day 2 is the boat day. The
+  travellers want nature — waterfalls, capes, beaches, reef — and explicitly not
   shopping, souvenirs, crowds, caves or historical sites, so American Village, the pottery village and the Blue
   Cave were all removed. Don't reintroduce them.
 - **Verified, and what is not.** The content was fact-checked in Sep 2026. Confirmed against primary
   sources: the Solaseed flight times, Naha sunrise/sunset, Oct 12 2026 = Sports Day, the ¥1,040 ETC vs
   ¥1,610 cash toll and its ETC-only discount, Churaumi's ¥2,180, JMA weather normals, the habu campaign
-  dates, and that a gas canister cannot be flown. **Still unverified** — confirm by phone: King Tacos'
-  hours, Ryujin-no-yu's rate and whether the holiday price applies on Sports Day, Kishimoto's 1905
-  founding and cash-only policy, and every campsite fee (the directory prices only two).
+  dates, that a gas canister cannot be flown, and every Dive Nuts price and time (read off
+  divenuts.jp/taiken-snorkel in Sep 2026). **Still unverified** — King Tacos' hours, Ryujin-no-yu's rate
+  and whether the holiday price applies on Sports Day, Kishimoto's 1905 founding and cash-only policy,
+  and every campsite fee (the directory prices only two). Note Dive Nuts has **suspended phone
+  bookings** — those confirmations have to go by email or LINE.
+- **Day 2 is snorkelling, not diving.** The booking is Dive Nuts' **ボートシュノーケル, morning boat**
+  (`divenuts.jp/taiken-snorkel`, detail page `/about/20726/`): ¥9,900 each at 2+ people for one drop,
+  ¥2,750 for the second, gear and photos included — ¥25,300 for two of us doing both. The morning boat
+  runs 08:00 meet → 12:00 back at the port, which is what Day 2's timeline is built on. Two consequences
+  worth remembering: the old ¥17,000-each fun-diving estimate is gone (it was never a published price),
+  and **the no-fly-after-diving constraint no longer applies**, so the boat no longer *has* to be Day 2 —
+  it stays there by choice, not necessity. The other four courses and their prices are listed in the card.
+- **The Day 1 waterfall is 普久川の滝**, not 福川の滝. Both read "Fukugawa", but only 普久川の滝 (Ogimi,
+  26.60537, 128.05676) exists, and OSRM backs it up: Manzamo → there is 53 min, there → Nago 19 min,
+  matching the itinerary's 52 and 19.
 - **Two claims were wrong and are now corrected** — King Tacos is *not* the 1984 original (taco rice was
   invented at Parlour Senri in Kin; King Tacos spread it), and Daisekirinzan was renamed **ASMUI** in
   Dec 2024 and charges ¥2,500. Campsite drive times are OSRM **free-flow** — add 20–40 min in holiday

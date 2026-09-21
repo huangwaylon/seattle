@@ -1,4 +1,4 @@
-const CACHE = 'okinawa-2026-v13';
+const CACHE = 'okinawa-2026-v15';
 const ASSETS = [
   './', './index.html', './manifest.webmanifest', './icon-180.png', './icon-512.png',
   './images/okinawa-hero.jpg',

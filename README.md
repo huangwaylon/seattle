@@ -6,8 +6,9 @@ A self-contained, offline-first travel itinerary for an October 2026 camping roa
 
 ## Features
 - 3-day itinerary, logistics cards (flights, the Jimny, weather & hazards), and an editable packing list.
+- **Map tab** — an inline-SVG map of the main island: the real road route for each day, the stops on it, and campsite / nature / food candidates as optional layers. Pick a day, drag the clock to walk through it, tap a pin or a row to link the two. No tiles, no network — it works offline like the rest of the app.
 - **Campsites tab** — all 26 drivable main-island campsites with photos, ordered by real road time from the Evertrail office where the car is collected, filterable by free / paid / beach / toilet / shower.
-- **Worth a Detour** — nature spots, kakigori and cafes at the foot of the itinerary, sourced from Japanese guides and checked open on the trip dates.
+- **Nearby** — nature spots, kakigori and cafes at the foot of the itinerary, sourced from Japanese guides and checked open on the trip dates.
 - Works **fully offline** once installed (service worker caches everything).
 - **Metric ⇄ imperial toggle** swaps every distance and temperature; the choice persists.
 - **English ⇄ 日本語 toggle** — the whole app is translated, guidebook-style; the choice persists.
@@ -23,6 +24,7 @@ A self-contained, offline-first travel itinerary for an October 2026 camping roa
 | `manifest.webmanifest` | PWA manifest (name, icons, standalone display). |
 | `icon-180.png` / `icon-512.png` | App icons. |
 | `.i18n/` | Translation source (glossary, extracted strings, Japanese). Not shipped — see CLAUDE.md. |
+| `.map/build.py` | Generator for the map's SVG geometry (coastline, routes, pins). Not shipped — see CLAUDE.md. |
 
 ## Install on iPhone (do once, on Wi-Fi)
 1. Open the live URL in **Safari** and let it fully load (caches it offline).
