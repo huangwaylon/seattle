@@ -1001,11 +1001,6 @@
  },
  {
   "slot": "title",
-  "en": "Fushikubu Cafe",
-  "id": "b0fc74dc23"
- },
- {
-  "slot": "title",
   "en": "Kajinho",
   "id": "11fdb7d93a"
  },
@@ -1248,11 +1243,6 @@
   "slot": "subtitle",
   "en": "氷ヲ刻メ &middot; Chatan",
   "id": "40dbe85547"
- },
- {
-  "slot": "subtitle",
-  "en": "ふしくぶカフェ &middot; Kunigami",
-  "id": "555c992ec3"
  },
  {
   "slot": "subtitle",
@@ -1636,16 +1626,6 @@
  },
  {
   "slot": "statv",
-  "en": "Loco moco, coffee",
-  "id": "be38029cca"
- },
- {
-  "slot": "statv",
-  "en": "10:00&ndash;17:30 &middot; never closed",
-  "id": "c5728ef9c0"
- },
- {
-  "slot": "statv",
   "en": "Pizza (small) &yen;1,500",
   "id": "7845bb1f62"
  },
@@ -1918,11 +1898,6 @@
   "slot": "desc",
   "en": "The one serious modern kakigori shop in the centre. Twelve seats and it sells out.",
   "id": "c0ef85289c"
- },
- {
-  "slot": "desc",
-  "en": "Upstairs at the Cape Hedo visitor centre &mdash; East China Sea to Pacific in one view.",
-  "id": "6377406b53"
  },
  {
   "slot": "desc",
@@ -2223,11 +2198,6 @@
   "slot": "regionsub",
   "en": "6 spots",
   "id": "78e3fd4965"
- },
- {
-  "slot": "regionsub",
-  "en": "7 spots",
-  "id": "5b47667c7b"
  },
  {
   "slot": "regionsub",
