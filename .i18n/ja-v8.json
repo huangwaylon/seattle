@@ -1,0 +1,818 @@
+[
+ {
+  "id": "2b2608edb5",
+  "ja": "1人&yen;1,330 &middot; 高速経由で約1時間"
+ },
+ {
+  "id": "46d9405777",
+  "ja": "徒歩10分、または希望すれば無料送迎"
+ },
+ {
+  "id": "5c6b56774c",
+  "ja": "ジムニー受け取り &mdash; 沖縄市池原"
+ },
+ {
+  "id": "184165fef6",
+  "ja": "営業所 9:30&ndash;18:00 &middot; 荷物預かりあり"
+ },
+ {
+  "id": "9e11350ac3",
+  "ja": "タコライスは1984年に金武町で誕生"
+ },
+ {
+  "id": "25fb7cc00e",
+  "ja": "万座毛"
+ },
+ {
+  "id": "c293ebb053",
+  "ja": "象の鼻の形の岩"
+ },
+ {
+  "id": "6eae6324ef",
+  "ja": "福川の滝"
+ },
+ {
+  "id": "8f332baeb2",
+  "ja": "徒歩で往復20&ndash;30分"
+ },
+ {
+  "id": "e8c6938753",
+  "ja": "マックスバリュ、24時間営業"
+ },
+ {
+  "id": "8c8778b208",
+  "ja": "ダイビングショップから30分"
+ },
+ {
+  "id": "f7ef05372a",
+  "ja": "バーベキュー &mdash; Evertrailのセット"
+ },
+ {
+  "id": "4c24f204f6",
+  "ja": "ショップ9:00開店 &middot; 集合時間はメールで"
+ },
+ {
+  "id": "30ea8e2ebf",
+  "ja": "水納島はボートで20分、瀬底島は10&ndash;20分 &middot; 海水温 <span class=\"u\" data-metric=\"29 &deg;C\" data-imperial=\"84 &deg;F\">29 &deg;C</span>"
+ },
+ {
+  "id": "dabc671e8c",
+  "ja": "ショップに帰着"
+ },
+ {
+  "id": "fb7cd63384",
+  "ja": "シャワー・タオル・ドライヤー &middot; 写真付き"
+ },
+ {
+  "id": "7586d6ab50",
+  "ja": "11:00&ndash;17:30 &middot; 現金のみ"
+ },
+ {
+  "id": "ed3fac6f18",
+  "ja": "フクギ2万本の下の砂道"
+ },
+ {
+  "id": "5cabef99b5",
+  "ja": "古宇利島</small>"
+ },
+ {
+  "id": "6fe5b6d616",
+  "ja": "ザ・ビッグエクスプレス、22:00まで"
+ },
+ {
+  "id": "da7da85b67",
+  "ja": "バーベキュー &mdash; 今日買った肉"
+ },
+ {
+  "id": "844f0c3ba3",
+  "ja": "テント撤収"
+ },
+ {
+  "id": "7e8315d0d0",
+  "ja": "残波岬"
+ },
+ {
+  "id": "b5a5133919",
+  "ja": "隆起サンゴの断崖2 km"
+ },
+ {
+  "id": "729ec34bec",
+  "ja": "瀬名波ビーチ"
+ },
+ {
+  "id": "45fc5dd189",
+  "ja": "管理なし &middot; 設備なし"
+ },
+ {
+  "id": "9b99897c2e",
+  "ja": "真栄田岬でシュノーケリング"
+ },
+ {
+  "id": "c6d5001fa1",
+  "ja": "階段からエントリー"
+ },
+ {
+  "id": "587e1edff1",
+  "ja": "昼食"
+ },
+ {
+  "id": "5bfad1d3be",
+  "ja": "6:00&ndash;24:00 &middot; 約&yen;1,570 &middot; タオル付き"
+ },
+ {
+  "id": "b9a9245cb3",
+  "ja": "給油"
+ },
+ {
+  "id": "c3825de3d6",
+  "ja": "1人&yen;1,330 &middot; 高速経由で約1時間"
+ },
+ {
+  "id": "659f231b60",
+  "ja": "徒歩10分、または希望すれば無料送迎"
+ },
+ {
+  "id": "53ad9d212d",
+  "ja": "<span class=\"time\">11:00</span><span class=\"dot\"></span><span class=\"txt\">ジムニー受け取り &mdash; 沖縄市池原"
+ },
+ {
+  "id": "a6b309d3e7",
+  "ja": "営業所 9:30&ndash;18:00 &middot; 荷物預かりあり"
+ },
+ {
+  "id": "c74373bef6",
+  "ja": "タコライスは1984年に金武町で誕生"
+ },
+ {
+  "id": "adf33823ee",
+  "ja": "<span class=\"time\">13:45</span><span class=\"dot\"></span><span class=\"txt\">万座毛"
+ },
+ {
+  "id": "7d5bd2b259",
+  "ja": "象の鼻の形の岩"
+ },
+ {
+  "id": "826a7862ae",
+  "ja": "<span class=\"time\">15:15</span><span class=\"dot\"></span><span class=\"txt\">福川の滝"
+ },
+ {
+  "id": "1327f1fff7",
+  "ja": "徒歩で往復20&ndash;30分"
+ },
+ {
+  "id": "4a030c530d",
+  "ja": "マックスバリュ、24時間営業"
+ },
+ {
+  "id": "1f331e26bc",
+  "ja": "ダイビングショップから30分"
+ },
+ {
+  "id": "7986cda946",
+  "ja": "<span class=\"time\">19:00</span><span class=\"dot\"></span><span class=\"txt\">バーベキュー &mdash; Evertrailのセット</span>"
+ },
+ {
+  "id": "446ca8bd33",
+  "ja": "ショップ9:00開店 &middot; 集合時間はメールで"
+ },
+ {
+  "id": "89fb5a45bd",
+  "ja": "水納島はボートで20分、瀬底島は10&ndash;20分 &middot; 海水温 <span class=\"u\" data-metric=\"29 &deg;C\" data-imperial=\"84 &deg;F\">29 &deg;C</span>"
+ },
+ {
+  "id": "698cfbcdc5",
+  "ja": "<span class=\"time\">13:00</span><span class=\"dot\"></span><span class=\"txt\">ショップに帰着"
+ },
+ {
+  "id": "b596b4e5fe",
+  "ja": "シャワー・タオル・ドライヤー &middot; 写真付き"
+ },
+ {
+  "id": "5c4863c16e",
+  "ja": "11:00&ndash;17:30 &middot; 現金のみ"
+ },
+ {
+  "id": "9b1578756f",
+  "ja": "フクギ2万本の下の砂道"
+ },
+ {
+  "id": "b734ec19d4",
+  "ja": "<span class=\"time\">16:45</span><span class=\"dot\"></span><span class=\"txt\">古宇利島</small></span>"
+ },
+ {
+  "id": "98be8cfe16",
+  "ja": "ザ・ビッグエクスプレス、22:00まで"
+ },
+ {
+  "id": "705f0aeb91",
+  "ja": "<span class=\"time\">19:00</span><span class=\"dot\"></span><span class=\"txt\">バーベキュー &mdash; 今日買った肉</span>"
+ },
+ {
+  "id": "3d6a430929",
+  "ja": "<span class=\"time\">07:30</span><span class=\"dot\"></span><span class=\"txt\">テント撤収</span>"
+ },
+ {
+  "id": "946a477e98",
+  "ja": "<span class=\"time\">09:00</span><span class=\"dot\"></span><span class=\"txt\">残波岬"
+ },
+ {
+  "id": "0242ad8257",
+  "ja": "隆起サンゴの断崖2 km"
+ },
+ {
+  "id": "f6d67bbc39",
+  "ja": "<span class=\"time\">10:15</span><span class=\"dot\"></span><span class=\"txt\">瀬名波ビーチ"
+ },
+ {
+  "id": "cc7469814e",
+  "ja": "管理なし &middot; 設備なし"
+ },
+ {
+  "id": "d11a34cc42",
+  "ja": "<span class=\"time\">11:45</span><span class=\"dot\"></span><span class=\"txt\">真栄田岬でシュノーケリング"
+ },
+ {
+  "id": "c21ea7e626",
+  "ja": "階段からエントリー"
+ },
+ {
+  "id": "8717bd85d8",
+  "ja": "<span class=\"time\">13:30</span><span class=\"dot\"></span><span class=\"txt\">昼食</span>"
+ },
+ {
+  "id": "100cc83f79",
+  "ja": "6:00&ndash;24:00 &middot; 約&yen;1,570 &middot; タオル付き"
+ },
+ {
+  "id": "e07d3fecbb",
+  "ja": "<span class=\"time\">16:15</span><span class=\"dot\"></span><span class=\"txt\">給油</span>"
+ },
+ {
+  "id": "db19709d01",
+  "ja": "ガスカートリッジ &middot; 焼肉鉄板グリル"
+ },
+ {
+  "id": "79e2eb89cb",
+  "ja": "2人分の夕食1回"
+ },
+ {
+  "id": "4d857a98e6",
+  "ja": "マスク・シュノーケル・フィン"
+ },
+ {
+  "id": "73cd27d9cc",
+  "ja": "日本の運転免許証で可"
+ },
+ {
+  "id": "683c6da2e4",
+  "ja": "国際運転免許証は不要"
+ },
+ {
+  "id": "1d578540e2",
+  "ja": "9:30&ndash;18:00 &middot; 080 9104 3373 &middot; 駐車場・荷物預かり"
+ },
+ {
+  "id": "c76fd565ff",
+  "ja": "1人&yen;1,330 &middot; 約1時間 &middot; 乗車時に支払い"
+ },
+ {
+  "id": "f6c93fdf9d",
+  "ja": "空港送迎"
+ },
+ {
+  "id": "6f5a0371b0",
+  "ja": "2人で片道&yen;10,000 &middot; 10:30&ndash;16:00"
+ },
+ {
+  "id": "cc0dae286a",
+  "ja": "キャンプ用品は車両保険の対象外"
+ },
+ {
+  "id": "9f01f63321",
+  "ja": "砂地とサンゴ、5&ndash;25 m、10以上のポイント"
+ },
+ {
+  "id": "1a72064003",
+  "ja": "クレバスとマクロ &middot; 島の四方にポイント"
+ },
+ {
+  "id": "47176fd455",
+  "ja": "浅いクレバス、差し込む光"
+ },
+ {
+  "id": "bcf2133e8e",
+  "ja": "トウアカクマノミ &middot; 水深10 mにヤシャハゼ"
+ },
+ {
+  "id": "a9b15db67e",
+  "ja": "1ダイブ50分"
+ },
+ {
+  "id": "6c0d524c18",
+  "ja": "要望に応じて事前手配"
+ },
+ {
+  "id": "d6e0175f25",
+  "ja": "シャワー4基、パウダールーム、ドライヤー、脱水機、アメニティ"
+ },
+ {
+  "id": "a7ff11cf1c",
+  "ja": "キャンセル料 3日前30% / 前日50% / 当日100%"
+ },
+ {
+  "id": "8ef2846342",
+  "ja": "2ダイブの基本料金は非公開"
+ },
+ {
+  "id": "40b1613bc1",
+  "ja": "1人&yen;17,000は概算、要確認"
+ },
+ {
+  "id": "402de65e79",
+  "ja": "<span class=\"u\" data-metric=\"57 km\" data-imperial=\"36 mi\">57 km</span> &middot; ETC &yen;1,040、現金&yen;1,610 &middot; 割引はETC限定"
+ },
+ {
+  "id": "372dae64f0",
+  "ja": "国道58号、海沿いの代替ルート"
+ },
+ {
+  "id": "e24991e352",
+  "ja": "名護まで約2倍の所要時間"
+ },
+ {
+  "id": "1820f58ac9",
+  "ja": "左側通行 &middot; ラッシュ時の那覇中心部はバス専用レーン"
+ },
+ {
+  "id": "f6bc56f0ad",
+  "ja": "ハブ &mdash; 夜行性、9&ndash;11月に活発"
+ },
+ {
+  "id": "a48b5360ea",
+  "ja": "日没後はライト、足を覆う靴、石垣と草むらを避ける。攻撃範囲1.5 m。咬まれたら動かず119番、緊縛なし、切開なし"
+ },
+ {
+  "id": "d9a91cc751",
+  "ja": "クラゲ &mdash; ネットなし、監視員なし"
+ },
+ {
+  "id": "c9a184da0c",
+  "ja": "ゴリラチョップと真栄田岬は監視なし。長袖ラッシュガード"
+ },
+ {
+  "id": "fe98758001",
+  "ja": "食酢はハブクラゲ<strong>のみ</strong>。カツオノエボシ &mdash; 青い浮き袋、長い青い触手 &mdash; には食酢は逆効果。触手はピンセットで除去し、冷却"
+ },
+ {
+  "id": "b1948df1e8",
+  "ja": "ムカデは靴やテントに入る"
+ },
+ {
+  "id": "5cbce7d6fa",
+  "ja": "靴は振って確認、テントは閉めて��く"
+ },
+ {
+  "id": "b24f9231d6",
+  "ja": "多くのキャンプ場で焚き火台が必須"
+ },
+ {
+  "id": "8d7e95012d",
+  "ja": "水道水は飲用可"
+ },
+ {
+  "id": "42cedcab37",
+  "ja": "<span class=\"u\" data-metric=\"5&ndash;10 L\" data-imperial=\"1&ndash;3 gal\">5&ndash;10 L</span>持参 &mdash; 野営地に水道がないことも多い"
+ },
+ {
+  "id": "fdee565fd0",
+  "ja": "名護より北のスーパーは19:00頃閉店"
+ },
+ {
+  "id": "90cf9d12f9",
+  "ja": "国頭村・大宜味村にはなし &middot; 国道58号沿いに24時間コンビニ"
+ },
+ {
+  "id": "d1e45d2460",
+  "ja": "沖縄そば店は現金のみが多い"
+ },
+ {
+  "id": "34d7873201",
+  "ja": "三連休 &middot; キャンプ場は事前予約"
+ },
+ {
+  "id": "e5d8b58488",
+  "ja": "片道1.5 km &middot; つり橋"
+ },
+ {
+  "id": "b6a1852b65",
+  "ja": "歩いてすぐ &middot; 滝壺"
+ },
+ {
+  "id": "4aa9444cfe",
+  "ja": "河口を見下ろす断崖"
+ },
+ {
+  "id": "cf129f5e31",
+  "ja": "本島最北端 &middot; 本部から90分"
+ },
+ {
+  "id": "be38a2b4bf",
+  "ja": "ビーチエントリーのリーフ &middot; 穏やかで浅い"
+ },
+ {
+  "id": "64d86ba1ee",
+  "ja": "東村ふれあいヒルギ公園の木道かカヌー"
+ },
+ {
+  "id": "f24ae13533",
+  "ja": "瀬良垣・ダイヤモンドビーチ（恩納村）"
+ },
+ {
+  "id": "28acb386f3",
+  "ja": "ウミガメ、マダラトビエイ &middot; 穏やかな海"
+ },
+ {
+  "id": "88e77c800b",
+  "ja": "一周徒歩約1時間"
+ },
+ {
+  "id": "6afe7ec41f",
+  "ja": "2万本の木の下の砂道、ビーチまで"
+ },
+ {
+  "id": "a1b405d4ea",
+  "ja": "氷ぜんざい&yen;350 &middot; 12:00&ndash;18:00 &middot; 売り切れあり"
+ },
+ {
+  "id": "4923e534ab",
+  "ja": "ミルクぜんざい&yen;480 &middot; 11:00&ndash;18:30 &middot; 駐車3台"
+ },
+ {
+  "id": "ebe6ea479a",
+  "ja": "サーターアンダギー&yen;150 &middot; 09:00&ndash;19:00"
+ },
+ {
+  "id": "a10e7b5bd5",
+  "ja": "マンゴー氷山 &middot; 10:00&ndash;19:00 &middot; 無料駐車104台"
+ },
+ {
+  "id": "628993a772",
+  "ja": "紅イモ黒糖ぜんざい &middot; 11:00&ndash;17:00 &middot; 火・水定休"
+ },
+ {
+  "id": "b143010a80",
+  "ja": "塩キャラメルグラノーラ&yen;800 &middot; 12席 &middot; 売り切れあり"
+ },
+ {
+  "id": "2040c1b96f",
+  "ja": "到着"
+ },
+ {
+  "id": "f3f410cfa4",
+  "ja": "西海岸、出発"
+ },
+ {
+  "id": "dab1713321",
+  "ja": "9か所"
+ },
+ {
+  "id": "1db17ddc51",
+  "ja": "6店、10月10&ndash;12日営業"
+ },
+ {
+  "id": "df17d49152",
+  "ja": "備瀬"
+ },
+ {
+  "id": "7382ef44af",
+  "ja": "野営地 &middot; うるま市"
+ },
+ {
+  "id": "6fb7936392",
+  "ja": "有料キャンプ場 &middot; 恩納村"
+ },
+ {
+  "id": "107be45b32",
+  "ja": "野営地 &middot; 名護市"
+ },
+ {
+  "id": "5777da35cf",
+  "ja": "有料キャンプ場 &middot; 南城市"
+ },
+ {
+  "id": "9e7f2fbf29",
+  "ja": "野営地 &middot; 糸満市"
+ },
+ {
+  "id": "0dc2b4f4ee",
+  "ja": "野営地 &middot; 南城市"
+ },
+ {
+  "id": "570d2da45b",
+  "ja": "有料キャンプ場 &middot; 名護市"
+ },
+ {
+  "id": "a6282470b7",
+  "ja": "野営地 &middot; 大宜味村"
+ },
+ {
+  "id": "580b232dae",
+  "ja": "有料キャンプ場 &middot; 大宜味村"
+ },
+ {
+  "id": "3c815e5b23",
+  "ja": "有料キャンプ場 &middot; 今帰仁村"
+ },
+ {
+  "id": "7abed61a2a",
+  "ja": "有料キャンプ場 &middot; 東村"
+ },
+ {
+  "id": "618930d672",
+  "ja": "野営地 &middot; 国頭村"
+ },
+ {
+  "id": "2bea030b3c",
+  "ja": "有料キャンプ場 &middot; 国頭村"
+ },
+ {
+  "id": "431f70d06f",
+  "ja": "概算"
+ },
+ {
+  "id": "d4d0dc6b90",
+  "ja": "営業所から"
+ },
+ {
+  "id": "44a5f847b4",
+  "ja": "1人&yen;17,000"
+ },
+ {
+  "id": "dd084a1d4f",
+  "ja": "11:30&ndash;19:00 &middot; 火・水定休"
+ },
+ {
+  "id": "985770786d",
+  "ja": "ジェラート"
+ },
+ {
+  "id": "2e5d7fb7fa",
+  "ja": "休日は08:00から &middot; 日没1時間後に閉場"
+ },
+ {
+  "id": "713f301393",
+  "ja": "17分 &middot; <span class=\"u\" data-metric=\"9.9 km\" data-imperial=\"6 mi\">9.9 km</span>"
+ },
+ {
+  "id": "b7f8a86bd8",
+  "ja": "29分 &middot; <span class=\"u\" data-metric=\"24.7 km\" data-imperial=\"15 mi\">24.7 km</span>"
+ },
+ {
+  "id": "7940dee692",
+  "ja": "36分 &middot; <span class=\"u\" data-metric=\"35.2 km\" data-imperial=\"22 mi\">35.2 km</span>"
+ },
+ {
+  "id": "dfc2241a2d",
+  "ja": "45分 &middot; <span class=\"u\" data-metric=\"41.8 km\" data-imperial=\"26 mi\">41.8 km</span>"
+ },
+ {
+  "id": "bf798f5850",
+  "ja": "45分 &middot; <span class=\"u\" data-metric=\"35.5 km\" data-imperial=\"22 mi\">35.5 km</span>"
+ },
+ {
+  "id": "a1571bc14d",
+  "ja": "47分 &middot; <span class=\"u\" data-metric=\"38.4 km\" data-imperial=\"24 mi\">38.4 km</span>"
+ },
+ {
+  "id": "38f3dabf56",
+  "ja": "48分 &middot; <span class=\"u\" data-metric=\"43.1 km\" data-imperial=\"27 mi\">43.1 km</span>"
+ },
+ {
+  "id": "4397270de4",
+  "ja": "50分 &middot; <span class=\"u\" data-metric=\"38.1 km\" data-imperial=\"24 mi\">38.1 km</span>"
+ },
+ {
+  "id": "ae2344cdf4",
+  "ja": "53分 &middot; <span class=\"u\" data-metric=\"48.1 km\" data-imperial=\"30 mi\">48.1 km</span>"
+ },
+ {
+  "id": "89633ff0e4",
+  "ja": "57分 &middot; <span class=\"u\" data-metric=\"50.6 km\" data-imperial=\"31 mi\">50.6 km</span>"
+ },
+ {
+  "id": "f4462c8316",
+  "ja": "57分 &middot; <span class=\"u\" data-metric=\"50.5 km\" data-imperial=\"31 mi\">50.5 km</span>"
+ },
+ {
+  "id": "a5cdddb28f",
+  "ja": "59分 &middot; <span class=\"u\" data-metric=\"51.7 km\" data-imperial=\"32 mi\">51.7 km</span>"
+ },
+ {
+  "id": "f8a7af3c48",
+  "ja": "63分 &middot; <span class=\"u\" data-metric=\"54.9 km\" data-imperial=\"34 mi\">54.9 km</span>"
+ },
+ {
+  "id": "db881322db",
+  "ja": "66分 &middot; <span class=\"u\" data-metric=\"57 km\" data-imperial=\"35 mi\">57 km</span>"
+ },
+ {
+  "id": "7c07954351",
+  "ja": "68分 &middot; <span class=\"u\" data-metric=\"57.9 km\" data-imperial=\"36 mi\">57.9 km</span>"
+ },
+ {
+  "id": "d1ca4051e1",
+  "ja": "74分 &middot; <span class=\"u\" data-metric=\"60 km\" data-imperial=\"37 mi\">60 km</span>"
+ },
+ {
+  "id": "63206f30c1",
+  "ja": "74分 &middot; <span class=\"u\" data-metric=\"61.8 km\" data-imperial=\"38 mi\">61.8 km</span>"
+ },
+ {
+  "id": "7934b8b584",
+  "ja": "81分 &middot; <span class=\"u\" data-metric=\"66.2 km\" data-imperial=\"41 mi\">66.2 km</span>"
+ },
+ {
+  "id": "b2e6032c9d",
+  "ja": "87分 &middot; <span class=\"u\" data-metric=\"70.8 km\" data-imperial=\"44 mi\">70.8 km</span>"
+ },
+ {
+  "id": "450d8d8def",
+  "ja": "89分 &middot; <span class=\"u\" data-metric=\"71.6 km\" data-imperial=\"44 mi\">71.6 km</span>"
+ },
+ {
+  "id": "2f44cc99af",
+  "ja": "91分 &middot; <span class=\"u\" data-metric=\"71.9 km\" data-imperial=\"45 mi\">71.9 km</span>"
+ },
+ {
+  "id": "3dcf79653f",
+  "ja": "101分 &middot; <span class=\"u\" data-metric=\"79.6 km\" data-imperial=\"49 mi\">79.6 km</span>"
+ },
+ {
+  "id": "e9b336b5f7",
+  "ja": "122分 &middot; <span class=\"u\" data-metric=\"87.7 km\" data-imperial=\"54 mi\">87.7 km</span>"
+ },
+ {
+  "id": "3087c0822a",
+  "ja": "131分 &middot; <span class=\"u\" data-metric=\"90.4 km\" data-imperial=\"56 mi\">90.4 km</span>"
+ },
+ {
+  "id": "df968a09dd",
+  "ja": "132分 &middot; <span class=\"u\" data-metric=\"96.9 km\" data-imperial=\"60 mi\">96.9 km</span>"
+ },
+ {
+  "id": "5a95a0049b",
+  "ja": "133分 &middot; <span class=\"u\" data-metric=\"95.4 km\" data-imperial=\"59 mi\">95.4 km</span>"
+ },
+ {
+  "id": "b5fc911259",
+  "ja": "スズキ・ジムニーシエラ II、ルーフトップテント、2名。受け取りは沖縄市池原のEvertrail営業所、\n          返却は那覇空港。"
+ },
+ {
+  "id": "dedec90ef0",
+  "ja": "瀬底島発のボートファンダイビング。水納島または瀬底島で2ダイブ。少人数制、自社ボート、\n          水中写真付き。"
+ },
+ {
+  "id": "cd7f00b67d",
+  "ja": "泳げる海、夜間は\n          <span class=\"u\" data-metric=\"24 &deg;C\" data-imperial=\"76 &deg;F\">24 &deg;C</span>前後。にわか雨は短時間、吹きさらしのサイトでの主なリスクは風。10月は台風シーズン &mdash; 3日間で300 km以内を通る確率は約10分の1。"
+ },
+ {
+  "id": "9e131a03be",
+  "ja": "伊江島を望む丘の上の赤瓦の家。ピザ、マンゴー。"
+ },
+ {
+  "id": "2b50ad8fad",
+  "ja": "フクギ並木の砂地のテラス、伊江島を望む。"
+ },
+ {
+  "id": "e39afe60c5",
+  "ja": "ハンモック席のある高台のテラス。ぶくぶく茶。"
+ },
+ {
+  "id": "7adb53f9a7",
+  "ja": "読谷村の海岸線に建つ。岩場に屋外160席。"
+ },
+ {
+  "id": "50a43713ce",
+  "ja": "穏やかな湾、市街に沈む夕日。トイレなし。"
+ },
+ {
+  "id": "411ce1bf6f",
+  "ja": "森林サイト。広い区画、炊事場、トイレ、シャワー。"
+ },
+ {
+  "id": "7d3e8a7736",
+  "ja": "静かな湾、穏やかな海。トイレなし。公開座標は高速道路上。"
+ },
+ {
+  "id": "aa92edceb6",
+  "ja": "名護市街の道路橋の下、川沿いの空き地。水道とトイレ。ビーチなし。"
+ },
+ {
+  "id": "45b20e29f5",
+  "ja": "ビーチ直結の管理されたパーク。オートキャンプ、カヤックとSUPのレンタル。"
+ },
+ {
+  "id": "a39fc4dbbd",
+  "ja": "刈り込まれた芝、久高島からの朝日。トイレ、シャワー、東屋6棟。"
+ },
+ {
+  "id": "4b4a47fd5e",
+  "ja": "無料、砂浜の上。トイレあり。週末は混雑。"
+ },
+ {
+  "id": "6c435ce85b",
+  "ja": "無料、朝日側。星空。知念岬が近い。"
+ },
+ {
+  "id": "a0b442bdfb",
+  "ja": "名護近くの管理キャンプ場。シャワー、トイレ、Wi-Fi。下段の区画は風をしのげる。"
+ },
+ {
+  "id": "a934d5cca8",
+  "ja": "オートキャンプとバンガロー。バーベキュー設備、ボートとカヤックのレンタル。"
+ },
+ {
+  "id": "f8b06d1ddf",
+  "ja": "古宇利大橋の眺め、海に沈む夕日。駐車は1台分。"
+ },
+ {
+  "id": "15db5857ea",
+  "ja": "人の少ない海岸、海に沈む夕日。行き止まりの道、駐車スペースは極小。"
+ },
+ {
+  "id": "b59e25de1f",
+  "ja": "日陰あり、夕日側、古宇利大橋の正面。潮位線から離れて駐車。"
+ },
+ {
+  "id": "6fb4578b08",
+  "ja": "夕日のビーチ。道の駅とコンビニが隣接。"
+ },
+ {
+  "id": "902bf29166",
+  "ja": "トイレ、シャワー、グリル、焚き火場。"
+ },
+ {
+  "id": "fb2c28445c",
+  "ja": "ビーチサイド・山側・VIPの区画。予約可。"
+ },
+ {
+  "id": "068c80360b",
+  "ja": "高木の下、川沿いの草地の開けた場所。設備なし、未舗装路でアクセス。"
+ },
+ {
+  "id": "b0066f126c",
+  "ja": "ビーチサイド・川沿い・VIPの区画。マリンスポーツ可。"
+ },
+ {
+  "id": "4a6be51762",
+  "ja": "無料、夕日側。トイレとシャワーも無料。週末は日帰り客と共用。"
+ },
+ {
+  "id": "3d80d2846e",
+  "ja": "ビーチの区画。暗い夜空、夕日。"
+ },
+ {
+  "id": "9069ef7333",
+  "ja": "星空。トイレ、シャワー、炊事場。"
+ },
+ {
+  "id": "38e31c15e8",
+  "ja": "辺野喜川の河口。光害はごくわずか。"
+ },
+ {
+  "id": "219d13c6e8",
+  "ja": "林冠の下の区画。トイレ、シャワー。"
+ },
+ {
+  "id": "5e41cf99c5",
+  "ja": "海の眺め、朝日、暗い夜空。トイレ・シャワーなし。"
+ },
+ {
+  "id": "cbaa97340c",
+  "ja": "北東海岸、辺戸岬の南3 kmの日陰の区画。裾礁。"
+ },
+ {
+  "id": "6faca45fa9",
+  "ja": "辺戸岬から10分の人の少ない湾。駐車場、シャワー。林道経由でアクセス。"
+ },
+ {
+  "id": "3acdbba7ec",
+  "ja": "ポイント"
+ },
+ {
+  "id": "33d36b090b",
+  "ja": "ショップ"
+ },
+ {
+  "id": "033a324319",
+  "ja": "危険生物"
+ },
+ {
+  "id": "a4b4056e95",
+  "ja": "周辺"
+ },
+ {
+  "id": "1ec5137434",
+  "ja": "写真"
+ }
+]

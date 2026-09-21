@@ -35,9 +35,16 @@ There is no build step or framework. No dependencies. No bundler.
 - **Self-contained:** no external CSS/JS/fonts/CDN assets. The only outbound links are per-campsite
   Google Maps and Evertrail listing links, plus the Evertrail onboarding link (all open externally
   and fail gracefully offline). System font stack only.
-- **Three tabs:** Itinerary, Campsites, Packing. Food and nature recommendations live in three
-  `details.card.travel` cards under a "Worth a Detour" heading at the bottom of the Itinerary tab — there is
+- **Three tabs:** Itinerary, Campsites, Packing. Nature, kakigori and cafe recommendations sit in
+  `details.card.travel` cards under a "Nearby" heading at the bottom of the Itinerary tab — there is
   deliberately no separate Eat tab.
+- **Voice: factual only.** No tone, no evaluation, no explanation, no persuasion. Entries are clipped
+  fact-lists ("Calm bay, sunsets over the city. No toilets."), and Japanese matches with 体言止め throughout.
+  Do not add words like "worth it", "the best", "don't miss", or reasons-why. **There are no `.note`
+  callouts anywhere** — the class and its icon were removed. If a fact matters, it goes in a plain bullet
+  or a stat tile.
+- **`.lead-chip` appears only on the three day cards** (the date). Every other card — logistics, Nearby,
+  campsites — has no leading number. A campsite's drive time lives in a `From office` stat tile instead.
 - **Bilingual (EN / 日本語).** Every translatable element carries a `data-ja` attribute holding its
   **Japanese inner HTML**; English stays in the markup, so first paint and the no-JS path are English.
   The language module caches the original into `data-en` on first switch, swaps `innerHTML`, and fires a
