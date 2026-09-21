@@ -1,7 +1,9 @@
-const CACHE = 'okinawa-2026-v4';
+const CACHE = 'okinawa-2026-v5';
 const ASSETS = [
   './', './index.html', './manifest.webmanifest', './icon-180.png', './icon-512.png',
   './images/okinawa-hero.jpg',
+  './images/dive/boat.jpg',
+  './images/dive/minna.jpg',
   './images/camps/adan-beach-campsite.jpg',
   './images/camps/aha-yanbaru.jpg',
   './images/camps/azama-sun-beach-camping-ground.jpg',

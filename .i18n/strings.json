@@ -71,8 +71,13 @@
  },
  {
   "slot": "txt",
-  "en": "Reach camp, pop the rooftop tent",
-  "id": "0eacabe080"
+  "en": "Camp &mdash; Yagaji or Kouri",
+  "id": "1a08377e77"
+ },
+ {
+  "slot": "txt-note",
+  "en": "Stay within 30 min of the dive shop for tomorrow",
+  "id": "7df0c39775"
  },
  {
   "slot": "txt",
@@ -86,48 +91,38 @@
  },
  {
   "slot": "txt",
-  "en": "Sunrise over the water",
-  "id": "6bad7d1af5"
+  "en": "Sunrise, break camp",
+  "id": "96b87f7790"
  },
  {
   "slot": "txt",
-  "en": "Coffee, break camp",
-  "id": "f2c40dc120"
- },
- {
-  "slot": "txt",
-  "en": "Cape Hedo &mdash; the island's northern tip",
-  "id": "f607fd7502"
- },
- {
-  "slot": "txt",
-  "en": "ASMUI (ex-Daisekirinzan)",
-  "id": "9936c82c01"
+  "en": "Check in at Dive Nuts, Sesoko",
+  "id": "bc1052d51d"
  },
  {
   "slot": "txt-note",
-  "en": "&yen;2,500 &middot; loops 30&ndash;80 min",
-  "id": "f327d383c4"
+  "en": "Confirm the meeting time by email &mdash; shop opens 09:00",
+  "id": "d4c1edbc68"
  },
  {
   "slot": "txt",
-  "en": "Drive south to Motobu",
-  "id": "481834bd0c"
+  "en": "Boat out &mdash; two dives",
+  "id": "9a9f3a089c"
  },
  {
   "slot": "txt-note",
-  "en": "90 min &mdash; the day's long leg, leave on time",
-  "id": "d118cfb566"
+  "en": "Minna Island 20 min out, or Sesoko 10&ndash;20 min &middot; sea &asymp; <span class=\"u\" data-metric=\"29 &deg;C\" data-imperial=\"84 &deg;F\">29 &deg;C</span>",
+  "id": "90f2e0a947"
  },
  {
   "slot": "txt",
-  "en": "Snorkel at Gorilla Chop",
-  "id": "7e2388fd8d"
+  "en": "Back at the shop &mdash; shower, photos",
+  "id": "60014de509"
  },
  {
   "slot": "txt-note",
-  "en": "Walk-in entry &middot; sea &asymp; <span class=\"u\" data-metric=\"29 &deg;C\" data-imperial=\"84 &deg;F\">29 &deg;C</span>",
-  "id": "b9c69a4785"
+  "en": "Towels, amenities and a dryer are there; the underwater photos are free",
+  "id": "8087e540aa"
  },
  {
   "slot": "txt",
@@ -141,8 +136,8 @@
  },
  {
   "slot": "txt",
-  "en": "Churaumi Aquarium",
-  "id": "9ee819d895"
+  "en": "Churaumi Aquarium, or Bise Fukugi",
+  "id": "6759414d4e"
  },
  {
   "slot": "txt-note",
@@ -161,8 +156,8 @@
  },
  {
   "slot": "txt",
-  "en": "Reach camp &mdash; Yagaji or Kouri",
-  "id": "24a44c13d5"
+  "en": "Back to camp",
+  "id": "15c64b2de6"
  },
  {
   "slot": "txt",
@@ -331,8 +326,13 @@
  },
  {
   "slot": "bul",
-  "en": "<span class=\"time\">16:45</span><span class=\"dot\"></span><span class=\"txt\">Reach camp, pop the rooftop tent</span>",
-  "id": "02185a0d4e"
+  "en": "<span class=\"time\">16:15</span><span class=\"dot\"></span><span class=\"txt\">Camp &mdash; Yagaji or Kouri",
+  "id": "bd88cac559"
+ },
+ {
+  "slot": "bul-note",
+  "en": "Stay within 30 min of the dive shop for tomorrow",
+  "id": "e117c44163"
  },
  {
   "slot": "bul",
@@ -361,53 +361,43 @@
  },
  {
   "slot": "bul",
-  "en": "<span class=\"time\">06:25</span><span class=\"dot\"></span><span class=\"txt\">Sunrise over the water</span>",
-  "id": "19e69b0b33"
+  "en": "<span class=\"time\">06:25</span><span class=\"dot\"></span><span class=\"txt\">Sunrise, break camp</span>",
+  "id": "1907342ca6"
  },
  {
   "slot": "bul",
-  "en": "<span class=\"time\">08:00</span><span class=\"dot\"></span><span class=\"txt\">Coffee, break camp</span>",
-  "id": "a0684108d1"
- },
- {
-  "slot": "bul",
-  "en": "<span class=\"time\">08:40</span><span class=\"dot\"></span><span class=\"txt\">Cape Hedo &mdash; the island's northern tip</span>",
-  "id": "9476ff7a1f"
- },
- {
-  "slot": "bul",
-  "en": "<span class=\"time\">09:30</span><span class=\"dot\"></span><span class=\"txt\">ASMUI (ex-Daisekirinzan)",
-  "id": "3680a8d382"
+  "en": "<span class=\"time\">08:30</span><span class=\"dot\"></span><span class=\"txt\">Check in at Dive Nuts, Sesoko",
+  "id": "f941cc7939"
  },
  {
   "slot": "bul-note",
-  "en": "&yen;2,500 &middot; loops 30&ndash;80 min",
-  "id": "127b7c177d"
+  "en": "Confirm the meeting time by email &mdash; shop opens 09:00",
+  "id": "35ec9e04de"
  },
  {
   "slot": "bul",
-  "en": "<span class=\"time\">11:00</span><span class=\"dot\"></span><span class=\"txt\">Drive south to Motobu",
-  "id": "8f52572ea9"
+  "en": "<span class=\"time\">09:15</span><span class=\"dot\"></span><span class=\"txt\">Boat out &mdash; two dives",
+  "id": "0e74a902b6"
  },
  {
   "slot": "bul-note",
-  "en": "90 min &mdash; the day's long leg, leave on time",
-  "id": "7337023162"
+  "en": "Minna Island 20 min out, or Sesoko 10&ndash;20 min &middot; sea &asymp; <span class=\"u\" data-metric=\"29 &deg;C\" data-imperial=\"84 &deg;F\">29 &deg;C</span>",
+  "id": "df2f6784e7"
  },
  {
   "slot": "bul",
-  "en": "<span class=\"time\">12:35</span><span class=\"dot\"></span><span class=\"txt\">Snorkel at Gorilla Chop",
-  "id": "695dc860d2"
+  "en": "<span class=\"time\">13:00</span><span class=\"dot\"></span><span class=\"txt\">Back at the shop &mdash; shower, photos",
+  "id": "aaa1267fbf"
  },
  {
   "slot": "bul-note",
-  "en": "Walk-in entry &middot; sea &asymp; <span class=\"u\" data-metric=\"29 &deg;C\" data-imperial=\"84 &deg;F\">29 &deg;C</span>",
-  "id": "b990471a2f"
+  "en": "Towels, amenities and a dryer are there; the underwater photos are free",
+  "id": "79c8c89633"
  },
  {
   "slot": "bul",
-  "en": "<span class=\"time\">14:00</span><span class=\"dot\"></span><span class=\"txt\">Kishimoto Shokudo &mdash; Okinawa soba",
-  "id": "0b6d2fc049"
+  "en": "<span class=\"time\">14:15</span><span class=\"dot\"></span><span class=\"txt\">Kishimoto Shokudo &mdash; Okinawa soba",
+  "id": "bd3478e91f"
  },
  {
   "slot": "bul-note",
@@ -416,8 +406,8 @@
  },
  {
   "slot": "bul",
-  "en": "<span class=\"time\">15:15</span><span class=\"dot\"></span><span class=\"txt\">Churaumi Aquarium",
-  "id": "5cae07164f"
+  "en": "<span class=\"time\">15:30</span><span class=\"dot\"></span><span class=\"txt\">Churaumi Aquarium, or Bise Fukugi",
+  "id": "ea7758a1dd"
  },
  {
   "slot": "bul-note",
@@ -436,8 +426,8 @@
  },
  {
   "slot": "bul",
-  "en": "<span class=\"time\">17:45</span><span class=\"dot\"></span><span class=\"txt\">Reach camp &mdash; Yagaji or Kouri</span>",
-  "id": "db4f286568"
+  "en": "<span class=\"time\">17:45</span><span class=\"dot\"></span><span class=\"txt\">Back to camp</span>",
+  "id": "c6a18ab62b"
  },
  {
   "slot": "bul",
@@ -461,8 +451,8 @@
  },
  {
   "slot": "bul",
-  "en": "Bise Fukugi tree road",
-  "id": "5046877641"
+  "en": "Bise Fukugi tree road, or the Kouri bridge",
+  "id": "d1a1a39a14"
  },
  {
   "slot": "bul",
@@ -621,6 +611,91 @@
  },
  {
   "slot": "bul",
+  "en": "Minna Island &mdash; 20 min by boat",
+  "id": "b31570de27"
+ },
+ {
+  "slot": "bul-note",
+  "en": "Sand and coral, 5&ndash;25 m, ten-plus points. The clear one",
+  "id": "595bf5158d"
+ },
+ {
+  "slot": "bul",
+  "en": "Sesoko &mdash; 10&ndash;20 min",
+  "id": "d84ae2cfa2"
+ },
+ {
+  "slot": "bul-note",
+  "en": "Crevices and macro, points on all four sides so it dives in any wind",
+  "id": "ed5ae662f4"
+ },
+ {
+  "slot": "bul",
+  "en": "Sesoko Labyrinth",
+  "id": "b962182ea5"
+ },
+ {
+  "slot": "bul-note",
+  "en": "Light beams through the crevices &mdash; shallow, so no depth penalty",
+  "id": "196b879136"
+ },
+ {
+  "slot": "bul",
+  "en": "Touaka point",
+  "id": "5d92b0318b"
+ },
+ {
+  "slot": "bul-note",
+  "en": "Tomato clownfish, and Yasha gobies at 10 m instead of the usual 20 m",
+  "id": "79925900ee"
+ },
+ {
+  "slot": "bul",
+  "en": "A 50-minute dive",
+  "id": "a7f7458c1e"
+ },
+ {
+  "slot": "bul-note",
+  "en": "Possible on the boat if you ask in advance",
+  "id": "db84020c14"
+ },
+ {
+  "slot": "bul",
+  "en": "Four showers, powder room, dryer, amenities, spin dryer",
+  "id": "93fc7ff707"
+ },
+ {
+  "slot": "bul-note",
+  "en": "Shower at the shop and drive off &mdash; no need to go back to camp first",
+  "id": "65c9c34f13"
+ },
+ {
+  "slot": "bul",
+  "en": "Parking for seven-plus cars &middot; 09:00&ndash;19:00",
+  "id": "2c0f14c939"
+ },
+ {
+  "slot": "bul",
+  "en": "Cancellation: 30% three days out, 50% the day before, 100% same day",
+  "id": "b5dff372f0"
+ },
+ {
+  "slot": "bul-note",
+  "en": "Waived if a typhoon or rough sea cancels the boat",
+  "id": "7cfded2314"
+ },
+ {
+  "slot": "bul",
+  "en": "The base two-tank price is not published",
+  "id": "adf31c710e"
+ },
+ {
+  "slot": "bul-note",
+  "en": "Confirm it with the &yen;17,000 estimate when you email",
+  "id": "65d54e7ad4"
+ },
+ {
+  "slot": "bul",
   "en": "Expressway, Naha IC &harr; Kyoda IC",
   "id": "8b09575dc3"
  },
@@ -736,8 +811,8 @@
  },
  {
   "slot": "title",
-  "en": "Yanbaru &amp; Motobu",
-  "id": "66ac8cd5b6"
+  "en": "Diving Day",
+  "id": "6e07ee7005"
  },
  {
   "slot": "title",
@@ -753,6 +828,11 @@
   "slot": "title",
   "en": "The Jimny",
   "id": "3ebc5f0c2c"
+ },
+ {
+  "slot": "title",
+  "en": "Diving &mdash; Dive Nuts",
+  "id": "62d7d0d600"
  },
  {
   "slot": "title",
@@ -976,13 +1056,13 @@
  },
  {
   "slot": "subtitle",
-  "en": "Naha &rarr; Kin &rarr; Yanbaru",
-  "id": "a90297f2ff"
+  "en": "Naha &rarr; Kin &rarr; Motobu",
+  "id": "4ba6d52630"
  },
  {
   "slot": "subtitle",
-  "en": "Cape Hedo, snorkel, soba",
-  "id": "b07563902b"
+  "en": "Minna Island, soba, Churaumi",
+  "id": "50bbe439e8"
  },
  {
   "slot": "subtitle",
@@ -998,6 +1078,11 @@
   "slot": "subtitle",
   "en": "Evertrail &middot; booking #260096",
   "id": "aef4c86186"
+ },
+ {
+  "slot": "subtitle",
+  "en": "Sesoko, Motobu &middot; Day 2",
+  "id": "a093bcb29a"
  },
  {
   "slot": "subtitle",
@@ -1281,6 +1366,26 @@
  },
  {
   "slot": "statk",
+  "en": "Budget",
+  "id": "8acfd75c4d"
+ },
+ {
+  "slot": "statk",
+  "en": "Extra dive",
+  "id": "4635bcb47b"
+ },
+ {
+  "slot": "statk",
+  "en": "Full gear",
+  "id": "6d08e48428"
+ },
+ {
+  "slot": "statk",
+  "en": "Wetsuit",
+  "id": "b524ff0095"
+ },
+ {
+  "slot": "statk",
   "en": "Daily high",
   "id": "bcc8b223a1"
  },
@@ -1388,6 +1493,26 @@
   "slot": "statv",
   "en": "&yen;68,160",
   "id": "fb20336ad1"
+ },
+ {
+  "slot": "statv",
+  "en": "~&yen;17,000 each",
+  "id": "2effb5ea0a"
+ },
+ {
+  "slot": "statv",
+  "en": "&yen;5,500",
+  "id": "5d2c2b6dce"
+ },
+ {
+  "slot": "statv",
+  "en": "&yen;2,750 / day",
+  "id": "0a38e6fb79"
+ },
+ {
+  "slot": "statv",
+  "en": "&yen;1,100",
+  "id": "e72be5d362"
  },
  {
   "slot": "statv",
@@ -1623,6 +1748,11 @@
   "slot": "desc",
   "en": "Suzuki Jimny Sierra II with a rooftop tent, 2 guests, Oct 10&ndash;12. Booked under Asuka Umeda.\n          Pick up 11:00, drop off 18:00 &mdash; but airport return closes 17:30.",
   "id": "f9b86e7ff6"
+ },
+ {
+  "slot": "desc",
+  "en": "Boat fun diving out of Sesoko. Two tanks at Minna Island or Sesoko, small groups, own boat,\n          and the underwater photos come free.",
+  "id": "714049b900"
  },
  {
   "slot": "desc",
@@ -1886,6 +2016,21 @@
  },
  {
   "slot": "subhead",
+  "en": "The two sites",
+  "id": "22350f8954"
+ },
+ {
+  "slot": "subhead",
+  "en": "Ask for",
+  "id": "2dd02ed438"
+ },
+ {
+  "slot": "subhead",
+  "en": "Good to know",
+  "id": "1efb2f86d1"
+ },
+ {
+  "slot": "subhead",
   "en": "Mid-October on the island",
   "id": "7567e88d53"
  },
@@ -1946,13 +2091,18 @@
  },
  {
   "slot": "note",
-  "en": "<strong>Habu season.</strong> The prefecture runs its snake-bite campaign 1 Sep&ndash;30 Nov &mdash; October\n            is peak activity, and Yanbaru is core habitat. Torch after dark, closed shoes off-trail, never reach into\n            long grass or stone walls, and shake out your boots in the morning.",
-  "id": "6865ad9ca3"
+  "en": "<strong>This is why the dive is today.</strong> Surfacing around 13:00 today leaves about 31 hours\n            before tomorrow's 20:25 flight &mdash; comfortably past the 24 h that two dives want. Diving on Day 3\n            would not be safe.",
+  "id": "bf35709190"
  },
  {
   "slot": "note",
   "en": "<strong>Return the car by 17:30, not 18:00.</strong> The booking's 18:00 slot is the Evertrail office;\n            <em>airport</em> return closes at <strong>17:30</strong>. Today is also Sports Day, a national holiday &mdash;\n            expect traffic on Route 58 and a busy terminal.",
   "id": "fa26515277"
+ },
+ {
+  "slot": "note",
+  "en": "<strong>Email to book &mdash; they are not taking calls.</strong> Staff shortage, so the phone is off;\n            <a href=\"mailto:info@divenuts.jp\">info@divenuts.jp</a> or LINE, and replies come the same evening or the\n            next day. Book well ahead, not the day before.",
+  "id": "21870b0dcd"
  },
  {
   "slot": "note",
@@ -2116,6 +2266,11 @@
  },
  {
   "slot": "mon",
+  "en": "DIVES",
+  "id": "96fe8dc783"
+ },
+ {
+  "slot": "mon",
   "en": "&deg;C",
   "id": "90d0f55efb"
  },
@@ -2156,6 +2311,11 @@
  },
  {
   "slot": "maplink",
+  "en": "divenuts.jp",
+  "id": "9a0f80cb04"
+ },
+ {
+  "slot": "maplink",
   "en": "Book / official site",
   "id": "5a06abf702"
  },
@@ -2173,6 +2333,11 @@
   "slot": "footer",
   "en": "Sourced from Tabelog, Okinawa Story and shop sites &middot; verify hours before a long drive",
   "id": "dccc5b899c"
+ },
+ {
+  "slot": "btn",
+  "en": "Edit list",
+  "id": "877e09e589"
  },
  {
   "slot": "btnplain",
