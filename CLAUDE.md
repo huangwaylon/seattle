@@ -154,6 +154,10 @@ intact, and the no-JS path still shows a real map with all three days and every 
   `data-food`. All the show/hide is CSS keyed off those, scoped under `.js-tabs` so the absence of the
   attributes (the no-JS case) means "show everything". The JS sets nothing else except the state
   classes `.past` / `.now` / `.future` / `.sel`.
+- **The map and its clock pin to the top** (`.mapstick`, `position:sticky`) so the stop list scrolls
+  against them. `svg.map` is capped at `calc(62vh - 60px)` so the pinned pair leaves room for about
+  four rows on a phone — without that cap a tall map fills the viewport and sticky buys nothing. The
+  day and layer chips deliberately scroll away; only the map and clock pin.
 - **The clock** (`#timeScrub`) is a range input over the selected day's first-to-last stop, in minutes.
   It **starts at the top of the day and resets there on every day switch**, so the opening view is always
   "here is the day ahead": the first stop gets `.now` (ring + label) and the whole route reads `.future`
@@ -347,6 +351,11 @@ new version activates on its own.
 - **iOS storage:** installed Home-Screen PWAs are exempt from Safari's 7-day script-storage cap,
   so the saved packing list persists — but only if opened occasionally. Install a week or two
   pre-trip.
+- **Day 3 has no snorkelling.** Maeda Point came out; 11:00 is **バンタカフェ** (Yomitan, 26.41771,
+  127.71400) instead — 6 min on from Senaha Beach, 76 min from there to the tide pool. Alternatives
+  considered and listed in its card: トランジットカフェ (Chatan, 2F sea view) and 瀬長島ウミカジテラス
+  (22 min from the pool, 11 min on to the airport). The jellyfish bullet used to name Maeda as the
+  unpatrolled swim; it now names the tide pool, which is the only swim left on the day.
 - **Day 3 ends at the Gushikawa tide pool, not the onsen.** The pool (具志川城跡, Kyan, Itoman —
   26.08036, 127.66452, free) only exists around low tide, and **Oct 12 2026's afternoon low at Naha is
   14:53** (JMA tide table, station NS: lows 02:33 / 14:53, highs 08:50 / 20:31), which is exactly when the
@@ -375,9 +384,16 @@ new version activates on its own.
   worth remembering: the old ¥17,000-each fun-diving estimate is gone (it was never a published price),
   and **the no-fly-after-diving constraint no longer applies**, so the boat no longer *has* to be Day 2 —
   it stays there by choice, not necessity. The other four courses and their prices are listed in the card.
-- **The Day 1 waterfall is 普久川の滝**, not 福川の滝. Both read "Fukugawa", but only 普久川の滝 (Ogimi,
-  26.60537, 128.05676) exists, and OSRM backs it up: Manzamo → there is 53 min, there → Nago 19 min,
-  matching the itinerary's 52 and 19.
+- **The Day 1 waterfall is フンガー滝**, in **名護市真喜屋** — 26.60810, 128.05392, FID
+  `0x34e4570022eb29ff:0xfbbd1edacdb1b196`, Google's only pin for it (3.8, 13 reviews). It has been
+  called two wrong things in this repo: 福川の滝 originally, then 普久川の滝 after I "corrected" it.
+  The trap is that OSM has a node labelled **普久川滝** 400 m away with no Google place at all, and
+  because OSRM snaps both to the same road point the drive times matched either way (Manzamo → 53 min
+  / 33.3 km, → Nago 19 min / 11.9 km), so the times "confirmed" the wrong name. Don't rename it again
+  without a Google place id. Note it is **not a managed site**: a local operator (がじゅまる自然学校)
+  has publicly asked on the listing for the pin to be removed because visitor traffic puts
+  conservation and safety on the village, reviewers say to read the posted cautions, and there is no
+  phone signal further in.
 - **Two claims were wrong and are now corrected** — King Tacos is *not* the 1984 original (taco rice was
   invented at Parlour Senri in Kin; King Tacos spread it), and Daisekirinzan was renamed **ASMUI** in
   Dec 2024 and charges ¥2,500. Campsite drive times are OSRM **free-flow** — add 20–40 min in holiday

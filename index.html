@@ -364,11 +364,14 @@
      Everything on the map is static markup. JS only sets data-day / data-<layer>
      on #view-map and a few state classes, so without JS all three days and every
      pin are visible and the map is still a map. */
+  /* The map and its clock pin to the top so the stop list can be scrolled against them.
+     max-height keeps the pair inside a short viewport, where sticky would otherwise be useless. */
+  .mapstick{position:sticky;top:var(--safe-t);z-index:20;background:var(--bg);}
   .mapcard{margin:8px var(--gutter) 12px;background:var(--sea-wash);border:1px solid var(--line);
     border-radius:var(--r);overflow:hidden;box-shadow:var(--sh-card);}
   /* max-height caps the tall island on a desktop screen; the letterbox gap falls on
      .mapcard, which is the same sea colour. */
-  svg.map{display:block;width:100%;height:auto;max-height:78vh;}
+  svg.map{display:block;width:100%;height:auto;max-height:calc(62vh - 60px);}
   .map .sea{fill:var(--sea-wash);}
   .map .land path{fill:var(--bg-2);stroke:var(--sea-d);stroke-width:2.2;stroke-linejoin:round;}
   /* one accent per day, inherited by that day's legs, pins and swatch */
@@ -406,7 +409,7 @@
     border-left-color:transparent;border-right-color:transparent;}
 
   /* clock */
-  .timebar{display:flex;align-items:center;gap:12px;margin:0 var(--gutter) 14px;}
+  .timebar{display:flex;align-items:center;gap:12px;margin:0 var(--gutter);padding-bottom:12px;}
   .timebar input{flex:1;min-width:0;-webkit-appearance:none;appearance:none;height:28px;background:none;}
   .timebar input::-webkit-slider-runnable-track{height:6px;border-radius:3px;background:var(--surface-3);
     border:1px solid var(--line);}
@@ -525,7 +528,7 @@
             <li><span class="time">11:00</span><span class="dot"></span><span class="txt" data-en="Collect the Jimny &mdash; Ikehara, Okinawa City<small>Office 9:30&ndash;18:00 &middot; luggage storage available</small>">ジムニー受け取り &mdash; 沖縄市池原<small>営業所 9:30&ndash;18:00 &middot; 荷物預かりあり</small></span></li>
             <li><span class="time">11:55</span><span class="dot"></span><span class="txt" data-en="King Tacos, Kin Town &mdash; taco rice<small>25 min from the office &middot; taco rice originated in Kin, 1984</small>">キングタコス金武町 &mdash; タコライス<small>営業所から25分 &middot; タコライスは1984年に金武町で誕生</small></span></li>
             <li><span class="time">13:05</span><span class="dot"></span><span class="txt" data-en="Cape Manzamo<small>19 min from Kin &middot; elephant-trunk rock formation</small>">万座毛<small>金武町から19分 &middot; 象の鼻の形の岩</small></span></li>
-            <li><span class="time">14:45</span><span class="dot"></span><span class="txt" data-en="Fukugawa Falls<small>52 min from Manzamo &middot; 20&ndash;30 min return on foot</small>">普久川の滝<small>万座毛から52分 &middot; 徒歩で往復20&ndash;30分</small></span></li>
+            <li><span class="time">14:45</span><span class="dot"></span><span class="txt" data-en="Hunga Falls, Makiya, Nago<small>53 min from Manzamo &middot; no phone signal further in &middot; read the posted cautions</small>">フンガー滝（名護市真喜屋）<small>万座毛から53分 &middot; 奥は携帯の電波なし &middot; 現地の注意書きを確認</small></span></li>
             <li><span class="time">16:05</span><span class="dot"></span><span class="txt" data-en="Nago &mdash; groceries<small>19 min from the falls &middot; MaxValu, open 24 h</small>">名護 &mdash; 食料の買い出し<small>滝から19分 &middot; マックスバリュ、24時間営業</small></span></li>
             <li><span class="time">16:50</span><span class="dot"></span><span class="txt" data-en="Camp &mdash; Yagaji or Kouri<small>12 min from Nago &middot; 35 min from the shop</small>">キャンプ &mdash; 屋我地か古宇利<small>名護から12分 &middot; ショップから35分</small></span></li>
             <li><span class="time">18:08</span><span class="dot"></span><span class="txt" data-en="Sunset">夕日</span></li>
@@ -565,7 +568,7 @@
           <span class="node"></span>
           <div class="lead-chip"><div class="d">12</div><div class="m" data-en="OCT">10月</div><div class="wd" data-en="Mon">月</div></div>
           <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-plane-takeoff"/></svg></span>
-          <div class="ttl"><div class="t" data-en="West Coast, Departure">西海岸、出発</div><div class="sub2" data-en="Zanpa, reef snorkel, tide pool">残波岬、リーフシュノーケリング、秘境プール</div></div>
+          <div class="ttl"><div class="t" data-en="West Coast, Departure">西海岸、出発</div><div class="sub2" data-en="Zanpa, a cliff cafe, the tide pool">残波岬、崖のカフェ、秘境プール</div></div>
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
@@ -574,9 +577,9 @@
             <li><span class="time">07:30</span><span class="dot"></span><span class="txt" data-en="Break camp">テント撤収</span></li>
             <li><span class="time">09:00</span><span class="dot"></span><span class="txt" data-en="Cape Zanpa<small>2 km of raised-coral cliff</small>">残波岬<small>隆起サンゴの断崖2 km</small></span></li>
             <li><span class="time">10:15</span><span class="dot"></span><span class="txt" data-en="Senaha Beach<small>Unmanaged &middot; no facilities</small>">瀬名波ビーチ<small>管理なし &middot; 設備なし</small></span></li>
-            <li><span class="time">11:45</span><span class="dot"></span><span class="txt" data-en="Snorkel at Maeda Point<small>Walk-in entry from the steps</small>">真栄田岬でシュノーケリング<small>階段からエントリー</small></span></li>
-            <li><span class="time">12:45</span><span class="dot"></span><span class="txt" data-en="Lunch, then south to Itoman<small>73 min from Maeda</small>">昼食、そのまま糸満へ南下<small>真栄田岬から73分</small></span></li>
-            <li><span class="time">14:00</span><span class="dot"></span><span class="txt" data-en="Gushikawa Castle ruins &mdash; the tide pool<small>Low tide 14:53 &middot; cliff scramble down &middot; free</small>">具志川城跡 &mdash; 秘境プール<small>干潮14:53 &middot; 崖を下る &middot; 入場無料</small></span></li>
+            <li><span class="time">11:00</span><span class="dot"></span><span class="txt" data-en="Banta Cafe, Yomitan &mdash; lunch on the rocks<small>6 min from Senaha &middot; 160 outdoor seats on the coastline &middot; opens 08:00</small>">バンタカフェ（読谷村）&mdash; 岩場で昼食<small>瀬名波から6分 &middot; 海岸線に屋外160席 &middot; 08:00開店</small></span></li>
+            <li><span class="time">12:30</span><span class="dot"></span><span class="txt" data-en="South to Itoman<small>76 min from the cafe</small>">糸満へ南下<small>カフェから76分</small></span></li>
+            <li><span class="time">13:50</span><span class="dot"></span><span class="txt" data-en="Gushikawa Castle ruins &mdash; the tide pool<small>Low tide 14:53 &middot; cliff scramble down &middot; free</small>">具志川城跡 &mdash; 秘境プール<small>干潮14:53 &middot; 崖を下る &middot; 入場無料</small></span></li>
             <li><span class="time">15:50</span><span class="dot"></span><span class="txt" data-en="Leave for the airport<small>25 min</small>">空港へ出発<small>25分</small></span></li>
             <li><span class="time">16:20</span><span class="dot"></span><span class="txt" data-en="Refuel">給油</span></li>
             <li><span class="time">16:45</span><span class="dot"></span><span class="txt" data-en="Return the Jimny at the airport">空港でジムニー返却</span></li>
@@ -757,7 +760,7 @@
           <div class="subhead" data-en="Hazards">危険生物</div>
           <ul class="bul">
             <li data-en="Habu vipers &mdash; nocturnal, active Sep&ndash;Nov<small>Torch after dark, closed shoes, avoid stone walls and long grass. Strike range 1.5 m. If bitten: stay still, call 119, no tourniquet, no cutting</small>">ハブ &mdash; 夜行性、9&ndash;11月に活発<small>日没後はライト、足を覆う靴、石垣と草むらを避ける。攻撃範囲1.5 m。咬まれたら動かず119番、緊縛なし、切開なし</small></li>
-            <li data-en="Jellyfish &mdash; no nets, no lifeguard<small>Gorilla Chop and Maeda are unpatrolled. Long-sleeve rash guard</small>">クラゲ &mdash; ネットなし、監視員なし<small>ゴリラチョップと真栄田岬は監視なし。長袖ラッシュガード</small></li>
+            <li data-en="Jellyfish &mdash; no nets, no lifeguard<small>Gorilla Chop and the Gushikawa tide pool are unpatrolled. Long-sleeve rash guard</small>">クラゲ &mdash; ネットなし、監視員なし<small>ゴリラチョップと具志川城跡のタイドプールは監視なし。長袖ラッシュガード</small></li>
             <li data-en="Stings: rinse with seawater, never fresh water<small>Vinegar for habu-kurage <strong>only</strong>. On a Portuguese man o' war &mdash; blue float, long blue threads &mdash; vinegar worsens it. Remove tentacles with pincers, then cool</small>">刺されたら海水で洗う &mdash; 真水は絶対に使わない<small>食酢はハブクラゲ<strong>のみ</strong>。カツオノエボシ &mdash; 青い浮き袋、長い青い触手 &mdash; には食酢は逆効果。触手はピンセットで除去し、冷却</small></li>
             <li data-en="Centipedes enter boots and tents<small>Shake out footwear, keep the tent zipped</small>">ムカデは靴やテントに入る<small>靴は振って確認、テントは閉めて��く</small></li>
             <li data-en="No open fires or charcoal on sand<small>Most sites require a fire pan</small>">直火も、砂浜での炭の使用も不可<small>多くのキャンプ場で焚き火台が必須</small></li>
@@ -768,6 +771,7 @@
             <li data-en="Supermarkets north of Nago close by ~19:00<small>None in Kunigami or Ogimi &middot; 24 h konbini on Route 58</small>">名護より北のスーパーは19:00頃閉店<small>国頭村・大宜味村にはなし &middot; 国道58号沿いに24時間コンビニ</small></li>
             <li data-en="Many soba shops are cash-only">沖縄そば店は現金のみが多い</li>
             <li data-en="Mon Oct 12 is Sports Day<small>Three-day weekend &middot; book campsites ahead</small>">10月12日（月）はスポーツの日<small>三連休 &middot; キャンプ場は事前予約</small></li>
+            <li data-en="Hunga Falls is not a managed site<small>A local operator has publicly asked for its map pin to be removed &mdash; conservation and safety fall on the village. Read what is posted, take everything out</small>">フンガー滝は管理された観光地ではない<small>地元の事業者がマップ登録の削除を公開で求めています &mdash; 環境保全と安全管理は集落の負担。掲示を読み、ゴミは持ち帰り</small></li>
           </ul>
         </div>
       </details>
@@ -793,7 +797,7 @@
           <div class="stat-grid">
             <div class="stat"><div class="k" data-en="Fee">料金</div><div class="v" data-en="Free">無料</div></div>
             <div class="stat"><div class="k" data-en="Low tide, Oct 12">10月12日の干潮</div><div class="v">14:53</div></div>
-            <div class="stat"><div class="k" data-en="From Maeda Point">真栄田岬から</div><div class="v" data-en="73 min &middot; <span class=&quot;u&quot; data-metric=&quot;60.7 km&quot; data-imperial=&quot;38 mi&quot;>60.7 km</span>">73分 &middot; <span class="u" data-metric="60.7 km" data-imperial="38 mi">60.7 km</span></div></div>
+            <div class="stat"><div class="k" data-en="From Banta Cafe">バンタカフェから</div><div class="v" data-en="76 min &middot; <span class=&quot;u&quot; data-metric=&quot;46.9 km&quot; data-imperial=&quot;29 mi&quot;>46.9 km</span>">76分 &middot; <span class="u" data-metric="46.9 km" data-imperial="29 mi">46.9 km</span></div></div>
             <div class="stat"><div class="k" data-en="To the airport">空港まで</div><div class="v" data-en="25 min &middot; <span class=&quot;u&quot; data-metric=&quot;14.8 km&quot; data-imperial=&quot;9 mi&quot;>14.8 km</span>">25分 &middot; <span class="u" data-metric="14.8 km" data-imperial="9 mi">14.8 km</span></div></div>
           </div>
           <div class="chips"><span class="chip pick" data-en="Good fit">おすすめ</span><span class="chip" data-en="Snorkel">シュノーケル</span><span class="chip" data-en="No facilities">設備なし</span></div>
@@ -977,15 +981,29 @@
         <summary class="head">
           <span class="node"></span>
           <span class="gly"><svg class="ic" aria-hidden="true"><use href="#i-teacup"/></svg></span>
-          <div class="ttl"><div class="t" data-en="Banta Cafe">バンタカフェ</div><div class="sub2" data-en="バンタカフェ &middot; Yomitan">読谷村</div></div>
+          <div class="ttl"><div class="t" data-en="Banta Cafe">バンタカフェ</div><div class="sub2" data-en="Yomitan &middot; Day 3">読谷村 &middot; 3日目</div></div>
           <span class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
         </summary>
         <div class="content">
-          <p class="desc" data-en="Built into the Yomitan coastline. 160 outdoor seats on the rocks.">読谷村の海岸線に建つ。岩場に屋外160席。</p>
+          <p class="desc" data-en="Built into the Yomitan coastline, by Hoshino Resorts. 160 outdoor seats on the rocks, a
+          lawn and an indoor room for wind. Light western food, gelato, beni-imo shakes.">星野リゾートが読谷村の海岸線に建てたカフェ。岩場に屋外160席、芝生、風の日の屋内席。
+          軽い洋食、ジェラート、紅芋シェイク。</p>
           <div class="stat-grid">
-            <div class="stat"><div class="k" data-en="Order">おすすめ</div><div class="v" data-en="Gelato">ジェラート</div></div>
-            <div class="stat"><div class="k" data-en="Hours">営業時間</div><div class="v" data-en="From 08:00 on holidays &middot; closes 1 h after sunset">休日は08:00から &middot; 日没1時間後に閉場</div></div>
+            <div class="stat"><div class="k" data-en="Order">おすすめ</div><div class="v" data-en="Gelato, beni-imo shake">ジェラート、紅芋シェイク</div></div>
+            <div class="stat"><div class="k" data-en="Rating">評価</div><div class="v" data-en="4.5 &middot; 2,379 reviews">4.5 &middot; 口コミ2,379件</div></div>
+            <div class="stat"><div class="k" data-en="Per person">予算</div><div class="v">&yen;1,000&ndash;2,000</div></div>
+            <div class="stat"><div class="k" data-en="Opens">開店</div><div class="v" data-en="08:00 &middot; closes 1 h after sunset">08:00 &middot; 日没1時間後に閉場</div></div>
+            <div class="stat"><div class="k" data-en="From Senaha Beach">瀬名波ビーチから</div><div class="v" data-en="6 min &middot; <span class=&quot;u&quot; data-metric=&quot;2.8 km&quot; data-imperial=&quot;1.7 mi&quot;>2.8 km</span>">6分 &middot; <span class="u" data-metric="2.8 km" data-imperial="1.7 mi">2.8 km</span></div></div>
+            <div class="stat"><div class="k" data-en="To the tide pool">秘境プールまで</div><div class="v" data-en="76 min &middot; <span class=&quot;u&quot; data-metric=&quot;46.9 km&quot; data-imperial=&quot;29 mi&quot;>46.9 km</span>">76分 &middot; <span class="u" data-metric="46.9 km" data-imperial="29 mi">46.9 km</span></div></div>
           </div>
+          <ul class="bul">
+            <li data-en="560 Gima, Yomitan &middot; 098-921-6810">読谷村儀間560 &middot; 098-921-6810</li>
+          </ul>
+          <div class="subhead" data-en="Other viewpoints on the way south">南下の道中、ほかの眺め</div>
+          <ul class="bul">
+            <li data-en="<a href=&quot;https://www.google.com/maps/place//data=!4m2!3m1!1s0x34e5139fe9505dbf:0xf1e9393661fd0ca9&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>Transit Cafe, Chatan</a><small>First-floor sea view from a 2F room &middot; 4.4 &middot; &yen;1,000&ndash;2,000 &middot; to 22:00</small>"><a href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x34e5139fe9505dbf:0xf1e9393661fd0ca9" target="_blank" rel="noopener">トランジットカフェ（北谷町）</a><small>2階から海を一望 &middot; 4.4 &middot; &yen;1,000&ndash;2,000 &middot; 22:00まで</small></li>
+            <li data-en="<a href=&quot;https://www.google.com/maps/place//data=!4m2!3m1!1s0x34e5681e893b714d:0xa5360835fe2d83b8&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>Umikaji Terrace, Senagajima</a><small>White terraced village of cafes over the sea &middot; 10:00&ndash;21:00 &middot; 22 min from the tide pool, 11 min on to the airport</small>"><a href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x34e5681e893b714d:0xa5360835fe2d83b8" target="_blank" rel="noopener">瀬長島ウミカジテラス（豊見城市）</a><small>海に向かう白い階段状のカフェ街 &middot; 10:00&ndash;21:00 &middot; 秘境プールから22分、空港まであと11分</small></li>
+          </ul>
           <a class="maplink" href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x34e5179945710b5b:0x14dc6ce7bed9f877" target="_blank" rel="noopener"><span data-en="Open in Maps">マップで開く</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
           <a class="maplink alt" href="https://tabelog.com/okinawa/A4703/A470304/47026115/" target="_blank" rel="noopener"><span data-en="Photos">写真</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
@@ -1009,6 +1027,7 @@
       <button type="button" data-layer="nature" aria-pressed="false"><span class="sw k-nature"></span><span data-en="Nature">自然</span></button>
       <button type="button" data-layer="food" aria-pressed="false"><span class="sw k-food"></span><span data-en="Eat">食べる</span></button>
     </div>
+    <div class="mapstick">
     <div class="mapcard"><svg class="map" viewBox="0 0 778 1000" role="img" aria-labelledby="mapTitle">
 <title id="mapTitle" data-en="Okinawa main island: our route and the places on it">沖縄本島 &mdash; 走るルートと立ち寄り先</title>
 <rect class="sea" width="778" height="1000"/>
@@ -1043,8 +1062,8 @@
 <path class="leg d1 bus" data-day="1" data-min="660" d="M218.9 619.3L204.3 634.0L199.8 649.5L192.5 662.6L187.7 665.2L185.5 664.1L185.1 666.7L184.2 665.4L185.9 663.8L190.4 664.0L193.5 661.2L199.7 649.5L204.8 633.0L214.8 622.2L215.4 619.1L218.1 620.2L225.3 612.8"/>
 <path class="leg d1" data-day="1" data-min="715" d="M225.3 612.8L219.7 619.3L215.3 619.8L217.3 617.4L222.5 596.0L219.3 587.0L210.8 576.4L208.6 569.7L210.7 558.7L217.7 549.1L225.5 544.4L240.5 539.7L250.0 523.7L258.9 518.2L281.1 516.2L297.9 521.2L305.2 518.9L303.6 527.4L300.1 528.2L305.9 530.5L312.9 530.2L322.1 525.9"/>
 <path class="leg d1" data-day="1" data-min="785" d="M322.1 525.9L331.3 524.4L336.7 515.5L327.0 506.1L311.5 484.8L310.0 480.1L295.6 477.6L296.9 470.4L292.5 467.6L288.9 469.1L273.9 464.5L261.9 473.5L258.5 471.0L255.6 471.6L250.1 465.5"/>
-<path class="leg d1" data-day="1" data-min="885" d="M250.1 465.5L255.6 471.6L258.5 471.0L261.9 473.5L273.9 464.5L290.8 468.9L293.3 466.5L297.0 455.9L303.1 456.5L311.8 448.5L322.6 451.9L327.6 441.4L335.6 434.5L339.3 427.2L351.0 428.4L361.7 416.5L366.0 416.5L367.6 421.2L371.5 421.9L375.5 409.4L394.6 393.4L400.0 381.0L408.4 370.2L410.5 354.8L408.4 341.5L418.5 332.9L426.2 331.1L433.0 323.0L437.3 325.7L450.5 319.1L451.1 321.1L454.7 320.2L457.0 323.5L461.1 324.6L460.5 327.0L465.5 331.7L468.5 341.3"/>
-<path class="leg d1" data-day="1" data-min="965" d="M468.5 341.3L465.5 331.7L460.5 327.0L461.1 324.6L457.0 323.5L454.6 320.2L451.1 321.1L451.4 319.0L441.0 323.0L430.5 332.8L428.6 328.1L425.4 331.5L419.0 332.6L409.3 341.5L393.7 341.1L383.6 346.4L388.7 343.4"/>
+<path class="leg d1" data-day="1" data-min="885" d="M250.1 465.5L255.6 471.6L258.5 471.0L262.0 473.5L274.1 464.5L290.8 468.9L293.3 466.5L297.0 455.9L303.1 456.5L311.8 448.5L322.6 451.9L327.6 441.4L335.6 434.5L339.3 427.2L351.0 428.4L361.7 416.5L366.0 416.5L367.6 421.2L371.5 421.9L375.5 409.4L394.6 393.4L400.0 381.0L408.4 370.2L410.5 354.8L408.4 341.5L418.5 332.9L426.2 331.1L433.0 323.0L437.3 325.7L450.5 319.1L451.1 321.1L454.7 320.2L457.0 323.5L460.9 324.4L460.6 327.3L465.4 331.5L467.7 341.5"/>
+<path class="leg d1" data-day="1" data-min="965" d="M467.7 341.5L465.6 332.0L460.6 327.3L461.1 324.6L457.0 323.5L454.6 320.2L451.1 321.1L451.4 319.0L441.0 323.0L430.5 332.8L428.6 328.1L425.4 331.5L419.0 332.6L409.3 341.5L393.7 341.1L383.6 346.4L388.7 343.4"/>
 <path class="leg d1" data-day="1" data-min="1010" d="M388.7 343.4L394.1 340.9L409.0 341.4L418.5 332.9L426.5 330.8L432.5 323.4L447.6 311.3L445.0 305.3L445.5 294.2"/>
 <path class="leg d2" data-day="2" data-min="480" d="M445.5 294.2L445.0 305.3L447.6 311.3L432.5 323.4L426.5 330.8L418.5 332.9L409.3 341.5L392.9 341.3L376.2 350.7L360.5 342.6L346.6 348.1L340.3 346.3L330.0 339.4L324.7 340.4L321.3 346.9L317.5 349.4L300.0 343.8L298.5 333.6L290.2 321.2L289.3 313.7L284.1 304.0L283.3 291.1L269.7 294.9L264.5 301.2"/>
 <path class="leg d2 boat" data-day="2" data-min="540" d="M264.3 301.2L216.2 294.4"/>
@@ -1054,8 +1073,8 @@
 <path class="leg d2" data-day="2" data-min="980" d="M388.7 343.4L394.1 340.9L409.0 341.4L418.5 332.9L426.5 330.8L432.5 323.4L447.6 311.3L445.0 305.3L445.5 294.2"/>
 <path class="leg d3" data-day="3" data-min="540" d="M445.5 294.2L445.0 305.3L447.6 311.3L432.5 323.4L426.5 330.8L418.5 332.9L408.6 341.7L410.5 355.7L407.9 371.2L400.0 381.0L394.6 393.4L375.5 409.5L372.6 421.0L365.3 421.1L362.3 424.0L364.3 428.9L378.8 431.6L386.4 439.1L388.2 454.7L393.2 468.4L391.6 474.7L387.1 479.8L366.1 484.1L355.1 495.7L343.0 499.9L335.9 510.5L318.2 513.9L305.0 520.3L294.9 521.0L280.5 516.3L256.6 519.0L249.6 524.4L242.6 538.1L228.8 543.9L228.4 548.0L220.9 546.4L213.2 549.5L203.5 543.4L196.7 546.6L189.7 544.9L185.0 547.9L179.6 548.0L175.7 544.9L162.2 543.0L137.6 562.4L130.6 562.9L122.9 560.5L119.6 550.9L115.9 548.8L110.0 549.6L105.1 542.1"/>
 <path class="leg d3" data-day="3" data-min="615" d="M105.1 542.1L110.0 549.6L115.7 548.7L118.9 550.3L122.9 560.3L126.7 561.2"/>
-<path class="leg d3" data-day="3" data-min="705" d="M126.7 561.2L130.3 562.9L137.6 562.4L161.9 543.1L165.3 542.7L167.2 537.5"/>
-<path class="leg d3" data-day="3" data-min="840" d="M167.2 537.5L168.0 542.8L176.0 545.0L179.6 548.0L185.7 547.4L189.4 544.9L196.9 546.5L202.1 543.1L214.6 549.5L220.8 546.4L228.1 547.6L227.9 544.3L221.8 546.3L215.5 551.5L211.2 557.9L208.9 566.2L210.4 575.4L221.2 590.7L222.4 600.9L218.3 608.9L216.7 619.5L203.8 634.9L200.1 648.8L194.5 659.8L191.5 663.5L182.9 666.7L180.6 669.3L186.0 683.1L184.4 695.9L189.3 708.7L182.4 729.1L165.8 755.6L153.3 768.0L141.8 772.1L134.7 782.1L131.3 797.7L133.0 808.3L130.4 815.5L133.0 831.9L129.4 844.7L123.4 849.5L111.4 850.2L87.2 860.5L69.0 861.8L62.5 856.9L56.9 856.2L43.8 858.8L43.4 861.2L39.6 861.7L39.3 869.9L45.8 881.2L57.1 925.0L56.5 935.3L52.9 939.1L55.1 942.7L51.4 955.8L54.5 964.0L52.9 969.1"/>
+<path class="leg d3" data-day="3" data-min="660" d="M126.7 561.2L123.3 560.2L121.1 566.1L107.2 566.3L105.8 568.3"/>
+<path class="leg d3" data-day="3" data-min="830" d="M105.8 568.3L111.6 568.9L112.2 588.2L116.4 595.8L118.0 594.9L123.6 604.0L139.2 610.0L139.8 624.1L143.2 635.6L139.1 642.2L140.9 653.0L145.2 662.8L146.0 673.7L153.5 684.0L158.8 699.2L153.3 717.5L134.0 731.8L125.9 734.4L119.4 739.8L119.0 747.7L107.2 748.4L101.3 758.2L77.9 781.4L75.4 787.4L75.5 795.7L71.7 803.7L64.9 811.5L62.3 820.7L58.6 822.4L53.1 820.5L50.6 823.0L47.0 838.4L43.8 843.5L38.9 867.4L46.0 881.7L57.0 924.7L56.5 935.3L52.9 939.1L55.1 942.7L51.4 955.8L54.5 964.0L52.9 969.1"/>
 <path class="leg d3" data-day="3" data-min="1005" d="M52.9 969.1L54.5 964.0L51.4 955.8L55.1 942.7L52.9 939.1L56.5 935.3L56.9 924.7L45.7 881.2L38.8 867.7L47.0 832.6L37.4 832.8L37.3 831.1"/>
 <path class="leg d2" data-day="2" data-min="790" d="M264.5 301.2L269.7 294.9L283.4 291.1L284.1 303.7L289.4 313.5L290.3 321.2L298.6 333.5L299.0 342.8L315.7 349.1L319.3 348.6L323.9 341.0L328.9 339.3L335.0 341.3L340.7 346.3L350.3 347.5L354.8 344.0L353.8 341.8L361.0 333.1L361.6 329.0L371.1 326.5"/>
 </g>
@@ -1117,7 +1136,7 @@
 <g class="pin stop d1" data-day="1" data-i="2" data-min="660"><circle class="hit" cx="225.3" cy="612.5" r="24"/><circle class="ring" cx="225.3" cy="612.5" r="20"/><circle class="mk" cx="225.3" cy="612.5" r="11"/><text class="lab" x="249.3" y="621.5" data-en="Evertrail office">Evertrail営業所</text></g>
 <g class="pin stop d1" data-day="1" data-i="3" data-min="715"><circle class="hit" cx="322.1" cy="525.9" r="24"/><circle class="ring" cx="322.1" cy="525.9" r="20"/><circle class="mk" cx="322.1" cy="525.9" r="11"/><text class="lab" x="346.1" y="534.9" data-en="King Tacos, Kin">キングタコス金武</text></g>
 <g class="pin stop d1" data-day="1" data-i="4" data-min="785"><circle class="hit" cx="250.7" cy="464.3" r="24"/><circle class="ring" cx="250.7" cy="464.3" r="20"/><circle class="mk" cx="250.7" cy="464.3" r="11"/><text class="lab" x="274.7" y="473.3" data-en="Cape Manzamo">万座毛</text></g>
-<g class="pin stop d1" data-day="1" data-i="5" data-min="885"><circle class="hit" cx="470.8" cy="344.8" r="24"/><circle class="ring" cx="470.8" cy="344.8" r="20"/><circle class="mk" cx="470.8" cy="344.8" r="11"/><text class="lab" text-anchor="end" x="446.8" y="353.8" data-en="Fukugawa Falls">普久川の滝</text></g>
+<g class="pin stop d1" data-day="1" data-i="5" data-min="885"><circle class="hit" cx="467.7" cy="341.5" r="24"/><circle class="ring" cx="467.7" cy="341.5" r="20"/><circle class="mk" cx="467.7" cy="341.5" r="11"/><text class="lab" text-anchor="end" x="443.7" y="350.5" data-en="Hunga Falls">フンガー滝</text></g>
 <g class="pin stop d1" data-day="1" data-i="6" data-min="965"><circle class="hit" cx="388.3" cy="342.9" r="24"/><circle class="ring" cx="388.3" cy="342.9" r="20"/><circle class="mk" cx="388.3" cy="342.9" r="11"/><text class="lab" text-anchor="end" x="364.3" y="351.9" data-en="Nago groceries">名護 買い出し</text></g>
 <g class="pin stop d1" data-day="1" data-i="7" data-min="1010"><circle class="hit" cx="446.2" cy="293.8" r="24"/><circle class="ring" cx="446.2" cy="293.8" r="20"/><circle class="mk" cx="446.2" cy="293.8" r="11"/><text class="lab" text-anchor="end" x="422.2" y="302.8" data-en="Camp, Yagaji">キャンプ 屋我地</text></g>
 <g class="pin stop d2" data-day="2" data-i="0" data-min="385"><circle class="hit" cx="446.2" cy="293.8" r="24"/><circle class="ring" cx="446.2" cy="293.8" r="20"/><circle class="mk" cx="446.2" cy="293.8" r="11"/><text class="lab" text-anchor="end" x="422.2" y="302.8" data-en="Camp, Yagaji">キャンプ 屋我地</text></g>
@@ -1130,14 +1149,15 @@
 <g class="pin stop d3" data-day="3" data-i="0" data-min="450"><circle class="hit" cx="446.2" cy="293.8" r="24"/><circle class="ring" cx="446.2" cy="293.8" r="20"/><circle class="mk" cx="446.2" cy="293.8" r="11"/><text class="lab" text-anchor="end" x="422.2" y="302.8" data-en="Camp, Yagaji">キャンプ 屋我地</text></g>
 <g class="pin stop d3" data-day="3" data-i="1" data-min="540"><circle class="hit" cx="103.3" cy="541.1" r="24"/><circle class="ring" cx="103.3" cy="541.1" r="20"/><circle class="mk" cx="103.3" cy="541.1" r="11"/><text class="lab" x="127.3" y="550.1" data-en="Cape Zanpa">残波岬</text></g>
 <g class="pin stop d3" data-day="3" data-i="2" data-min="615"><circle class="hit" cx="126.7" cy="559.9" r="24"/><circle class="ring" cx="126.7" cy="559.9" r="20"/><circle class="mk" cx="126.7" cy="559.9" r="11"/><text class="lab" x="150.7" y="568.9" data-en="Senaha Beach">瀬名波ビーチ</text></g>
-<g class="pin stop d3" data-day="3" data-i="3" data-min="705"><circle class="hit" cx="166.6" cy="534.2" r="24"/><circle class="ring" cx="166.6" cy="534.2" r="20"/><circle class="mk" cx="166.6" cy="534.2" r="11"/><text class="lab" x="190.6" y="543.2" data-en="Cape Maeda">真栄田岬</text></g>
-<g class="pin stop d3" data-day="3" data-i="4" data-min="840"><circle class="hit" cx="52.8" cy="969.8" r="24"/><circle class="ring" cx="52.8" cy="969.8" r="20"/><circle class="mk" cx="52.8" cy="969.8" r="11"/><text class="lab" x="76.8" y="978.8" data-en="Gushikawa tide pool">具志川城跡 秘境プール</text></g>
+<g class="pin stop d3" data-day="3" data-i="3" data-min="660"><circle class="hit" cx="105.5" cy="568.2" r="24"/><circle class="ring" cx="105.5" cy="568.2" r="20"/><circle class="mk" cx="105.5" cy="568.2" r="11"/><text class="lab" x="129.5" y="577.2" data-en="Banta Cafe">バンタカフェ</text></g>
+<g class="pin stop d3" data-day="3" data-i="4" data-min="830"><circle class="hit" cx="52.8" cy="969.8" r="24"/><circle class="ring" cx="52.8" cy="969.8" r="20"/><circle class="mk" cx="52.8" cy="969.8" r="11"/><text class="lab" x="76.8" y="978.8" data-en="Gushikawa tide pool">具志川城跡 秘境プール</text></g>
 <g class="pin stop d3" data-day="3" data-i="5" data-min="1005"><circle class="hit" cx="36.2" cy="831.3" r="24"/><circle class="ring" cx="36.2" cy="831.3" r="20"/><circle class="mk" cx="36.2" cy="831.3" r="11"/><text class="lab" x="60.2" y="840.3" data-en="Naha Airport, car back">那覇空港 返却</text></g>
 </g>
 </svg></div>
     <div class="timebar jsonly">
       <input type="range" id="timeScrub" min="535" max="1010" step="5" value="535" aria-label="Time of day">
       <output class="tnow" id="timeNow" for="timeScrub">08:55</output>
+    </div>
     </div>
     <div class="group stopcard">
 <ul class="tl stoplist d1" data-day="1">
@@ -1146,7 +1166,7 @@
         <li data-i="2" data-min="660" tabindex="0" role="button"><span class="time">11:00</span><span class="dot"></span><span class="txt" data-en="Evertrail office">Evertrail営業所</span></li>
         <li data-i="3" data-min="715" tabindex="0" role="button"><span class="time">11:55</span><span class="dot"></span><span class="txt" data-en="King Tacos, Kin">キングタコス金武</span></li>
         <li data-i="4" data-min="785" tabindex="0" role="button"><span class="time">13:05</span><span class="dot"></span><span class="txt" data-en="Cape Manzamo">万座毛</span></li>
-        <li data-i="5" data-min="885" tabindex="0" role="button"><span class="time">14:45</span><span class="dot"></span><span class="txt" data-en="Fukugawa Falls">普久川の滝</span></li>
+        <li data-i="5" data-min="885" tabindex="0" role="button"><span class="time">14:45</span><span class="dot"></span><span class="txt" data-en="Hunga Falls">フンガー滝</span></li>
         <li data-i="6" data-min="965" tabindex="0" role="button"><span class="time">16:05</span><span class="dot"></span><span class="txt" data-en="Nago groceries">名護 買い出し</span></li>
         <li data-i="7" data-min="1010" tabindex="0" role="button"><span class="time">16:50</span><span class="dot"></span><span class="txt" data-en="Camp, Yagaji">キャンプ 屋我地</span></li>
       </ul>
@@ -1163,8 +1183,8 @@
         <li data-i="0" data-min="450" tabindex="0" role="button"><span class="time">07:30</span><span class="dot"></span><span class="txt" data-en="Camp, Yagaji">キャンプ 屋我地</span></li>
         <li data-i="1" data-min="540" tabindex="0" role="button"><span class="time">09:00</span><span class="dot"></span><span class="txt" data-en="Cape Zanpa">残波岬</span></li>
         <li data-i="2" data-min="615" tabindex="0" role="button"><span class="time">10:15</span><span class="dot"></span><span class="txt" data-en="Senaha Beach">瀬名波ビーチ</span></li>
-        <li data-i="3" data-min="705" tabindex="0" role="button"><span class="time">11:45</span><span class="dot"></span><span class="txt" data-en="Cape Maeda">真栄田岬</span></li>
-        <li data-i="4" data-min="840" tabindex="0" role="button"><span class="time">14:00</span><span class="dot"></span><span class="txt" data-en="Gushikawa tide pool">具志川城跡 秘境プール</span></li>
+        <li data-i="3" data-min="660" tabindex="0" role="button"><span class="time">11:00</span><span class="dot"></span><span class="txt" data-en="Banta Cafe">バンタカフェ</span></li>
+        <li data-i="4" data-min="830" tabindex="0" role="button"><span class="time">13:50</span><span class="dot"></span><span class="txt" data-en="Gushikawa tide pool">具志川城跡 秘境プール</span></li>
         <li data-i="5" data-min="1005" tabindex="0" role="button"><span class="time">16:45</span><span class="dot"></span><span class="txt" data-en="Naha Airport, car back">那覇空港 返却</span></li>
       </ul>
     </div>
