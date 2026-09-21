@@ -21,7 +21,7 @@ trip — the URL and remote are unchanged on purpose).
 |------|------|
 | `index.html` | The entire app. **Source of truth — edit directly.** |
 | `images/okinawa-hero.jpg`, `images/mount-rainier.jpg` | The two book covers, which are also the heroes. |
-| `images/camps/*`, `images/tidepool/*`, `images/dive/*`, `images/cafe/*` | Okinawa card photos, 720 px wide. |
+| `images/camps/*`, `images/tidepool/*`, `images/dive/*`, `images/cafe/*` | Okinawa card photos, 720 px wide (`dive/boat.jpg` is 442). |
 | `images/*.webp` | Seattle hike photos. |
 | `sw.js` | Cache-first service worker; precaches the shell and every image. A new worker waits until the refresh banner is tapped (or the app is fully closed). |
 | `manifest.webmanifest`, `icon-180.png`, `icon-512.png` | PWA manifest and icons. |
@@ -37,7 +37,8 @@ links are Google Maps, Evertrail and trail maps, which open externally and fail 
   `seattle`, and CSS shows that one place. The bootstrap script in `<head>` sets it before first paint
   and swaps `nojs` for `js-tabs`, so there is no flash; it persists in `localStorage['place']` and is
   mirrored into `history` so Back works. Adding a book means one more selector in the
-  `html[data-place=…]` rule.
+  `html[data-place=…]` rule, plus its slug in that bootstrap script's whitelist and one more
+  `.book:nth-child()` pair for the shelf animation timings.
 - **Opening a book** zooms `#turner` (a fixed overlay carrying the cover image) from the book's rect to
   full screen, then rotates its inner page off the spine. Reduced motion skips straight to the guide.
 - **Themes are token sets.** `:root` holds structure plus a neutral palette for the shelf and the
@@ -54,7 +55,8 @@ links are Google Maps, Evertrail and trail maps, which open externally and fail 
 - **Tabs are pure CSS.** Each guide has one radio group (`name="tab-<slug>"`) with each radio inside
   its `<label class="tabbtn">`, and `.guide:has(.t-<tab>:checked) .v-<tab>` shows the view. A new tab
   means one more selector there; the tab-bar highlight is already generic
-  (`.tabbtn:has(.tabradio:checked)`).
+  (`.tabbtn:has(.tabradio:checked)`). `:has()` carries the whole mechanism, so there is an
+  `@supports not (selector(:has(*)))` escape hatch that falls back to the stacked layout.
 - **Accordions** are native `<details>/<summary>`; **checklists** are `<input class="cb">` +
   `<label class="checkrow">`. Both are styled purely in CSS.
 - **`.spine`** is the shared vertical timeline behind day, logistics and campsite cards. Each card
@@ -71,16 +73,19 @@ links are Google Maps, Evertrail and trail maps, which open externally and fail 
 - **Bilingual, Japanese-first (Okinawa only).** Japanese is the markup, so first paint and the no-JS
   path are Japanese. Every translatable element carries its English inner HTML in `data-en`; the
   Japanese is cached into `data-ja` on the first switch, and a bubbling `langchange` event lets other
-  modules re-apply. The guide's `data-lang` is the flag and `data-bilingual` marks it translatable; the
-  choice persists in `localStorage['lang']`. Strings JS sets at runtime live in the `T()` table — keep
+  modules re-apply. `data-bilingual` on the guide is what declares a book translatable — both the
+  language sweep and the packing model check it — and `data-lang` holds the current choice, persisted in
+  `localStorage['lang']`. Strings JS sets at runtime live in the `T()` table — keep
   its Japanese identical to the markup. The packing list is excluded from the sweep: it renders from
   its own bilingual model.
 - **Units.** Every distance and temperature is a
   `<span class="u" data-metric="11.5 km" data-imperial="7 mi">11.5 km</span>`. Both strings are
   literals, so JS never does live maths. The default text is metric, the choice persists in
-  `localStorage['units']`, and it is global across both books. Always wrap a new measurement.
+  `localStorage['units']`, and the module is document-wide, so both books stay in sync. Always wrap a
+  new measurement.
 - **One toolbar rhythm on every tab:** heading → intro 6px, intro → control row 20px, row → row 12px,
-  row → content 14px. The language and unit toggles exist once each, in the Okinawa itinerary toolbar.
+  row → content 14px. Each book's itinerary toolbar holds a unit toggle; only Okinawa has a language
+  toggle.
 - **The packing list is the one exception to static markup.** The static `.group` rows are both the
   no-JS fallback and the one-time seed: JS builds a model from them, or restores the saved one, then
   re-renders. **Edit list** renames, adds, deletes and reorders categories and items; blank rows are
@@ -96,7 +101,7 @@ links are Google Maps, Evertrail and trail maps, which open externally and fail 
 
 ## The map (Okinawa)
 
-`.v-map` is an inline SVG — no tiles, no library, no network. The island, the route, all 67 pins and
+`.v-map` is an inline SVG — no tiles, no library, no network. The island, the route, all 69 pins and
 the three stop timelines are **static markup generated at authoring time** by `.map/build.py`; JS only
 toggles state. With JS off, all three days and every pin show.
 
@@ -105,8 +110,8 @@ toggles state. With JS off, all three days and every pin show.
   day on purpose, so the island never moves. Geometry is Douglas-Peucker simplified, rounded to 1 dp.
 - **Data:** coastline = OSM `natural=coastline` via Overpass (the 24 rings with area ≥ 18 px²). Routes
   = one OSRM driving leg per pair of consecutive stops, so the lines follow real roads; the boat, bus
-  and ~870 m office→IC walk are straight dashed lines instead (`KIND` marks the walk, whose car route
-  loops 13 km onto the expressway and would draw a lie). OSRM's per-leg minutes are what the
+  and the walking legs are straight dashed lines instead (`KIND` names them; the ~870 m office→IC
+  walk's car route loops 13 km onto the expressway and would draw a lie). OSRM's per-leg minutes are what the
   itinerary's drive times were checked against. **Keep the footer credit to OSRM and OpenStreetMap.**
 - **Colour = day** (`--acc`, `--acc2`, `--sun`). The day and layer chips carry a matching `.sw`
   swatch, so **the chips are the legend** — there is deliberately no legend block. Candidate layers are
@@ -117,7 +122,7 @@ toggles state. With JS off, all three days and every pin show.
 - **There is no time slider.** Tapping a stop — a pin or a row — is the only clock. That stop is
   `.now`; everything earlier that day goes grey, so the day's colour is only what is still ahead. A day
   opens at its first stop, or during Oct 10–12 2026 at the stop you should be at by now.
-- **Pins are not focusable** (67 tab stops would swamp the keyboard order): the SVG is one
+- **Pins are not focusable** (69 tab stops would swamp the keyboard order): the SVG is one
   `role="img"` and the stop rows are the keyboard path. Each pin carries a wide invisible `circle.hit`
   so a small dot stays hittable.
 - **Regenerating:** `python3 .map/build.py` needs `.map/coast.json` and `.map/legs.json` (gitignored —
@@ -161,9 +166,9 @@ translation pass.
    `<small>` under the line it belongs to, or a stat tile.
 3. **Do not hand-edit the map SVG** — change the tables in `.map/build.py` and regenerate. A new or
    moved stop needs its OSRM leg refetched too, or the line will not reach its pin.
-4. Checklist rows are an `<input class="cb" id="<slug>-packing-<group>-<index>">` followed by its
-   `<label class="checkrow" for="…">`. `seedFromDOM()` reads structure (`.group`, `.checkrow`, `.ctxt`,
-   the `.gicon use` href), not ids.
+4. Checklist rows are an `<input class="cb" id="ok-|se-packing-<group>-<index>">` followed by its
+   `<label class="checkrow" for="…">`. The prefix only has to be unique per book — `seedFromDOM()`
+   reads structure (`.group`, `.checkrow`, `.ctxt`, the `.gicon use` href), never ids.
 5. **After any change to `index.html` or another cached asset, bump `CACHE` in `sw.js`** — otherwise
    installed phones keep serving the old copy.
 

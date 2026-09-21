@@ -23,7 +23,7 @@ Two books, both 2026:
   car is collected, filterable by free / paid / beach / toilet / shower.
 - **Editable packing list** per book — add, rename, reorder and delete categories and items; saved on
   the device.
-- **Metric ⇄ imperial** and **English ⇄ 日本語** toggles; both choices persist.
+- **Metric ⇄ imperial** everywhere, and **English ⇄ 日本語** in the Okinawa book; both choices persist.
 - Degrades gracefully: with JavaScript off (a plain file preview) every book still shows, stacked
   instead of tabbed.
 
