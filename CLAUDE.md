@@ -173,6 +173,38 @@ Two constraints worth remembering:
 3. **After ANY change to `index.html` (or other cached assets): bump the cache name in `sw.js`**
    (`okinawa-2026-v1` → `v2`). Otherwise installed phones keep serving the old cached copy.
 
+### Google Maps links — how they were built
+
+Every link points at a real place, never a coordinate. Three tiers, in descending precision:
+
+1. **Campsites (26)** — the Evertrail directory's own `Google maps` field, i.e. the operator's pin.
+   For unnamed wild sites this is the best available; do not "improve" it into a coordinate search.
+2. **Named venues (18)** — an exact place link of the form
+   `https://www.google.com/maps/place//data=!4m2!3m1!1s<FID>` where `<FID>` is Google's
+   `0x…:0x…` feature id.
+3. **Cape Hedo (1)** — a `?api=1&query=` place query, because Google returns a result list for it
+   rather than one place. Flagged here so nobody assumes it was missed.
+
+**How a FID is obtained** (no API key needed):
+1. From a page on an allowlisted origin, `window.open('https://www.google.com/maps/search/<query>')`
+   for each venue — several at once is fine.
+2. Wait ~6 s, then call chrome-devtools `list_pages`. Each tab's entry shows its **resolved** URL,
+   which for a single match becomes `/maps/place/<name>/@<lat>,<lon>,17z/data=…!1s0x…:0x…!8m2!3d<lat>!4d<lon>`.
+   This is the trick that makes it cheap — the page list carries the resolved URL, so one call reads
+   a whole batch. `evaluate_script` on each tab would work too but costs a call per venue.
+3. Take `!1s0x…:0x…` as the FID and `!3d/!4d` as Google's coordinates for that place.
+4. **Verify**: compare `!3d/!4d` against an independent reference — Tabelog's coordinates for shops,
+   OSM/Nominatim for landmarks, the Evertrail record otherwise. All ten shops and cafes matched to
+   within ~2 m. Accept a larger gap only with a reason: 比地大滝 130 m and 崎本部緑地 45 m are the
+   place pin versus the OSM node; ター滝 is ~625 m from Evertrail's pin because Google marks the falls
+   and Evertrail marks the trailhead; 古宇利島 is the island centroid, not the bridge.
+5. If a tab stays on `/maps/search/`, there is no single matching place. Retry with the official name
+   (ゴリラチョップ only resolved as 崎本部緑地, Seragaki only as ダイヤモンドビーチ). If it still does
+   not resolve, leave a query link rather than inventing a pin.
+
+**Dead end worth remembering:** `https://maps.google.com/?cid=<decimal>` no longer works. It looks
+right and fails silently — a test link opened in Tokyo. Only the FID form or a place query is safe.
+
 ### Where the campsite data came from
 
 The 26 campsites are the drivable main-island subset of the **Evertrail Okinawa directory**
