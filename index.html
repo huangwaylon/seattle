@@ -272,19 +272,26 @@
     background-image:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='s'><feTurbulence type='fractalNoise' baseFrequency='0.28' numOctaves='1' seed='7' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 9 0 0 0 -6.7'/></filter><rect width='200' height='200' filter='url%28%23s%29'/></svg>");background-size:200px 200px;}
   @keyframes glint{from{opacity:.22;} to{opacity:.68;}}
 
-  /* The specular streak. Keep the band wide and low-contrast — a narrow one reads as a seam down
-     the cover, not as light. */
-  .book-gloss{position:absolute;inset:-25% -60%;z-index:2;pointer-events:none;
+  /* The specular streak — a bloom of white light sweeping the other way to the colour field.
+     Built exactly like the field, and for the same reason: a layer larger than the cover, moved by
+     a transform, drags its own boundary across the art inside the cover's clip, and that boundary
+     is shaped like the cover. Nothing here is larger than the cover, nothing is transformed, and
+     closest-side guarantees the bloom reaches transparent before its own background box ends, so
+     there is no edge anywhere for the sweep to bring into view. */
+  .book-gloss{position:absolute;inset:0;z-index:2;pointer-events:none;
     mix-blend-mode:color-dodge;
-    background:linear-gradient(125deg,
-      rgba(255,255,255,0) 30%,   rgba(150,80,255,.07) 40%, rgba(70,175,255,.13) 45%,
-      rgba(150,255,220,.17) 50%, rgba(255,220,120,.13) 55%, rgba(255,100,155,.07) 60%,
-      rgba(255,255,255,0) 70%);
+    background-image:radial-gradient(closest-side at 50% 50%,
+      rgba(255,250,240,.30) 0%, rgba(255,238,210,.17) 42%, rgba(255,225,180,.07) 66%,
+      rgba(0,0,0,0) 88%);
+    background-size:150% 210%;background-repeat:no-repeat;
     -webkit-mask-image:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='170' height='170'><filter id='u'><feTurbulence type='fractalNoise' baseFrequency='0.017 0.021' numOctaves='3' seed='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.48 0 0 0 0.52'/></filter><rect width='170' height='170' filter='url%28%23u%29'/></svg>");mask-image:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='170' height='170'><filter id='u'><feTurbulence type='fractalNoise' baseFrequency='0.017 0.021' numOctaves='3' seed='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.48 0 0 0 0.52'/></filter><rect width='170' height='170' filter='url%28%23u%29'/></svg>");
     -webkit-mask-size:170px 170px;mask-size:170px 170px;
     -webkit-mask-repeat:repeat;mask-repeat:repeat;
     animation:gloss var(--sway) ease-in-out var(--sway-delay) infinite alternate;}
-  @keyframes gloss{from{transform:translateX(-22%);} to{transform:translateX(22%);}}
+  @keyframes gloss{
+    from{background-position:-46% 24%;}
+    to{background-position:46% -24%;}
+  }
   .book-txt{position:absolute;left:0;right:0;bottom:0;z-index:4;padding:16px 14px 17px 18px;}
   .bk-eyebrow{display:block;font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
     color:var(--eyebrow);text-shadow:0 1px 8px rgba(0,0,0,.7);}
