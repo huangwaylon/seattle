@@ -219,11 +219,11 @@
   .book-cover::after{content:"";position:absolute;inset:0;z-index:1;
     background:linear-gradient(180deg,rgba(10,12,11,.12) 34%,rgba(10,12,11,.82) 100%);}
   /* ---- Holographic foil ----
-     Iridescence is a *specular* thing: it rides on reflected light, so it belongs in the lit parts
-     of the art and nowhere near the shadows. Every layer here therefore blends on color-dodge,
-     whose result is identically zero against black — the dark band the title sits on, and the dark
-     water and rock in the photos, stay exactly as they were. Alpha bounds the lift at the other
-     end, so a bright sky cannot blow out either.
+     The colour is not painted on: the field blends on `hue`, so it supplies only a hue and takes
+     the photograph's own saturation and luminosity. The glint and the streak are specular and blend
+     on color-dodge, whose result is identically zero against black — the dark band the title sits
+     on, and the dark water and rock in the photos, stay exactly as they were, and alpha bounds the
+     lift at the other end so a bright sky cannot blow out either.
        .book-holo    the spectral field: concentric rings, which is what a diffraction pattern
                      actually looks like, fading to transparent at their own edge so the layer has
                      no boundary of its own to show.
@@ -244,18 +244,22 @@
      filter plus mix-blend-mode plus a preserve-3d ancestor is where compositing gets fragile. Only
      background-position moves, and only on the layer that should. */
   .book-holo,.book-sparkle{position:absolute;inset:0;z-index:2;pointer-events:none;
-    mix-blend-mode:color-dodge;
     animation-duration:var(--sway,9s);animation-delay:var(--sway-delay,0s);
     animation-timing-function:ease-in-out;animation-iteration-count:infinite;
     animation-direction:alternate;}
-  .book-holo{animation-name:holo;
+  /* The field blends on `hue`, which takes its hue but the *photograph's* saturation and
+     luminosity. So the foil only colours what the photo already has colour in — grey rock and
+     white snow stay as they are, a blue sky and green grass swing through the spectrum — and since
+     luminosity is untouched it cannot blow out a highlight or wash a shadow. The rainbow stops
+     being painted on and starts being a property of the art underneath. */
+  .book-holo{mix-blend-mode:hue;animation-name:holo;
     /* closest-side, not a fixed 64%: the rings must reach transparent *inside* their own
        background box on both axes. Sized in percentages they did not, so the box's edge stayed
        coloured — a hard vertical boundary, bright on one side and untouched on the other, sliding
        across the cover as the position animates. That is the line. */
     background-image:radial-gradient(closest-side at 50% 46%,
-      rgba(255,150,205,.26) 0%,  rgba(140,205,255,.24) 22%, rgba(160,255,215,.22) 40%,
-      rgba(255,228,145,.19) 58%, rgba(200,155,255,.11) 74%, rgba(0,0,0,0) 92%);
+      rgba(255,90,175,.85) 0%,   rgba(90,185,255,.80) 22%, rgba(120,255,195,.72) 40%,
+      rgba(255,215,105,.62) 58%, rgba(185,120,255,.38) 74%, rgba(0,0,0,0) 92%);
     background-size:200% 180%;background-repeat:no-repeat;
     -webkit-mask-image:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='170' height='170'><filter id='u'><feTurbulence type='fractalNoise' baseFrequency='0.017 0.021' numOctaves='3' seed='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.48 0 0 0 0.52'/></filter><rect width='170' height='170' filter='url%28%23u%29'/></svg>");mask-image:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='170' height='170'><filter id='u'><feTurbulence type='fractalNoise' baseFrequency='0.017 0.021' numOctaves='3' seed='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.48 0 0 0 0.52'/></filter><rect width='170' height='170' filter='url%28%23u%29'/></svg>");
     -webkit-mask-size:170px 170px;mask-size:170px 170px;
@@ -264,7 +268,7 @@
     from{background-position:-38% -24%;}
     to{background-position:38% 24%;}
   }
-  .book-sparkle{animation-name:glint;
+  .book-sparkle{mix-blend-mode:color-dodge;animation-name:glint;
     background-image:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='s'><feTurbulence type='fractalNoise' baseFrequency='0.28' numOctaves='1' seed='7' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 9 0 0 0 -6.7'/></filter><rect width='200' height='200' filter='url%28%23s%29'/></svg>");background-size:200px 200px;}
   @keyframes glint{from{opacity:.22;} to{opacity:.68;}}
 
@@ -797,6 +801,7 @@ var LS={
     <symbol id="i-minus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/></symbol>
     <symbol id="i-fit" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></symbol>
     <symbol id="i-sliders" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h10"/><path d="M18 8h2"/><path d="M4 16h4"/><path d="M12 16h8"/><circle cx="16" cy="8" r="2"/><circle cx="10" cy="16" r="2"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></symbol>
   </defs>
 </svg>
 
@@ -3316,7 +3321,8 @@ var T=(function(){
     food:['Eat','食べる'],
     zoomIn:['Zoom in','拡大'],
     zoomOut:['Zoom out','縮小'],
-    zoomFit:['Fit','全体表示']
+    zoomFit:['Fit','全体表示'],
+    close:['Close','閉じる']
   };
   return function(k,a){
     var v=S[k][document.documentElement.lang==='en'?0:1];
@@ -3668,6 +3674,54 @@ function icon(id){return '<svg class="ic" aria-hidden="true"><use href="#i-'+id+
     labels(); render();
   }
 
+  /* CAMPSITE SHEET — a campsite pin names itself on the first tap and opens on the second, or on a
+     tap of the name. The card is not rebuilt: it is cloned live out of the campsite list, so the
+     photo, chips, stats and Maps link arrive in whatever language and units are showing and there
+     is nothing to keep in step. A pin finds its card by the slug the generator writes, which is the
+     same slug the card's own photo is named by. */
+  function campSheet(g){
+    var cards={};
+    g.querySelectorAll('.camp-list details.camp').forEach(function(c){
+      var img=c.querySelector('.thumb img');
+      var m=img&&img.getAttribute('src').match(/([^/]+)\.[a-z]+$/);
+      if(m) cards[m[1]]=c;
+    });
+    if(!Object.keys(cards).length) return null;
+
+    var sheet=elt('div','camp-sheet jsonly',
+      '<div class="scrim"></div>'
+      +'<div class="sheet-card" role="dialog" aria-modal="true" tabindex="-1">'
+      +'<div class="sheet-head"><div class="ttl"></div>'
+      +'<button class="icon-btn sheet-x" type="button">'+icon('x')+'</button></div>'
+      +'<div class="sheet-body"></div></div>');
+    sheet.hidden=true;
+    g.appendChild(sheet);
+    var card=sheet.querySelector('.sheet-card'), was=null;
+
+    function close(){
+      sheet.hidden=true;
+      if(was&&was.isConnected) was.focus({preventScroll:true});
+      was=null;
+    }
+    function open(slug){
+      var src=cards[slug]; if(!src) return;
+      sheet.querySelector('.ttl').innerHTML=src.querySelector('.ttl').innerHTML;
+      sheet.querySelector('.sheet-body').replaceChildren(
+        src.querySelector('.content').cloneNode(true));
+      sheet.querySelector('.sheet-x').setAttribute('aria-label',T('close'));
+      was=document.activeElement;
+      sheet.hidden=false;
+      card.focus({preventScroll:true});
+    }
+    sheet.addEventListener('click',function(e){
+      if(e.target.closest('.sheet-x')||e.target.closest('.scrim')) close();
+    });
+    document.addEventListener('keydown',function(e){
+      if(e.key==='Escape'&&!sheet.hidden) close();
+    });
+    return open;
+  }
+
   /* MAP — the coastline, routes and pins are static SVG; this only switches state on the view and
      moves the viewBox. Both maps share every line of it. */
   function map(g){
@@ -3677,6 +3731,7 @@ function icon(id){return '<svg class="ic" aria-hidden="true"><use href="#i-'+id+
     var lists=view.querySelectorAll('.stoplist');
     var rows=view.querySelectorAll('.stoplist li');
     var day='1', at=null;            /* at = the minute of the stop we are at, null for none */
+    var openCamp=campSheet(g);       /* null unless this book has campsite cards */
     function mine(el){return el.classList.contains('d'+day);}
 
     /* ---- chrome. Built here, so a book's day chips cannot fall out of step with its stops. ---- */
@@ -3883,7 +3938,15 @@ function icon(id){return '<svg class="ic" aria-hidden="true"><use href="#i-'+id+
       /* A pan is not a tap — but only a pan of the map itself, so a chip tapped straight after
          one still lands. */
       if(dragged&&svg.contains(e.target)){ dragged=false; return; }
-      var pin=e.target.closest('.pin');                 if(pin){select(pin); return;}
+      var pin=e.target.closest('.pin');
+      if(pin){
+        /* A campsite opens on the second tap, or on a tap of the name it just put up — so the
+           first tap can still be "which one is that?" without committing to anything. */
+        if(openCamp&&pin.dataset.camp&&(pin.classList.contains('sel')||e.target.closest('.lab')))
+          openCamp(pin.dataset.camp);
+        else select(pin);
+        return;
+      }
       var dayBtn=e.target.closest('.map-days button');  if(dayBtn){setDay(dayBtn.dataset.day); return;}
       var lay=e.target.closest('.map-layers button');
       if(lay){
