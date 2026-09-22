@@ -77,7 +77,14 @@ def guide_range(html, guide):
 
 def matches(tag, cls, ancestors):
     for stag, scls, parent in SLOTS:
-        if tag != stag or not set(scls) <= set(cls):
+        if tag != stag:
+            continue
+        # A slot listing no class means the bare element: `<li>` in a bullet list, the wrapper
+        # `<span>` in a button. Without this, a stop row's `.time` would look like a wrapper span.
+        if scls:
+            if not set(scls) <= set(cls):
+                continue
+        elif cls:
             continue
         if parent:
             if not ancestors:
@@ -126,10 +133,13 @@ def slots(html, guide):
 
 
 def other(html, guide):
-    """The attribute a guide's translations live in: the language its markup is *not* written in."""
-    lo, _ = guide_range(html, guide)
-    base = re.search(r'data-lang="(\w+)"', html[lo:lo + 400]).group(1)
-    return 'en' if base == 'ja' else 'ja'
+    """The attribute a guide's translations live in. There is no per-book language setting any
+    more — an element's markup language is simply the one attribute it does *not* carry — so the
+    direction is read back from whichever attribute the guide already uses. A guide with no
+    translations yet is assumed to be English awaiting Japanese."""
+    lo, hi = guide_range(html, guide)
+    body = html[lo:hi]
+    return 'en' if body.count('data-en="') > body.count('data-ja="') else 'ja'
 
 
 def sid(slot, src):

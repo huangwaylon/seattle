@@ -164,8 +164,8 @@ def lab(x,ja,en,dy):
     return '<text class="lab"%s x="%.1f" y="%.1f" data-en="%s">%s</text>'%(a,x,dy,esc(en),esc(ja))
 
 out=[]
-out.append('<svg class="map" viewBox="0 0 %d %d" role="img" aria-labelledby="mapTitle">'%(W,H))
-out.append('<title id="mapTitle" data-en="Okinawa main island: our route and the places on it">沖縄本島 &mdash; 走るルートと立ち寄り先</title>')
+out.append('<svg class="map" viewBox="0 0 %d %d" role="img">'%(W,H))
+out.append('<title data-en="Okinawa main island &mdash; our route and the places on it">沖縄本島 &mdash; 走るルートと立ち寄り先</title>')
 out.append('<rect class="sea" width="%d" height="%d"/>'%(W,H))
 out.append('<g class="land">\n'+'\n'.join('<path d="%s"/>'%d for d in land)+'\n</g>')
 
@@ -232,9 +232,10 @@ lists=[]
 for d,stops in DAYS.items():
     rows=[]
     for i,(t,ja,en,la,lo) in enumerate(stops):
-        rows.append('<li data-i="%d" data-min="%d" tabindex="0" role="button">'
+        rows.append('<li data-i="%d" data-min="%d">'
+                    '<button class="stoprow" type="button">'
                     '<span class="time">%s</span><span class="dot"></span>'
-                    '<span class="txt" data-en="%s">%s</span></li>'%(i,mins(t),t,esc(en),esc(ja)))
+                    '<span class="txt" data-en="%s">%s</span></button></li>'%(i,mins(t),t,esc(en),esc(ja)))
     lists.append('      <ul class="tl stoplist d%d" data-day="%d">\n        %s\n      </ul>'%(d,d,'\n        '.join(rows)))
 
 open('.map/map.svg.html','w').write(svg)

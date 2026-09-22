@@ -1,4 +1,4 @@
-const CACHE = 'guides-v5';
+const CACHE = 'guides-v6';
 const ASSETS = [
   './', './index.html', './manifest.webmanifest', './icon-180.png', './icon-512.png',
   './images/okinawa-hero.jpg',

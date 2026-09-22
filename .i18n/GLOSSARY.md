@@ -47,3 +47,29 @@ Stargazing 星空 / Toilet トイレ / Shower シャワー
 3. 数字・時刻・価格・便名・座席番号・予約番号はそのまま。
 4. 訳す必要がない文字列（`SNA 021`, `&yen;9,000`, `06:10 &rarr; 08:55` など）は英語のまま返す。
 5. スマホの狭い1カラムに収まる長さにする。ボタン・タブ・スタット名は特に短く。
+
+## New Zealand place & proper names
+New Zealand ニュージーランド / North Island 北島 / Auckland オークランド
+Auckland Airport オークランド空港 / Narita 成田 / Air New Zealand ニュージーランド航空
+New Lynn ニューリン / Waiheke Island ワイヘキ島 / Matiatia Wharf マティアティア埠頭
+Downtown Ferry Terminal ダウンタウン・フェリーターミナル / Britomart ブリトマート
+Parnell パーネル / Parnell Farmers' Market パーネル・ファーマーズマーケット
+Domain Wintergardens ドメイン・ウィンターガーデン / Cornwall Park コーンウォール・パーク
+One Tree Hill ワンツリーヒル / Maungakiekie マウンガキエキエ
+Karangahape Road カランガハペ・ロード / North Shore ノースショア / Northcote ノースコート
+Devonport デボンポート / Belmont ベルモント / Kauri Glen Reserve カウリ・グレン保護区
+Takarunga タカルンガ / Mount Victoria マウント・ビクトリア
+Waitomo ワイトモ / Waitomo Glowworm Caves ワイトモ鍾乳洞 / glowworm 土ボタル
+New Plymouth ニュープリマス / Taranaki タラナキ / Pouākai Tarns ポウアカイ・ターン
+Mangorei Track マンゴレイ・トラック / trailhead 登山口 / tarn ターン / bushline 森林限界
+Taupō タウポ / Tīrau ティラウ / Orakei Korako オラケイコラコ
+Orakei Korako Geothermal Park & Cave オラケイコラコ地熱公園・洞窟 / Huka Falls フカ滝
+NZeTA NZeTA / Māori マオリ / NZDT ニュージーランド夏時間 / biosecurity 検疫
+visitor levy 入国者観光税 / free-flow 渋滞なし / boardwalk 木道 / bush walk 森の遊歩道
+host mother ホストマザー / Type I plug Type Iのプラグ（そのまま） / OSRM OSRM（そのまま）
+
+Latin script, unchanged: Daily Bread, Crushes, Porter James, Hard To Find Books, MIBO,
+Outdoors Society, Amano, Allpress Olive Groves, Batch Winery, Expedia.
+Branch suffix pattern: `Daily Bread, New Lynn` → `Daily Bread ニューリン店`;
+`Amano, Britomart` → `Amano（ブリトマート）`.
+Traveller names stay in Latin script: Waylon Huang, Asuka Umeda.

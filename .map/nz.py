@@ -386,9 +386,10 @@ lists = []
 for d, stops in DAYS.items():
     rows = []
     for i, (t, en, ja, la, lo) in enumerate(stops):
-        rows.append('<li data-i="%d" data-min="%d" tabindex="0" role="button">'
+        rows.append('<li data-i="%d" data-min="%d">'
+                    '<button class="stoprow" type="button">'
                     '<span class="time">%s</span><span class="dot"></span>'
-                    '<span class="txt" data-ja="%s">%s</span></li>'
+                    '<span class="txt" data-ja="%s">%s</span></button></li>'
                     % (i, mins(t), t, esc(ja), esc(en)))
     lists.append('      <ul class="tl stoplist d%d" data-day="%d">\n        %s\n      </ul>'
                  % (d, d, '\n        '.join(rows)))
