@@ -239,14 +239,16 @@
        .book-gloss   the specular streak that sweeps as the cover turns.
      Both the field and the streak are masked by a slow turbulence field, so neither is the clean
      shape a gradient wants to be: a laminated cover is never flat, and the foil under it catches
-     the light unevenly. The mask only ever thins the foil — its alpha runs 0.52 to 1 — and it
-     tiles, so it has no edge of its own.
+     the light unevenly. The mask only ever thins the foil — its alpha runs about 0.6 to 0.95 — and
+     it tiles seamlessly, which needs an explicit filterUnits region: stitchTiles stitches to the
+     *filter region*, and that defaults to 10% larger than the tile, so without it every tile edge
+     is a visible step.
      Everything runs on --sway, the book's own rotation cycle, so the foil answers the turn.
-     Nothing is larger than the cover, nothing rotates, nothing is masked and nothing is filtered:
-     an oversized or rotated blended layer drags its own rectangular edge across the art, and
-     filter plus mix-blend-mode plus a preserve-3d ancestor is where compositing gets fragile. Only
-     background-position moves, and only on the layer that should. */
-  .book-holo,.book-sparkle{position:absolute;inset:0;z-index:2;pointer-events:none;
+     Nothing is larger than the cover and nothing is transformed: an oversized or moved blended
+     layer drags its own rectangular edge across the art, and that edge is shaped like the cover.
+     Only background-position moves, and every gradient is sized with closest-side so it reaches
+     transparent before its own background box ends — which is what keeps that box edge invisible. */
+  .book-holo,.book-sparkle,.book-gloss{position:absolute;inset:0;z-index:2;pointer-events:none;
     animation-duration:var(--sway,9s);animation-delay:var(--sway-delay,0s);
     animation-timing-function:ease-in-out;animation-iteration-count:infinite;
     animation-direction:alternate;}
@@ -265,15 +267,15 @@
       rgba(255,215,105,.32) 58%, rgba(185,120,255,.19) 74%, rgba(0,0,0,0) 92%);
     background-size:200% 180%;background-repeat:no-repeat;
     background-position:50% 41%;   /* the midpoint of the sweep, so reduced motion rests centred */
-    -webkit-mask-image:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='170' height='170'><filter id='u'><feTurbulence type='fractalNoise' baseFrequency='0.017 0.021' numOctaves='3' seed='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.48 0 0 0 0.52'/></filter><rect width='170' height='170' filter='url%28%23u%29'/></svg>");mask-image:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='170' height='170'><filter id='u'><feTurbulence type='fractalNoise' baseFrequency='0.017 0.021' numOctaves='3' seed='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.48 0 0 0 0.52'/></filter><rect width='170' height='170' filter='url%28%23u%29'/></svg>");
+    -webkit-mask-image:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='170' height='170'><filter id='u' filterUnits='userSpaceOnUse' x='0' y='0' width='170' height='170'><feTurbulence type='fractalNoise' baseFrequency='0.017 0.021' numOctaves='3' seed='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.48 0 0 0 0.52'/></filter><rect width='170' height='170' filter='url%28%23u%29'/></svg>");mask-image:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='170' height='170'><filter id='u' filterUnits='userSpaceOnUse' x='0' y='0' width='170' height='170'><feTurbulence type='fractalNoise' baseFrequency='0.017 0.021' numOctaves='3' seed='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.48 0 0 0 0.52'/></filter><rect width='170' height='170' filter='url%28%23u%29'/></svg>");
     -webkit-mask-size:170px 170px;mask-size:170px 170px;
     -webkit-mask-repeat:repeat;mask-repeat:repeat;}
   @keyframes holo{
     from{background-position:12% 16%;}
     to{background-position:88% 66%;}
   }
-  .book-sparkle{mix-blend-mode:color-dodge;animation-name:glint;
-    background-image:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='s'><feTurbulence type='fractalNoise' baseFrequency='0.28' numOctaves='1' seed='7' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 9 0 0 0 -6.7'/></filter><rect width='200' height='200' filter='url%28%23s%29'/></svg>");background-size:200px 200px;}
+  .book-sparkle{mix-blend-mode:color-dodge;animation-name:glint;opacity:.38;
+    background-image:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='s' filterUnits='userSpaceOnUse' x='0' y='0' width='200' height='200'><feTurbulence type='fractalNoise' baseFrequency='0.28' numOctaves='1' seed='7' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 9 0 0 0 -6.7'/></filter><rect width='200' height='200' filter='url%28%23s%29'/></svg>");background-size:200px 200px;}
   @keyframes glint{from{opacity:.2;} to{opacity:.56;}}
 
   /* The specular streak — a bloom of white light sweeping the other way to the colour field.
@@ -282,17 +284,16 @@
      is shaped like the cover. Nothing here is larger than the cover, nothing is transformed, and
      closest-side guarantees the bloom reaches transparent before its own background box ends, so
      there is no edge anywhere for the sweep to bring into view. */
-  .book-gloss{position:absolute;inset:0;z-index:2;pointer-events:none;
-    mix-blend-mode:color-dodge;
+  .book-gloss{mix-blend-mode:color-dodge;
     background-image:radial-gradient(closest-side at 50% 50%,
-      rgba(255,250,240,.17) 0%, rgba(255,238,210,.10) 42%, rgba(255,225,180,.04) 66%,
+      rgba(46,41,33,.62) 0%, rgba(38,34,27,.34) 42%, rgba(26,23,18,.13) 66%,
       rgba(0,0,0,0) 88%);
     background-size:150% 210%;background-repeat:no-repeat;
     background-position:50% 50%;
-    -webkit-mask-image:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='170' height='170'><filter id='u'><feTurbulence type='fractalNoise' baseFrequency='0.017 0.021' numOctaves='3' seed='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.48 0 0 0 0.52'/></filter><rect width='170' height='170' filter='url%28%23u%29'/></svg>");mask-image:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='170' height='170'><filter id='u'><feTurbulence type='fractalNoise' baseFrequency='0.017 0.021' numOctaves='3' seed='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.48 0 0 0 0.52'/></filter><rect width='170' height='170' filter='url%28%23u%29'/></svg>");
+    -webkit-mask-image:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='170' height='170'><filter id='u' filterUnits='userSpaceOnUse' x='0' y='0' width='170' height='170'><feTurbulence type='fractalNoise' baseFrequency='0.017 0.021' numOctaves='3' seed='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.48 0 0 0 0.52'/></filter><rect width='170' height='170' filter='url%28%23u%29'/></svg>");mask-image:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='170' height='170'><filter id='u' filterUnits='userSpaceOnUse' x='0' y='0' width='170' height='170'><feTurbulence type='fractalNoise' baseFrequency='0.017 0.021' numOctaves='3' seed='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.48 0 0 0 0.52'/></filter><rect width='170' height='170' filter='url%28%23u%29'/></svg>");
     -webkit-mask-size:170px 170px;mask-size:170px 170px;
     -webkit-mask-repeat:repeat;mask-repeat:repeat;
-    animation:gloss var(--sway) ease-in-out var(--sway-delay) infinite alternate;}
+    animation-name:gloss;}
   @keyframes gloss{
     from{background-position:88% 80%;}
     to{background-position:12% 20%;}
@@ -3704,14 +3705,24 @@ function icon(id){return '<svg class="ic" aria-hidden="true"><use href="#i-'+id+
       '<div class="scrim"></div>'
       +'<div class="sheet-card" role="dialog" aria-modal="true" tabindex="-1">'
       +'<div class="sheet-head"><div class="ttl"></div>'
-      +'<button class="icon-btn sheet-x" type="button">'+icon('x')+'</button></div>'
+      +'<button class="icon-btn sheet-x" type="button">'+icon('x')
+      +'<span class="sr"></span></button></div>'
       +'<div class="sheet-body"></div></div>');
     sheet.hidden=true;
     g.appendChild(sheet);
     var card=sheet.querySelector('.sheet-card'), was=null;
+    function label(){sheet.querySelector('.sheet-x .sr').textContent=T('close');}
+    document.addEventListener('langchange',label);
+    label();
 
+    /* aria-modal only *claims* the rest is unreachable; inert is what makes it true. */
+    function seal(on){
+      Array.prototype.forEach.call(g.children,function(el){
+        if(el!==sheet) el.inert=on;
+      });
+    }
     function close(){
-      sheet.hidden=true;
+      sheet.hidden=true; seal(false);
       if(was&&was.isConnected) was.focus({preventScroll:true});
       was=null;
     }
@@ -3720,9 +3731,8 @@ function icon(id){return '<svg class="ic" aria-hidden="true"><use href="#i-'+id+
       sheet.querySelector('.ttl').innerHTML=src.querySelector('.ttl').innerHTML;
       sheet.querySelector('.sheet-body').replaceChildren(
         src.querySelector('.content').cloneNode(true));
-      sheet.querySelector('.sheet-x').setAttribute('aria-label',T('close'));
       was=document.activeElement;
-      sheet.hidden=false;
+      sheet.hidden=false; seal(true);
       card.focus({preventScroll:true});
     }
     sheet.addEventListener('click',function(e){

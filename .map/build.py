@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """Generates the static inline-SVG map (#view-map in index.html) — the island, the road
-routes and all 69 pins. index.html stays the source of truth: this writes markup you paste
+routes and all 70 pins. index.html stays the source of truth: this writes markup you paste
 into it, there is no build step at runtime.
 
 It needs two fetched inputs next to it. Neither ships to the browser, and both come from an
