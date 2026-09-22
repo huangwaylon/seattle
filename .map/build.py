@@ -156,10 +156,10 @@ FOOD=[('新垣ぜんざい屋','Aragaki Zenzai',26.66063,127.89583),
 # ---------------------------------------------------------------- output
 def esc(s): return s.replace('&','&amp;').replace('<','&lt;').replace('>','&gt;').replace('"','&quot;')
 def lab(x,ja,en,dy):
-    """label text element, flipped to the left half when the pin sits on the right"""
-    if x > W*0.45: a,dx=' text-anchor="end"',-24
-    else:          a,dx=              '', 24
-    return '<text class="lab"%s x="%.1f" y="%.1f" data-en="%s">%s</text>'%(a,x+dx,dy+9,esc(en),esc(ja))
+    """label text element, flipped to the left half when the pin sits on the right. The gap from
+    pin to label is a CSS translate, so it holds its size on screen at any zoom."""
+    a=' text-anchor="end"' if x > W*0.45 else ''
+    return '<text class="lab"%s x="%.1f" y="%.1f" data-en="%s">%s</text>'%(a,x,dy,esc(en),esc(ja))
 
 out=[]
 out.append('<svg class="map" viewBox="0 0 %d %d" role="img" aria-labelledby="mapTitle">'%(W,H))
