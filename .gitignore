@@ -5,3 +5,6 @@
 
 # Python
 __pycache__/
+
+# scratch screenshots from .map/seam.py
+.map/*.png

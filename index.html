@@ -205,24 +205,83 @@
     letter-spacing:.15em;color:#e9d59f;text-shadow:0 1px 0 rgba(0,0,0,.65);white-space:nowrap;}
 
   .book-cover{position:absolute;inset:0;overflow:hidden;border-radius:2px 12px 12px 2px;
+    isolation:isolate;                    /* keep the foil's blend modes inside the cover */
     box-shadow:0 22px 40px rgba(0,0,0,.5), inset 0 0 0 1px rgba(255,255,255,.1);}
   .book-img{position:absolute;inset:0;background-image:var(--cover);background-size:cover;
     background-position:var(--cover-pos,50% 50%);}
-  /* Hinge groove and a little cloth grain, over the photo. */
-  .book-cover::before{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
-    background:linear-gradient(90deg,rgba(0,0,0,.6) 0,rgba(0,0,0,.2) 5%,rgba(255,255,255,.14) 7%,
-        rgba(255,255,255,0) 15%),
+  /* Hinge groove and a little cloth grain. These are the shape of the book, so they sit *above* the
+     foil: underneath it the groove was the one thing color-dodge could not brighten, and the
+     contrast against the lifted art around it turned it into a hard line down every cover. */
+  .book-cover::before{content:"";position:absolute;inset:0;z-index:3;pointer-events:none;
+    background:linear-gradient(90deg,rgba(0,0,0,.46) 0,rgba(0,0,0,.20) 4%,rgba(0,0,0,.07) 9%,
+        rgba(0,0,0,0) 17%),
       repeating-linear-gradient(48deg,rgba(255,255,255,.022) 0 1px,rgba(0,0,0,.022) 1px 3px);}
   .book-cover::after{content:"";position:absolute;inset:0;z-index:1;
     background:linear-gradient(180deg,rgba(10,12,11,.12) 34%,rgba(10,12,11,.82) 100%);}
-  /* Laminated gloss: a soft diagonal glint that slides across as the cover turns. Keep the band
-     wide and low-contrast — a narrow one reads as a seam down the cover, not as light. */
+  /* ---- Holographic foil ----
+     Iridescence is a *specular* thing: it rides on reflected light, so it belongs in the lit parts
+     of the art and nowhere near the shadows. Every layer here therefore blends on color-dodge,
+     whose result is identically zero against black — the dark band the title sits on, and the dark
+     water and rock in the photos, stay exactly as they were. Alpha bounds the lift at the other
+     end, so a bright sky cannot blow out either.
+       .book-holo    the spectral field: concentric rings, which is what a diffraction pattern
+                     actually looks like, fading to transparent at their own edge so the layer has
+                     no boundary of its own to show.
+       .book-sparkle glitter in the lamination, set in place and simply catching the light. The one
+                     irregular thing on the cover, from feTurbulence — the only source of real
+                     randomness CSS has, and it lives in this stylesheet, so nothing downloads. An
+                     all-over noise *texture* was tried here and dropped: an opaque layer in a
+                     background-blend stack destroys the alpha of the layer under it, and a grain
+                     that survives color-dodge is a grain you can see.
+       .book-gloss   the specular streak that sweeps as the cover turns.
+     Both the field and the streak are masked by a slow turbulence field, so neither is the clean
+     shape a gradient wants to be: a laminated cover is never flat, and the foil under it catches
+     the light unevenly. The mask only ever thins the foil — its alpha runs 0.52 to 1 — and it
+     tiles, so it has no edge of its own.
+     Everything runs on --sway, the book's own rotation cycle, so the foil answers the turn.
+     Nothing is larger than the cover, nothing rotates, nothing is masked and nothing is filtered:
+     an oversized or rotated blended layer drags its own rectangular edge across the art, and
+     filter plus mix-blend-mode plus a preserve-3d ancestor is where compositing gets fragile. Only
+     background-position moves, and only on the layer that should. */
+  .book-holo,.book-sparkle{position:absolute;inset:0;z-index:2;pointer-events:none;
+    mix-blend-mode:color-dodge;
+    animation-duration:var(--sway,9s);animation-delay:var(--sway-delay,0s);
+    animation-timing-function:ease-in-out;animation-iteration-count:infinite;
+    animation-direction:alternate;}
+  .book-holo{animation-name:holo;
+    /* closest-side, not a fixed 64%: the rings must reach transparent *inside* their own
+       background box on both axes. Sized in percentages they did not, so the box's edge stayed
+       coloured — a hard vertical boundary, bright on one side and untouched on the other, sliding
+       across the cover as the position animates. That is the line. */
+    background-image:radial-gradient(closest-side at 50% 46%,
+      rgba(255,150,205,.26) 0%,  rgba(140,205,255,.24) 22%, rgba(160,255,215,.22) 40%,
+      rgba(255,228,145,.19) 58%, rgba(200,155,255,.11) 74%, rgba(0,0,0,0) 92%);
+    background-size:200% 180%;background-repeat:no-repeat;
+    -webkit-mask-image:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='170' height='170'><filter id='u'><feTurbulence type='fractalNoise' baseFrequency='0.017 0.021' numOctaves='3' seed='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.48 0 0 0 0.52'/></filter><rect width='170' height='170' filter='url%28%23u%29'/></svg>");mask-image:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='170' height='170'><filter id='u'><feTurbulence type='fractalNoise' baseFrequency='0.017 0.021' numOctaves='3' seed='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.48 0 0 0 0.52'/></filter><rect width='170' height='170' filter='url%28%23u%29'/></svg>");
+    -webkit-mask-size:170px 170px;mask-size:170px 170px;
+    -webkit-mask-repeat:repeat;mask-repeat:repeat;}
+  @keyframes holo{
+    from{background-position:-38% -24%;}
+    to{background-position:38% 24%;}
+  }
+  .book-sparkle{animation-name:glint;
+    background-image:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='s'><feTurbulence type='fractalNoise' baseFrequency='0.28' numOctaves='1' seed='7' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 9 0 0 0 -6.7'/></filter><rect width='200' height='200' filter='url%28%23s%29'/></svg>");background-size:200px 200px;}
+  @keyframes glint{from{opacity:.22;} to{opacity:.68;}}
+
+  /* The specular streak. Keep the band wide and low-contrast — a narrow one reads as a seam down
+     the cover, not as light. */
   .book-gloss{position:absolute;inset:-25% -60%;z-index:2;pointer-events:none;
-    background:linear-gradient(125deg,rgba(255,255,255,0) 28%,rgba(255,255,255,.1) 44%,
-      rgba(255,255,255,.2) 50%,rgba(255,255,255,.1) 56%,rgba(255,255,255,0) 72%);
+    mix-blend-mode:color-dodge;
+    background:linear-gradient(125deg,
+      rgba(255,255,255,0) 30%,   rgba(150,80,255,.07) 40%, rgba(70,175,255,.13) 45%,
+      rgba(150,255,220,.17) 50%, rgba(255,220,120,.13) 55%, rgba(255,100,155,.07) 60%,
+      rgba(255,255,255,0) 70%);
+    -webkit-mask-image:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='170' height='170'><filter id='u'><feTurbulence type='fractalNoise' baseFrequency='0.017 0.021' numOctaves='3' seed='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.48 0 0 0 0.52'/></filter><rect width='170' height='170' filter='url%28%23u%29'/></svg>");mask-image:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='170' height='170'><filter id='u'><feTurbulence type='fractalNoise' baseFrequency='0.017 0.021' numOctaves='3' seed='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.48 0 0 0 0.52'/></filter><rect width='170' height='170' filter='url%28%23u%29'/></svg>");
+    -webkit-mask-size:170px 170px;mask-size:170px 170px;
+    -webkit-mask-repeat:repeat;mask-repeat:repeat;
     animation:gloss var(--sway) ease-in-out var(--sway-delay) infinite alternate;}
-  @keyframes gloss{from{transform:translateX(-20%);} to{transform:translateX(20%);}}
-  .book-txt{position:absolute;left:0;right:0;bottom:0;z-index:3;padding:16px 14px 17px 18px;}
+  @keyframes gloss{from{transform:translateX(-22%);} to{transform:translateX(22%);}}
+  .book-txt{position:absolute;left:0;right:0;bottom:0;z-index:4;padding:16px 14px 17px 18px;}
   .bk-eyebrow{display:block;font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
     color:var(--eyebrow);text-shadow:0 1px 8px rgba(0,0,0,.7);}
   .bk-title{display:block;margin-top:5px;font-family:var(--font-display);font-size:19px;font-weight:600;
@@ -233,9 +292,10 @@
   /* The cover zooms to full screen, then turns off the front of the book. */
   #turner{position:fixed;inset:0;z-index:200;transform-origin:0 0;perspective:1500px;pointer-events:none;}
   .turner-page{position:absolute;inset:0;transform-origin:left center;backface-visibility:hidden;
+    isolation:isolate;overflow:hidden;
     background-image:var(--cover);background-size:cover;background-position:var(--cover-pos,50% 50%);
     box-shadow:0 0 70px rgba(0,0,0,.55);}
-  .turner-page::after{content:"";position:absolute;inset:0;
+  .turner-page::after{content:"";position:absolute;inset:0;z-index:3;
     background:linear-gradient(90deg,rgba(0,0,0,.5) 0,rgba(0,0,0,0) 34%);}
 
   /* On the itinerary it sits in the hero and scrolls away with the cover photo. On the other tabs
@@ -582,7 +642,12 @@
     stroke-width:calc(2.6px / var(--z));r:calc(11px / var(--z));}
   .map .stop.past .mk{fill:var(--faint);}
   .map .stop.past .ring{stroke:var(--faint);}
-  .map .cands .mk{fill:var(--surface);stroke:var(--muted);stroke-width:calc(2.3px / var(--z));}
+  /* A circle holds its size through `r`; a square, triangle or diamond cannot, so each candidate
+     marker is drawn about its own origin and scaled back down by the zoom — which takes its stroke
+     with it, so the stroke width here is the on-screen one. */
+  .map .cands .mk{fill:var(--surface);stroke:var(--muted);stroke-width:2.3px;
+    transform:scale(calc(1.6 / var(--z)));}   /* 1.6 so the shape, which is the legend, reads */
+  .map .cands .mk.turn45{transform:scale(calc(1.6 / var(--z))) rotate(45deg);}
   .map .cands .pin.sel .mk{stroke:var(--acc-d);}
   /* A paint-order halo instead of a background box, so labels read over land and sea. The gap
      from pin to label is a translate, so it does not stretch when the map is zoomed. */
@@ -592,6 +657,7 @@
     transform:translate(calc(24px / var(--z)),calc(9px / var(--z)));}
   .map .lab[text-anchor="end"]{transform:translate(calc(-24px / var(--z)),calc(9px / var(--z)));}
   .map .pin.sel .lab,.map .stop.now .lab{display:block;}
+  .map .p-camp.sel .lab{pointer-events:auto;cursor:pointer;}
 
   .mapzoom{position:absolute;top:10px;right:10px;z-index:2;display:flex;flex-direction:column;gap:6px;}
   .mapzoom button{width:44px;height:44px;padding:0;justify-content:center;
@@ -610,6 +676,29 @@
   .filters button.active .sw{background:#fff;border-color:#fff;}
   .filters button.active .sw.k-nature{background:none;border-bottom-color:#fff;
     border-left-color:transparent;border-right-color:transparent;}
+
+  /* ---- Campsite sheet ----
+     Tapping a campsite pin names it; tapping the name again brings up the card. The card is not
+     rebuilt here — it is cloned live out of the campsite list, so the photo, the chips, the stats
+     and the Maps link all arrive in whatever language and units are showing, with nothing to keep
+     in step. It lives inside the guide, so it inherits that book's palette. */
+  .camp-sheet{position:fixed;inset:0;z-index:100;display:flex;align-items:flex-end;}
+  .camp-sheet .scrim{position:absolute;inset:0;background:rgba(var(--scrim),.5);
+    backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);animation:fade .2s ease;}
+  .sheet-card{position:relative;width:100%;max-width:var(--maxw);margin:0 auto;
+    max-height:82vh;max-height:82dvh;display:flex;flex-direction:column;
+    background:var(--surface);border-radius:var(--r) var(--r) 0 0;
+    box-shadow:var(--sh-pop);padding-bottom:var(--safe-b);
+    animation:sheet-up .26s cubic-bezier(.32,0,.24,1);}
+  @keyframes sheet-up{from{transform:translateY(100%);}to{transform:none;}}
+  .sheet-head{display:flex;align-items:flex-start;gap:12px;padding:16px 18px 12px;
+    border-bottom:1px solid var(--line-2);}
+  .sheet-head .ttl{flex:1;min-width:0;}
+  .sheet-head .t{font-family:var(--font-display);font-weight:600;font-size:19px;letter-spacing:-.25px;
+    color:var(--ink);line-height:1.2;}
+  .sheet-head .sub2{font-size:12.5px;color:var(--muted);margin-top:3px;}
+  .sheet-body{overflow-y:auto;-webkit-overflow-scrolling:touch;padding:0 20px 20px;}
+  .sheet-body .thumb{margin-top:16px;}
 
   /* The day's stops — the itinerary timeline again, two-way linked to the pins. Each row is a real
      button, so Enter, Space and VoiceOver come for free and the list keeps its list semantics. */
@@ -747,6 +836,8 @@ var LS={
             <span class="book-spine" aria-hidden="true"><span class="spine-txt">沖縄 2026</span></span>
             <span class="book-cover">
               <span class="book-img"></span>
+              <span class="book-holo"></span>
+              <span class="book-sparkle"></span>
               <span class="book-gloss"></span>
               <span class="book-txt">
                 <span class="bk-eyebrow" data-ja="沖縄 &middot; 3日間">Okinawa &middot; 3 days</span>
@@ -762,6 +853,8 @@ var LS={
             <span class="book-spine" aria-hidden="true"><span class="spine-txt">Seattle 2026</span></span>
             <span class="book-cover">
               <span class="book-img"></span>
+              <span class="book-holo"></span>
+              <span class="book-sparkle"></span>
               <span class="book-gloss"></span>
               <span class="book-txt">
                 <span class="bk-eyebrow" data-ja="カスケード &middot; 18日間">Cascades &middot; 18 days</span>
@@ -780,6 +873,8 @@ var LS={
             <span class="book-spine" aria-hidden="true"><span class="spine-txt">New Zealand 2027</span></span>
             <span class="book-cover">
               <span class="book-img"></span>
+              <span class="book-holo"></span>
+              <span class="book-sparkle"></span>
               <span class="book-gloss"></span>
               <span class="book-txt">
                 <span class="bk-eyebrow" data-ja="北島 &middot; 6日間">North Island &middot; 6 days</span>
@@ -1392,54 +1487,54 @@ var LS={
 </g>
 <g class="cands">
 
-<g class="pin p-camp"><circle class="hit" cx="256.0" cy="557.9" r="22"/><circle class="ring" cx="256.0" cy="557.9" r="17"/><rect class="mk" x="250.5" y="552.4" width="11" height="11"/><text class="lab" x="256.0" y="557.9" data-en="Katsuren Beach">勝連ビーチ</text></g>
-<g class="pin p-camp"><circle class="hit" cx="281.3" cy="376.0" r="22"/><circle class="ring" cx="281.3" cy="376.0" r="17"/><rect class="mk" x="275.8" y="370.5" width="11" height="11"/><text class="lab" x="281.3" y="376.0" data-en="Okinawa Prefectural People's Forrest">沖縄県民の森</text></g>
-<g class="pin p-camp"><circle class="hit" cx="328.4" cy="344.7" r="22"/><circle class="ring" cx="328.4" cy="344.7" r="17"/><rect class="mk" x="322.9" y="339.2" width="11" height="11"/><text class="lab" text-anchor="end" x="328.4" y="344.7" data-en="Koki Camp Spot">幸喜の野営地</text></g>
-<g class="pin p-camp"><circle class="hit" cx="357.2" cy="302.3" r="22"/><circle class="ring" cx="357.2" cy="302.3" r="17"/><rect class="mk" x="351.7" y="296.8" width="11" height="11"/><text class="lab" text-anchor="end" x="357.2" y="302.3" data-en="Nago Castle Bridge Spot">名護城橋の野営地</text></g>
-<g class="pin p-camp"><circle class="hit" cx="191.3" cy="732.6" r="22"/><circle class="ring" cx="191.3" cy="732.6" r="17"/><rect class="mk" x="185.8" y="727.1" width="11" height="11"/><text class="lab" x="191.3" y="732.6" data-en="NEOS Outdoor Park">NEOSアウトドアパーク</text></g>
-<g class="pin p-camp"><circle class="hit" cx="213.5" cy="703.3" r="22"/><circle class="ring" cx="213.5" cy="703.3" r="17"/><rect class="mk" x="208.0" y="697.8" width="11" height="11"/><text class="lab" x="213.5" y="703.3" data-en="Azama Sun Beach Camping Ground">あざまサンサンビーチ</text></g>
-<g class="pin p-camp"><circle class="hit" cx="66.4" cy="772.0" r="22"/><circle class="ring" cx="66.4" cy="772.0" r="17"/><rect class="mk" x="60.9" y="766.5" width="11" height="11"/><text class="lab" x="66.4" y="772.0" data-en="Kita Nashiro Beach">北名城ビーチ</text></g>
-<g class="pin p-camp"><circle class="hit" cx="210.4" cy="714.9" r="22"/><circle class="ring" cx="210.4" cy="714.9" r="17"/><rect class="mk" x="204.9" y="709.4" width="11" height="11"/><text class="lab" x="210.4" y="714.9" data-en="Kudeken Beach">久手堅ビーチ</text></g>
-<g class="pin p-camp"><circle class="hit" cx="309.2" cy="272.9" r="22"/><circle class="ring" cx="309.2" cy="272.9" r="17"/><rect class="mk" x="303.7" y="267.4" width="11" height="11"/><text class="lab" x="309.2" y="272.9" data-en="Base Camp">ベースキャンプ</text></g>
-<g class="pin p-camp"><circle class="hit" cx="393.1" cy="242.1" r="22"/><circle class="ring" cx="393.1" cy="242.1" r="17"/><rect class="mk" x="387.6" y="236.6" width="11" height="11"/><text class="lab" text-anchor="end" x="393.1" y="242.1" data-en="Yagaji Beach Campsite">屋我地ビーチ キャンプ場</text></g>
-<g class="pin p-camp"><circle class="hit" cx="407.4" cy="255.4" r="22"/><circle class="ring" cx="407.4" cy="255.4" r="17"/><rect class="mk" x="401.9" y="249.9" width="11" height="11"/><text class="lab" text-anchor="end" x="407.4" y="255.4" data-en="Inamine Camp Spot">稲嶺の野営地</text></g>
-<g class="pin p-camp"><circle class="hit" cx="393.4" cy="235.7" r="22"/><circle class="ring" cx="393.4" cy="235.7" r="17"/><rect class="mk" x="387.9" y="230.2" width="11" height="11"/><text class="lab" text-anchor="end" x="393.4" y="235.7" data-en="Yagajima Spot">屋我地島の野営地</text></g>
-<g class="pin p-camp"><circle class="hit" cx="440.5" cy="240.4" r="22"/><circle class="ring" cx="440.5" cy="240.4" r="17"/><rect class="mk" x="435.0" y="234.9" width="11" height="11"/><text class="lab" text-anchor="end" x="440.5" y="240.4" data-en="Henan Bridge">平南橋</text></g>
-<g class="pin p-camp"><circle class="hit" cx="452.6" cy="229.1" r="22"/><circle class="ring" cx="452.6" cy="229.1" r="17"/><rect class="mk" x="447.1" y="223.6" width="11" height="11"/><text class="lab" text-anchor="end" x="452.6" y="229.1" data-en="Tsuha Beach Camp Spot">津波ビーチの野営地</text></g>
-<g class="pin p-camp"><circle class="hit" cx="459.0" cy="226.8" r="22"/><circle class="ring" cx="459.0" cy="226.8" r="17"/><rect class="mk" x="453.5" y="221.3" width="11" height="11"/><text class="lab" text-anchor="end" x="459.0" y="226.8" data-en="Tonokiya Campsite">渡野喜屋キャンプ場</text></g>
-<g class="pin p-camp"><circle class="hit" cx="379.3" cy="182.9" r="22"/><circle class="ring" cx="379.3" cy="182.9" r="17"/><rect class="mk" x="373.8" y="177.4" width="11" height="11"/><text class="lab" text-anchor="end" x="379.3" y="182.9" data-en="Kouri Island Camp Ground">古宇利島キャンプ場</text></g>
-<g class="pin p-camp"><circle class="hit" cx="489.3" cy="236.9" r="22"/><circle class="ring" cx="489.3" cy="236.9" r="17"/><rect class="mk" x="483.8" y="231.4" width="11" height="11"/><text class="lab" text-anchor="end" x="489.3" y="236.9" data-en="Daiboo River Camp">大保川キャンプ場</text></g>
-<g class="pin p-camp"><circle class="hit" cx="502.8" cy="258.4" r="22"/><circle class="ring" cx="502.8" cy="258.4" r="17"/><rect class="mk" x="497.3" y="252.9" width="11" height="11"/><text class="lab" text-anchor="end" x="502.8" y="258.4" data-en="Fukuchi River Seaside Park">福地川海浜公園</text></g>
-<g class="pin p-camp"><circle class="hit" cx="514.6" cy="145.6" r="22"/><circle class="ring" cx="514.6" cy="145.6" r="17"/><rect class="mk" x="509.1" y="140.1" width="11" height="11"/><text class="lab" text-anchor="end" x="514.6" y="145.6" data-en="Kokyono Beach">コキョウノビーチ</text></g>
-<g class="pin p-camp"><circle class="hit" cx="525.9" cy="141.6" r="22"/><circle class="ring" cx="525.9" cy="141.6" r="17"/><rect class="mk" x="520.4" y="136.1" width="11" height="11"/><text class="lab" text-anchor="end" x="525.9" y="141.6" data-en="Hentona Camp Spot">辺土名の野営地</text></g>
-<g class="pin p-camp"><circle class="hit" cx="530.7" cy="162.2" r="22"/><circle class="ring" cx="530.7" cy="162.2" r="17"/><rect class="mk" x="525.2" y="156.7" width="11" height="11"/><text class="lab" text-anchor="end" x="530.7" y="162.2" data-en="Okuma Mountains">奥間の山あい</text></g>
-<g class="pin p-camp"><circle class="hit" cx="567.3" cy="94.7" r="22"/><circle class="ring" cx="567.3" cy="94.7" r="17"/><rect class="mk" x="561.8" y="89.2" width="11" height="11"/><text class="lab" text-anchor="end" x="567.3" y="94.7" data-en="Benoki Camp Spot">辺野喜の野営地</text></g>
-<g class="pin p-camp"><circle class="hit" cx="596.1" cy="168.2" r="22"/><circle class="ring" cx="596.1" cy="168.2" r="17"/><rect class="mk" x="590.6" y="162.7" width="11" height="11"/><text class="lab" text-anchor="end" x="596.1" y="168.2" data-en="Yanbaru Discovery Forest">やんばる学びの森</text></g>
-<g class="pin p-camp"><circle class="hit" cx="621.6" cy="175.7" r="22"/><circle class="ring" cx="621.6" cy="175.7" r="17"/><rect class="mk" x="616.1" y="170.2" width="11" height="11"/><text class="lab" text-anchor="end" x="621.6" y="175.7" data-en="Aha, Yanbaru">安波（やんばる）</text></g>
-<g class="pin p-camp"><circle class="hit" cx="614.4" cy="47.9" r="22"/><circle class="ring" cx="614.4" cy="47.9" r="17"/><rect class="mk" x="608.9" y="42.4" width="11" height="11"/><text class="lab" text-anchor="end" x="614.4" y="47.9" data-en="Oku Beach Road">奥のビーチロード</text></g>
-<g class="pin p-camp"><circle class="hit" cx="638.8" cy="72.6" r="22"/><circle class="ring" cx="638.8" cy="72.6" r="17"/><rect class="mk" x="633.3" y="67.1" width="11" height="11"/><text class="lab" text-anchor="end" x="638.8" y="72.6" data-en="Adan Beach Campsite">アダンビーチ キャンプ場</text></g>
+<g class="pin p-camp" data-camp="katsuren-beach"><circle class="hit" cx="256.0" cy="557.9" r="22"/><circle class="ring" cx="256.0" cy="557.9" r="17"/><g class="mk-at" transform="translate(256.0 557.9)"><rect class="mk" x="-5.5" y="-5.5" width="11" height="11"/></g><text class="lab" x="256.0" y="557.9" data-en="Katsuren Beach">勝連ビーチ</text></g>
+<g class="pin p-camp" data-camp="okinawa-prefectural-people-s-forrest"><circle class="hit" cx="281.3" cy="376.0" r="22"/><circle class="ring" cx="281.3" cy="376.0" r="17"/><g class="mk-at" transform="translate(281.3 376.0)"><rect class="mk" x="-5.5" y="-5.5" width="11" height="11"/></g><text class="lab" x="281.3" y="376.0" data-en="Okinawa Prefectural People's Forrest">沖縄県民の森</text></g>
+<g class="pin p-camp" data-camp="koki-camp-spot"><circle class="hit" cx="328.4" cy="344.7" r="22"/><circle class="ring" cx="328.4" cy="344.7" r="17"/><g class="mk-at" transform="translate(328.4 344.7)"><rect class="mk" x="-5.5" y="-5.5" width="11" height="11"/></g><text class="lab" text-anchor="end" x="328.4" y="344.7" data-en="Koki Camp Spot">幸喜の野営地</text></g>
+<g class="pin p-camp" data-camp="nago-castle-bridge-spot"><circle class="hit" cx="357.2" cy="302.3" r="22"/><circle class="ring" cx="357.2" cy="302.3" r="17"/><g class="mk-at" transform="translate(357.2 302.3)"><rect class="mk" x="-5.5" y="-5.5" width="11" height="11"/></g><text class="lab" text-anchor="end" x="357.2" y="302.3" data-en="Nago Castle Bridge Spot">名護城橋の野営地</text></g>
+<g class="pin p-camp" data-camp="neos-outdoor-park"><circle class="hit" cx="191.3" cy="732.6" r="22"/><circle class="ring" cx="191.3" cy="732.6" r="17"/><g class="mk-at" transform="translate(191.3 732.6)"><rect class="mk" x="-5.5" y="-5.5" width="11" height="11"/></g><text class="lab" x="191.3" y="732.6" data-en="NEOS Outdoor Park">NEOSアウトドアパーク</text></g>
+<g class="pin p-camp" data-camp="azama-sun-beach-camping-ground"><circle class="hit" cx="213.5" cy="703.3" r="22"/><circle class="ring" cx="213.5" cy="703.3" r="17"/><g class="mk-at" transform="translate(213.5 703.3)"><rect class="mk" x="-5.5" y="-5.5" width="11" height="11"/></g><text class="lab" x="213.5" y="703.3" data-en="Azama Sun Beach Camping Ground">あざまサンサンビーチ</text></g>
+<g class="pin p-camp" data-camp="kita-nashiro-beach"><circle class="hit" cx="66.4" cy="772.0" r="22"/><circle class="ring" cx="66.4" cy="772.0" r="17"/><g class="mk-at" transform="translate(66.4 772.0)"><rect class="mk" x="-5.5" y="-5.5" width="11" height="11"/></g><text class="lab" x="66.4" y="772.0" data-en="Kita Nashiro Beach">北名城ビーチ</text></g>
+<g class="pin p-camp" data-camp="kudeken-beach"><circle class="hit" cx="210.4" cy="714.9" r="22"/><circle class="ring" cx="210.4" cy="714.9" r="17"/><g class="mk-at" transform="translate(210.4 714.9)"><rect class="mk" x="-5.5" y="-5.5" width="11" height="11"/></g><text class="lab" x="210.4" y="714.9" data-en="Kudeken Beach">久手堅ビーチ</text></g>
+<g class="pin p-camp" data-camp="base-camp"><circle class="hit" cx="309.2" cy="272.9" r="22"/><circle class="ring" cx="309.2" cy="272.9" r="17"/><g class="mk-at" transform="translate(309.2 272.9)"><rect class="mk" x="-5.5" y="-5.5" width="11" height="11"/></g><text class="lab" x="309.2" y="272.9" data-en="Base Camp">ベースキャンプ</text></g>
+<g class="pin p-camp" data-camp="yagaji-beach-campsite"><circle class="hit" cx="393.1" cy="242.1" r="22"/><circle class="ring" cx="393.1" cy="242.1" r="17"/><g class="mk-at" transform="translate(393.1 242.1)"><rect class="mk" x="-5.5" y="-5.5" width="11" height="11"/></g><text class="lab" text-anchor="end" x="393.1" y="242.1" data-en="Yagaji Beach Campsite">屋我地ビーチ キャンプ場</text></g>
+<g class="pin p-camp" data-camp="inamine-camp-spot"><circle class="hit" cx="407.4" cy="255.4" r="22"/><circle class="ring" cx="407.4" cy="255.4" r="17"/><g class="mk-at" transform="translate(407.4 255.4)"><rect class="mk" x="-5.5" y="-5.5" width="11" height="11"/></g><text class="lab" text-anchor="end" x="407.4" y="255.4" data-en="Inamine Camp Spot">稲嶺の野営地</text></g>
+<g class="pin p-camp" data-camp="yagajima-spot"><circle class="hit" cx="393.4" cy="235.7" r="22"/><circle class="ring" cx="393.4" cy="235.7" r="17"/><g class="mk-at" transform="translate(393.4 235.7)"><rect class="mk" x="-5.5" y="-5.5" width="11" height="11"/></g><text class="lab" text-anchor="end" x="393.4" y="235.7" data-en="Yagajima Spot">屋我地島の野営地</text></g>
+<g class="pin p-camp" data-camp="henan-bridge"><circle class="hit" cx="440.5" cy="240.4" r="22"/><circle class="ring" cx="440.5" cy="240.4" r="17"/><g class="mk-at" transform="translate(440.5 240.4)"><rect class="mk" x="-5.5" y="-5.5" width="11" height="11"/></g><text class="lab" text-anchor="end" x="440.5" y="240.4" data-en="Henan Bridge">平南橋</text></g>
+<g class="pin p-camp" data-camp="tsuha-beach-camp-spot"><circle class="hit" cx="452.6" cy="229.1" r="22"/><circle class="ring" cx="452.6" cy="229.1" r="17"/><g class="mk-at" transform="translate(452.6 229.1)"><rect class="mk" x="-5.5" y="-5.5" width="11" height="11"/></g><text class="lab" text-anchor="end" x="452.6" y="229.1" data-en="Tsuha Beach Camp Spot">津波ビーチの野営地</text></g>
+<g class="pin p-camp" data-camp="tonokiya-campsite"><circle class="hit" cx="459.0" cy="226.8" r="22"/><circle class="ring" cx="459.0" cy="226.8" r="17"/><g class="mk-at" transform="translate(459.0 226.8)"><rect class="mk" x="-5.5" y="-5.5" width="11" height="11"/></g><text class="lab" text-anchor="end" x="459.0" y="226.8" data-en="Tonokiya Campsite">渡野喜屋キャンプ場</text></g>
+<g class="pin p-camp" data-camp="kouri-island-camp-ground"><circle class="hit" cx="379.3" cy="182.9" r="22"/><circle class="ring" cx="379.3" cy="182.9" r="17"/><g class="mk-at" transform="translate(379.3 182.9)"><rect class="mk" x="-5.5" y="-5.5" width="11" height="11"/></g><text class="lab" text-anchor="end" x="379.3" y="182.9" data-en="Kouri Island Camp Ground">古宇利島キャンプ場</text></g>
+<g class="pin p-camp" data-camp="daiboo-river-camp"><circle class="hit" cx="489.3" cy="236.9" r="22"/><circle class="ring" cx="489.3" cy="236.9" r="17"/><g class="mk-at" transform="translate(489.3 236.9)"><rect class="mk" x="-5.5" y="-5.5" width="11" height="11"/></g><text class="lab" text-anchor="end" x="489.3" y="236.9" data-en="Daiboo River Camp">大保川キャンプ場</text></g>
+<g class="pin p-camp" data-camp="fukuchi-river-seaside-park"><circle class="hit" cx="502.8" cy="258.4" r="22"/><circle class="ring" cx="502.8" cy="258.4" r="17"/><g class="mk-at" transform="translate(502.8 258.4)"><rect class="mk" x="-5.5" y="-5.5" width="11" height="11"/></g><text class="lab" text-anchor="end" x="502.8" y="258.4" data-en="Fukuchi River Seaside Park">福地川海浜公園</text></g>
+<g class="pin p-camp" data-camp="kokyono-beach"><circle class="hit" cx="514.6" cy="145.6" r="22"/><circle class="ring" cx="514.6" cy="145.6" r="17"/><g class="mk-at" transform="translate(514.6 145.6)"><rect class="mk" x="-5.5" y="-5.5" width="11" height="11"/></g><text class="lab" text-anchor="end" x="514.6" y="145.6" data-en="Kokyono Beach">コキョウノビーチ</text></g>
+<g class="pin p-camp" data-camp="hentona-camp-spot"><circle class="hit" cx="525.9" cy="141.6" r="22"/><circle class="ring" cx="525.9" cy="141.6" r="17"/><g class="mk-at" transform="translate(525.9 141.6)"><rect class="mk" x="-5.5" y="-5.5" width="11" height="11"/></g><text class="lab" text-anchor="end" x="525.9" y="141.6" data-en="Hentona Camp Spot">辺土名の野営地</text></g>
+<g class="pin p-camp" data-camp="okuma-mountains"><circle class="hit" cx="530.7" cy="162.2" r="22"/><circle class="ring" cx="530.7" cy="162.2" r="17"/><g class="mk-at" transform="translate(530.7 162.2)"><rect class="mk" x="-5.5" y="-5.5" width="11" height="11"/></g><text class="lab" text-anchor="end" x="530.7" y="162.2" data-en="Okuma Mountains">奥間の山あい</text></g>
+<g class="pin p-camp" data-camp="benoki-camp-spot"><circle class="hit" cx="567.3" cy="94.7" r="22"/><circle class="ring" cx="567.3" cy="94.7" r="17"/><g class="mk-at" transform="translate(567.3 94.7)"><rect class="mk" x="-5.5" y="-5.5" width="11" height="11"/></g><text class="lab" text-anchor="end" x="567.3" y="94.7" data-en="Benoki Camp Spot">辺野喜の野営地</text></g>
+<g class="pin p-camp" data-camp="yanbaru-discovery-forest"><circle class="hit" cx="596.1" cy="168.2" r="22"/><circle class="ring" cx="596.1" cy="168.2" r="17"/><g class="mk-at" transform="translate(596.1 168.2)"><rect class="mk" x="-5.5" y="-5.5" width="11" height="11"/></g><text class="lab" text-anchor="end" x="596.1" y="168.2" data-en="Yanbaru Discovery Forest">やんばる学びの森</text></g>
+<g class="pin p-camp" data-camp="aha-yanbaru"><circle class="hit" cx="621.6" cy="175.7" r="22"/><circle class="ring" cx="621.6" cy="175.7" r="17"/><g class="mk-at" transform="translate(621.6 175.7)"><rect class="mk" x="-5.5" y="-5.5" width="11" height="11"/></g><text class="lab" text-anchor="end" x="621.6" y="175.7" data-en="Aha, Yanbaru">安波（やんばる）</text></g>
+<g class="pin p-camp" data-camp="oku-beach-road"><circle class="hit" cx="614.4" cy="47.9" r="22"/><circle class="ring" cx="614.4" cy="47.9" r="17"/><g class="mk-at" transform="translate(614.4 47.9)"><rect class="mk" x="-5.5" y="-5.5" width="11" height="11"/></g><text class="lab" text-anchor="end" x="614.4" y="47.9" data-en="Oku Beach Road">奥のビーチロード</text></g>
+<g class="pin p-camp" data-camp="adan-beach-campsite"><circle class="hit" cx="638.8" cy="72.6" r="22"/><circle class="ring" cx="638.8" cy="72.6" r="17"/><g class="mk-at" transform="translate(638.8 72.6)"><rect class="mk" x="-5.5" y="-5.5" width="11" height="11"/></g><text class="lab" text-anchor="end" x="638.8" y="72.6" data-en="Adan Beach Campsite">アダンビーチ キャンプ場</text></g>
 
-<g class="pin p-nature"><circle class="hit" cx="527.4" cy="181.0" r="22"/><circle class="ring" cx="527.4" cy="181.0" r="17"/><path class="mk" d="M527.4 174.0L533.8 185.5L521.0 185.5Z"/><text class="lab" text-anchor="end" x="527.4" y="181.0" data-en="Hiji Falls">比地大滝</text></g>
-<g class="pin p-nature"><circle class="hit" cx="444.9" cy="258.6" r="22"/><circle class="ring" cx="444.9" cy="258.6" r="17"/><path class="mk" d="M444.9 251.6L451.3 263.1L438.5 263.1Z"/><text class="lab" text-anchor="end" x="444.9" y="258.6" data-en="Ta Falls">ター滝</text></g>
-<g class="pin p-nature"><circle class="hit" cx="582.9" cy="39.9" r="22"/><circle class="ring" cx="582.9" cy="39.9" r="17"/><path class="mk" d="M582.9 32.9L589.3 44.4L576.5 44.4Z"/><text class="lab" text-anchor="end" x="582.9" y="39.9" data-en="Kayauchi Banta">茅打バンタ</text></g>
-<g class="pin p-nature"><circle class="hit" cx="596.8" cy="22.6" r="22"/><circle class="ring" cx="596.8" cy="22.6" r="17"/><path class="mk" d="M596.8 15.6L603.2 27.1L590.4 27.1Z"/><text class="lab" text-anchor="end" x="596.8" y="22.6" data-en="Cape Hedo">辺戸岬</text></g>
-<g class="pin p-nature"><circle class="hit" cx="260.2" cy="253.1" r="22"/><circle class="ring" cx="260.2" cy="253.1" r="17"/><path class="mk" d="M260.2 246.1L266.6 257.6L253.8 257.6Z"/><text class="lab" x="260.2" y="253.1" data-en="Gorilla Chop">ゴリラチョップ</text></g>
-<g class="pin p-nature"><circle class="hit" cx="490.7" cy="285.5" r="22"/><circle class="ring" cx="490.7" cy="285.5" r="17"/><path class="mk" d="M490.7 278.5L497.1 290.0L484.3 290.0Z"/><text class="lab" text-anchor="end" x="490.7" y="285.5" data-en="Fureai Hirugi Park">ふれあいヒルギ公園</text></g>
-<g class="pin p-nature"><circle class="hit" cx="257.4" cy="380.9" r="22"/><circle class="ring" cx="257.4" cy="380.9" r="17"/><path class="mk" d="M257.4 373.9L263.8 385.4L251.0 385.4Z"/><text class="lab" x="257.4" y="380.9" data-en="Diamond Beach">ダイヤモンドビーチ</text></g>
-<g class="pin p-nature"><circle class="hit" cx="379.5" cy="184.1" r="22"/><circle class="ring" cx="379.5" cy="184.1" r="17"/><path class="mk" d="M379.5 177.1L385.9 188.6L373.1 188.6Z"/><text class="lab" text-anchor="end" x="379.5" y="184.1" data-en="Kouri Island">古宇利島</text></g>
-<g class="pin p-nature"><circle class="hit" cx="258.3" cy="189.7" r="22"/><circle class="ring" cx="258.3" cy="189.7" r="17"/><path class="mk" d="M258.3 182.7L264.7 194.2L251.9 194.2Z"/><text class="lab" x="258.3" y="189.7" data-en="Bise Fukugi tree road">備瀬のフクギ並木</text></g>
+<g class="pin p-nature"><circle class="hit" cx="527.4" cy="181.0" r="22"/><circle class="ring" cx="527.4" cy="181.0" r="17"/><g class="mk-at" transform="translate(527.4 181.0)"><path class="mk" d="M0 -7L6.4 4.5L-6.4 4.5Z"/></g><text class="lab" text-anchor="end" x="527.4" y="181.0" data-en="Hiji Falls">比地大滝</text></g>
+<g class="pin p-nature"><circle class="hit" cx="444.9" cy="258.6" r="22"/><circle class="ring" cx="444.9" cy="258.6" r="17"/><g class="mk-at" transform="translate(444.9 258.6)"><path class="mk" d="M0 -7L6.4 4.5L-6.4 4.5Z"/></g><text class="lab" text-anchor="end" x="444.9" y="258.6" data-en="Ta Falls">ター滝</text></g>
+<g class="pin p-nature"><circle class="hit" cx="582.9" cy="39.9" r="22"/><circle class="ring" cx="582.9" cy="39.9" r="17"/><g class="mk-at" transform="translate(582.9 39.9)"><path class="mk" d="M0 -7L6.4 4.5L-6.4 4.5Z"/></g><text class="lab" text-anchor="end" x="582.9" y="39.9" data-en="Kayauchi Banta">茅打バンタ</text></g>
+<g class="pin p-nature"><circle class="hit" cx="596.8" cy="22.6" r="22"/><circle class="ring" cx="596.8" cy="22.6" r="17"/><g class="mk-at" transform="translate(596.8 22.6)"><path class="mk" d="M0 -7L6.4 4.5L-6.4 4.5Z"/></g><text class="lab" text-anchor="end" x="596.8" y="22.6" data-en="Cape Hedo">辺戸岬</text></g>
+<g class="pin p-nature"><circle class="hit" cx="260.2" cy="253.1" r="22"/><circle class="ring" cx="260.2" cy="253.1" r="17"/><g class="mk-at" transform="translate(260.2 253.1)"><path class="mk" d="M0 -7L6.4 4.5L-6.4 4.5Z"/></g><text class="lab" x="260.2" y="253.1" data-en="Gorilla Chop">ゴリラチョップ</text></g>
+<g class="pin p-nature"><circle class="hit" cx="490.7" cy="285.5" r="22"/><circle class="ring" cx="490.7" cy="285.5" r="17"/><g class="mk-at" transform="translate(490.7 285.5)"><path class="mk" d="M0 -7L6.4 4.5L-6.4 4.5Z"/></g><text class="lab" text-anchor="end" x="490.7" y="285.5" data-en="Fureai Hirugi Park">ふれあいヒルギ公園</text></g>
+<g class="pin p-nature"><circle class="hit" cx="257.4" cy="380.9" r="22"/><circle class="ring" cx="257.4" cy="380.9" r="17"/><g class="mk-at" transform="translate(257.4 380.9)"><path class="mk" d="M0 -7L6.4 4.5L-6.4 4.5Z"/></g><text class="lab" x="257.4" y="380.9" data-en="Diamond Beach">ダイヤモンドビーチ</text></g>
+<g class="pin p-nature"><circle class="hit" cx="379.5" cy="184.1" r="22"/><circle class="ring" cx="379.5" cy="184.1" r="17"/><g class="mk-at" transform="translate(379.5 184.1)"><path class="mk" d="M0 -7L6.4 4.5L-6.4 4.5Z"/></g><text class="lab" text-anchor="end" x="379.5" y="184.1" data-en="Kouri Island">古宇利島</text></g>
+<g class="pin p-nature"><circle class="hit" cx="258.3" cy="189.7" r="22"/><circle class="ring" cx="258.3" cy="189.7" r="17"/><g class="mk-at" transform="translate(258.3 189.7)"><path class="mk" d="M0 -7L6.4 4.5L-6.4 4.5Z"/></g><text class="lab" x="258.3" y="189.7" data-en="Bise Fukugi tree road">備瀬のフクギ並木</text></g>
 
-<g class="pin p-food"><circle class="hit" cx="272.1" cy="229.9" r="22"/><circle class="ring" cx="272.1" cy="229.9" r="17"/><rect class="mk" x="-5" y="-5" width="10" height="10" transform="translate(272.1 229.9) rotate(45)"/><text class="lab" x="272.1" y="229.9" data-en="Aragaki Zenzai">新垣ぜんざい屋</text></g>
-<g class="pin p-food"><circle class="hit" cx="272.1" cy="230.2" r="22"/><circle class="ring" cx="272.1" cy="230.2" r="17"/><rect class="mk" x="-5" y="-5" width="10" height="10" transform="translate(272.1 230.2) rotate(45)"/><text class="lab" x="272.1" y="230.2" data-en="Kishimoto Shokudo">きしもと食堂</text></g>
-<g class="pin p-food"><circle class="hit" cx="353.6" cy="300.4" r="22"/><circle class="ring" cx="353.6" cy="300.4" r="17"/><rect class="mk" x="-5" y="-5" width="10" height="10" transform="translate(353.6 300.4) rotate(45)"/><text class="lab" text-anchor="end" x="353.6" y="300.4" data-en="Higashi Shokudo">ひがし食堂</text></g>
-<g class="pin p-food"><circle class="hit" cx="337.2" cy="336.5" r="22"/><circle class="ring" cx="337.2" cy="336.5" r="17"/><rect class="mk" x="-5" y="-5" width="10" height="10" transform="translate(337.2 336.5) rotate(45)"/><text class="lab" text-anchor="end" x="337.2" y="336.5" data-en="Mitsuya, Kyoda">三矢 道の駅許田店</text></g>
-<g class="pin p-food"><circle class="hit" cx="183.3" cy="450.0" r="22"/><circle class="ring" cx="183.3" cy="450.0" r="17"/><rect class="mk" x="-5" y="-5" width="10" height="10" transform="translate(183.3 450.0) rotate(45)"/><text class="lab" x="183.3" y="450.0" data-en="Ryupin, Onna">琉冰 おんなの駅</text></g>
-<g class="pin p-food"><circle class="hit" cx="137.2" cy="479.5" r="22"/><circle class="ring" cx="137.2" cy="479.5" r="17"/><rect class="mk" x="-5" y="-5" width="10" height="10" transform="translate(137.2 479.5) rotate(45)"/><text class="lab" x="137.2" y="479.5" data-en="Tsurukamedo">鶴亀堂ぜんざい</text></g>
-<g class="pin p-food"><circle class="hit" cx="145.6" cy="556.7" r="22"/><circle class="ring" cx="145.6" cy="556.7" r="17"/><rect class="mk" x="-5" y="-5" width="10" height="10" transform="translate(145.6 556.7) rotate(45)"/><text class="lab" x="145.6" y="556.7" data-en="Kori wo Kizame">氷ヲ刻メ</text></g>
-<g class="pin p-food"><circle class="hit" cx="276.4" cy="222.1" r="22"/><circle class="ring" cx="276.4" cy="222.1" r="17"/><rect class="mk" x="-5" y="-5" width="10" height="10" transform="translate(276.4 222.1) rotate(45)"/><text class="lab" x="276.4" y="222.1" data-en="Kajinho">花人逢</text></g>
-<g class="pin p-food"><circle class="hit" cx="258.1" cy="189.2" r="22"/><circle class="ring" cx="258.1" cy="189.2" r="17"/><rect class="mk" x="-5" y="-5" width="10" height="10" transform="translate(258.1 189.2) rotate(45)"/><text class="lab" x="258.1" y="189.2" data-en="Cafe Cahaya Bulan">cafe CAHAYA BULAN</text></g>
-<g class="pin p-food"><circle class="hit" cx="276.0" cy="223.5" r="22"/><circle class="ring" cx="276.0" cy="223.5" r="17"/><rect class="mk" x="-5" y="-5" width="10" height="10" transform="translate(276.0 223.5) rotate(45)"/><text class="lab" x="276.0" y="223.5" data-en="Anettai Chaya">亜熱帯茶屋</text></g>
-<g class="pin p-food"><circle class="hit" cx="112.4" cy="468.2" r="22"/><circle class="ring" cx="112.4" cy="468.2" r="17"/><rect class="mk" x="-5" y="-5" width="10" height="10" transform="translate(112.4 468.2) rotate(45)"/><text class="lab" x="112.4" y="468.2" data-en="Banta Cafe">バンタカフェ</text></g>
+<g class="pin p-food"><circle class="hit" cx="272.1" cy="229.9" r="22"/><circle class="ring" cx="272.1" cy="229.9" r="17"/><g class="mk-at" transform="translate(272.1 229.9)"><rect class="mk turn45" x="-5" y="-5" width="10" height="10"/></g><text class="lab" x="272.1" y="229.9" data-en="Aragaki Zenzai">新垣ぜんざい屋</text></g>
+<g class="pin p-food"><circle class="hit" cx="272.1" cy="230.2" r="22"/><circle class="ring" cx="272.1" cy="230.2" r="17"/><g class="mk-at" transform="translate(272.1 230.2)"><rect class="mk turn45" x="-5" y="-5" width="10" height="10"/></g><text class="lab" x="272.1" y="230.2" data-en="Kishimoto Shokudo">きしもと食堂</text></g>
+<g class="pin p-food"><circle class="hit" cx="353.6" cy="300.4" r="22"/><circle class="ring" cx="353.6" cy="300.4" r="17"/><g class="mk-at" transform="translate(353.6 300.4)"><rect class="mk turn45" x="-5" y="-5" width="10" height="10"/></g><text class="lab" text-anchor="end" x="353.6" y="300.4" data-en="Higashi Shokudo">ひがし食堂</text></g>
+<g class="pin p-food"><circle class="hit" cx="337.2" cy="336.5" r="22"/><circle class="ring" cx="337.2" cy="336.5" r="17"/><g class="mk-at" transform="translate(337.2 336.5)"><rect class="mk turn45" x="-5" y="-5" width="10" height="10"/></g><text class="lab" text-anchor="end" x="337.2" y="336.5" data-en="Mitsuya, Kyoda">三矢 道の駅許田店</text></g>
+<g class="pin p-food"><circle class="hit" cx="183.3" cy="450.0" r="22"/><circle class="ring" cx="183.3" cy="450.0" r="17"/><g class="mk-at" transform="translate(183.3 450.0)"><rect class="mk turn45" x="-5" y="-5" width="10" height="10"/></g><text class="lab" x="183.3" y="450.0" data-en="Ryupin, Onna">琉冰 おんなの駅</text></g>
+<g class="pin p-food"><circle class="hit" cx="137.2" cy="479.5" r="22"/><circle class="ring" cx="137.2" cy="479.5" r="17"/><g class="mk-at" transform="translate(137.2 479.5)"><rect class="mk turn45" x="-5" y="-5" width="10" height="10"/></g><text class="lab" x="137.2" y="479.5" data-en="Tsurukamedo">鶴亀堂ぜんざい</text></g>
+<g class="pin p-food"><circle class="hit" cx="145.6" cy="556.7" r="22"/><circle class="ring" cx="145.6" cy="556.7" r="17"/><g class="mk-at" transform="translate(145.6 556.7)"><rect class="mk turn45" x="-5" y="-5" width="10" height="10"/></g><text class="lab" x="145.6" y="556.7" data-en="Kori wo Kizame">氷ヲ刻メ</text></g>
+<g class="pin p-food"><circle class="hit" cx="276.4" cy="222.1" r="22"/><circle class="ring" cx="276.4" cy="222.1" r="17"/><g class="mk-at" transform="translate(276.4 222.1)"><rect class="mk turn45" x="-5" y="-5" width="10" height="10"/></g><text class="lab" x="276.4" y="222.1" data-en="Kajinho">花人逢</text></g>
+<g class="pin p-food"><circle class="hit" cx="258.1" cy="189.2" r="22"/><circle class="ring" cx="258.1" cy="189.2" r="17"/><g class="mk-at" transform="translate(258.1 189.2)"><rect class="mk turn45" x="-5" y="-5" width="10" height="10"/></g><text class="lab" x="258.1" y="189.2" data-en="Cafe Cahaya Bulan">cafe CAHAYA BULAN</text></g>
+<g class="pin p-food"><circle class="hit" cx="276.0" cy="223.5" r="22"/><circle class="ring" cx="276.0" cy="223.5" r="17"/><g class="mk-at" transform="translate(276.0 223.5)"><rect class="mk turn45" x="-5" y="-5" width="10" height="10"/></g><text class="lab" x="276.0" y="223.5" data-en="Anettai Chaya">亜熱帯茶屋</text></g>
+<g class="pin p-food"><circle class="hit" cx="112.4" cy="468.2" r="22"/><circle class="ring" cx="112.4" cy="468.2" r="17"/><g class="mk-at" transform="translate(112.4 468.2)"><rect class="mk turn45" x="-5" y="-5" width="10" height="10"/></g><text class="lab" x="112.4" y="468.2" data-en="Banta Cafe">バンタカフェ</text></g>
 
 </g>
 <g class="stops">
@@ -3184,7 +3279,7 @@ var LS={
 </main>
 
 <!-- The cover of the book being opened: it zooms to full screen, then turns like a page. -->
-<div id="turner" hidden aria-hidden="true"><div class="turner-page"></div></div>
+<div id="turner" hidden aria-hidden="true"><div class="turner-page"><span class="book-holo"></span><span class="book-sparkle"></span><span class="book-gloss"></span></div></div>
 
 <!-- Shown by JS only when the service worker reports a newer cached version is ready. -->
 <div class="update-banner" id="updateBanner" hidden role="status" aria-live="polite">

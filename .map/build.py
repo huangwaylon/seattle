@@ -20,7 +20,7 @@ Then:  python3 .map/build.py   ->  .map/map.svg.html and .map/map.lists.html
 and splice those into index.html, replacing the <svg class="map">...</svg> block and the
 three <ul class="tl stoplist"> blocks. Bump CACHE in sw.js afterwards.
 """
-import json, math
+import json, math, re
 
 # The lon window is widened past what the island needs so the frame comes out 692x824, the same
 # shape as the New Zealand map — both map cards then sit the same height on screen.
@@ -196,18 +196,26 @@ rt.append('<path class="leg d2" data-day="2" data-min="%d" d="%s"/>'%(m,path(pts
 out.append('<g class="routes">\n'+'\n'.join(rt)+'\n</g>')
 
 # candidate pins
+def slug(en):
+    """The same slug the campsite photos are named by, so a pin can find its card with no extra
+    bookkeeping: lowercase, every run of non-alphanumerics becomes one hyphen."""
+    return re.sub(r'[^a-z0-9]+','-',en.lower()).strip('-')
 def cand(items,cls,shape):
     g=[]
     for ja,en,la,lo in items:
         x,y=prj(la,lo)
-        g.append('<g class="pin %s">'
+        # only campsites have a card to open, so only they carry the slug
+        key=' data-camp="%s"'%slug(en) if cls=='p-camp' else ''
+        g.append('<g class="pin %s"%s>'
                  '<circle class="hit" cx="%.1f" cy="%.1f" r="22"/>'
                  '<circle class="ring" cx="%.1f" cy="%.1f" r="17"/>%s%s</g>'
-                 %(cls,x,y,x,y,shape(x,y),lab(x,ja,en,y)))
+                 %(cls,key,x,y,x,y,shape(x,y),lab(x,ja,en,y)))
     return '\n'.join(g)+'\n'
-sq   =lambda x,y:'<rect class="mk" x="%.1f" y="%.1f" width="11" height="11"/>'%(x-5.5,y-5.5)
-tri  =lambda x,y:'<path class="mk" d="M%.1f %.1fL%.1f %.1fL%.1f %.1fZ"/>'%(x,y-7,x+6.4,y+4.5,x-6.4,y+4.5)
-di   =lambda x,y:'<rect class="mk" x="-5" y="-5" width="10" height="10" transform="translate(%.1f %.1f) rotate(45)"/>'%(x,y)
+# Each candidate marker is drawn about its own origin and placed by a translate, so CSS can hold it
+# at a constant size on screen with one scale(1/--z) — a shape cannot do what `r` does for a circle.
+sq   =lambda x,y:'<g class="mk-at" transform="translate(%.1f %.1f)"><rect class="mk" x="-5.5" y="-5.5" width="11" height="11"/></g>'%(x,y)
+tri  =lambda x,y:'<g class="mk-at" transform="translate(%.1f %.1f)"><path class="mk" d="M0 -7L6.4 4.5L-6.4 4.5Z"/></g>'%(x,y)
+di   =lambda x,y:'<g class="mk-at" transform="translate(%.1f %.1f)"><rect class="mk turn45" x="-5" y="-5" width="10" height="10"/></g>'%(x,y)
 out.append('<g class="cands">\n')
 out.append(cand(CAMPS,'p-camp',sq))
 out.append(cand(NATURE,'p-nature',tri))
