@@ -39,8 +39,11 @@ Google Maps, Evertrail and trail maps — they open externally and fail graceful
   into `history`. The bootstrap does not know which books exist — a slug with no book is corrected
   to `shelf` by the navigation module, which does.
 - **Opening a book** zooms `#turner` (a fixed overlay holding the cover) from the book's rect to full
-  screen, then rotates its inner page off the spine. One transition at a time, and a counter every
-  navigation bumps lets a stale animation know not to finish. Reduced motion skips it.
+  screen, then rotates its inner page off the spine. The zoom's scale is **uniform** and a `clip-path`
+  trims the overhang to the book's rect, because scaling a viewport-shaped overlay down to a
+  book-shaped one non-uniformly squeezed the photograph by half its width. One transition at a time,
+  and a counter every navigation bumps lets a stale animation know not to finish. Reduced motion
+  skips it.
 - **Themes are token sets.** `:root` holds structure plus a neutral palette **and a default for every
   token the shared CSS reads**, so a theme that omits one degrades to something visible rather than
   to an invalid value. `.t-okinawa`, `.t-seattle` and `.t-nz` each declare their own colours,
@@ -52,6 +55,11 @@ Google Maps, Evertrail and trail maps — they open externally and fail graceful
   and slides a gloss on cycle lengths given per book (`--sway`, `--float` and their delays, inline),
   so no two fall into step. Each book is an `<a href="#g-…">`, so the no-JS path still navigates.
   A book's *title* is never translated — on the cover as on the spine — only its eyebrow and dates.
+  The cover's fore-edge round is **kept small (6px) on purpose**: the cover is clipped under a
+  perspective matrix, where the corner arc collapses to one un-antialiased chord, and at 12px that
+  chord cut a visible dark triangle off the bottom-right of every cover at the far end of the sway.
+  A mask, a `clip-path`, a forced render surface and a radius on the children all chamfer the same
+  way — the fault is the perspective, not how the round is asked for.
 - **Adding a book** means: a `.book` in a `.books` grid (two per row, each row followed by a
   `.shelf-plank`), an `<article class="guide t-slug">`, a theme block, and one two-line block giving
   the place its `--shell` and its `display:block`. Nothing else.
@@ -78,7 +86,8 @@ Google Maps, Evertrail and trail maps — they open externally and fail graceful
   never does live maths. Metric is the default text, the choice persists in `localStorage['units']`,
   and the module is document-wide, so every book stays in sync.
 - **One toolbar rhythm on every tab:** heading → intro 6px, intro → control row 20px, row → row 12px,
-  row → content 14px.
+  row → content 14px. On the itinerary the hero → first card gap is the gutter instead, so the first
+  card has the same air above it as it has beside it.
 - **Settings live once, on the shelf** — a `.setbtn` opens a panel with the unit and language
   toggles, both applying to every book. Day cards open by default, so there is no expand-all button.
 - **The packing list is the one exception to static markup.** Its `.group` rows are both the no-JS
@@ -101,8 +110,10 @@ Safari on iPhone is the platform; everything else is a convenience.
   `::before` pads the hit area out without changing how it looks. The destructive button in the
   packing editor keeps its distance from the reorder pair.
 - **There is always a way back.** `.backbtn` is a child of the `.guide`, absolute on the itinerary so
-  it scrolls away with the hero, and `position:fixed` on every other tab, which have no hero to hold
-  it.
+  it scrolls away with the hero, and hidden on every other tab, which have no hero to hold it — from
+  those, the tab bar leads back to the itinerary and the button is there. Where `:has()` is missing
+  every view is stacked and there is no tab bar, so the hiding rule being dropped is the right
+  outcome.
 - `-webkit-text-size-adjust:100%` stops iOS inflating text in landscape; `100dvh` (with `100vh`
   first as the fallback) keeps full-height boxes off the URL bar; `-webkit-touch-callout:none` on the
   tappable, non-text elements stops the long-press preview sheet.

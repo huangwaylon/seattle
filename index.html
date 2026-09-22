@@ -204,7 +204,14 @@
     writing-mode:vertical-rl;font-family:var(--font-display);font-size:10px;font-weight:600;
     letter-spacing:.15em;color:#e9d59f;text-shadow:0 1px 0 rgba(0,0,0,.65);white-space:nowrap;}
 
-  .book-cover{position:absolute;inset:0;overflow:hidden;border-radius:2px 12px 12px 2px;
+  /* The fore-edge round is deliberately small. The cover is clipped *under a perspective matrix*,
+     and neither Chrome nor Skia can clip a rounded rect analytically there: the corner arc collapses
+     to a single un-antialiased chord. At 12px that chord cut a visible dark triangle off the
+     bottom-right of every cover at the far end of the sway; at 6px the same chord is under 2px deep
+     and reads as the corner it is meant to be. A mask, a clip-path, a render surface and a radius on
+     the children were all tried instead — they chamfer identically, because the fault is the
+     perspective, not the way the round is asked for. */
+  .book-cover{position:absolute;inset:0;overflow:hidden;border-radius:2px 6px 6px 2px;
     isolation:isolate;                    /* keep the foil's blend modes inside the cover */
     box-shadow:0 22px 40px rgba(0,0,0,.5), inset 0 0 0 1px rgba(255,255,255,.1);}
   .book-img{position:absolute;inset:0;background-image:var(--cover);background-size:cover;
@@ -315,14 +322,15 @@
   .turner-page::after{content:"";position:absolute;inset:0;z-index:3;
     background:linear-gradient(90deg,rgba(0,0,0,.5) 0,rgba(0,0,0,0) 34%);}
 
-  /* On the itinerary it sits in the hero and scrolls away with the cover photo. On the other tabs
-     there is no hero to hold it, so it stays pinned — otherwise those tabs have no way back. */
+  /* It belongs to the hero: it sits in the cover photo and scrolls away with it. The other tabs have
+     no hero, so it is hidden there — the tab bar leads back to the itinerary, and the shelf from it.
+     Without :has() the whole selector is dropped, which is right: that layout has no tab bar. */
   .backbtn{position:absolute;top:calc(var(--safe-t) + 12px);left:var(--gutter);z-index:30;border:0;cursor:pointer;
     display:inline-flex;align-items:center;gap:6px;color:#fff;font-family:inherit;font-size:12.5px;
     font-weight:700;letter-spacing:.04em;padding:13px 16px 13px 12px;border-radius:var(--r-chip);
     background:rgba(16,24,22,.5);backdrop-filter:blur(16px) saturate(160%);
     -webkit-backdrop-filter:blur(16px) saturate(160%);transition:transform .1s,background .15s;}
-  .guide:not(:has(.t-itinerary:checked)) .backbtn{position:fixed;background:rgba(16,24,22,.72);}
+  .guide:not(:has(.t-itinerary:checked)) .backbtn{display:none;}
   .backbtn .ic{width:15px;height:15px;}
   .backbtn:active{transform:scale(.95);background:rgba(16,24,22,.65);}
 
@@ -400,6 +408,9 @@
 
   /* ---- Spine: the shared vertical timeline behind day, logistics and campsite cards ---- */
   .spine{position:relative;padding:8px 0 4px;}
+  /* The first card under the hero sits in from the sides by the gutter, so it sits down from the
+     photo by the gutter too — the same air on all three sides. */
+  .hero + .spine{padding-top:var(--gutter);}
   .spine::before{content:"";position:absolute;left:42px;top:34px;bottom:34px;width:2px;
     background:var(--line-strong);border-radius:1px;z-index:0;pointer-events:none;}
 
@@ -3431,9 +3442,21 @@ function icon(id){return '<svg class="ic" aria-hidden="true"><use href="#i-'+id+
     turner.style.setProperty('--cover',book.style.getPropertyValue('--cover'));
     turner.style.setProperty('--cover-pos',book.style.getPropertyValue('--cover-pos'));
     turner.hidden=false;
+    /* The scale is *uniform*, so the photograph is never stretched. Scaling a viewport-shaped
+       overlay non-uniformly down to a book-shaped rect squeezed the cover by half its width at the
+       start of the zoom, which is what showed. So the overlay is scaled by whichever axis needs the
+       most — it then covers the book's rect and overhangs on the other axis — centred on the book,
+       and a clip-path trims the overhang away. The clip's window has the book's own proportions, so
+       the frame the reader sees is exactly the book's rect throughout while the picture inside it
+       keeps its shape. It opens to inset(0), which is the viewport, i.e. no clip at all, so the page
+       turn that follows is unaffected. */
+    var s=Math.max(r.width/innerWidth,r.height/innerHeight);
+    var tx=r.left+(r.width-s*innerWidth)/2, ty=r.top+(r.height-s*innerHeight)/2;
+    var cx=(s*innerWidth-r.width)/(2*s), cy=(s*innerHeight-r.height)/(2*s);
     var zoom=turner.animate([
-      {transform:'translate('+r.left+'px,'+r.top+'px) scale('+(r.width/innerWidth)+','+(r.height/innerHeight)+')'},
-      {transform:'none'}
+      {transform:'translate('+tx+'px,'+ty+'px) scale('+s+')',
+       clipPath:'inset('+cy+'px '+cx+'px '+cy+'px '+cx+'px)'},
+      {transform:'none',clipPath:'inset(0px 0px 0px 0px)'}
     ],{duration:320,easing:'cubic-bezier(.32,0,.24,1)',fill:'both'});
     function finish(){
       turner.hidden=true; zoom.cancel(); if(turn) turn.cancel(); busy=false;
