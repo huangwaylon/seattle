@@ -2,3 +2,6 @@
 .DS_Store
 .map/*.json
 .map/*.html
+
+# Python
+__pycache__/

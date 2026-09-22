@@ -1,0 +1,1122 @@
+[
+ {
+  "slot": "span",
+  "src": "Shelf",
+  "id": "6885b00289"
+ },
+ {
+  "slot": "eyebrow",
+  "src": "North Island &middot; 6 days",
+  "id": "5a8507a1ac"
+ },
+ {
+  "slot": "h1",
+  "src": "New Zealand 2027",
+  "id": "69c9dbbef4"
+ },
+ {
+  "slot": "sub",
+  "src": "Feb 11 &ndash; Feb 16 &middot; Auckland &amp; Taranaki",
+  "id": "1a5d01ed99"
+ },
+ {
+  "slot": "m",
+  "src": "FEB",
+  "id": "6ff5e0b914"
+ },
+ {
+  "slot": "wd",
+  "src": "Thu",
+  "id": "60a27ab853"
+ },
+ {
+  "slot": "t",
+  "src": "Arrival",
+  "id": "7bf2b52d6d"
+ },
+ {
+  "slot": "sub2",
+  "src": "Narita &rarr; Auckland &rarr; New Lynn",
+  "id": "6d99dc2dfe"
+ },
+ {
+  "slot": "txt",
+  "src": "Narita &rarr; Auckland &mdash; Air NZ 98<small>Leaves Feb 10 &middot; 10 h 30 m &middot; confirmation 5HXFYH</small>",
+  "id": "e5d5c24900"
+ },
+ {
+  "slot": "txt",
+  "src": "Land at Auckland (AKL)",
+  "id": "aec33610c2"
+ },
+ {
+  "slot": "txt",
+  "src": "Border, bags, rental car<small>Biosecurity queues are slow &mdash; declare or bin every scrap of food</small>",
+  "id": "0fa69b8ada"
+ },
+ {
+  "slot": "txt",
+  "src": "New Lynn &mdash; the house<small><span class=\"u\" data-metric=\"20 km\" data-imperial=\"12 mi\">20 km</span> from the airport, 22 min free-flow</small>",
+  "id": "dccaf68b4f"
+ },
+ {
+  "slot": "txt",
+  "src": "Daily Bread, New Lynn<small>2 min away</small>",
+  "id": "adefd9357e"
+ },
+ {
+  "slot": "txt",
+  "src": "Cornwall Park<small>19 min</small>",
+  "id": "f50ef46b11"
+ },
+ {
+  "slot": "txt",
+  "src": "One Tree Hill / Maungakiekie<small>Up from the park &middot; <span class=\"u\" data-metric=\"182 m\" data-imperial=\"597 ft\">182 m</span></small>",
+  "id": "722fd22d9f"
+ },
+ {
+  "slot": "txt",
+  "src": "Back to New Lynn<small>Sunset 20:23</small>",
+  "id": "6ab5648938"
+ },
+ {
+  "slot": "m",
+  "src": "FEB",
+  "id": "6ff5e0b914"
+ },
+ {
+  "slot": "wd",
+  "src": "Fri",
+  "id": "d940305b33"
+ },
+ {
+  "slot": "t",
+  "src": "Karangahape Road",
+  "id": "b2836ef8e1"
+ },
+ {
+  "slot": "sub2",
+  "src": "Coffee, books, gear",
+  "id": "54bfad7e2b"
+ },
+ {
+  "slot": "txt",
+  "src": "Leave New Lynn",
+  "id": "3869731e7c"
+ },
+ {
+  "slot": "txt",
+  "src": "Crushes<small>16 min &middot; coffee</small>",
+  "id": "30be4c0178"
+ },
+ {
+  "slot": "txt",
+  "src": "Porter James<small>8 min on foot</small>",
+  "id": "792d84aff1"
+ },
+ {
+  "slot": "txt",
+  "src": "Hard To Find Books<small>5 min on foot</small>",
+  "id": "3196ba5aa6"
+ },
+ {
+  "slot": "txt",
+  "src": "MIBO<small>10 min on foot &middot; lunch</small>",
+  "id": "26ae55bbee"
+ },
+ {
+  "slot": "txt",
+  "src": "Outdoors Society<small>3 min on foot</small>",
+  "id": "69716d7e4a"
+ },
+ {
+  "slot": "txt",
+  "src": "Back to New Lynn",
+  "id": "a7bbac8f1c"
+ },
+ {
+  "slot": "desc",
+  "src": "Everything after Crushes is one walking loop of about <span class=\"u\" data-metric=\"1.6 km\" data-imperial=\"1 mi\">1.6 km</span>. Park once.",
+  "id": "d4f7d48842"
+ },
+ {
+  "slot": "m",
+  "src": "FEB",
+  "id": "6ff5e0b914"
+ },
+ {
+  "slot": "wd",
+  "src": "Sat",
+  "id": "c8d04a270d"
+ },
+ {
+  "slot": "t",
+  "src": "Market &amp; North Shore",
+  "id": "9bceffd371"
+ },
+ {
+  "slot": "sub2",
+  "src": "Parnell &rarr; Northcote &rarr; Devonport",
+  "id": "fafcca8a1c"
+ },
+ {
+  "slot": "txt",
+  "src": "Leave New Lynn",
+  "id": "3869731e7c"
+ },
+ {
+  "slot": "txt",
+  "src": "Parnell Farmers&rsquo; Market<small>19 min &middot; Saturdays 08:00&ndash;12:00</small>",
+  "id": "44965bca48"
+ },
+ {
+  "slot": "txt",
+  "src": "Domain Wintergardens<small>15 min on foot &middot; free</small>",
+  "id": "050583c8c2"
+ },
+ {
+  "slot": "txt",
+  "src": "Kauri Glen Reserve<small>13 min over the harbour bridge &middot; bush walk</small>",
+  "id": "2ca1f09b1b"
+ },
+ {
+  "slot": "txt",
+  "src": "Daily Bread, Belmont<small>10 min</small>",
+  "id": "1c1c64c4ab"
+ },
+ {
+  "slot": "txt",
+  "src": "Takarunga / Mount Victoria<small>6 min &middot; Devonport &middot; <span class=\"u\" data-metric=\"87 m\" data-imperial=\"285 ft\">87 m</span></small>",
+  "id": "e4eb53e178"
+ },
+ {
+  "slot": "txt",
+  "src": "Back to New Lynn<small>32 min</small>",
+  "id": "73f2e4a116"
+ },
+ {
+  "slot": "m",
+  "src": "FEB",
+  "id": "6ff5e0b914"
+ },
+ {
+  "slot": "wd",
+  "src": "Sun",
+  "id": "04a30284e4"
+ },
+ {
+  "slot": "t",
+  "src": "Waiheke Island",
+  "id": "66a1750d9a"
+ },
+ {
+  "slot": "sub2",
+  "src": "Olives, wine, ferry both ways",
+  "id": "91c7b9d5bc"
+ },
+ {
+  "slot": "txt",
+  "src": "Leave New Lynn",
+  "id": "3869731e7c"
+ },
+ {
+  "slot": "txt",
+  "src": "Downtown Ferry Terminal<small>21 min &middot; park in the city</small>",
+  "id": "379b420d64"
+ },
+ {
+  "slot": "txt",
+  "src": "Ferry to Waiheke<small>About 40 min</small>",
+  "id": "eeb4955dab"
+ },
+ {
+  "slot": "txt",
+  "src": "Matiatia Wharf",
+  "id": "a0c04c6379"
+ },
+ {
+  "slot": "txt",
+  "src": "Allpress Olive Groves<small>12 min</small>",
+  "id": "2bc79e9657"
+ },
+ {
+  "slot": "txt",
+  "src": "Batch Winery<small>5 min &middot; lunch</small>",
+  "id": "44d91e5dac"
+ },
+ {
+  "slot": "txt",
+  "src": "Matiatia Wharf<small>16 min</small>",
+  "id": "2106709acc"
+ },
+ {
+  "slot": "txt",
+  "src": "Ferry back",
+  "id": "5dede66dc1"
+ },
+ {
+  "slot": "txt",
+  "src": "Amano, Britomart<small>4 min on foot from the terminal &middot; dinner</small>",
+  "id": "017e1daca2"
+ },
+ {
+  "slot": "txt",
+  "src": "Back to New Lynn<small>18 min</small>",
+  "id": "10efc2243c"
+ },
+ {
+  "slot": "desc",
+  "src": "The ferry is passenger-only, so the car stays in Auckland. Getting around the island &mdash; bus or a booked shuttle &mdash; is not arranged.",
+  "id": "38b1e86f58"
+ },
+ {
+  "slot": "m",
+  "src": "FEB",
+  "id": "6ff5e0b914"
+ },
+ {
+  "slot": "wd",
+  "src": "Mon",
+  "id": "306d6a844d"
+ },
+ {
+  "slot": "t",
+  "src": "South to Taranaki",
+  "id": "1c94f819e6"
+ },
+ {
+  "slot": "sub2",
+  "src": "Waitomo &rarr; New Plymouth",
+  "id": "f5c34860fc"
+ },
+ {
+  "slot": "txt",
+  "src": "Leave New Lynn",
+  "id": "3869731e7c"
+ },
+ {
+  "slot": "txt",
+  "src": "Waitomo Glowworm Caves<small><span class=\"u\" data-metric=\"197 km\" data-imperial=\"123 mi\">197 km</span> &middot; 2 h 36 free-flow &middot; book the tour ahead</small>",
+  "id": "31beb7615e"
+ },
+ {
+  "slot": "txt",
+  "src": "Cave tour<small>About 45 min, ending on the boat ride under the glowworms</small>",
+  "id": "3731ca9391"
+ },
+ {
+  "slot": "txt",
+  "src": "Leave Waitomo",
+  "id": "8451446387"
+ },
+ {
+  "slot": "txt",
+  "src": "New Plymouth<small><span class=\"u\" data-metric=\"181 km\" data-imperial=\"113 mi\">181 km</span> &middot; 2 h 30</small>",
+  "id": "e6c40d5c13"
+ },
+ {
+  "slot": "txt",
+  "src": "Sunset<small>Early night &mdash; tomorrow starts at 04:00</small>",
+  "id": "1405c2f1ba"
+ },
+ {
+  "slot": "desc",
+  "src": "A bed in New Plymouth is not booked.",
+  "id": "4c155f0a04"
+ },
+ {
+  "slot": "m",
+  "src": "FEB",
+  "id": "6ff5e0b914"
+ },
+ {
+  "slot": "wd",
+  "src": "Tue",
+  "id": "bdf529c457"
+ },
+ {
+  "slot": "t",
+  "src": "Pou&#257;kai Tarns",
+  "id": "e4f90d0f50"
+ },
+ {
+  "slot": "sub2",
+  "src": "Sunrise, then the drive back",
+  "id": "d982ee780b"
+ },
+ {
+  "slot": "txt",
+  "src": "Leave New Plymouth",
+  "id": "4349f40454"
+ },
+ {
+  "slot": "txt",
+  "src": "Mangorei Track trailhead<small><span class=\"u\" data-metric=\"19 km\" data-imperial=\"12 mi\">19 km</span> &middot; 17 min</small>",
+  "id": "688a1f49df"
+ },
+ {
+  "slot": "txt",
+  "src": "Start climbing<small>Headlamps &middot; about <span class=\"u\" data-metric=\"6 km\" data-imperial=\"3.7 mi\">6 km</span> and <span class=\"u\" data-metric=\"600 m\" data-imperial=\"1,970 ft\">600 m</span> up, on boardwalk most of the way</small>",
+  "id": "12fd285693"
+ },
+ {
+  "slot": "txt",
+  "src": "Pou&#257;kai Tarns<small>The reflection shot needs still air and a clear summit &mdash; neither is promised</small>",
+  "id": "c14526c578"
+ },
+ {
+  "slot": "txt",
+  "src": "Sunrise",
+  "id": "e8a92a4599"
+ },
+ {
+  "slot": "txt",
+  "src": "Start down",
+  "id": "0b44389998"
+ },
+ {
+  "slot": "txt",
+  "src": "Trailhead",
+  "id": "1f5e64bb15"
+ },
+ {
+  "slot": "txt",
+  "src": "New Plymouth<small>Shower, pack, eat</small>",
+  "id": "f59fbb9413"
+ },
+ {
+  "slot": "txt",
+  "src": "Leave for Auckland",
+  "id": "5eea7d4ae2"
+ },
+ {
+  "slot": "txt",
+  "src": "Auckland Airport<small><span class=\"u\" data-metric=\"349 km\" data-imperial=\"217 mi\">349 km</span> &middot; 4 h 41 &middot; return the car</small>",
+  "id": "52a87000fa"
+ },
+ {
+  "slot": "txt",
+  "src": "Check-in opens",
+  "id": "2b20f5efd1"
+ },
+ {
+  "slot": "txt",
+  "src": "Auckland &rarr; Narita &mdash; Air NZ 95<small>Leaves Feb 17 &middot; 10 h 55 m &middot; lands 07:05</small>",
+  "id": "b50ba9d4cf"
+ },
+ {
+  "slot": "span",
+  "src": "Logistics",
+  "id": "168848739e"
+ },
+ {
+  "slot": "t",
+  "src": "Flights",
+  "id": "513e1b5532"
+ },
+ {
+  "slot": "sub2",
+  "src": "Air New Zealand &middot; 5HXFYH",
+  "id": "511f88772e"
+ },
+ {
+  "slot": "li",
+  "src": "Out &mdash; NZ 98, Narita 18:30 Feb 10 &rarr; Auckland 09:00 Feb 11<small>10 h 30 m &middot; economy</small>",
+  "id": "a83e0a598c"
+ },
+ {
+  "slot": "li",
+  "src": "Back &mdash; NZ 95, Auckland 00:10 Feb 17 &rarr; Narita 07:05<small>10 h 55 m &middot; economy</small>",
+  "id": "1f2a8de095"
+ },
+ {
+  "slot": "li",
+  "src": "Waylon Huang &middot; Asuka Umeda<small>Names must match the passports exactly</small>",
+  "id": "729a25a969"
+ },
+ {
+  "slot": "li",
+  "src": "One checked bag each, plus a carry-on",
+  "id": "7c7dc1a349"
+ },
+ {
+  "slot": "li",
+  "src": "No seats chosen yet<small>Seat choice and changes cost extra; cancellation is not included</small>",
+  "id": "769a7e7533"
+ },
+ {
+  "slot": "li",
+  "src": "Expedia itinerary 73531978112284",
+  "id": "eea7213d4a"
+ },
+ {
+  "slot": "t",
+  "src": "The Car",
+  "id": "e339b5debb"
+ },
+ {
+  "slot": "sub2",
+  "src": "Picked up and returned at AKL",
+  "id": "8ca52556d5"
+ },
+ {
+  "slot": "li",
+  "src": "Not booked yet",
+  "id": "50f16e57ca"
+ },
+ {
+  "slot": "li",
+  "src": "An American licence is enough<small>English-language licence, valid to drive here for 12 months, so no international permit</small>",
+  "id": "3c318c38dc"
+ },
+ {
+  "slot": "li",
+  "src": "Drive on the left",
+  "id": "ac8c9fc31f"
+ },
+ {
+  "slot": "li",
+  "src": "Every drive time here is free-flow, from OSRM<small>Auckland at peak adds 20&ndash;40 min; the Feb 11 arrival lands mid-morning</small>",
+  "id": "544bbcc1ed"
+ },
+ {
+  "slot": "li",
+  "src": "The Waiheke ferry is passenger-only<small>The car stays in the city for that day</small>",
+  "id": "4598cf2bea"
+ },
+ {
+  "slot": "li",
+  "src": "One long day: <span class=\"u\" data-metric=\"349 km\" data-imperial=\"217 mi\">349 km</span> back from New Plymouth on Feb 16",
+  "id": "9c8e853954"
+ },
+ {
+  "slot": "t",
+  "src": "Know Before You Go",
+  "id": "680d59dbda"
+ },
+ {
+  "slot": "sub2",
+  "src": "Border, sun, plugs",
+  "id": "03876d4241"
+ },
+ {
+  "slot": "li",
+  "src": "NZeTA before boarding<small>Japanese and US passports both need one, plus the visitor levy. Apply well ahead &mdash; it is checked at check-in</small>",
+  "id": "b706022da4"
+ },
+ {
+  "slot": "li",
+  "src": "Biosecurity is strict<small>No food, seeds, honey or plants. Declare boots and tents, and scrub the soil off them first</small>",
+  "id": "da86ca8c65"
+ },
+ {
+  "slot": "li",
+  "src": "Plugs are Type I, 230 V<small>Japanese plugs do not fit</small>",
+  "id": "9e7d250de4"
+ },
+ {
+  "slot": "li",
+  "src": "Late summer<small>Auckland averages <span class=\"u\" data-metric=\"24 &deg;C\" data-imperial=\"75 &deg;F\">24 &deg;C</span> by day and <span class=\"u\" data-metric=\"16 &deg;C\" data-imperial=\"61 &deg;F\">16 &deg;C</span> at night</small>",
+  "id": "952ee51d6a"
+ },
+ {
+  "slot": "li",
+  "src": "The UV is extreme<small>Burn times are short even under cloud. Hat, sunscreen, sunglasses</small>",
+  "id": "a13d4b658b"
+ },
+ {
+  "slot": "li",
+  "src": "Taranaki turns fast<small>The tarns are above the bushline &mdash; rain shell and a warm layer, whatever the forecast says</small>",
+  "id": "8e5e0256bc"
+ },
+ {
+  "slot": "li",
+  "src": "Nearly cashless<small>Contactless works almost everywhere</small>",
+  "id": "b58b0412b5"
+ },
+ {
+  "slot": "li",
+  "src": "Emergency 111",
+  "id": "4a38352792"
+ },
+ {
+  "slot": "t",
+  "src": "Not Scheduled Yet",
+  "id": "927513f1d9"
+ },
+ {
+  "slot": "sub2",
+  "src": "The Taup&#333; loop, and what is unbooked",
+  "id": "8ec101efb0"
+ },
+ {
+  "slot": "desc",
+  "src": "Taranaki and Taup&#333; do not both fit into Feb 15&ndash;16. Taranaki is the plan above; this is the other way to spend those two days.",
+  "id": "2cb8dee83d"
+ },
+ {
+  "slot": "li",
+  "src": "T&#299;rau<small>New Lynn &rarr; <span class=\"u\" data-metric=\"177 km\" data-imperial=\"110 mi\">177 km</span>, 2 h 12 &middot; a stop on the way, not a destination</small>",
+  "id": "cfca7658cf"
+ },
+ {
+  "slot": "li",
+  "src": "Orakei Korako Geothermal Park &amp; Cave<small>T&#299;rau &rarr; <span class=\"u\" data-metric=\"88 km\" data-imperial=\"55 mi\">88 km</span>, 1 h 10 &middot; reached by boat across the lake</small>",
+  "id": "1da6c4f4d0"
+ },
+ {
+  "slot": "li",
+  "src": "Huka Falls<small>Orakei Korako &rarr; <span class=\"u\" data-metric=\"32 km\" data-imperial=\"20 mi\">32 km</span>, 25 min &middot; then <span class=\"u\" data-metric=\"269 km\" data-imperial=\"167 mi\">269 km</span>, 3 h 22 home</small>",
+  "id": "ab28018b68"
+ },
+ {
+  "slot": "subhead",
+  "src": "Still to book",
+  "id": "a4491a6121"
+ },
+ {
+  "slot": "li",
+  "src": "The rental car",
+  "id": "d2543558e6"
+ },
+ {
+  "slot": "li",
+  "src": "The Waitomo cave tour",
+  "id": "30e959c5f3"
+ },
+ {
+  "slot": "li",
+  "src": "A bed in New Plymouth for Feb 15",
+  "id": "1473125dcc"
+ },
+ {
+  "slot": "li",
+  "src": "Waiheke ferry, and a way around the island",
+  "id": "48170a7cb5"
+ },
+ {
+  "slot": "li",
+  "src": "Seats on both flights",
+  "id": "f5fc8c62d3"
+ },
+ {
+  "slot": "footer",
+  "src": "All times NZDT (UTC+13)",
+  "id": "311ee9878e"
+ },
+ {
+  "slot": "button",
+  "src": "<span class=\"sw d1\"></span>Day 1",
+  "id": "658e10aedc"
+ },
+ {
+  "slot": "button",
+  "src": "<span class=\"sw d2\"></span>Day 2",
+  "id": "565ab746dd"
+ },
+ {
+  "slot": "button",
+  "src": "<span class=\"sw d3\"></span>Day 3",
+  "id": "738e02265f"
+ },
+ {
+  "slot": "button",
+  "src": "<span class=\"sw d4\"></span>Day 4",
+  "id": "08232cf227"
+ },
+ {
+  "slot": "button",
+  "src": "<span class=\"sw d5\"></span>Day 5",
+  "id": "9e9e80cb96"
+ },
+ {
+  "slot": "button",
+  "src": "<span class=\"sw d6\"></span>Day 6",
+  "id": "7487609ff9"
+ },
+ {
+  "slot": "button",
+  "src": "All 6 days",
+  "id": "cea93ee385"
+ },
+ {
+  "slot": "txt",
+  "src": "Auckland Airport",
+  "id": "b1e834ca08"
+ },
+ {
+  "slot": "txt",
+  "src": "New Lynn",
+  "id": "673be7d562"
+ },
+ {
+  "slot": "txt",
+  "src": "Daily Bread, New Lynn",
+  "id": "eff4035649"
+ },
+ {
+  "slot": "txt",
+  "src": "Cornwall Park",
+  "id": "5112ef5cc9"
+ },
+ {
+  "slot": "txt",
+  "src": "One Tree Hill",
+  "id": "b2f8260380"
+ },
+ {
+  "slot": "txt",
+  "src": "New Lynn",
+  "id": "673be7d562"
+ },
+ {
+  "slot": "txt",
+  "src": "New Lynn",
+  "id": "673be7d562"
+ },
+ {
+  "slot": "txt",
+  "src": "Crushes",
+  "id": "b8c19e9d51"
+ },
+ {
+  "slot": "txt",
+  "src": "Porter James",
+  "id": "8826239814"
+ },
+ {
+  "slot": "txt",
+  "src": "Hard To Find Books",
+  "id": "e2f451ee60"
+ },
+ {
+  "slot": "txt",
+  "src": "MIBO",
+  "id": "25b5ca9385"
+ },
+ {
+  "slot": "txt",
+  "src": "Outdoors Society",
+  "id": "027143cfe2"
+ },
+ {
+  "slot": "txt",
+  "src": "New Lynn",
+  "id": "673be7d562"
+ },
+ {
+  "slot": "txt",
+  "src": "New Lynn",
+  "id": "673be7d562"
+ },
+ {
+  "slot": "txt",
+  "src": "Parnell Farmers' Market",
+  "id": "5264724eb6"
+ },
+ {
+  "slot": "txt",
+  "src": "Domain Wintergardens",
+  "id": "5f9a278bd8"
+ },
+ {
+  "slot": "txt",
+  "src": "Kauri Glen Reserve",
+  "id": "0de51dd684"
+ },
+ {
+  "slot": "txt",
+  "src": "Daily Bread, Belmont",
+  "id": "c1758d3a67"
+ },
+ {
+  "slot": "txt",
+  "src": "Takarunga / Mount Victoria",
+  "id": "b8d8d507ea"
+ },
+ {
+  "slot": "txt",
+  "src": "New Lynn",
+  "id": "673be7d562"
+ },
+ {
+  "slot": "txt",
+  "src": "New Lynn",
+  "id": "673be7d562"
+ },
+ {
+  "slot": "txt",
+  "src": "Downtown Ferry Terminal",
+  "id": "dd2549f06c"
+ },
+ {
+  "slot": "txt",
+  "src": "Matiatia Wharf",
+  "id": "a0c04c6379"
+ },
+ {
+  "slot": "txt",
+  "src": "Allpress Olive Groves",
+  "id": "4f51c0db65"
+ },
+ {
+  "slot": "txt",
+  "src": "Batch Winery",
+  "id": "61eb342c80"
+ },
+ {
+  "slot": "txt",
+  "src": "Matiatia Wharf",
+  "id": "a0c04c6379"
+ },
+ {
+  "slot": "txt",
+  "src": "Downtown Ferry Terminal",
+  "id": "dd2549f06c"
+ },
+ {
+  "slot": "txt",
+  "src": "Amano, Britomart",
+  "id": "75cc9035b6"
+ },
+ {
+  "slot": "txt",
+  "src": "New Lynn",
+  "id": "673be7d562"
+ },
+ {
+  "slot": "txt",
+  "src": "New Lynn",
+  "id": "673be7d562"
+ },
+ {
+  "slot": "txt",
+  "src": "Waitomo Glowworm Caves",
+  "id": "59d17e8470"
+ },
+ {
+  "slot": "txt",
+  "src": "New Plymouth",
+  "id": "9eb114a494"
+ },
+ {
+  "slot": "txt",
+  "src": "New Plymouth",
+  "id": "9eb114a494"
+ },
+ {
+  "slot": "txt",
+  "src": "Mangorei Track trailhead",
+  "id": "a30fe67ad0"
+ },
+ {
+  "slot": "txt",
+  "src": "Pouākai Tarns",
+  "id": "8acf69db05"
+ },
+ {
+  "slot": "txt",
+  "src": "Mangorei Track trailhead",
+  "id": "a30fe67ad0"
+ },
+ {
+  "slot": "txt",
+  "src": "New Plymouth",
+  "id": "9eb114a494"
+ },
+ {
+  "slot": "txt",
+  "src": "Auckland Airport",
+  "id": "b1e834ca08"
+ },
+ {
+  "slot": "span",
+  "src": "Packing",
+  "id": "1cfc3c9ffe"
+ },
+ {
+  "slot": "span",
+  "src": "Edit list",
+  "id": "2eb0c6580e"
+ },
+ {
+  "slot": "button",
+  "src": "Reset checks",
+  "id": "7bd1a1d834"
+ },
+ {
+  "slot": "span",
+  "src": "Documents",
+  "id": "c5462cd7e8"
+ },
+ {
+  "slot": "ctxt",
+  "src": "Passports",
+  "id": "1fae43764e"
+ },
+ {
+  "slot": "ctxt",
+  "src": "NZeTA approved",
+  "id": "273742b513"
+ },
+ {
+  "slot": "small",
+  "src": "Both of us, before check-in",
+  "id": "cb1e6317a2"
+ },
+ {
+  "slot": "ctxt",
+  "src": "Driver&rsquo;s licence",
+  "id": "1cee880083"
+ },
+ {
+  "slot": "small",
+  "src": "American, kept on me for the whole drive",
+  "id": "4fc2305416"
+ },
+ {
+  "slot": "ctxt",
+  "src": "Cards, and a little cash",
+  "id": "d72d6558fc"
+ },
+ {
+  "slot": "ctxt",
+  "src": "Booking references",
+  "id": "6c17215f58"
+ },
+ {
+  "slot": "small",
+  "src": "Flights, car, caves, bed",
+  "id": "8a3109b467"
+ },
+ {
+  "slot": "span",
+  "src": "Wear",
+  "id": "f698b1d8a2"
+ },
+ {
+  "slot": "ctxt",
+  "src": "Clothes for 6 days",
+  "id": "204db54627"
+ },
+ {
+  "slot": "small",
+  "src": "Late summer, one wash midway",
+  "id": "3b63136d59"
+ },
+ {
+  "slot": "ctxt",
+  "src": "Warm layer",
+  "id": "8210507b27"
+ },
+ {
+  "slot": "small",
+  "src": "Fleece or light down &mdash; the tarns before sunrise",
+  "id": "558bb09296"
+ },
+ {
+  "slot": "ctxt",
+  "src": "Rain shell",
+  "id": "3cadb8dbe7"
+ },
+ {
+  "slot": "ctxt",
+  "src": "Hiking shoes",
+  "id": "2fd185a732"
+ },
+ {
+  "slot": "small",
+  "src": "Scrubbed clean &mdash; biosecurity checks the soles",
+  "id": "da6b447215"
+ },
+ {
+  "slot": "ctxt",
+  "src": "Cap + sunglasses",
+  "id": "3cbfefd8b5"
+ },
+ {
+  "slot": "ctxt",
+  "src": "Swimsuit",
+  "id": "58c2d1c7f3"
+ },
+ {
+  "slot": "span",
+  "src": "The Climb",
+  "id": "e3d85be205"
+ },
+ {
+  "slot": "ctxt",
+  "src": "2 headlamps + spare batteries",
+  "id": "3adf905616"
+ },
+ {
+  "slot": "small",
+  "src": "The climb starts at 04:45 in the dark",
+  "id": "e02767c88a"
+ },
+ {
+  "slot": "ctxt",
+  "src": "2 L water each",
+  "id": "61e3c8e5cd"
+ },
+ {
+  "slot": "small",
+  "src": "Nothing to drink on the track",
+  "id": "16f61ea2da"
+ },
+ {
+  "slot": "ctxt",
+  "src": "Breakfast to carry up",
+  "id": "8ac976f439"
+ },
+ {
+  "slot": "ctxt",
+  "src": "Sunscreen + lip balm",
+  "id": "24bba1099c"
+ },
+ {
+  "slot": "ctxt",
+  "src": "Small first-aid kit",
+  "id": "019a43aacc"
+ },
+ {
+  "slot": "small",
+  "src": "Plasters, tape, painkillers, antiseptic",
+  "id": "ea1990300f"
+ },
+ {
+  "slot": "ctxt",
+  "src": "Tripod",
+  "id": "bf035da0e4"
+ },
+ {
+  "slot": "small",
+  "src": "For the tarns at first light",
+  "id": "51735e98d8"
+ },
+ {
+  "slot": "span",
+  "src": "Tech",
+  "id": "8c4121e5b4"
+ },
+ {
+  "slot": "ctxt",
+  "src": "Type I plug adapters",
+  "id": "e74c6c5bd1"
+ },
+ {
+  "slot": "small",
+  "src": "230 V &mdash; Japanese plugs do not fit the socket",
+  "id": "708e939a34"
+ },
+ {
+  "slot": "ctxt",
+  "src": "Phones, cables, car charger",
+  "id": "5a45cad39e"
+ },
+ {
+  "slot": "ctxt",
+  "src": "Power bank",
+  "id": "e2d7faae5f"
+ },
+ {
+  "slot": "ctxt",
+  "src": "Camera, charger, spare card",
+  "id": "8e37f8bbd9"
+ },
+ {
+  "slot": "ctxt",
+  "src": "Offline maps downloaded",
+  "id": "7b30d2886a"
+ },
+ {
+  "slot": "small",
+  "src": "Taranaki and Waitomo both drop out",
+  "id": "c001a22f69"
+ },
+ {
+  "slot": "span",
+  "src": "Gifts &amp; Souvenirs",
+  "id": "fe8d830d23"
+ },
+ {
+  "slot": "ctxt",
+  "src": "Gift for the host mother",
+  "id": "ed271ebc49"
+ },
+ {
+  "slot": "small",
+  "src": "From Japan &mdash; nothing edible, biosecurity takes food",
+  "id": "d6e018f037"
+ },
+ {
+  "slot": "ctxt",
+  "src": "Smaller gifts",
+  "id": "905ef2ac8d"
+ },
+ {
+  "slot": "small",
+  "src": "For whoever else we end up seeing",
+  "id": "cbae562256"
+ },
+ {
+  "slot": "ctxt",
+  "src": "Room in the bag coming home",
+  "id": "0378cb8a9f"
+ },
+ {
+  "slot": "small",
+  "src": "Wine from Waiheke, olive oil, books",
+  "id": "0524a9c5ff"
+ },
+ {
+  "slot": "span",
+  "src": "Essentials",
+  "id": "e1646e56fc"
+ },
+ {
+  "slot": "ctxt",
+  "src": "Toiletries",
+  "id": "14465973a1"
+ },
+ {
+  "slot": "ctxt",
+  "src": "Medicines",
+  "id": "3bffb4d9ac"
+ },
+ {
+  "slot": "small",
+  "src": "In their boxes, declared if asked",
+  "id": "21e610b756"
+ },
+ {
+  "slot": "ctxt",
+  "src": "Reusable bottle + tote",
+  "id": "9b71a2f3e5"
+ },
+ {
+  "slot": "ctxt",
+  "src": "Empty the bag of food before packing",
+  "id": "b84b2ef12a"
+ },
+ {
+  "slot": "small",
+  "src": "Snacks, seeds, tea bags &mdash; all of it",
+  "id": "0fb6816ca8"
+ },
+ {
+  "slot": "lb",
+  "src": "Itinerary",
+  "id": "b550a760f2"
+ },
+ {
+  "slot": "lb",
+  "src": "Map",
+  "id": "65a34c921f"
+ },
+ {
+  "slot": "lb",
+  "src": "Packing",
+  "id": "5070708478"
+ }
+]
