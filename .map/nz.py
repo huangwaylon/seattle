@@ -279,50 +279,50 @@ def mins(hhmm):
     return int(h) * 60 + int(m)
 
 
-NL   = ('New Lynn', -36.90939, 174.68405)        # the base, named by suburb, not by address
-AKL  = ('Auckland Airport', -37.00820, 174.78500)
-MATI = ('Matiatia Wharf', -36.78250, 175.00550)
-FERR = ('Downtown Ferry Terminal', -36.84320, 174.76770)
-MANG = ('Mangorei Track trailhead', -39.20365, 174.05618)
-NP   = ('New Plymouth', -39.05560, 174.07520)
+NL   = ('New Lynn', 'ニューリン', -36.90939, 174.68405)   # the base, named by suburb, not by address
+AKL  = ('Auckland Airport', 'オークランド空港', -37.00820, 174.78500)
+MATI = ('Matiatia Wharf', 'マティアティア埠頭', -36.78250, 175.00550)
+FERR = ('Downtown Ferry Terminal', 'ダウンタウン・フェリーターミナル', -36.84320, 174.76770)
+MANG = ('Mangorei Track trailhead', 'マンゴレイ・トラック登山口', -39.20365, 174.05618)
+NP   = ('New Plymouth', 'ニュープリマス', -39.05560, 174.07520)
 
-# day stops: (time, name, lat, lon)
+# day stops: (time, en, ja, lat, lon) — English is the markup, Japanese goes in data-ja
 DAYS = {
  1: [('09:00',) + AKL,
      ('11:00',) + NL,
-     ('12:15', 'Daily Bread, New Lynn', -36.90738, 174.69136),
-     ('14:00', 'Cornwall Park', -36.89745, 174.78431),
-     ('15:15', 'One Tree Hill', -36.90494, 174.78957),
+     ('12:15', 'Daily Bread, New Lynn', 'Daily Bread ニューリン店', -36.90738, 174.69136),
+     ('14:00', 'Cornwall Park', 'コーンウォール・パーク', -36.89745, 174.78431),
+     ('15:15', 'One Tree Hill', 'ワンツリーヒル', -36.90494, 174.78957),
      ('17:00',) + NL],
  2: [('09:30',) + NL,
-     ('10:00', 'Crushes', -36.85754, 174.75926),
-     ('11:00', 'Porter James', -36.86323, 174.75973),
-     ('11:45', 'Hard To Find Books', -36.86166, 174.76252),
-     ('13:00', 'MIBO', -36.86918, 174.76319),
-     ('14:30', 'Outdoors Society', -36.87069, 174.76106),
+     ('10:00', 'Crushes', 'Crushes', -36.85754, 174.75926),
+     ('11:00', 'Porter James', 'Porter James', -36.86323, 174.75973),
+     ('11:45', 'Hard To Find Books', 'Hard To Find Books', -36.86166, 174.76252),
+     ('13:00', 'MIBO', 'MIBO', -36.86918, 174.76319),
+     ('14:30', 'Outdoors Society', 'Outdoors Society', -36.87069, 174.76106),
      ('16:00',) + NL],
  3: [('08:15',) + NL,
-     ('08:40', "Parnell Farmers' Market", -36.86331, 174.78006),
-     ('10:00', 'Domain Wintergardens', -36.86024, 174.77409),
-     ('11:45', 'Kauri Glen Reserve', -36.80625, 174.73482),
-     ('13:15', 'Daily Bread, Belmont', -36.80381, 174.78347),
-     ('15:00', 'Takarunga / Mount Victoria', -36.82638, 174.79902),
+     ('08:40', "Parnell Farmers' Market", 'パーネル・ファーマーズマーケット', -36.86331, 174.78006),
+     ('10:00', 'Domain Wintergardens', 'ドメイン・ウィンターガーデン', -36.86024, 174.77409),
+     ('11:45', 'Kauri Glen Reserve', 'カウリ・グレン保護区', -36.80625, 174.73482),
+     ('13:15', 'Daily Bread, Belmont', 'Daily Bread ベルモント店', -36.80381, 174.78347),
+     ('15:00', 'Takarunga / Mount Victoria', 'タカルンガ／マウント・ビクトリア', -36.82638, 174.79902),
      ('17:30',) + NL],
  4: [('08:30',) + NL,
      ('09:00',) + FERR,
      ('10:15',) + MATI,
-     ('10:45', 'Allpress Olive Groves', -36.80943, 175.06142),
-     ('12:30', 'Batch Winery', -36.81462, 175.08318),
+     ('10:45', 'Allpress Olive Groves', 'Allpress オリーブ農園', -36.80943, 175.06142),
+     ('12:30', 'Batch Winery', 'Batch ワイナリー', -36.81462, 175.08318),
      ('15:15',) + MATI,
      ('16:30',) + FERR,
-     ('17:30', 'Amano, Britomart', -36.84441, 174.77046),
+     ('17:30', 'Amano, Britomart', 'Amano ブリトマート店', -36.84441, 174.77046),
      ('19:45',) + NL],
  5: [('07:00',) + NL,
-     ('09:45', 'Waitomo Glowworm Caves', -38.26070, 175.10361),
+     ('09:45', 'Waitomo Glowworm Caves', 'ワイトモ鍾乳洞', -38.26070, 175.10361),
      ('15:15',) + NP],
  6: [('04:00',) + NP,
      ('04:25',) + MANG,
-     ('06:45', 'Pouākai Tarns', -39.24930, 174.05300),
+     ('06:45', 'Pouākai Tarns', 'ポウアカイ・ターン', -39.24930, 174.05300),
      ('10:00',) + MANG,
      ('10:45',) + NP,
      ('17:45',) + AKL],
@@ -340,16 +340,17 @@ def esc(s):
     return s.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;').replace('"', '&quot;')
 
 
-def lab(x, y, name):
+def lab(x, y, en, ja):
     """label text element, flipped to the left of the pin when the pin sits on the right. The gap
     from pin to label is a CSS translate, so it holds its size on screen at any zoom."""
     a = ' text-anchor="end"' if x > WIDTH * 0.45 else ''
-    return '<text class="lab"%s x="%.1f" y="%.1f">%s</text>' % (a, x, y, esc(name))
+    return '<text class="lab"%s x="%.1f" y="%.1f" data-ja="%s">%s</text>' % (a, x, y, esc(ja), esc(en))
 
 
 legs = json.load(open('.map/nz_legs.json'))
-out = ['<svg class="map" viewBox="0 0 %d %d" role="img" aria-label="New Zealand North Island: '
-       'our route and the stops on it">' % (WIDTH, HEIGHT)]
+out = ['<svg class="map" viewBox="0 0 %d %d" role="img">' % (WIDTH, HEIGHT),
+       '<title data-ja="ニュージーランド北島 &mdash; 走るルートと立ち寄り先">New Zealand North Island '
+       '&mdash; our route and the stops on it</title>']
 out.append('<rect class="sea" width="%d" height="%d"/>' % (WIDTH, HEIGHT))
 paths = land()
 out.append('<g class="land">\n' + '\n'.join('<path d="%s"/>' % d for d in paths) + '\n</g>')
@@ -362,7 +363,7 @@ for d, stops in DAYS.items():
         cls = 'leg d%d%s' % (d, ' ' + kind if kind else '')
         if kind:                                  # a ferry or a walk draws straight
             a, b = stops[i - 1], stops[i]
-            pts = [prj(a[2], a[3]), prj(b[2], b[3])]
+            pts = [prj(a[3], a[4]), prj(b[3], b[4])]
         else:
             pts = dp([prj(*p) for p in legs['d%d-%d' % (d, i - 1)]['geom']], ROUTE_TOL)
         rt.append('<path class="%s" data-day="%d" data-min="%d" d="%s"/>' % (cls, d, m, path(pts)))
@@ -370,13 +371,13 @@ out.append('<g class="routes">\n' + '\n'.join(rt) + '\n</g>')
 
 sp = []
 for d, stops in DAYS.items():
-    for i, (t, name, la, lo) in enumerate(stops):
+    for i, (t, en, ja, la, lo) in enumerate(stops):
         x, y = prj(la, lo)
         sp.append('<g class="pin stop d%d" data-day="%d" data-i="%d" data-min="%d">'
                   '<circle class="hit" cx="%.1f" cy="%.1f" r="24"/>'
                   '<circle class="ring" cx="%.1f" cy="%.1f" r="20"/>'
                   '<circle class="mk" cx="%.1f" cy="%.1f" r="11"/>%s</g>'
-                  % (d, d, i, mins(t), x, y, x, y, x, y, lab(x, y, name)))
+                  % (d, d, i, mins(t), x, y, x, y, x, y, lab(x, y, en, ja)))
 out.append('<g class="stops">\n' + '\n'.join(sp) + '\n</g>')
 out.append('</svg>')
 svg = '\n'.join(out)
@@ -384,10 +385,11 @@ svg = '\n'.join(out)
 lists = []
 for d, stops in DAYS.items():
     rows = []
-    for i, (t, name, la, lo) in enumerate(stops):
+    for i, (t, en, ja, la, lo) in enumerate(stops):
         rows.append('<li data-i="%d" data-min="%d" tabindex="0" role="button">'
                     '<span class="time">%s</span><span class="dot"></span>'
-                    '<span class="txt">%s</span></li>' % (i, mins(t), t, esc(name)))
+                    '<span class="txt" data-ja="%s">%s</span></li>'
+                    % (i, mins(t), t, esc(ja), esc(en)))
     lists.append('      <ul class="tl stoplist d%d" data-day="%d">\n        %s\n      </ul>'
                  % (d, d, '\n        '.join(rows)))
 
