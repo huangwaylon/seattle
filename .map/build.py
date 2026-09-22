@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """Generates the static inline-SVG map (#view-map in index.html) — the island, the road
-routes and all 67 pins. index.html stays the source of truth: this writes markup you paste
+routes and all 69 pins. index.html stays the source of truth: this writes markup you paste
 into it, there is no build step at runtime.
 
 It needs two fetched inputs next to it. Neither ships to the browser, and both come from an
@@ -138,7 +138,7 @@ NATURE=[('比地大滝','Hiji Falls',26.71053,128.18661),
  ('茅打バンタ','Kayauchi Banta',26.85432,128.24978),
  ('辺戸岬','Cape Hedo',26.87197,128.26564),
  ('ゴリラチョップ','Gorilla Chop',26.63703,127.88235),
- ('ふれあいヒルギ公園','Yagaji mangroves',26.60399,128.14484),
+ ('ふれあいヒルギ公園','Fureai Hirugi Park',26.60399,128.14484),
  ('ダイヤモンドビーチ','Diamond Beach',26.50675,127.87912),
  ('古宇利島','Kouri Island',26.70730,128.01817),
  ('備瀬のフクギ並木','Bise Fukugi tree road',26.70159,127.88022)]

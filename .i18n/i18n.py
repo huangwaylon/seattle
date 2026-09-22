@@ -183,6 +183,10 @@ def main():
             if val is None:
                 missing += 1
                 continue
+            # A translation carries nested markup — span.u above all — so its quotes have to be
+            # escaped or they close the attribute. The dataset getter resolves them again, which
+            # is why innerHTML comes back byte-identical.
+            val = val.replace('"', '&quot;')
             tag = html[s['os']:s['oe']]
             stripped = re.sub(r' data-%s="[^"]*"' % att, '', tag)
             new = stripped[:-1].rstrip('/') + ' data-%s="%s"' % (att, val) + \

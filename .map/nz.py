@@ -320,11 +320,11 @@ DAYS = {
  5: [('07:00',) + NL,
      ('09:45', 'Waitomo Glowworm Caves', 'ワイトモ鍾乳洞', -38.26070, 175.10361),
      ('15:15',) + NP],
- 6: [('04:00',) + NP,
-     ('04:25',) + MANG,
-     ('06:45', 'Pouākai Tarns', 'ポウアカイ・ターン', -39.24930, 174.05300),
-     ('10:00',) + MANG,
-     ('10:45',) + NP,
+ 6: [('03:15',) + NP,
+     ('03:35',) + MANG,
+     ('06:35', 'Pouākai Tarns', 'ポウアカイ・ターン', -39.24930, 174.05300),
+     ('10:15',) + MANG,
+     ('10:35',) + NP,
      ('17:45',) + AKL],
 }
 # leg kinds by (day, destination index) — everything else is a driving route from OSRM

@@ -80,6 +80,11 @@
   "id": "6ab5648938"
  },
  {
+  "slot": "span",
+  "src": "Open in Maps",
+  "id": "f0944e5591"
+ },
+ {
   "slot": "m",
   "src": "FEB",
   "id": "6ff5e0b914"
@@ -135,9 +140,14 @@
   "id": "a7bbac8f1c"
  },
  {
+  "slot": "span",
+  "src": "Open in Maps",
+  "id": "f0944e5591"
+ },
+ {
   "slot": "desc",
-  "src": "Everything after Crushes is one walking loop of about <span class=\"u\" data-metric=\"1.6 km\" data-imperial=\"1 mi\">1.6 km</span>. Park once.",
-  "id": "d4f7d48842"
+  "src": "Everything after Crushes is on foot: about <span class=\"u\" data-metric=\"2 km\" data-imperial=\"1.2 mi\">2 km</span> one way, <span class=\"u\" data-metric=\"3.5 km\" data-imperial=\"2.2 mi\">3.5 km</span> with the walk back to the car. One park covers all five.",
+  "id": "a8399d5d9a"
  },
  {
   "slot": "m",
@@ -195,6 +205,11 @@
   "id": "73f2e4a116"
  },
  {
+  "slot": "span",
+  "src": "Open in Maps",
+  "id": "f0944e5591"
+ },
+ {
   "slot": "m",
   "src": "FEB",
   "id": "6ff5e0b914"
@@ -226,8 +241,8 @@
  },
  {
   "slot": "txt",
-  "src": "Ferry to Waiheke<small>About 40 min</small>",
-  "id": "eeb4955dab"
+  "src": "Ferry to Waiheke<small>About 45 min</small>",
+  "id": "df4fc6c723"
  },
  {
   "slot": "txt",
@@ -256,6 +271,11 @@
  },
  {
   "slot": "txt",
+  "src": "Downtown Ferry Terminal",
+  "id": "dd2549f06c"
+ },
+ {
+  "slot": "txt",
   "src": "Amano, Britomart<small>4 min on foot from the terminal &middot; dinner</small>",
   "id": "017e1daca2"
  },
@@ -263,6 +283,11 @@
   "slot": "txt",
   "src": "Back to New Lynn<small>18 min</small>",
   "id": "10efc2243c"
+ },
+ {
+  "slot": "span",
+  "src": "Open in Maps",
+  "id": "f0944e5591"
  },
  {
   "slot": "desc",
@@ -296,8 +321,8 @@
  },
  {
   "slot": "txt",
-  "src": "Waitomo Glowworm Caves<small><span class=\"u\" data-metric=\"197 km\" data-imperial=\"123 mi\">197 km</span> &middot; 2 h 36 free-flow &middot; book the tour ahead</small>",
-  "id": "31beb7615e"
+  "src": "Waitomo Glowworm Caves<small><span class=\"u\" data-metric=\"197 km\" data-imperial=\"122 mi\">197 km</span> &middot; 2 h 36 free-flow &middot; book the tour ahead</small>",
+  "id": "c1befe0dab"
  },
  {
   "slot": "txt",
@@ -311,13 +336,18 @@
  },
  {
   "slot": "txt",
-  "src": "New Plymouth<small><span class=\"u\" data-metric=\"181 km\" data-imperial=\"113 mi\">181 km</span> &middot; 2 h 30</small>",
-  "id": "e6c40d5c13"
+  "src": "New Plymouth<small><span class=\"u\" data-metric=\"181 km\" data-imperial=\"112 mi\">181 km</span> &middot; 2 h 30</small>",
+  "id": "42c11f25c3"
  },
  {
   "slot": "txt",
-  "src": "Sunset<small>Early night &mdash; tomorrow starts at 04:00</small>",
-  "id": "1405c2f1ba"
+  "src": "Sunset<small>Tomorrow starts at 03:15</small>",
+  "id": "42938b23b6"
+ },
+ {
+  "slot": "span",
+  "src": "Open in Maps",
+  "id": "f0944e5591"
  },
  {
   "slot": "desc",
@@ -336,8 +366,8 @@
  },
  {
   "slot": "t",
-  "src": "Pou&#257;kai Tarns",
-  "id": "e4f90d0f50"
+  "src": "Pouākai Tarns",
+  "id": "00a7b1de22"
  },
  {
   "slot": "sub2",
@@ -356,13 +386,13 @@
  },
  {
   "slot": "txt",
-  "src": "Start climbing<small>Headlamps &middot; about <span class=\"u\" data-metric=\"6 km\" data-imperial=\"3.7 mi\">6 km</span> and <span class=\"u\" data-metric=\"600 m\" data-imperial=\"1,970 ft\">600 m</span> up, on boardwalk most of the way</small>",
-  "id": "12fd285693"
+  "src": "Start climbing<small>Headlamps &middot; about <span class=\"u\" data-metric=\"6 km\" data-imperial=\"3.7 mi\">6 km</span> and <span class=\"u\" data-metric=\"600 m\" data-imperial=\"1,970 ft\">600 m</span> up, boardwalk and stairs most of the way &middot; DOC gives 2 h 30 to Pouākai Hut, and the tarns are past it</small>",
+  "id": "9a75b4d6a7"
  },
  {
   "slot": "txt",
-  "src": "Pou&#257;kai Tarns<small>The reflection shot needs still air and a clear summit &mdash; neither is promised</small>",
-  "id": "c14526c578"
+  "src": "Pouākai Tarns<small>The reflection needs still air and a clear summit</small>",
+  "id": "b21e79dc23"
  },
  {
   "slot": "txt",
@@ -371,8 +401,8 @@
  },
  {
   "slot": "txt",
-  "src": "Start down",
-  "id": "0b44389998"
+  "src": "Start down<small>About 2 h</small>",
+  "id": "ffa0ae7dca"
  },
  {
   "slot": "txt",
@@ -403,6 +433,11 @@
   "slot": "txt",
   "src": "Auckland &rarr; Narita &mdash; Air NZ 95<small>Leaves Feb 17 &middot; 10 h 55 m &middot; lands 07:05</small>",
   "id": "b50ba9d4cf"
+ },
+ {
+  "slot": "span",
+  "src": "Open in Maps",
+  "id": "f0944e5591"
  },
  {
   "slot": "span",
@@ -526,8 +561,8 @@
  },
  {
   "slot": "li",
-  "src": "Taranaki turns fast<small>The tarns are above the bushline &mdash; rain shell and a warm layer, whatever the forecast says</small>",
-  "id": "8e5e0256bc"
+  "src": "Taranaki turns fast<small>The tarns are above the bushline &mdash; rain shell and a warm layer</small>",
+  "id": "9097fc3c1f"
  },
  {
   "slot": "li",
@@ -546,23 +581,23 @@
  },
  {
   "slot": "sub2",
-  "src": "The Taup&#333; loop, and what is unbooked",
-  "id": "8ec101efb0"
+  "src": "The Taupō loop, and what is unbooked",
+  "id": "4ff6716eff"
  },
  {
   "slot": "desc",
-  "src": "Taranaki and Taup&#333; do not both fit into Feb 15&ndash;16. Taranaki is the plan above; this is the other way to spend those two days.",
-  "id": "2cb8dee83d"
+  "src": "Taranaki and Taupō do not both fit into Feb 15&ndash;16. Taranaki is the plan above; this is the other way to spend those two days.",
+  "id": "42a69d1766"
  },
  {
   "slot": "li",
-  "src": "T&#299;rau<small>New Lynn &rarr; <span class=\"u\" data-metric=\"177 km\" data-imperial=\"110 mi\">177 km</span>, 2 h 12 &middot; a stop on the way, not a destination</small>",
-  "id": "cfca7658cf"
+  "src": "Tīrau<small>New Lynn &rarr; <span class=\"u\" data-metric=\"177 km\" data-imperial=\"110 mi\">177 km</span>, 2 h 12 &middot; on the route south</small>",
+  "id": "c36c235c3d"
  },
  {
   "slot": "li",
-  "src": "Orakei Korako Geothermal Park &amp; Cave<small>T&#299;rau &rarr; <span class=\"u\" data-metric=\"88 km\" data-imperial=\"55 mi\">88 km</span>, 1 h 10 &middot; reached by boat across the lake</small>",
-  "id": "1da6c4f4d0"
+  "src": "Orakei Korako Geothermal Park &amp; Cave<small>Tīrau &rarr; <span class=\"u\" data-metric=\"88 km\" data-imperial=\"55 mi\">88 km</span>, 1 h 10 &middot; reached by boat across the lake</small>",
+  "id": "a67a8e70d9"
  },
  {
   "slot": "li",
@@ -605,39 +640,9 @@
   "id": "311ee9878e"
  },
  {
-  "slot": "button",
-  "src": "<span class=\"sw d1\"></span>Day 1",
-  "id": "658e10aedc"
- },
- {
-  "slot": "button",
-  "src": "<span class=\"sw d2\"></span>Day 2",
-  "id": "565ab746dd"
- },
- {
-  "slot": "button",
-  "src": "<span class=\"sw d3\"></span>Day 3",
-  "id": "738e02265f"
- },
- {
-  "slot": "button",
-  "src": "<span class=\"sw d4\"></span>Day 4",
-  "id": "08232cf227"
- },
- {
-  "slot": "button",
-  "src": "<span class=\"sw d5\"></span>Day 5",
-  "id": "9e9e80cb96"
- },
- {
-  "slot": "button",
-  "src": "<span class=\"sw d6\"></span>Day 6",
-  "id": "7487609ff9"
- },
- {
-  "slot": "button",
-  "src": "All 6 days",
-  "id": "cea93ee385"
+  "slot": "title",
+  "src": "New Zealand North Island &mdash; our route and the stops on it",
+  "id": "13bfa5e888"
  },
  {
   "slot": "txt",
@@ -835,19 +840,9 @@
   "id": "1cfc3c9ffe"
  },
  {
-  "slot": "span",
-  "src": "Edit list",
-  "id": "2eb0c6580e"
- },
- {
-  "slot": "button",
-  "src": "Reset checks",
-  "id": "7bd1a1d834"
- },
- {
-  "slot": "span",
+  "slot": "gname",
   "src": "Documents",
-  "id": "c5462cd7e8"
+  "id": "070e742769"
  },
  {
   "slot": "ctxt",
@@ -890,9 +885,9 @@
   "id": "8a3109b467"
  },
  {
-  "slot": "span",
+  "slot": "gname",
   "src": "Wear",
-  "id": "f698b1d8a2"
+  "id": "4b1591890a"
  },
  {
   "slot": "ctxt",
@@ -940,9 +935,9 @@
   "id": "58c2d1c7f3"
  },
  {
-  "slot": "span",
+  "slot": "gname",
   "src": "The Climb",
-  "id": "e3d85be205"
+  "id": "aa075bc210"
  },
  {
   "slot": "ctxt",
@@ -951,8 +946,8 @@
  },
  {
   "slot": "small",
-  "src": "The climb starts at 04:45 in the dark",
-  "id": "e02767c88a"
+  "src": "The climb starts at 03:50 in the dark",
+  "id": "88bac6a6c6"
  },
  {
   "slot": "ctxt",
@@ -995,9 +990,9 @@
   "id": "51735e98d8"
  },
  {
-  "slot": "span",
+  "slot": "gname",
   "src": "Tech",
-  "id": "8c4121e5b4"
+  "id": "0a7ff58d46"
  },
  {
   "slot": "ctxt",
@@ -1035,9 +1030,9 @@
   "id": "c001a22f69"
  },
  {
-  "slot": "span",
+  "slot": "gname",
   "src": "Gifts &amp; Souvenirs",
-  "id": "fe8d830d23"
+  "id": "3edc3addce"
  },
  {
   "slot": "ctxt",
@@ -1070,9 +1065,9 @@
   "id": "0524a9c5ff"
  },
  {
-  "slot": "span",
+  "slot": "gname",
   "src": "Essentials",
-  "id": "e1646e56fc"
+  "id": "a52d3496f9"
  },
  {
   "slot": "ctxt",
