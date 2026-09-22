@@ -208,7 +208,10 @@
     isolation:isolate;                    /* keep the foil's blend modes inside the cover */
     box-shadow:0 22px 40px rgba(0,0,0,.5), inset 0 0 0 1px rgba(255,255,255,.1);}
   .book-img{position:absolute;inset:0;background-image:var(--cover);background-size:cover;
-    background-position:var(--cover-pos,50% 50%);}
+    background-position:var(--cover-pos,50% 50%);
+    /* The foil costs the photograph a little chroma — the hue layer flattens its local colour
+       variety and the bloom lifts toward white — so the art is given some back. */
+    filter:saturate(1.16) contrast(1.03);}
   /* Hinge groove and a little cloth grain. These are the shape of the book, so they sit *above* the
      foil: underneath it the groove was the one thing color-dodge could not brighten, and the
      contrast against the lifted art around it turned it into a hard line down every cover. */
@@ -258,8 +261,8 @@
        coloured — a hard vertical boundary, bright on one side and untouched on the other, sliding
        across the cover as the position animates. That is the line. */
     background-image:radial-gradient(closest-side at 50% 46%,
-      rgba(255,90,175,.85) 0%,   rgba(90,185,255,.80) 22%, rgba(120,255,195,.72) 40%,
-      rgba(255,215,105,.62) 58%, rgba(185,120,255,.38) 74%, rgba(0,0,0,0) 92%);
+      rgba(255,90,175,.44) 0%,   rgba(90,185,255,.41) 22%, rgba(120,255,195,.37) 40%,
+      rgba(255,215,105,.32) 58%, rgba(185,120,255,.19) 74%, rgba(0,0,0,0) 92%);
     background-size:200% 180%;background-repeat:no-repeat;
     background-position:50% 41%;   /* the midpoint of the sweep, so reduced motion rests centred */
     -webkit-mask-image:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='170' height='170'><filter id='u'><feTurbulence type='fractalNoise' baseFrequency='0.017 0.021' numOctaves='3' seed='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.48 0 0 0 0.52'/></filter><rect width='170' height='170' filter='url%28%23u%29'/></svg>");mask-image:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='170' height='170'><filter id='u'><feTurbulence type='fractalNoise' baseFrequency='0.017 0.021' numOctaves='3' seed='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.48 0 0 0 0.52'/></filter><rect width='170' height='170' filter='url%28%23u%29'/></svg>");
@@ -271,7 +274,7 @@
   }
   .book-sparkle{mix-blend-mode:color-dodge;animation-name:glint;
     background-image:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='s'><feTurbulence type='fractalNoise' baseFrequency='0.28' numOctaves='1' seed='7' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 9 0 0 0 -6.7'/></filter><rect width='200' height='200' filter='url%28%23s%29'/></svg>");background-size:200px 200px;}
-  @keyframes glint{from{opacity:.22;} to{opacity:.68;}}
+  @keyframes glint{from{opacity:.2;} to{opacity:.56;}}
 
   /* The specular streak — a bloom of white light sweeping the other way to the colour field.
      Built exactly like the field, and for the same reason: a layer larger than the cover, moved by
@@ -282,7 +285,7 @@
   .book-gloss{position:absolute;inset:0;z-index:2;pointer-events:none;
     mix-blend-mode:color-dodge;
     background-image:radial-gradient(closest-side at 50% 50%,
-      rgba(255,250,240,.30) 0%, rgba(255,238,210,.17) 42%, rgba(255,225,180,.07) 66%,
+      rgba(255,250,240,.17) 0%, rgba(255,238,210,.10) 42%, rgba(255,225,180,.04) 66%,
       rgba(0,0,0,0) 88%);
     background-size:150% 210%;background-repeat:no-repeat;
     background-position:50% 50%;
