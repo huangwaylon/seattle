@@ -606,7 +606,7 @@
   .sw.k-nature{background:none;border-radius:0;width:0;height:0;
     border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:10px solid var(--muted);}
   /* After .filters button.active, so the day colour wins over the generic accent. */
-  .map-days button.active{background:var(--c);border-color:var(--c);}
+  .map-days button.active{background:var(--c,var(--acc));border-color:var(--c,var(--acc));}
   .filters button.active .sw{background:#fff;border-color:#fff;}
   .filters button.active .sw.k-nature{background:none;border-bottom-color:#fff;
     border-left-color:transparent;border-right-color:transparent;}
@@ -860,7 +860,7 @@ var LS={
             <li><span class="time">13:10</span><span class="dot"></span><span class="txt" data-en="Ufuya, Nago &mdash; agu and yushi-dofu soba<small>24 min from the shop &middot; lunch to 15:30, last order 15:00</small>">百年古家 大家（名護市）&mdash; あぐー肉とゆし豆腐そば<small>ショップから24分 &middot; 昼は15:30まで、L.O. 15:00</small></span></li>
             <li><span class="time">14:35</span><span class="dot"></span><span class="txt" data-en="Nago &mdash; tonight's food and ice<small>7 min from Ufuya &middot; MaxValu &middot; the cooler bag rides in the Jimny</small>">名護 &mdash; 今夜の食材と氷<small>大家から7分 &middot; マックスバリュ &middot; クーラーバッグはジムニーに常備</small></span></li>
             <li><span class="time">16:45</span><span class="dot"></span><span class="txt" data-en="Azama Sun Sun Beach, Nanjo &mdash; check in<small>89 min from Nago, the length of the island &middot; Sunday of a three-day weekend, so add 20&ndash;40 min</small>">あざまサンサンビーチ（南城市）&mdash; チェックイン<small>名護から89分、島を縦断 &middot; 三連休の日曜、20&ndash;40分の余裕を</small></span></li>
-            <li><span class="time">18:05</span><span class="dot"></span><span class="txt" data-en="Sunset">夕日</span></li>
+            <li><span class="time">18:06</span><span class="dot"></span><span class="txt" data-en="Sunset">夕日</span></li>
             <li><span class="time">19:00</span><span class="dot"></span><span class="txt" data-en="BBQ &mdash; one of the six pavilions">バーベキュー &mdash; 6つある炊事棟のひとつ</span></li>
           </ul>
         </div>
@@ -1070,7 +1070,7 @@ var LS={
             <li data-en="Habu vipers &mdash; nocturnal, active Sep&ndash;Nov<small>Torch after dark, closed shoes, avoid stone walls and long grass. Strike range 1.5 m. If bitten: stay still, call 119, no tourniquet, no cutting</small>">ハブ &mdash; 夜行性、9&ndash;11月に活発<small>日没後はライト、足を覆う靴、石垣と草むらを避ける。攻撃範囲1.5 m。咬まれたら動かず119番、緊縛なし、切開なし</small></li>
             <li data-en="Jellyfish &mdash; no nets, no lifeguard<small>Gorilla Chop and the Gushikawa tide pool are unpatrolled. Long-sleeve rash guard</small>">クラゲ &mdash; ネットなし、監視員なし<small>ゴリラチョップと具志川城跡のタイドプールは監視なし。長袖ラッシュガード</small></li>
             <li data-en="Stings: rinse with seawater, never fresh water<small>Vinegar for habu-kurage <strong>only</strong>. On a Portuguese man o' war &mdash; blue float, long blue threads &mdash; vinegar worsens it. Remove tentacles with pincers, then cool</small>">刺されたら海水で洗う &mdash; 真水は絶対に使わない<small>食酢はハブクラゲ<strong>のみ</strong>。カツオノエボシ &mdash; 青い浮き袋、長い青い触手 &mdash; には食酢は逆効果。触手はピンセットで除去し、冷却</small></li>
-            <li data-en="Centipedes enter boots and tents<small>Shake out footwear, keep the tent zipped</small>">ムカデは靴やテントに入る<small>靴は振って確認、テントは閉めて��く</small></li>
+            <li data-en="Centipedes enter boots and tents<small>Shake out footwear, keep the tent zipped</small>">ムカデは靴やテントに入る<small>靴は振って確認、テントは閉めておく</small></li>
             <li data-en="No open fires or charcoal on sand<small>Most sites require a fire pan</small>">直火も、砂浜での炭の使用も不可<small>多くのキャンプ場で焚き火台が必須</small></li>
           </ul>
           <div class="subhead" data-en="Practical">実用情報</div>
@@ -1197,7 +1197,7 @@ var LS={
             <div class="stat"><div class="k" data-en="Closed">定休日</div><div class="v" data-en="Wed and Thu">水・木</div></div>
           </div>
           <ul class="bul">
-            <li data-en="Open all three days &middot; Day 2, 6 min after Ufuya">3日間とも営業 &middot; 2日目、大家から6分</li>
+            <li data-en="Open all three days &middot; Day 1, 36 min from Manzamo">3日間とも営業 &middot; 1日目、万座毛から36分</li>
             <li data-en="Also: kokuto milk zenzai, pastel de nata, ice cream">ほかに黒糖ミルクぜんざい、パステル・デ・ナタ、アイスクリーム</li>
             <li data-en="Under &yen;1,000 per person &middot; 080-6497-3690 &middot; 6 min from Ufuya">1人&yen;1,000以下 &middot; 080-6497-3690 &middot; 大家から6分</li>
           </ul>
@@ -1530,7 +1530,7 @@ var LS={
         <div class="content">
           <figure class="thumb"><img src="images/camps/katsuren-beach.jpg" alt="" loading="lazy" decoding="async" width="720" height="405"></figure>
           <p class="desc" data-en="Calm bay, sunsets over the city. No toilets.">穏やかな湾、市街に沈む夕日。トイレなし。</p>
-          <div class="chips"><span class="chip pick" data-en="Night 1">1泊目</span><span class="chip" data-en="Beach">ビーチ</span><span class="chip" data-en="Ocean view">オーシャンビュー</span><span class="chip" data-en="Sunset">夕日</span></div>
+          <div class="chips"><span class="chip" data-en="Beach">ビーチ</span><span class="chip" data-en="Ocean view">オーシャンビュー</span><span class="chip" data-en="Sunset">夕日</span></div>
           <div class="stat-grid">
             <div class="stat"><div class="k" data-en="From office">営業所から</div><div class="v" data-en="17 min &middot; <span class=&quot;u&quot; data-metric=&quot;9.9 km&quot; data-imperial=&quot;6 mi&quot;>9.9 km</span>">17分 &middot; <span class="u" data-metric="9.9 km" data-imperial="6 mi">9.9 km</span></div></div>
             <div class="stat"><div class="k" data-en="Type">種別</div><div class="v" data-en="Wild camp">野営地</div></div>
@@ -1701,7 +1701,7 @@ var LS={
         <div class="content">
           <figure class="thumb"><img src="images/camps/yagaji-beach-campsite.jpg" alt="" loading="lazy" decoding="async" width="720" height="405"></figure>
           <p class="desc" data-en="Auto camping and bungalows. BBQ facilities, boat and kayak rental.">オートキャンプとバンガロー。バーベキュー設備、ボートとカヤックのレンタル。</p>
-          <div class="chips"><span class="chip pick" data-en="Shortlist">候補</span><span class="chip" data-en="Beach">ビーチ</span><span class="chip" data-en="Ocean view">オーシャンビュー</span><span class="chip" data-en="Sunset">夕日</span><span class="chip" data-en="Toilet">トイレ</span><span class="chip" data-en="Shower">シャワー</span></div>
+          <div class="chips"><span class="chip pick" data-en="Night 1">1泊目</span><span class="chip pick" data-en="Shortlist">候補</span><span class="chip" data-en="Beach">ビーチ</span><span class="chip" data-en="Ocean view">オーシャンビュー</span><span class="chip" data-en="Sunset">夕日</span><span class="chip" data-en="Toilet">トイレ</span><span class="chip" data-en="Shower">シャワー</span></div>
           <div class="stat-grid">
             <div class="stat"><div class="k" data-en="From office">営業所から</div><div class="v" data-en="57 min &middot; <span class=&quot;u&quot; data-metric=&quot;50.6 km&quot; data-imperial=&quot;31 mi&quot;>50.6 km</span>">57分 &middot; <span class="u" data-metric="50.6 km" data-imperial="31 mi">50.6 km</span></div></div>
             <div class="stat"><div class="k" data-en="Type">種別</div><div class="v" data-en="Paid camp">有料キャンプ場</div></div>
@@ -2789,7 +2789,7 @@ var LS={
             <li><span class="time">20:25</span><span class="dot"></span><span class="txt" data-ja="日没<small>翌日は03:15出発</small>">Sunset<small>Tomorrow starts at 03:15</small></span></li>
           </ul>
           <a class="outlink" href="https://www.google.com/maps/search/?api=1&amp;query=Waitomo+Glowworm+Caves" target="_blank" rel="noopener"><span data-ja="マップで開く">Open in Maps</span> <svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-          <p class="desc note-sm" data-ja="ニュープリマスの宿はまだ予��していません。">A bed in New Plymouth is not booked.</p>
+          <p class="desc note-sm" data-ja="ニュープリマスの宿はまだ予約していません。">A bed in New Plymouth is not booked.</p>
         </div>
       </details>
 
@@ -3087,7 +3087,7 @@ var LS={
         <li data-i="1" data-min="520"><button class="stoprow" type="button"><span class="time">08:40</span><span class="dot"></span><span class="txt" data-ja="パーネル・ファーマーズマーケット">Parnell Farmers' Market</span></button></li>
         <li data-i="2" data-min="600"><button class="stoprow" type="button"><span class="time">10:00</span><span class="dot"></span><span class="txt" data-ja="ドメイン・ウィンターガーデン">Domain Wintergardens</span></button></li>
         <li data-i="3" data-min="705"><button class="stoprow" type="button"><span class="time">11:45</span><span class="dot"></span><span class="txt" data-ja="カウリ・グレン保護区">Kauri Glen Reserve</span></button></li>
-        <li data-i="4" data-min="795"><button class="stoprow" type="button"><span class="time">13:15</span><span class="dot"></span><span class="txt" data-ja="Daily Bread ベルモント���">Daily Bread, Belmont</span></button></li>
+        <li data-i="4" data-min="795"><button class="stoprow" type="button"><span class="time">13:15</span><span class="dot"></span><span class="txt" data-ja="Daily Bread ベルモント店">Daily Bread, Belmont</span></button></li>
         <li data-i="5" data-min="900"><button class="stoprow" type="button"><span class="time">15:00</span><span class="dot"></span><span class="txt" data-ja="タカルンガ／マウント・ビクトリア">Takarunga / Mount Victoria</span></button></li>
         <li data-i="6" data-min="1050"><button class="stoprow" type="button"><span class="time">17:30</span><span class="dot"></span><span class="txt" data-ja="ニューリン">New Lynn</span></button></li>
       </ul>
@@ -3095,11 +3095,11 @@ var LS={
         <li data-i="0" data-min="510"><button class="stoprow" type="button"><span class="time">08:30</span><span class="dot"></span><span class="txt" data-ja="ニューリン">New Lynn</span></button></li>
         <li data-i="1" data-min="540"><button class="stoprow" type="button"><span class="time">09:00</span><span class="dot"></span><span class="txt" data-ja="ダウンタウン・フェリーターミナル">Downtown Ferry Terminal</span></button></li>
         <li data-i="2" data-min="615"><button class="stoprow" type="button"><span class="time">10:15</span><span class="dot"></span><span class="txt" data-ja="マティアティア埠頭">Matiatia Wharf</span></button></li>
-        <li data-i="3" data-min="645"><button class="stoprow" type="button"><span class="time">10:45</span><span class="dot"></span><span class="txt" data-ja="Allpress Olive Groves">Allpress Olive Groves</span></button></li>
-        <li data-i="4" data-min="750"><button class="stoprow" type="button"><span class="time">12:30</span><span class="dot"></span><span class="txt" data-ja="Batch Winery">Batch Winery</span></button></li>
+        <li data-i="3" data-min="645"><button class="stoprow" type="button"><span class="time">10:45</span><span class="dot"></span><span class="txt" data-ja="Allpress オリーブ農園">Allpress Olive Groves</span></button></li>
+        <li data-i="4" data-min="750"><button class="stoprow" type="button"><span class="time">12:30</span><span class="dot"></span><span class="txt" data-ja="Batch ワイナリー">Batch Winery</span></button></li>
         <li data-i="5" data-min="915"><button class="stoprow" type="button"><span class="time">15:15</span><span class="dot"></span><span class="txt" data-ja="マティアティア埠頭">Matiatia Wharf</span></button></li>
         <li data-i="6" data-min="990"><button class="stoprow" type="button"><span class="time">16:30</span><span class="dot"></span><span class="txt" data-ja="ダウンタウン・フェリーターミナル">Downtown Ferry Terminal</span></button></li>
-        <li data-i="7" data-min="1050"><button class="stoprow" type="button"><span class="time">17:30</span><span class="dot"></span><span class="txt" data-ja="Amano（ブリトマート）">Amano, Britomart</span></button></li>
+        <li data-i="7" data-min="1050"><button class="stoprow" type="button"><span class="time">17:30</span><span class="dot"></span><span class="txt" data-ja="Amano ブリトマート店">Amano, Britomart</span></button></li>
         <li data-i="8" data-min="1185"><button class="stoprow" type="button"><span class="time">19:45</span><span class="dot"></span><span class="txt" data-ja="ニューリン">New Lynn</span></button></li>
       </ul>
       <ul class="tl stoplist d5" data-day="5">

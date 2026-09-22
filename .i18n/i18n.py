@@ -98,14 +98,19 @@ def matches(tag, cls, ancestors):
 
 
 def slots(html, guide):
-    """Every translatable element in the guide, outermost first, skipping the generated map SVG
-    and anything nested inside another slot (one attribute already carries the lot)."""
+    """Every translatable element in the guide, outermost first, skipping anything the map
+    generator owns — the SVG *and* the stop lists, whose labels it emits in both languages — and
+    anything nested inside another slot (one attribute already carries the lot)."""
     lo, hi = guide_range(html, guide)
+    skip = []
     svg = re.search(r'<svg class="map".*?</svg>', html[lo:hi], re.S)
-    skip = (lo + svg.start(), lo + svg.end()) if svg else None
+    if svg:
+        skip.append((lo + svg.start(), lo + svg.end()))
+    for m in re.finditer(r'<ul class="tl stoplist.*?</ul>', html[lo:hi], re.S):
+        skip.append((lo + m.start(), lo + m.end()))
     found = []
     for tag, cls, cs, ce, os_, oe, anc in parse(html, lo, hi):
-        if skip and skip[0] <= os_ < skip[1] and tag != 'title':
+        if any(a <= os_ < b for a, b in skip) and tag != 'title':
             continue
         slot = matches(tag, cls, anc)
         if slot:
