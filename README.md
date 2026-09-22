@@ -8,11 +8,14 @@ iPhone. Tap a book and it opens; close the app and it reopens where you left off
 Three books:
 
 - **沖縄 2026** — Oct 10–12, a camping road trip on the main island in a Jimny with a rooftop tent.
-  Itinerary, an inline-SVG map, all 26 drivable campsites, and a packing list. Fully bilingual 日本語 / English.
+  Itinerary, an inline-SVG map, all 26 drivable campsites, and a packing list.
 - **Seattle 2026** — Jul 2–19, a Pacific Northwest hiking trip. Itinerary with per-hike stats, photos
   and trail-map links, plus its own packing list.
 - **New Zealand 2027** — Feb 11–16, Auckland and Taranaki. Itinerary, a zoomable North Island map, and
   a packing list.
+
+Okinawa and New Zealand are fully bilingual 日本語 / English, in both directions: each is written in
+its own language and carries the other alongside.
 
 ## Features
 
@@ -27,6 +30,8 @@ Three books:
 - **Settings on the shelf** — metric ⇄ imperial and English ⇄ 日本語, applied to every book.
 - **Editable packing list** per book — add, rename, reorder and delete categories and items; saved on
   the device.
+- **Touch first.** Every control clears 44×44, there is always a way back to the shelf, and the
+  de-emphasis text clears 4.5:1 contrast — these get read outdoors, on a phone.
 - Degrades gracefully: with JavaScript off (a plain file preview) every book still shows, stacked
   instead of tabbed.
 
@@ -38,8 +43,8 @@ Three books:
 | `images/` | Book covers and card photos, all precached for offline use. |
 | `sw.js` | Service worker — caches the app shell and every image. |
 | `manifest.webmanifest`, `icon-180.png`, `icon-512.png` | PWA manifest and icons. |
-| `.i18n/` | Translation source (glossary, strings, Japanese). Not shipped — see CLAUDE.md. |
-| `.map/build.py` | Generator for the map's SVG geometry. Not shipped — see CLAUDE.md. |
+| `.i18n/` | Translation tooling, glossary and Japanese. Not shipped — see CLAUDE.md. |
+| `.map/build.py`, `.map/nz.py` | Generators for the two maps' SVG geometry. Not shipped. |
 
 ## Install on iPhone (once, on Wi-Fi)
 
@@ -51,4 +56,10 @@ Three books:
 
 `index.html` is the source of truth; itineraries, campsites and the packing seed rows are static HTML,
 so edit them directly. After any change, bump `CACHE` in `sw.js` so installed phones pick up the new
-version. See `CLAUDE.md` for the architecture and conventions.
+version. If you edit a translated book, run `python3 .i18n/i18n.py check <guide>` — it names every
+string whose translation your edit orphaned. See `CLAUDE.md` for the architecture and conventions.
+
+## Attribution
+
+Road routes from [OSRM](https://project-osrm.org/); coastlines and place coordinates from
+[OpenStreetMap](https://www.openstreetmap.org/copyright), © OpenStreetMap contributors, ODbL.
