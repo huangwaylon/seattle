@@ -58,7 +58,7 @@
     --eyebrow:#ffb59e;
     --tabbar:248,247,243;
     --tabbar:250,248,242;
-    --sun:#c98a1f;            /* day 3 on the map */
+    --d1:var(--acc); --d2:var(--acc2); --d3:#c98a1f;   /* one colour per day on the map */
     --map-sea:#dbe7e5;
     --scrim:6,32,38;
   }
@@ -73,6 +73,8 @@
     --eyebrow:#ffd08a;
     --tabbar:246,245,250;
     --map-sea:#cbd9ea;
+    /* Six days drawn together need six colours that hold up over pale land and paler sea. */
+    --d1:#1f6fe0; --d2:#e0453f; --d3:#00996f; --d4:#e07c00; --d5:#8a3fd6; --d6:#0aa2bd;
     --scrim:14,16,34;
   }
   /* ── Alpine Field Guide ── */
@@ -129,10 +131,23 @@
   .shelf-in{max-width:var(--maxw);margin:0 auto;}
   /* A title page, set in mincho. */
   .masthead{padding:0 2px;}
-  .masthead h1{margin:0;font-family:var(--font-jp);font-size:clamp(24px,6.6vw,31px);font-weight:600;
-    letter-spacing:.1em;line-height:1.2;color:#33261a;}
-  .shelf-sub{margin:9px 0 0;font-family:var(--font-jp);font-size:14px;font-weight:600;
-    letter-spacing:.14em;color:#7d6a51;}
+  .masthead{display:flex;align-items:center;gap:12px;}
+  .masthead h1{margin:0;flex:1;display:flex;align-items:baseline;flex-wrap:wrap;gap:11px;
+    font-family:var(--font-jp);font-size:15px;font-weight:600;letter-spacing:.14em;color:#33261a;}
+  .masthead .sep{color:#c1a87f;font-weight:400;}
+  .shelf-sub{color:#7d6a51;}
+  .setbtn{flex:0 0 auto;width:36px;height:36px;border-radius:50%;cursor:pointer;
+    border:1px solid rgba(76,52,26,.18);background:rgba(255,255,255,.6);color:#6b5940;
+    display:flex;align-items:center;justify-content:center;transition:background .15s,transform .1s;}
+  .setbtn:active{transform:scale(.94);}
+  .setbtn[aria-expanded="true"]{background:#fff;color:#33261a;}
+  .settings{margin:16px 0 0;padding:4px 14px 10px;border-radius:12px;
+    background:rgba(255,255,255,.55);border:1px solid rgba(76,52,26,.14);animation:fade .2s ease;}
+  .settings[hidden]{display:none;}
+  .setrow{display:flex;align-items:center;gap:12px;padding:10px 0;}
+  .setrow + .setrow{border-top:1px solid rgba(76,52,26,.1);}
+  .setlabel{flex:1;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#6b5940;}
+
   /* One recessed case holding every row, so the shelf reads as a single piece of furniture. */
   .shelf-case{position:relative;margin:30px 0 0;padding:0 14px;border-radius:7px;overflow:hidden;
     background:linear-gradient(180deg,#d8c4a4 0%,#e7d8bd 100%);
@@ -166,7 +181,9 @@
     background:linear-gradient(90deg,rgba(0,0,0,.5) 0,rgba(255,255,255,.15) 42%,rgba(0,0,0,.42) 100%),
       var(--cloth,#2c2420);
     box-shadow:inset 0 7px 0 -6px rgba(201,162,39,.85), inset 0 -7px 0 -6px rgba(201,162,39,.85);}
+  /* The face is rotated away from the reader, so its content is mirrored to read right. */
   .spine-txt{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    transform:scaleX(-1);
     writing-mode:vertical-rl;font-family:var(--font-display);font-size:10px;font-weight:600;
     letter-spacing:.15em;color:#e9d59f;text-shadow:0 1px 0 rgba(0,0,0,.65);white-space:nowrap;}
 
@@ -512,7 +529,7 @@
 
   /* ---- MAP (Okinawa) — every line and pin is static markup; JS only sets state ---- */
   /* Pinned so the stop list scrolls against it; .mapstick carries the page background. */
-  .mapstick{position:sticky;top:var(--safe-t);z-index:20;background:var(--bg);}
+  .mapstick{position:sticky;top:var(--safe-t);z-index:20;background:var(--bg);padding-top:12px;}
   .mapcard{margin:8px var(--gutter) 12px;background:var(--map-sea);border:1px solid var(--line);
     border-radius:var(--r);overflow:hidden;box-shadow:var(--sh-card);}
   svg.map{display:block;width:100%;height:auto;max-height:66vh;}
@@ -520,10 +537,10 @@
   .map{--z:1;--c:var(--acc);}   /* --z is the zoom factor, --c the day accent */
   .map .land path{fill:var(--bg-2);stroke:var(--acc-d);stroke-linejoin:round;
     stroke-width:calc(2.2px / var(--z));}
-  /* One accent per day, for a map that draws several days at once. A map that shows one day
-     at a time just uses the guide accent. */
-  .t-okinawa .map .d1{--c:var(--acc);} .t-okinawa .map .d2{--c:var(--acc2);}
-  .t-okinawa .map .d3{--c:var(--sun);}
+  /* One accent per day, from the theme's --d1..--d6, falling back to the guide accent. */
+  .map .d1{--c:var(--d1,var(--acc));} .map .d2{--c:var(--d2,var(--acc));}
+  .map .d3{--c:var(--d3,var(--acc));} .map .d4{--c:var(--d4,var(--acc));}
+  .map .d5{--c:var(--d5,var(--acc));} .map .d6{--c:var(--d6,var(--acc));}
   .map .cands{--c:var(--acc-d);}
   .map .leg{fill:none;stroke:var(--c);stroke-linecap:round;stroke-linejoin:round;
     stroke-width:calc(4.6px / var(--z));opacity:.9;transition:opacity .2s;}
@@ -561,13 +578,19 @@
 
   /* The day and layer chips are the legend: colour = day, shape = kind. */
   .sw{flex:0 0 auto;width:11px;height:11px;border-radius:50%;background:var(--sw-c,var(--muted));}
-  .sw.d1{--sw-c:var(--acc);} .sw.d2{--sw-c:var(--acc2);} .sw.d3{--sw-c:var(--sun);}
+  .sw.d1{--sw-c:var(--d1,var(--acc));} .sw.d2{--sw-c:var(--d2,var(--acc));}
+  .sw.d3{--sw-c:var(--d3,var(--acc));} .sw.d4{--sw-c:var(--d4,var(--acc));}
+  .sw.d5{--sw-c:var(--d5,var(--acc));} .sw.d6{--sw-c:var(--d6,var(--acc));}
   .sw.k-camp,.sw.k-food{background:none;border:2px solid var(--muted);border-radius:2px;}
   .sw.k-food{transform:rotate(45deg);width:10px;height:10px;}
   .sw.k-nature{background:none;border-radius:0;width:0;height:0;
     border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:10px solid var(--muted);}
-  .map-days button[data-day="2"].active{background:var(--acc2);border-color:var(--acc2);}
-  .map-days button[data-day="3"].active{background:var(--sun);border-color:var(--sun);}
+  .map-days button[data-day="1"].active{background:var(--d1,var(--acc));border-color:var(--d1,var(--acc));}
+  .map-days button[data-day="2"].active{background:var(--d2,var(--acc));border-color:var(--d2,var(--acc));}
+  .map-days button[data-day="3"].active{background:var(--d3,var(--acc));border-color:var(--d3,var(--acc));}
+  .map-days button[data-day="4"].active{background:var(--d4,var(--acc));border-color:var(--d4,var(--acc));}
+  .map-days button[data-day="5"].active{background:var(--d5,var(--acc));border-color:var(--d5,var(--acc));}
+  .map-days button[data-day="6"].active{background:var(--d6,var(--acc));border-color:var(--d6,var(--acc));}
   .filters button.active .sw{background:#fff;border-color:#fff;}
   .filters button.active .sw.k-nature{background:none;border-bottom-color:#fff;
     border-left-color:transparent;border-right-color:transparent;}
@@ -636,7 +659,6 @@ var LS={
     <symbol id="i-chevron-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></symbol>
     <symbol id="i-chevron-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></symbol>
     <symbol id="i-chevron-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></symbol>
-    <symbol id="i-chevrons-up-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/></symbol>
     <symbol id="i-droplets" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 4.8 7 3.5c-.29 1.3-1.15 2.84-2.29 3.75S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z"/><path d="M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a4.16 4.16 0 0 1-7.33 2.66"/></symbol>
     <symbol id="i-file" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></symbol>
     <symbol id="i-footprints" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16v-2.38C4 11.5 2.97 10.5 3 8c.03-2.72 1.49-6 4.5-6C9.37 2 10 3.8 10 5.5c0 3.11-2 5.66-2 8.68V16a2 2 0 1 1-4 0Z"/><path d="M20 20v-2.38c0-2.12 1.03-3.12 1-5.62-.03-2.72-1.49-6-4.5-6C14.63 6 14 7.8 14 9.5c0 3.11 2 5.66 2 8.68V20a2 2 0 1 0 4 0Z"/><path d="M16 17h4"/><path d="M4 13h4"/></symbol>
@@ -664,6 +686,7 @@ var LS={
     <symbol id="i-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/><path d="M16 18h.01"/></symbol>
     <symbol id="i-minus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/></symbol>
     <symbol id="i-fit" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></symbol>
+    <symbol id="i-sliders" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h10"/><path d="M18 8h2"/><path d="M4 16h4"/><path d="M12 16h8"/><circle cx="16" cy="8" r="2"/><circle cx="10" cy="16" r="2"/></symbol>
   </defs>
 </svg>
 
@@ -672,8 +695,27 @@ var LS={
 <section id="shelf" tabindex="-1">
   <div class="shelf-in">
     <div class="masthead">
-      <h1>うめうぇの旅</h1>
-      <p class="shelf-sub">私たちの思い出</p>
+      <h1>うめうぇの旅<span class="sep">|</span><span class="shelf-sub">私たちの思い出</span></h1>
+      <button class="setbtn jsonly" type="button" aria-controls="settings" aria-expanded="false" aria-label="Settings">
+        <svg class="ic" aria-hidden="true"><use href="#i-sliders"/></svg>
+      </button>
+    </div>
+    <!-- One place for both settings: they apply to every book. -->
+    <div class="settings jsonly" id="settings" hidden>
+      <div class="setrow">
+        <span class="setlabel">Units</span>
+        <div class="seg unit-toggle" role="group" aria-label="Units">
+          <button type="button" data-unit="metric" class="active">KM</button>
+          <button type="button" data-unit="imperial">MI</button>
+        </div>
+      </div>
+      <div class="setrow">
+        <span class="setlabel">Language</span>
+        <div class="seg lang-toggle" role="group" aria-label="Language">
+          <button type="button" data-lang="en">EN</button>
+          <button type="button" data-lang="ja" class="active">日本語</button>
+        </div>
+      </div>
     </div>
     <div class="shelf-case">
       <div class="shelf-row">
@@ -751,18 +793,6 @@ var LS={
       </div>
     </header>
 
-    <div class="toolbar">
-      <div class="seg lang-toggle jsonly" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="ja" class="active">日本語</button></div>
-      <div class="seg unit-toggle jsonly" role="group" aria-label="Units">
-        <button type="button" data-unit="metric" class="active" data-en="KM">キロ</button>
-        <button type="button" data-unit="imperial" data-en="MI">マイル</button>
-      </div>
-      <div class="spacer"></div>
-      <button class="btn-sm jsonly expand-all"  type="button">
-        <svg class="ic" aria-hidden="true"><use href="#i-chevrons-up-down"/></svg>
-        <span>Expand all</span>
-      </button>
-    </div>
 
     <div class="spine days">
       <details class="card day" open>
@@ -791,7 +821,7 @@ var LS={
         </div>
       </details>
 
-      <details class="card day">
+      <details class="card day" open>
         <summary class="head">
           <span class="node"></span>
           <div class="lead-chip"><div class="d">11</div><div class="m" data-en="OCT">10月</div><div class="wd" data-en="Sun">日</div></div>
@@ -817,7 +847,7 @@ var LS={
         </div>
       </details>
 
-      <details class="card day">
+      <details class="card day" open>
         <summary class="head">
           <span class="node"></span>
           <div class="lead-chip"><div class="d">12</div><div class="m" data-en="OCT">10月</div><div class="wd" data-en="Mon">月</div></div>
@@ -1273,8 +1303,142 @@ var LS={
   </section>
 
   <section class="view v-map">
-    <h2 class="section"><svg class="ic" aria-hidden="true"><use href="#i-map"/></svg><span data-en="Map">地図</span></h2>
-    <p class="intro" data-en="Real road routes. &#9679; stops, &#9632; campsites, &#9650; nature, &#9670; food. Tap a stop to move the clock.">実際の道路に沿ったルート。&#9679;立ち寄り先、&#9632;キャンプ場、&#9650;自然、&#9670;食べる。立ち寄り先をタップすると、そこが現在地。</p>
+    <div class="mapstick">
+    <div class="mapcard">
+      <div class="mapzoom jsonly">
+        <button class="btn-sm" type="button" data-zoom="in" aria-label="Zoom in"><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg></button>
+        <button class="btn-sm" type="button" data-zoom="out" aria-label="Zoom out"><svg class="ic" aria-hidden="true"><use href="#i-minus"/></svg></button>
+        <button class="btn-sm" type="button" data-zoom="reset" aria-label="Fit"><svg class="ic" aria-hidden="true"><use href="#i-fit"/></svg></button>
+      </div>
+<svg class="map" viewBox="0 0 692 824" role="img" aria-labelledby="mapTitle">
+<title id="mapTitle" data-en="Okinawa main island: our route and the places on it">沖縄本島 &mdash; 走るルートと立ち寄り先</title>
+<rect class="sea" width="692" height="824"/>
+<g class="land">
+<path d="M283.7 582.7L282.6 585.0L285.0 582.8L284.9 584.6L287.0 584.1L285.8 585.3L289.7 589.3L295.2 588.1L296.4 581.7L294.7 579.1L296.7 575.2L295.3 576.8L294.9 574.4L294.1 575.3L294.2 573.6L296.5 574.5L295.4 571.9L293.2 572.5L291.3 567.3L292.9 567.0L280.8 553.4L288.8 552.5L276.2 552.2L265.2 543.6L267.4 543.1L264.1 542.3L253.8 527.9L251.8 522.3L252.1 518.6L254.3 516.6L253.2 508.5L257.8 507.0L258.0 509.1L258.2 506.8L256.4 506.9L252.2 500.2L253.0 499.1L242.7 492.8L240.6 487.8L229.1 482.9L227.3 480.3L232.6 478.9L227.3 480.2L223.5 479.2L220.0 471.9L222.6 469.8L222.1 467.9L214.4 467.2L211.4 463.6L212.4 461.1L214.5 461.9L215.6 460.0L214.3 457.0L217.1 458.5L214.8 454.2L223.3 459.1L225.1 456.5L226.0 458.3L225.2 456.3L228.5 451.1L225.9 449.1L230.5 444.0L232.5 437.9L235.2 435.2L249.2 429.1L255.8 432.7L259.6 430.6L262.4 431.1L262.9 429.2L275.5 437.4L287.8 439.1L288.4 442.1L290.0 442.0L288.5 439.5L290.2 439.5L292.2 441.8L290.7 443.8L296.9 447.4L298.3 444.8L299.9 446.8L311.7 444.6L318.6 448.6L319.1 445.6L314.1 443.2L313.6 435.9L314.8 432.5L318.5 432.1L321.4 429.0L319.2 429.0L316.2 422.8L320.8 420.3L320.7 414.4L329.2 413.5L334.8 419.2L355.7 411.9L357.1 408.6L354.5 406.4L358.7 406.9L364.6 403.8L365.9 399.1L364.4 393.1L358.3 388.5L356.1 383.0L359.9 378.8L363.3 377.1L365.6 381.8L367.7 382.2L369.5 380.4L367.9 376.0L372.0 373.0L386.1 377.2L392.6 373.4L390.8 367.9L393.0 369.0L399.2 367.5L401.3 372.0L413.0 366.6L410.2 366.8L409.1 365.0L410.2 364.4L404.4 359.0L402.8 351.9L393.1 336.7L393.7 334.7L394.8 336.8L398.1 336.1L400.4 332.9L400.2 329.4L401.8 331.7L400.0 337.2L402.0 340.5L406.8 339.4L408.4 341.0L412.7 337.6L416.6 336.9L419.4 336.9L417.7 338.0L419.3 339.0L420.5 335.5L421.0 338.0L427.5 339.5L440.4 351.6L447.2 353.8L444.7 351.0L445.3 348.0L447.5 346.7L452.9 349.2L451.7 344.9L458.1 338.8L474.2 333.3L481.6 333.0L485.1 335.1L486.2 332.4L484.6 322.4L488.0 320.5L496.2 320.6L490.5 316.7L484.7 303.7L476.5 296.6L472.0 286.1L478.9 289.1L482.5 288.5L482.6 290.3L484.8 289.9L482.6 290.8L486.3 288.2L487.5 290.3L496.8 291.5L496.5 287.7L499.9 282.4L498.3 276.3L495.6 275.9L495.3 273.7L496.0 275.1L494.6 275.1L494.8 272.5L491.4 267.6L493.7 260.5L503.5 259.1L508.7 262.4L510.5 261.6L509.4 262.9L514.9 262.1L523.7 266.0L550.2 263.7L553.9 260.8L559.5 261.3L560.5 259.6L566.0 258.3L571.0 259.2L574.6 255.6L574.7 253.5L578.3 252.4L577.3 250.6L580.1 247.2L585.1 244.9L584.0 238.4L587.7 236.1L588.6 231.5L591.5 233.2L593.1 231.1L595.2 231.3L596.1 222.7L601.9 219.8L604.3 220.3L608.9 214.1L607.5 209.3L609.2 199.5L612.6 197.3L610.7 194.5L612.8 193.4L615.5 194.8L616.3 192.7L621.6 189.6L618.7 185.5L619.0 183.1L623.2 180.8L625.2 181.6L626.4 178.8L625.1 175.6L623.2 176.1L623.8 175.1L621.4 174.2L624.4 171.3L630.2 170.6L632.7 165.2L632.3 162.0L643.2 157.4L643.8 152.9L648.7 149.3L643.6 151.7L643.2 149.8L647.0 149.4L643.0 148.9L644.9 149.1L643.8 148.0L646.3 144.4L650.8 142.9L651.2 136.3L648.4 138.2L643.8 135.2L646.8 134.2L647.3 129.5L649.5 127.0L646.5 121.8L649.0 117.9L648.3 115.6L650.1 114.7L650.0 110.6L647.1 104.3L644.9 104.3L642.0 101.1L642.6 98.5L645.9 97.5L642.6 87.3L645.1 79.4L644.1 80.3L642.1 78.1L641.1 71.8L635.1 69.5L631.9 65.2L632.1 49.3L627.1 48.5L627.3 47.2L623.3 49.1L621.3 47.6L623.6 49.7L623.0 51.3L618.3 52.3L617.7 48.7L620.0 48.7L613.9 46.6L610.2 43.2L609.7 38.0L601.0 35.5L598.6 31.3L593.6 28.1L593.8 24.3L597.0 22.5L595.0 20.4L588.9 19.4L579.6 27.8L577.9 36.0L580.0 39.7L584.4 42.2L583.6 43.4L585.7 42.9L586.0 45.9L584.2 43.7L586.3 46.6L586.0 51.2L579.7 62.5L578.0 62.9L577.6 69.0L572.5 75.2L566.1 88.3L567.2 95.1L562.2 95.9L559.8 104.2L556.9 104.8L555.5 108.8L543.2 117.6L543.6 123.5L541.9 126.1L538.4 126.4L537.1 124.5L535.4 127.9L530.6 131.0L528.3 138.6L524.5 142.8L518.3 143.9L519.3 142.1L518.2 144.2L514.2 144.7L507.5 149.0L501.7 149.4L500.9 146.7L497.8 146.3L495.6 150.9L500.9 152.9L504.9 163.5L503.0 169.9L502.7 168.4L500.6 173.1L492.5 177.9L487.7 183.7L473.0 188.4L466.4 188.1L462.6 195.5L457.0 200.9L455.3 206.6L453.9 206.1L450.0 210.3L450.7 213.7L453.9 215.6L454.0 218.1L455.0 216.5L455.6 220.3L457.6 221.8L458.2 219.0L460.0 218.6L470.2 222.9L471.7 225.2L470.5 227.0L474.1 230.1L472.9 230.9L466.6 231.6L464.6 227.2L464.3 229.6L461.2 231.2L463.2 226.2L461.5 222.4L458.9 227.8L454.7 226.5L451.8 229.6L448.8 228.4L441.1 239.6L437.5 240.6L433.3 245.8L426.2 245.9L408.7 255.3L392.9 253.9L393.5 257.0L387.6 261.3L387.0 259.2L387.5 262.0L386.1 261.6L386.5 259.6L385.8 263.0L375.4 257.5L370.3 259.7L366.0 256.7L366.9 252.6L362.6 247.1L348.5 241.0L348.7 238.8L355.6 238.6L353.7 235.1L355.6 228.6L357.6 227.1L357.5 218.4L359.8 216.8L360.3 214.1L370.9 207.5L368.7 203.3L361.4 199.7L363.1 198.7L360.8 199.8L349.8 197.7L344.6 193.5L338.9 193.9L339.4 196.5L337.5 197.1L333.5 193.6L336.8 190.7L337.1 188.2L322.4 183.2L319.3 183.0L317.7 185.3L313.2 185.0L303.5 188.9L303.1 186.9L298.3 187.3L296.6 189.0L287.6 188.2L283.3 191.7L279.1 192.0L277.2 188.2L274.9 187.9L276.5 189.6L272.7 189.7L258.1 181.6L258.0 188.5L255.0 191.9L256.4 194.3L252.8 200.1L253.0 206.3L260.0 211.2L260.1 213.8L261.6 212.1L260.7 213.2L262.4 213.6L260.8 215.0L263.0 216.4L262.9 214.5L265.1 216.2L267.5 227.2L265.6 229.3L271.2 230.1L266.7 231.6L265.5 229.9L257.1 236.1L258.5 240.1L256.8 244.8L258.1 246.6L256.7 245.9L256.3 248.1L258.2 247.3L258.3 249.0L255.3 249.0L257.3 249.4L258.4 253.8L260.4 253.2L263.6 258.3L264.4 265.2L271.2 275.3L270.0 277.2L271.0 282.8L286.9 288.4L290.4 286.1L293.2 280.6L299.4 280.7L307.8 286.7L315.8 287.3L321.7 292.7L333.1 299.2L334.6 297.6L344.3 301.0L345.6 299.6L344.6 301.0L346.6 305.8L345.9 300.8L346.2 302.8L348.4 303.4L347.4 304.9L348.8 303.9L348.1 312.5L349.5 313.3L342.9 328.8L334.7 337.2L332.4 346.4L330.4 345.8L330.4 347.5L328.3 346.8L329.2 344.0L327.0 341.5L321.1 343.1L317.9 349.2L312.0 352.9L307.8 350.1L308.3 346.5L304.6 344.5L303.8 346.0L305.8 347.1L305.8 349.9L302.6 355.0L300.6 354.8L301.4 356.6L299.4 360.1L294.4 359.4L292.7 370.0L289.9 371.9L286.5 371.3L282.7 368.1L278.5 372.8L267.7 376.2L268.4 379.7L265.2 383.9L258.7 383.7L257.9 380.9L252.1 378.1L251.7 375.5L249.4 378.4L248.4 374.6L246.7 374.8L248.4 377.5L245.8 377.7L242.9 383.1L241.0 382.5L239.4 377.6L237.4 379.0L239.5 380.3L239.9 383.0L238.5 386.0L236.4 386.0L238.2 386.8L236.6 388.4L232.4 382.3L226.6 383.6L225.2 389.3L221.8 391.1L225.9 395.6L228.2 405.9L222.7 409.1L218.9 408.0L215.2 415.5L211.3 418.8L206.6 419.3L200.5 424.0L198.3 422.4L198.9 423.6L196.7 425.1L197.3 428.7L193.0 432.3L191.3 431.7L187.5 438.3L190.1 437.7L190.2 441.4L187.1 439.1L188.8 441.8L191.4 441.7L187.1 449.3L172.4 451.0L171.4 447.4L164.8 444.3L162.7 440.1L158.1 448.6L156.0 446.4L154.0 447.7L156.3 448.8L152.0 453.3L149.7 453.0L149.7 454.7L141.9 458.5L138.6 463.4L133.5 463.7L130.4 462.4L122.1 446.1L110.3 445.6L114.8 452.3L111.8 468.6L113.8 481.8L120.6 494.7L119.8 495.7L120.9 495.3L120.7 497.6L119.3 496.1L120.3 498.4L122.4 497.7L126.3 503.9L133.0 521.9L140.9 523.3L141.0 520.7L150.3 515.5L149.7 517.5L140.9 521.2L141.1 524.2L136.3 522.6L134.4 525.2L136.6 534.3L138.1 533.8L137.5 532.0L139.9 533.1L139.0 536.1L141.6 543.6L137.4 553.1L140.6 561.3L143.2 563.8L147.2 560.0L149.5 561.9L146.7 563.1L147.2 569.9L148.8 573.1L152.8 574.0L152.8 575.2L150.1 581.8L151.1 586.4L149.6 589.3L146.5 587.8L145.2 593.0L139.5 595.8L137.6 595.1L137.2 596.4L138.9 596.0L137.7 598.7L133.5 598.6L135.9 599.8L136.2 602.0L134.2 602.4L133.5 600.0L128.7 601.1L127.5 600.0L127.1 602.9L122.0 604.8L126.6 603.2L127.9 604.7L125.1 607.1L123.2 605.0L124.9 608.0L123.0 606.2L124.0 615.6L121.2 610.6L118.9 611.6L119.9 609.6L117.6 612.9L118.3 608.9L117.2 612.5L117.2 608.5L111.2 608.7L109.7 612.0L107.5 609.1L103.7 615.4L100.3 617.3L92.2 627.6L88.4 625.9L78.8 625.9L76.2 628.4L79.1 626.1L85.7 627.0L86.9 640.2L82.8 637.1L83.6 638.7L82.5 638.7L81.3 636.7L82.8 636.5L78.1 636.5L78.1 632.4L80.4 632.1L76.6 632.0L76.6 630.7L76.4 632.0L72.7 632.0L71.2 640.6L73.1 639.0L75.7 641.5L75.7 643.9L71.2 644.8L71.2 650.1L77.0 650.1L78.2 642.3L80.0 642.3L80.7 646.0L82.0 642.4L82.8 651.7L81.1 650.4L81.0 653.7L82.1 655.2L82.0 652.9L83.3 652.9L83.5 655.7L86.9 656.8L85.4 658.5L81.9 656.4L78.7 658.8L77.3 657.8L78.3 655.8L77.6 658.5L75.2 658.5L75.1 661.0L71.4 660.0L70.5 661.5L66.9 661.5L65.1 663.9L67.0 661.5L68.1 662.3L65.8 664.5L71.6 669.4L70.5 670.6L77.7 672.8L77.2 674.6L74.8 673.3L76.0 675.9L74.8 676.6L67.9 669.1L66.1 669.9L67.7 668.7L62.6 668.4L58.0 664.3L55.2 665.4L47.9 674.3L49.6 674.8L49.1 677.9L43.0 678.1L42.0 675.5L39.0 675.7L39.9 693.2L37.4 694.0L39.9 693.4L40.3 705.6L43.4 705.5L44.1 703.0L43.1 681.4L48.3 680.0L44.4 683.0L50.7 693.0L51.1 703.3L49.9 704.7L48.0 704.0L47.4 706.0L49.8 707.9L58.0 706.1L61.6 708.0L54.7 707.4L54.9 712.2L58.3 712.0L59.8 715.1L55.7 715.1L55.9 716.9L59.3 715.8L59.6 717.7L58.2 717.1L59.6 718.1L52.5 721.4L53.7 727.5L55.7 727.0L56.2 720.2L65.3 719.0L69.8 722.8L73.1 728.7L54.4 735.4L57.1 745.9L55.5 747.4L56.0 748.8L56.2 746.5L57.3 749.1L56.9 752.8L58.0 751.4L58.6 753.5L56.8 753.5L59.4 754.5L61.4 753.0L59.1 745.3L65.1 743.7L64.2 745.4L65.8 746.3L63.5 746.2L64.0 748.4L62.8 748.7L64.4 749.7L64.1 748.4L72.5 747.1L72.2 750.9L71.2 748.0L67.2 750.8L67.6 754.4L73.1 754.6L69.5 756.0L66.6 759.6L72.9 758.3L72.3 760.5L71.9 758.8L66.1 760.7L65.0 764.0L68.9 765.6L64.5 775.2L64.2 786.4L62.4 788.5L62.2 795.4L64.0 798.8L66.7 797.9L72.7 801.4L76.7 801.1L80.3 804.9L83.4 804.2L86.7 799.4L98.5 792.4L107.3 789.6L113.3 792.3L121.8 789.4L124.3 783.0L130.3 780.7L134.6 770.5L137.7 769.1L142.4 761.2L145.6 759.5L149.1 760.4L151.8 756.2L154.9 756.9L152.8 756.3L155.3 754.2L159.4 754.1L159.9 749.1L166.2 745.6L171.2 745.6L176.1 748.2L181.3 745.9L186.6 738.0L188.6 738.4L190.1 734.1L194.0 731.4L195.4 733.1L193.9 735.0L197.1 732.1L195.0 729.1L198.1 725.8L204.8 723.0L210.8 714.9L214.8 715.4L214.0 705.9L215.6 704.2L210.6 700.3L211.9 702.1L207.6 700.9L206.5 690.0L201.5 690.0L183.3 695.6L177.5 708.4L178.0 709.6L180.9 705.7L179.6 710.0L177.0 710.6L175.0 707.2L174.4 709.2L168.6 708.7L169.9 705.5L167.9 703.0L169.2 701.7L166.9 701.3L167.8 699.0L170.4 700.5L169.9 697.8L167.1 691.1L165.4 692.0L165.5 690.2L162.1 689.0L161.1 681.9L149.2 678.5L150.9 674.2L159.9 667.5L162.2 668.2L163.8 665.9L165.8 667.3L168.6 665.5L168.7 663.6L169.2 665.8L169.7 663.4L166.8 661.1L169.7 663.0L174.2 656.3L176.9 656.3L181.9 663.1L177.0 656.2L179.1 652.4L177.3 651.0L178.7 634.6L180.9 630.7L183.3 630.3L182.0 630.4L182.4 628.0L183.8 630.3L182.2 627.4L184.9 624.2L186.7 616.2L196.0 608.1L198.6 609.0L199.6 611.9L198.7 608.9L202.2 605.8L201.1 604.6L202.7 593.8L201.4 594.3L197.3 590.3L198.1 584.0L202.2 578.6L208.1 580.8L212.5 580.1L213.6 570.8L217.4 571.0L220.3 569.2L227.6 570.3L223.3 569.3L224.0 567.9L229.2 568.6L227.8 568.8L228.8 570.3L229.8 569.1L229.5 565.3L224.2 564.0L224.1 561.2L223.5 563.2L223.6 561.2L220.8 560.2L218.6 561.8L219.5 558.8L222.4 560.1L218.4 558.2L222.0 552.4L231.4 546.7L235.1 542.5L242.6 539.7L244.9 540.6L251.1 552.3L249.8 553.7L251.5 556.2L250.6 553.1L255.3 557.0L270.1 575.2L280.1 581.2L278.9 584.3L281.0 581.1L283.7 582.7Z"/>
+<path d="M206.1 162.5L204.4 159.1L195.5 153.0L178.3 158.6L166.9 157.9L161.0 154.9L153.1 154.2L146.2 158.8L143.1 168.7L143.6 173.7L148.0 180.8L155.4 184.6L154.2 182.9L155.4 184.1L156.1 182.8L177.5 181.6L184.8 182.3L186.3 184.9L185.5 183.4L187.6 183.4L188.3 185.2L190.9 184.4L192.6 186.9L192.7 185.1L197.5 186.3L197.6 184.5L212.5 181.6L214.7 177.6L215.6 172.7L213.5 167.7L206.1 162.5Z"/>
+<path d="M392.0 231.4L387.9 229.0L383.3 221.4L381.1 210.2L378.5 212.6L372.1 211.6L371.2 216.0L368.9 215.2L369.0 216.7L366.8 216.7L366.4 214.4L364.2 216.2L362.6 215.5L362.4 219.5L358.9 220.0L360.2 222.3L357.9 230.3L361.0 234.2L366.7 234.1L367.3 237.4L372.2 240.0L372.5 235.3L374.7 233.4L378.1 233.5L382.0 237.2L391.6 241.5L392.1 245.0L390.3 246.5L392.8 245.0L393.1 240.6L394.7 239.6L392.0 231.4Z"/>
+<path d="M339.6 509.8L339.0 514.1L336.4 516.7L336.9 528.5L341.7 530.2L343.3 531.4L342.1 532.4L344.0 532.5L342.8 529.7L346.7 529.4L352.6 525.1L356.2 525.8L360.4 522.9L357.9 518.4L359.0 517.0L360.9 517.9L358.0 514.8L357.4 510.9L351.2 510.8L350.5 508.9L355.3 505.8L353.1 500.3L349.2 505.2L344.4 505.7L339.6 509.8Z"/>
+<path d="M320.7 527.3L314.8 528.2L314.9 522.8L314.0 523.6L313.4 521.3L313.7 530.6L318.0 538.8L316.4 543.2L310.6 548.6L316.6 544.8L323.5 544.5L324.1 547.6L326.3 548.5L324.5 547.6L325.2 545.1L327.9 546.1L326.8 549.1L329.3 545.0L341.0 534.5L341.1 530.6L336.8 529.4L335.6 522.1L323.9 528.7L320.7 527.3Z"/>
+<path d="M247.7 548.1L242.1 540.9L236.4 542.9L220.6 554.8L223.7 558.2L222.8 556.7L224.5 555.1L226.3 557.1L225.2 558.8L226.4 557.2L234.9 559.6L238.8 556.1L236.4 553.3L239.2 550.8L246.2 556.9L249.3 554.2L247.7 548.1Z"/>
+<path d="M371.9 180.6L371.4 187.3L377.2 197.1L376.8 194.8L381.0 195.5L381.0 197.2L384.4 195.8L387.6 191.0L387.4 180.4L378.1 177.0L374.4 177.4L371.9 180.6Z"/>
+<path d="M252.1 243.0L252.9 240.9L246.7 236.6L242.1 237.4L236.1 241.3L236.7 246.3L240.2 251.8L238.8 258.0L240.0 260.5L242.9 260.2L244.7 254.4L250.0 249.5L252.1 243.0Z"/>
+<path d="M320.5 556.6L321.8 569.0L327.7 575.2L329.5 572.3L328.6 568.3L330.0 570.1L328.9 567.6L334.4 565.8L336.4 560.7L334.5 562.3L334.5 560.7L325.9 555.3L321.1 555.0L324.2 556.5L320.5 556.6Z"/>
+<path d="M305.7 636.2L305.1 638.0L306.2 636.3L309.3 638.9L305.4 639.3L304.0 637.9L305.4 639.5L307.9 638.7L313.4 641.0L312.9 636.9L316.6 634.6L316.4 628.3L318.2 625.3L314.3 620.7L308.5 620.7L309.5 629.7L305.7 633.6L305.7 636.2Z"/>
+<path d="M362.4 501.2L367.2 486.2L363.5 484.7L359.4 485.8L358.1 489.9L353.6 492.5L356.0 496.4L353.6 499.2L355.1 500.3L356.9 498.6L356.1 502.3L359.0 501.6L361.9 503.2L362.4 501.2Z"/>
+<path d="M59.1 728.5L64.6 729.2L71.7 727.1L65.5 720.3L61.2 721.1L59.9 719.6L55.5 722.6L56.1 727.9L59.1 728.5Z"/>
+<path d="M268.6 723.4L281.8 713.7L284.9 709.6L261.7 720.8L263.6 721.0L261.0 724.6L263.1 727.1L268.6 723.4Z"/>
+<path d="M160.7 668.6L151.0 674.4L150.0 678.0L161.6 680.5L163.0 678.9L157.6 676.8L159.1 674.5L164.2 679.5L160.5 671.7L164.9 670.1L165.1 667.5L160.7 668.6Z"/>
+<path d="M217.2 578.4L222.1 584.8L223.1 582.7L227.4 582.9L228.2 584.2L226.0 584.7L227.3 584.8L229.9 583.8L229.1 581.8L231.2 582.2L229.0 581.0L230.0 576.4L220.0 576.3L217.2 578.4Z"/>
+<path d="M302.3 -6.5L293.6 -6.9L295.0 -1.9L293.9 1.0L303.1 3.1L305.4 0.5L300.4 -0.2L299.0 -4.0L302.3 -6.5Z"/>
+<path d="M296.5 566.8L302.2 570.9L296.4 559.1L296.3 560.7L290.9 562.7L293.2 566.5L296.5 566.8Z"/>
+<path d="M203.8 239.7L199.1 239.7L196.3 243.6L200.0 241.7L202.0 243.8L199.4 245.1L206.4 245.5L203.8 239.7Z"/>
+<path d="M359.8 582.4L356.7 579.2L353.2 582.1L355.6 585.2L359.8 582.4Z"/>
+<path d="M165.9 752.2L167.6 751.1L166.1 747.8L162.5 748.8L160.9 751.4L164.6 753.7L165.9 752.2Z"/>
+<path d="M393.6 248.7L391.1 247.9L390.0 254.6L391.2 255.8L394.7 251.1L393.6 248.7Z"/>
+<path d="M454.8 222.8L452.7 220.6L448.5 223.2L454.8 226.0L455.0 223.9L456.9 224.3L454.8 222.8Z"/>
+</g>
+<g class="routes">
+<path class="leg d1 bus" data-day="1" data-min="645" d="M56.2 684.8L56.2 686.2L64.2 686.0L64.7 688.5L78.0 681.2L79.4 685.4L83.4 687.1L104.3 690.0L110.6 686.2L113.6 680.7L118.4 678.8L121.2 669.6L133.6 666.7L134.0 653.9L137.9 641.2L143.6 635.2L152.1 632.5L162.6 621.9L175.4 601.4L181.0 586.4L177.4 573.4L178.6 562.9L174.3 551.2L184.5 545.4L190.0 535.2L193.7 522.4L203.0 510.1L205.8 510.3"/>
+<path class="leg d1 walk" data-day="1" data-min="660" d="M205.8 510.3L211.1 504.7"/>
+<path class="leg d1" data-day="1" data-min="715" d="M211.1 504.9L206.5 510.3L202.9 510.7L208.8 491.1L197.4 469.5L199.1 460.4L204.9 452.5L223.7 444.7L231.5 431.5L238.8 427.0L257.1 425.4L271.0 429.5L277.0 427.6L275.6 434.6L272.8 435.3L277.5 437.2L283.3 436.9L290.8 433.3"/>
+<path class="leg d1" data-day="1" data-min="785" d="M290.8 433.3L298.5 432.1L302.9 424.8L294.9 417.0L280.9 395.6L269.0 393.5L270.1 387.6L266.5 385.3L263.5 386.6L251.1 382.7L241.3 390.2L236.1 388.6L231.6 383.5"/>
+<path class="leg d1" data-day="1" data-min="885" d="M231.6 383.5L236.1 388.6L241.3 390.2L251.3 382.7L265.1 386.4L270.2 375.7L275.2 376.1L282.4 369.6L291.3 372.4L295.4 363.7L302.0 358.0L305.1 352.0L314.7 353.0L323.5 343.2L327.0 343.2L328.3 347.1L331.6 347.6L334.9 337.3L350.6 324.2L355.1 314.0L362.0 305.1L363.7 292.4L362.0 281.4L370.3 274.3L376.6 272.8L382.3 266.2L385.8 268.4L396.6 262.9L397.2 264.6L400.1 263.9L405.2 267.3L405.0 269.7L408.9 273.1L410.9 281.4"/>
+<path class="leg d1" data-day="1" data-min="965" d="M410.9 281.4L409.1 273.5L405.0 269.7L405.4 267.5L400.0 263.8L397.2 264.6L397.4 262.8L388.8 266.2L380.2 274.2L378.7 270.3L376.0 273.2L370.7 274.1L362.7 281.4L349.9 281.1L341.5 285.4L345.7 283.0"/>
+<path class="leg d1" data-day="1" data-min="1010" d="M345.7 283.0L350.2 280.9L362.5 281.3L370.3 274.3L376.9 272.6L394.3 256.5L392.1 251.6L392.6 242.4"/>
+<path class="leg d2" data-day="2" data-min="480" d="M392.6 242.4L392.1 251.6L394.3 256.5L376.9 272.6L370.3 274.3L362.7 281.4L349.2 281.2L335.4 289.0L322.5 282.3L311.1 286.8L297.3 279.6L293.0 280.5L287.1 287.9L272.7 283.3L271.4 274.9L264.6 264.6L263.8 258.5L259.6 250.5L258.9 239.9L247.7 243.0L243.4 248.2"/>
+<path class="leg d2 boat" data-day="2" data-min="540" d="M243.2 248.2L203.6 242.6"/>
+<path class="leg d2 boat" data-day="2" data-min="790" d="M203.6 242.6L243.2 248.2"/>
+<path class="leg d2" data-day="2" data-min="870" d="M331.3 269.0L332.7 269.8L333.7 267.7L336.6 273.1L337.1 281.4L340.1 284.1"/>
+<path class="leg d2" data-day="2" data-min="930" d="M340.1 284.1L341.5 285.3L345.7 283.0"/>
+<path class="leg d2" data-day="2" data-min="980" d="M345.7 283.0L350.2 280.9L362.5 281.3L370.3 274.3L376.9 272.6L394.3 256.5L392.1 251.6L392.6 242.4"/>
+<path class="leg d3" data-day="3" data-min="555" d="M392.6 242.4L392.1 251.6L394.3 256.5L376.9 272.6L370.3 274.3L362.1 281.5L363.7 293.1L361.5 305.9L355.1 314.0L350.6 324.2L334.9 337.4L332.5 346.9L326.4 347.0L324.0 349.4L325.6 353.4L337.6 355.6L343.8 361.8L345.4 374.7L349.4 386.0L348.1 391.1L344.4 395.4L327.2 398.9L318.1 408.5L308.1 411.9L302.2 420.6L287.6 423.5L276.8 428.7L268.5 429.3L256.6 425.4L236.9 427.7L231.1 432.1L225.3 443.4L214.0 448.1L213.7 451.5L207.5 450.3L201.1 452.8L193.2 447.8L187.5 450.4L181.8 449.0L173.4 451.6L170.2 449.0L159.1 447.4L138.8 463.4L133.1 463.9L126.8 461.8L124.0 454.0L121.0 452.2L116.1 452.8L112.1 446.7"/>
+<path class="leg d3" data-day="3" data-min="615" d="M112.1 446.7L116.1 452.8L123.5 453.4L126.8 461.7L129.9 462.4"/>
+<path class="leg d3" data-day="3" data-min="660" d="M129.9 462.4L127.1 461.6L125.2 466.5L113.8 466.7L112.7 468.3"/>
+<path class="leg d3" data-day="3" data-min="830" d="M112.7 468.3L117.5 468.8L118.0 484.7L121.4 491.0L122.7 490.2L127.3 497.7L140.1 502.7L140.6 514.3L143.5 523.7L140.1 529.2L141.5 538.1L145.1 546.1L145.8 555.1L152.0 563.6L156.3 576.1L151.8 591.2L123.9 609.6L123.5 616.1L113.8 616.7L108.9 624.8L89.7 643.9L87.6 648.8L87.7 655.6L78.9 668.7L76.8 676.2L73.8 677.7L69.2 676.1L67.2 678.2L57.5 714.7L63.4 726.5L72.5 762.0L72.1 770.7L69.1 773.8L70.9 776.8L67.8 787.6L70.3 794.3L69.1 798.5"/>
+<path class="leg d3" data-day="3" data-min="1005" d="M69.1 798.5L70.4 794.6L67.9 787.7L68.8 784.9L77.1 785.6L81.0 777.2L82.9 777.0L83.3 765.0L88.5 757.6L86.8 747.7L94.3 737.5L93.7 733.4L97.9 725.8L106.3 716.1L115.1 700.2L126.6 700.0L133.0 694.2L135.0 684.1L132.8 673.0L135.0 665.8L133.6 657.1L137.6 641.7L143.1 635.5L152.1 632.5L162.0 622.6L175.9 600.2L181.3 584.0L177.4 573.9L178.6 562.9L174.3 551.2L184.5 545.4L190.0 535.2L194.2 521.6L203.0 510.1L205.2 511.1L211.1 504.9"/>
+<path class="leg d3 walk" data-day="3" data-min="1025" d="M211.1 504.7L205.8 510.3"/>
+<path class="leg d3 bus" data-day="3" data-min="1105" d="M205.8 510.3L193.8 522.4L190.1 535.2L184.6 545.4L174.4 551.2L178.8 563.4L177.5 573.4L181.1 582.4L181.0 586.7L175.6 601.2L162.7 621.9L152.2 632.5L143.4 635.4L137.7 641.7L134.0 654.3L133.7 666.7L121.1 670.0L118.5 678.9L113.7 680.7L110.9 686.3L104.6 690.1L84.2 686.5L82.2 684.3L82.5 679.9L64.9 688.6L64.2 686.0L56.2 686.2L56.2 684.8"/>
+<path class="leg d2" data-day="2" data-min="790" d="M243.4 248.2L247.7 243.0L259.0 239.8L259.6 250.2L263.9 258.4L264.7 264.6L271.5 274.8L271.8 282.5L285.6 287.7L288.6 287.2L292.4 281.0L296.5 279.5L306.2 285.4L314.1 286.3L317.8 283.4L317.0 281.7L322.9 274.5L323.5 271.1L331.3 269.0"/>
+</g>
+<g class="cands">
+
+<g class="pin p-camp"><circle class="hit" cx="256.0" cy="557.9" r="22"/><circle class="ring" cx="256.0" cy="557.9" r="17"/><rect class="mk" x="250.5" y="552.4" width="11" height="11"/><text class="lab" x="256.0" y="557.9" data-en="Katsuren Beach">勝連ビーチ</text></g>
+<g class="pin p-camp"><circle class="hit" cx="281.3" cy="376.0" r="22"/><circle class="ring" cx="281.3" cy="376.0" r="17"/><rect class="mk" x="275.8" y="370.5" width="11" height="11"/><text class="lab" x="281.3" y="376.0" data-en="Okinawa Prefectural People's Forrest">沖縄県民の森</text></g>
+<g class="pin p-camp"><circle class="hit" cx="328.4" cy="344.7" r="22"/><circle class="ring" cx="328.4" cy="344.7" r="17"/><rect class="mk" x="322.9" y="339.2" width="11" height="11"/><text class="lab" text-anchor="end" x="328.4" y="344.7" data-en="Koki Camp Spot">幸喜の野営地</text></g>
+<g class="pin p-camp"><circle class="hit" cx="357.2" cy="302.3" r="22"/><circle class="ring" cx="357.2" cy="302.3" r="17"/><rect class="mk" x="351.7" y="296.8" width="11" height="11"/><text class="lab" text-anchor="end" x="357.2" y="302.3" data-en="Nago Castle Bridge Spot">名護城橋の野営地</text></g>
+<g class="pin p-camp"><circle class="hit" cx="191.3" cy="732.6" r="22"/><circle class="ring" cx="191.3" cy="732.6" r="17"/><rect class="mk" x="185.8" y="727.1" width="11" height="11"/><text class="lab" x="191.3" y="732.6" data-en="NEOS Outdoor Park">NEOSアウトドアパーク</text></g>
+<g class="pin p-camp"><circle class="hit" cx="213.5" cy="703.3" r="22"/><circle class="ring" cx="213.5" cy="703.3" r="17"/><rect class="mk" x="208.0" y="697.8" width="11" height="11"/><text class="lab" x="213.5" y="703.3" data-en="Azama Sun Beach Camping Ground">あざまサンサンビーチ</text></g>
+<g class="pin p-camp"><circle class="hit" cx="66.4" cy="772.0" r="22"/><circle class="ring" cx="66.4" cy="772.0" r="17"/><rect class="mk" x="60.9" y="766.5" width="11" height="11"/><text class="lab" x="66.4" y="772.0" data-en="Kita Nashiro Beach">北名城ビーチ</text></g>
+<g class="pin p-camp"><circle class="hit" cx="210.4" cy="714.9" r="22"/><circle class="ring" cx="210.4" cy="714.9" r="17"/><rect class="mk" x="204.9" y="709.4" width="11" height="11"/><text class="lab" x="210.4" y="714.9" data-en="Kudeken Beach">久手堅ビーチ</text></g>
+<g class="pin p-camp"><circle class="hit" cx="309.2" cy="272.9" r="22"/><circle class="ring" cx="309.2" cy="272.9" r="17"/><rect class="mk" x="303.7" y="267.4" width="11" height="11"/><text class="lab" x="309.2" y="272.9" data-en="Base Camp">ベースキャンプ</text></g>
+<g class="pin p-camp"><circle class="hit" cx="393.1" cy="242.1" r="22"/><circle class="ring" cx="393.1" cy="242.1" r="17"/><rect class="mk" x="387.6" y="236.6" width="11" height="11"/><text class="lab" text-anchor="end" x="393.1" y="242.1" data-en="Yagaji Beach Campsite">屋我地ビーチ キャンプ場</text></g>
+<g class="pin p-camp"><circle class="hit" cx="407.4" cy="255.4" r="22"/><circle class="ring" cx="407.4" cy="255.4" r="17"/><rect class="mk" x="401.9" y="249.9" width="11" height="11"/><text class="lab" text-anchor="end" x="407.4" y="255.4" data-en="Inamine Camp Spot">稲嶺の野営地</text></g>
+<g class="pin p-camp"><circle class="hit" cx="393.4" cy="235.7" r="22"/><circle class="ring" cx="393.4" cy="235.7" r="17"/><rect class="mk" x="387.9" y="230.2" width="11" height="11"/><text class="lab" text-anchor="end" x="393.4" y="235.7" data-en="Yagajima Spot">屋我地島の野営地</text></g>
+<g class="pin p-camp"><circle class="hit" cx="440.5" cy="240.4" r="22"/><circle class="ring" cx="440.5" cy="240.4" r="17"/><rect class="mk" x="435.0" y="234.9" width="11" height="11"/><text class="lab" text-anchor="end" x="440.5" y="240.4" data-en="Henan Bridge">平南橋</text></g>
+<g class="pin p-camp"><circle class="hit" cx="452.6" cy="229.1" r="22"/><circle class="ring" cx="452.6" cy="229.1" r="17"/><rect class="mk" x="447.1" y="223.6" width="11" height="11"/><text class="lab" text-anchor="end" x="452.6" y="229.1" data-en="Tsuha Beach Camp Spot">津波ビーチの野営地</text></g>
+<g class="pin p-camp"><circle class="hit" cx="459.0" cy="226.8" r="22"/><circle class="ring" cx="459.0" cy="226.8" r="17"/><rect class="mk" x="453.5" y="221.3" width="11" height="11"/><text class="lab" text-anchor="end" x="459.0" y="226.8" data-en="Tonokiya Campsite">渡野喜屋キャンプ場</text></g>
+<g class="pin p-camp"><circle class="hit" cx="379.3" cy="182.9" r="22"/><circle class="ring" cx="379.3" cy="182.9" r="17"/><rect class="mk" x="373.8" y="177.4" width="11" height="11"/><text class="lab" text-anchor="end" x="379.3" y="182.9" data-en="Kouri Island Camp Ground">古宇利島キャンプ場</text></g>
+<g class="pin p-camp"><circle class="hit" cx="489.3" cy="236.9" r="22"/><circle class="ring" cx="489.3" cy="236.9" r="17"/><rect class="mk" x="483.8" y="231.4" width="11" height="11"/><text class="lab" text-anchor="end" x="489.3" y="236.9" data-en="Daiboo River Camp">大保川キャンプ場</text></g>
+<g class="pin p-camp"><circle class="hit" cx="502.8" cy="258.4" r="22"/><circle class="ring" cx="502.8" cy="258.4" r="17"/><rect class="mk" x="497.3" y="252.9" width="11" height="11"/><text class="lab" text-anchor="end" x="502.8" y="258.4" data-en="Fukuchi River Seaside Park">福地川海浜公園</text></g>
+<g class="pin p-camp"><circle class="hit" cx="514.6" cy="145.6" r="22"/><circle class="ring" cx="514.6" cy="145.6" r="17"/><rect class="mk" x="509.1" y="140.1" width="11" height="11"/><text class="lab" text-anchor="end" x="514.6" y="145.6" data-en="Kokyono Beach">コキョウノビーチ</text></g>
+<g class="pin p-camp"><circle class="hit" cx="525.9" cy="141.6" r="22"/><circle class="ring" cx="525.9" cy="141.6" r="17"/><rect class="mk" x="520.4" y="136.1" width="11" height="11"/><text class="lab" text-anchor="end" x="525.9" y="141.6" data-en="Hentona Camp Spot">辺土名の野営地</text></g>
+<g class="pin p-camp"><circle class="hit" cx="530.7" cy="162.2" r="22"/><circle class="ring" cx="530.7" cy="162.2" r="17"/><rect class="mk" x="525.2" y="156.7" width="11" height="11"/><text class="lab" text-anchor="end" x="530.7" y="162.2" data-en="Okuma Mountains">奥間の山あい</text></g>
+<g class="pin p-camp"><circle class="hit" cx="567.3" cy="94.7" r="22"/><circle class="ring" cx="567.3" cy="94.7" r="17"/><rect class="mk" x="561.8" y="89.2" width="11" height="11"/><text class="lab" text-anchor="end" x="567.3" y="94.7" data-en="Benoki Camp Spot">辺野喜の野営地</text></g>
+<g class="pin p-camp"><circle class="hit" cx="596.1" cy="168.2" r="22"/><circle class="ring" cx="596.1" cy="168.2" r="17"/><rect class="mk" x="590.6" y="162.7" width="11" height="11"/><text class="lab" text-anchor="end" x="596.1" y="168.2" data-en="Yanbaru Discovery Forest">やんばる学びの森</text></g>
+<g class="pin p-camp"><circle class="hit" cx="621.6" cy="175.7" r="22"/><circle class="ring" cx="621.6" cy="175.7" r="17"/><rect class="mk" x="616.1" y="170.2" width="11" height="11"/><text class="lab" text-anchor="end" x="621.6" y="175.7" data-en="Aha, Yanbaru">安波（やんばる）</text></g>
+<g class="pin p-camp"><circle class="hit" cx="614.4" cy="47.9" r="22"/><circle class="ring" cx="614.4" cy="47.9" r="17"/><rect class="mk" x="608.9" y="42.4" width="11" height="11"/><text class="lab" text-anchor="end" x="614.4" y="47.9" data-en="Oku Beach Road">奥のビーチロード</text></g>
+<g class="pin p-camp"><circle class="hit" cx="638.8" cy="72.6" r="22"/><circle class="ring" cx="638.8" cy="72.6" r="17"/><rect class="mk" x="633.3" y="67.1" width="11" height="11"/><text class="lab" text-anchor="end" x="638.8" y="72.6" data-en="Adan Beach Campsite">アダンビーチ キャンプ場</text></g>
+
+<g class="pin p-nature"><circle class="hit" cx="527.4" cy="181.0" r="22"/><circle class="ring" cx="527.4" cy="181.0" r="17"/><path class="mk" d="M527.4 174.0L533.8 185.5L521.0 185.5Z"/><text class="lab" text-anchor="end" x="527.4" y="181.0" data-en="Hiji Falls">比地大滝</text></g>
+<g class="pin p-nature"><circle class="hit" cx="444.9" cy="258.6" r="22"/><circle class="ring" cx="444.9" cy="258.6" r="17"/><path class="mk" d="M444.9 251.6L451.3 263.1L438.5 263.1Z"/><text class="lab" text-anchor="end" x="444.9" y="258.6" data-en="Ta Falls">ター滝</text></g>
+<g class="pin p-nature"><circle class="hit" cx="582.9" cy="39.9" r="22"/><circle class="ring" cx="582.9" cy="39.9" r="17"/><path class="mk" d="M582.9 32.9L589.3 44.4L576.5 44.4Z"/><text class="lab" text-anchor="end" x="582.9" y="39.9" data-en="Kayauchi Banta">茅打バンタ</text></g>
+<g class="pin p-nature"><circle class="hit" cx="596.8" cy="22.6" r="22"/><circle class="ring" cx="596.8" cy="22.6" r="17"/><path class="mk" d="M596.8 15.6L603.2 27.1L590.4 27.1Z"/><text class="lab" text-anchor="end" x="596.8" y="22.6" data-en="Cape Hedo">辺戸岬</text></g>
+<g class="pin p-nature"><circle class="hit" cx="260.2" cy="253.1" r="22"/><circle class="ring" cx="260.2" cy="253.1" r="17"/><path class="mk" d="M260.2 246.1L266.6 257.6L253.8 257.6Z"/><text class="lab" x="260.2" y="253.1" data-en="Gorilla Chop">ゴリラチョップ</text></g>
+<g class="pin p-nature"><circle class="hit" cx="490.7" cy="285.5" r="22"/><circle class="ring" cx="490.7" cy="285.5" r="17"/><path class="mk" d="M490.7 278.5L497.1 290.0L484.3 290.0Z"/><text class="lab" text-anchor="end" x="490.7" y="285.5" data-en="Yagaji mangroves">ふれあいヒルギ公園</text></g>
+<g class="pin p-nature"><circle class="hit" cx="257.4" cy="380.9" r="22"/><circle class="ring" cx="257.4" cy="380.9" r="17"/><path class="mk" d="M257.4 373.9L263.8 385.4L251.0 385.4Z"/><text class="lab" x="257.4" y="380.9" data-en="Diamond Beach">ダイヤモンドビーチ</text></g>
+<g class="pin p-nature"><circle class="hit" cx="379.5" cy="184.1" r="22"/><circle class="ring" cx="379.5" cy="184.1" r="17"/><path class="mk" d="M379.5 177.1L385.9 188.6L373.1 188.6Z"/><text class="lab" text-anchor="end" x="379.5" y="184.1" data-en="Kouri Island">古宇利島</text></g>
+<g class="pin p-nature"><circle class="hit" cx="258.3" cy="189.7" r="22"/><circle class="ring" cx="258.3" cy="189.7" r="17"/><path class="mk" d="M258.3 182.7L264.7 194.2L251.9 194.2Z"/><text class="lab" x="258.3" y="189.7" data-en="Bise Fukugi tree road">備瀬のフクギ並木</text></g>
+
+<g class="pin p-food"><circle class="hit" cx="272.1" cy="229.9" r="22"/><circle class="ring" cx="272.1" cy="229.9" r="17"/><rect class="mk" x="-5" y="-5" width="10" height="10" transform="translate(272.1 229.9) rotate(45)"/><text class="lab" x="272.1" y="229.9" data-en="Aragaki Zenzai">新垣ぜんざい屋</text></g>
+<g class="pin p-food"><circle class="hit" cx="272.1" cy="230.2" r="22"/><circle class="ring" cx="272.1" cy="230.2" r="17"/><rect class="mk" x="-5" y="-5" width="10" height="10" transform="translate(272.1 230.2) rotate(45)"/><text class="lab" x="272.1" y="230.2" data-en="Kishimoto Shokudo">きしもと食堂</text></g>
+<g class="pin p-food"><circle class="hit" cx="353.6" cy="300.4" r="22"/><circle class="ring" cx="353.6" cy="300.4" r="17"/><rect class="mk" x="-5" y="-5" width="10" height="10" transform="translate(353.6 300.4) rotate(45)"/><text class="lab" text-anchor="end" x="353.6" y="300.4" data-en="Higashi Shokudo">ひがし食堂</text></g>
+<g class="pin p-food"><circle class="hit" cx="337.2" cy="336.5" r="22"/><circle class="ring" cx="337.2" cy="336.5" r="17"/><rect class="mk" x="-5" y="-5" width="10" height="10" transform="translate(337.2 336.5) rotate(45)"/><text class="lab" text-anchor="end" x="337.2" y="336.5" data-en="Mitsuya, Kyoda">三矢 道の駅許田店</text></g>
+<g class="pin p-food"><circle class="hit" cx="183.3" cy="450.0" r="22"/><circle class="ring" cx="183.3" cy="450.0" r="17"/><rect class="mk" x="-5" y="-5" width="10" height="10" transform="translate(183.3 450.0) rotate(45)"/><text class="lab" x="183.3" y="450.0" data-en="Ryupin, Onna">琉冰 おんなの駅</text></g>
+<g class="pin p-food"><circle class="hit" cx="137.2" cy="479.5" r="22"/><circle class="ring" cx="137.2" cy="479.5" r="17"/><rect class="mk" x="-5" y="-5" width="10" height="10" transform="translate(137.2 479.5) rotate(45)"/><text class="lab" x="137.2" y="479.5" data-en="Tsurukamedo">鶴亀堂ぜんざい</text></g>
+<g class="pin p-food"><circle class="hit" cx="145.6" cy="556.7" r="22"/><circle class="ring" cx="145.6" cy="556.7" r="17"/><rect class="mk" x="-5" y="-5" width="10" height="10" transform="translate(145.6 556.7) rotate(45)"/><text class="lab" x="145.6" y="556.7" data-en="Kori wo Kizame">氷ヲ刻メ</text></g>
+<g class="pin p-food"><circle class="hit" cx="276.4" cy="222.1" r="22"/><circle class="ring" cx="276.4" cy="222.1" r="17"/><rect class="mk" x="-5" y="-5" width="10" height="10" transform="translate(276.4 222.1) rotate(45)"/><text class="lab" x="276.4" y="222.1" data-en="Kajinho">花人逢</text></g>
+<g class="pin p-food"><circle class="hit" cx="258.1" cy="189.2" r="22"/><circle class="ring" cx="258.1" cy="189.2" r="17"/><rect class="mk" x="-5" y="-5" width="10" height="10" transform="translate(258.1 189.2) rotate(45)"/><text class="lab" x="258.1" y="189.2" data-en="Cafe Cahaya Bulan">cafe CAHAYA BULAN</text></g>
+<g class="pin p-food"><circle class="hit" cx="276.0" cy="223.5" r="22"/><circle class="ring" cx="276.0" cy="223.5" r="17"/><rect class="mk" x="-5" y="-5" width="10" height="10" transform="translate(276.0 223.5) rotate(45)"/><text class="lab" x="276.0" y="223.5" data-en="Anettai Chaya">亜熱帯茶屋</text></g>
+<g class="pin p-food"><circle class="hit" cx="112.4" cy="468.2" r="22"/><circle class="ring" cx="112.4" cy="468.2" r="17"/><rect class="mk" x="-5" y="-5" width="10" height="10" transform="translate(112.4 468.2) rotate(45)"/><text class="lab" x="112.4" y="468.2" data-en="Banta Cafe">バンタカフェ</text></g>
+
+</g>
+<g class="stops">
+<g class="pin stop d1" data-day="1" data-i="0" data-min="535"><circle class="hit" cx="55.3" cy="685.0" r="24"/><circle class="ring" cx="55.3" cy="685.0" r="20"/><circle class="mk" cx="55.3" cy="685.0" r="11"/><text class="lab" x="55.3" y="685.0" data-en="Naha Airport">那覇空港</text></g>
+<g class="pin stop d1" data-day="1" data-i="1" data-min="645"><circle class="hit" cx="205.8" cy="510.3" r="24"/><circle class="ring" cx="205.8" cy="510.3" r="20"/><circle class="mk" cx="205.8" cy="510.3" r="11"/><text class="lab" x="205.8" y="510.3" data-en="Okinawa Kita IC">沖縄北IC</text></g>
+<g class="pin stop d1" data-day="1" data-i="2" data-min="660"><circle class="hit" cx="211.1" cy="504.7" r="24"/><circle class="ring" cx="211.1" cy="504.7" r="20"/><circle class="mk" cx="211.1" cy="504.7" r="11"/><text class="lab" x="211.1" y="504.7" data-en="Evertrail office">Evertrail営業所</text></g>
+<g class="pin stop d1" data-day="1" data-i="3" data-min="715"><circle class="hit" cx="290.9" cy="433.3" r="24"/><circle class="ring" cx="290.9" cy="433.3" r="20"/><circle class="mk" cx="290.9" cy="433.3" r="11"/><text class="lab" x="290.9" y="433.3" data-en="King Tacos, Kin">キングタコス金武</text></g>
+<g class="pin stop d1" data-day="1" data-i="4" data-min="785"><circle class="hit" cx="232.0" cy="382.6" r="24"/><circle class="ring" cx="232.0" cy="382.6" r="20"/><circle class="mk" cx="232.0" cy="382.6" r="11"/><text class="lab" x="232.0" y="382.6" data-en="Cape Manzamo">万座毛</text></g>
+<g class="pin stop d1" data-day="1" data-i="5" data-min="885"><circle class="hit" cx="410.9" cy="281.4" r="24"/><circle class="ring" cx="410.9" cy="281.4" r="20"/><circle class="mk" cx="410.9" cy="281.4" r="11"/><text class="lab" text-anchor="end" x="410.9" y="281.4" data-en="Hunga Falls">フンガー滝</text></g>
+<g class="pin stop d1" data-day="1" data-i="6" data-min="965"><circle class="hit" cx="345.5" cy="282.5" r="24"/><circle class="ring" cx="345.5" cy="282.5" r="20"/><circle class="mk" cx="345.5" cy="282.5" r="11"/><text class="lab" text-anchor="end" x="345.5" y="282.5" data-en="Nago groceries">名護 買い出し</text></g>
+<g class="pin stop d1" data-day="1" data-i="7" data-min="1010"><circle class="hit" cx="393.1" cy="242.1" r="24"/><circle class="ring" cx="393.1" cy="242.1" r="20"/><circle class="mk" cx="393.1" cy="242.1" r="11"/><text class="lab" text-anchor="end" x="393.1" y="242.1" data-en="Camp, Yagaji">キャンプ 屋我地</text></g>
+<g class="pin stop d2" data-day="2" data-i="0" data-min="385"><circle class="hit" cx="393.1" cy="242.1" r="24"/><circle class="ring" cx="393.1" cy="242.1" r="20"/><circle class="mk" cx="393.1" cy="242.1" r="11"/><text class="lab" text-anchor="end" x="393.1" y="242.1" data-en="Camp, Yagaji">キャンプ 屋我地</text></g>
+<g class="pin stop d2" data-day="2" data-i="1" data-min="480"><circle class="hit" cx="243.2" cy="248.2" r="24"/><circle class="ring" cx="243.2" cy="248.2" r="20"/><circle class="mk" cx="243.2" cy="248.2" r="11"/><text class="lab" x="243.2" y="248.2" data-en="Dive Nuts, Sesoko">DIVENUTS 瀬底</text></g>
+<g class="pin stop d2" data-day="2" data-i="2" data-min="540"><circle class="hit" cx="203.6" cy="242.6" r="24"/><circle class="ring" cx="203.6" cy="242.6" r="20"/><circle class="mk" cx="203.6" cy="242.6" r="11"/><text class="lab" x="203.6" y="242.6" data-en="Minna Island, snorkel">水納島 シュノーケル</text></g>
+<g class="pin stop d2" data-day="2" data-i="3" data-min="790"><circle class="hit" cx="331.6" cy="268.8" r="24"/><circle class="ring" cx="331.6" cy="268.8" r="20"/><circle class="mk" cx="331.6" cy="268.8" r="11"/><text class="lab" text-anchor="end" x="331.6" y="268.8" data-en="Ufuya">百年古家 大家</text></g>
+<g class="pin stop d2" data-day="2" data-i="4" data-min="870"><circle class="hit" cx="340.1" cy="284.2" r="24"/><circle class="ring" cx="340.1" cy="284.2" r="20"/><circle class="mk" cx="340.1" cy="284.2" r="11"/><text class="lab" text-anchor="end" x="340.1" y="284.2" data-en="Okinawa Milk Farm Cafe">みるくふぁーむカフェ</text></g>
+<g class="pin stop d2" data-day="2" data-i="5" data-min="930"><circle class="hit" cx="345.5" cy="282.5" r="24"/><circle class="ring" cx="345.5" cy="282.5" r="20"/><circle class="mk" cx="345.5" cy="282.5" r="11"/><text class="lab" text-anchor="end" x="345.5" y="282.5" data-en="Nago groceries">名護 買い出し</text></g>
+<g class="pin stop d2" data-day="2" data-i="6" data-min="980"><circle class="hit" cx="393.1" cy="242.1" r="24"/><circle class="ring" cx="393.1" cy="242.1" r="20"/><circle class="mk" cx="393.1" cy="242.1" r="11"/><text class="lab" text-anchor="end" x="393.1" y="242.1" data-en="Camp, Yagaji">キャンプ 屋我地</text></g>
+<g class="pin stop d3" data-day="3" data-i="0" data-min="450"><circle class="hit" cx="393.1" cy="242.1" r="24"/><circle class="ring" cx="393.1" cy="242.1" r="20"/><circle class="mk" cx="393.1" cy="242.1" r="11"/><text class="lab" text-anchor="end" x="393.1" y="242.1" data-en="Camp, Yagaji">キャンプ 屋我地</text></g>
+<g class="pin stop d3" data-day="3" data-i="1" data-min="555"><circle class="hit" cx="110.6" cy="445.8" r="24"/><circle class="ring" cx="110.6" cy="445.8" r="20"/><circle class="mk" cx="110.6" cy="445.8" r="11"/><text class="lab" x="110.6" y="445.8" data-en="Cape Zanpa">残波岬</text></g>
+<g class="pin stop d3" data-day="3" data-i="2" data-min="615"><circle class="hit" cx="129.9" cy="461.4" r="24"/><circle class="ring" cx="129.9" cy="461.4" r="20"/><circle class="mk" cx="129.9" cy="461.4" r="11"/><text class="lab" x="129.9" y="461.4" data-en="Senaha Beach">瀬名波ビーチ</text></g>
+<g class="pin stop d3" data-day="3" data-i="3" data-min="660"><circle class="hit" cx="112.4" cy="468.2" r="24"/><circle class="ring" cx="112.4" cy="468.2" r="20"/><circle class="mk" cx="112.4" cy="468.2" r="11"/><text class="lab" x="112.4" y="468.2" data-en="Banta Cafe">バンタカフェ</text></g>
+<g class="pin stop d3" data-day="3" data-i="4" data-min="830"><circle class="hit" cx="68.9" cy="799.1" r="24"/><circle class="ring" cx="68.9" cy="799.1" r="20"/><circle class="mk" cx="68.9" cy="799.1" r="11"/><text class="lab" x="68.9" y="799.1" data-en="Gushikawa tide pool">具志川城跡 秘境プール</text></g>
+<g class="pin stop d3" data-day="3" data-i="5" data-min="1005"><circle class="hit" cx="211.1" cy="504.7" r="24"/><circle class="ring" cx="211.1" cy="504.7" r="20"/><circle class="mk" cx="211.1" cy="504.7" r="11"/><text class="lab" x="211.1" y="504.7" data-en="Evertrail office, car back">Evertrail営業所 返却</text></g>
+<g class="pin stop d3" data-day="3" data-i="6" data-min="1025"><circle class="hit" cx="205.8" cy="510.3" r="24"/><circle class="ring" cx="205.8" cy="510.3" r="20"/><circle class="mk" cx="205.8" cy="510.3" r="11"/><text class="lab" x="205.8" y="510.3" data-en="Okinawa Kita IC">沖縄北IC</text></g>
+<g class="pin stop d3" data-day="3" data-i="7" data-min="1105"><circle class="hit" cx="55.3" cy="685.0" r="24"/><circle class="ring" cx="55.3" cy="685.0" r="20"/><circle class="mk" cx="55.3" cy="685.0" r="11"/><text class="lab" x="55.3" y="685.0" data-en="Naha Airport">那覇空港</text></g>
+</g>
+</svg></div>
+    </div>
     <div class="filters jsonly map-days" role="group" aria-label="Show one day">
       <button type="button" data-day="1" class="active" aria-pressed="true"><span class="sw d1"></span><span data-en="Day 1">1日目</span></button>
       <button type="button" data-day="2" aria-pressed="false"><span class="sw d2"></span><span data-en="Day 2">2日目</span></button>
@@ -1285,144 +1449,6 @@ var LS={
       <button type="button" data-layer="camp" aria-pressed="false"><span class="sw k-camp"></span><span data-en="Campsites">キャンプ場</span></button>
       <button type="button" data-layer="nature" aria-pressed="false"><span class="sw k-nature"></span><span data-en="Nature">自然</span></button>
       <button type="button" data-layer="food" aria-pressed="false"><span class="sw k-food"></span><span data-en="Eat">食べる</span></button>
-    </div>
-    <div class="mapstick">
-    <div class="mapcard">
-      <div class="mapzoom jsonly">
-        <button class="btn-sm" type="button" data-zoom="in" aria-label="Zoom in"><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg></button>
-        <button class="btn-sm" type="button" data-zoom="out" aria-label="Zoom out"><svg class="ic" aria-hidden="true"><use href="#i-minus"/></svg></button>
-        <button class="btn-sm" type="button" data-zoom="reset" aria-label="Fit"><svg class="ic" aria-hidden="true"><use href="#i-fit"/></svg></button>
-      </div>
-<svg class="map" viewBox="0 0 778 1000" role="img" aria-labelledby="mapTitle">
-<title id="mapTitle" data-en="Okinawa main island: our route and the places on it">沖縄本島 &mdash; 走るルートと立ち寄り先</title>
-<rect class="sea" width="778" height="1000"/>
-<g class="land">
-<path d="M313.4 707.2L312.1 710.0L315.0 707.3L320.7 715.2L327.4 713.7L328.8 706.0L326.8 702.8L329.2 698.1L327.4 700.0L326.0 698.2L326.1 696.1L329.0 697.2L327.5 694.1L324.9 694.8L322.7 688.5L324.6 688.1L309.8 671.6L319.5 670.5L304.3 670.1L289.6 658.1L274.7 633.8L277.7 626.9L276.4 617.1L282.0 615.3L282.2 617.8L282.4 615.0L280.3 615.2L276.1 605.7L263.6 598.1L261.0 591.9L247.2 586.1L245.0 582.9L251.3 581.1L240.3 581.6L236.1 572.7L238.6 567.8L229.2 567.0L225.6 562.6L230.7 558.3L229.2 554.7L232.5 556.5L229.7 551.2L240.1 557.1L242.2 554.0L243.4 556.2L242.4 553.7L246.4 547.4L243.3 545.0L251.2 531.4L271.5 520.7L279.5 525.1L287.5 523.2L288.1 520.8L303.4 530.9L318.3 532.9L319.2 536.5L321.3 533.4L323.8 536.2L321.9 538.6L329.4 542.9L331.1 539.8L333.0 542.2L347.4 539.6L355.7 544.4L356.4 540.7L350.3 537.9L349.7 529.0L351.2 524.9L359.2 520.7L356.5 520.7L352.9 513.1L358.4 510.1L358.3 502.9L368.6 501.8L375.4 508.7L400.7 499.9L402.5 495.9L399.3 493.2L404.4 493.9L411.6 490.1L411.3 477.0L404.0 471.5L401.3 464.8L405.8 459.7L410.1 457.7L415.3 463.8L417.6 461.7L415.6 456.3L420.6 452.7L437.6 457.8L445.6 453.1L443.4 446.5L453.5 446.0L456.2 451.4L470.3 444.9L466.9 445.2L459.8 435.7L458.0 427.0L446.2 408.6L446.9 406.2L448.2 408.8L452.2 407.9L454.7 399.7L456.8 402.5L454.5 409.2L457.0 413.3L462.8 411.9L464.7 413.9L474.7 408.8L478.1 408.9L476.1 410.2L478.0 411.4L479.4 407.2L480.1 410.2L488.0 412.0L503.6 426.7L511.8 429.4L508.8 426.0L509.5 422.3L512.2 420.7L518.7 423.8L517.2 418.5L525.1 411.2L544.6 404.5L553.6 404.1L557.8 406.7L557.2 391.3L571.2 389.1L564.3 384.4L557.3 368.5L547.4 359.9L542.0 347.2L554.6 350.2L557.4 351.9L554.8 352.9L559.3 349.7L560.7 352.2L572.0 353.7L575.8 342.7L573.9 335.3L570.2 332.2L569.4 333.9L565.4 324.8L568.3 316.2L580.2 314.5L588.6 317.4L587.3 319.1L594.0 318.1L604.7 322.9L636.9 320.0L641.3 316.5L662.1 314.5L666.5 307.6L670.9 306.4L669.7 304.2L673.1 300.0L679.2 297.2L677.9 289.3L682.3 286.6L683.4 281.0L686.9 283.0L691.4 280.7L692.5 270.3L702.5 267.3L708.1 259.9L706.3 254.0L708.5 242.1L712.5 239.4L710.2 236.1L716.0 236.4L723.5 230.1L720.3 222.2L727.8 220.4L729.3 217.0L723.2 211.4L726.9 207.8L733.9 207.1L736.5 196.6L749.6 191.1L750.4 185.6L756.4 181.2L750.2 184.1L749.7 181.8L754.3 181.3L749.5 180.7L751.8 181.0L753.5 175.2L758.9 173.5L759.4 165.4L756.0 167.7L750.4 164.1L754.0 162.9L757.3 154.1L753.7 147.8L757.9 134.2L754.4 126.6L748.2 122.7L748.9 119.5L753.0 118.3L748.9 106.0L752.0 96.4L748.3 94.8L747.2 87.2L739.9 84.3L736.0 79.1L736.3 59.8L723.1 57.7L725.1 62.3L719.5 63.5L718.8 59.1L721.5 59.0L709.6 52.4L709.1 46.1L698.5 43.0L689.5 34.1L689.7 29.5L693.6 27.3L691.1 24.8L683.8 23.6L672.5 33.8L670.5 43.7L677.4 52.6L679.9 52.1L680.2 55.7L678.1 53.0L680.3 62.1L670.5 76.4L670.0 83.7L656.1 107.1L657.5 115.5L651.4 116.4L648.5 126.4L628.4 142.7L626.7 153.0L621.0 151.0L613.1 159.0L605.7 173.3L598.1 174.7L599.4 172.5L585.0 180.8L577.9 181.3L577.0 178.0L573.3 177.5L570.6 183.1L576.9 185.6L581.8 198.5L579.6 206.2L560.9 222.9L543.2 228.6L535.1 228.3L521.6 250.7L515.2 255.2L524.5 269.1L527.4 265.3L539.7 270.5L542.9 280.2L535.4 281.0L532.9 275.7L528.8 280.6L531.2 274.6L529.1 269.9L526.1 276.5L520.9 274.9L517.3 278.6L513.7 277.2L504.4 290.7L495.0 298.3L486.3 298.5L465.1 309.8L445.9 308.1L446.6 311.8L439.5 317.1L438.7 314.6L437.3 319.2L424.6 312.5L418.5 315.2L413.2 311.5L414.4 306.5L409.2 299.8L392.0 292.5L392.3 289.8L400.6 289.6L398.3 285.3L406.3 259.8L419.2 251.8L416.6 246.7L407.6 242.4L409.7 241.1L393.6 239.9L387.3 234.8L380.3 235.3L381.0 238.5L378.7 239.2L373.8 235.0L378.1 228.4L360.3 222.4L337.5 229.3L337.0 226.8L329.0 229.4L318.1 228.5L307.9 233.1L305.5 228.4L300.0 230.2L282.4 220.4L276.1 250.4L284.7 256.3L284.7 259.5L286.5 257.4L285.6 261.0L290.9 262.4L293.8 275.7L291.4 278.3L298.2 279.3L292.7 281.0L291.2 279.0L281.1 286.5L282.8 291.4L280.1 301.1L282.5 300.1L282.5 302.2L278.9 302.2L289.0 313.4L289.9 321.8L298.3 334.1L298.0 343.2L317.3 350.0L325.0 340.5L332.5 340.6L342.7 347.9L352.3 348.6L373.4 363.1L375.1 361.2L387.0 365.2L388.5 363.6L389.7 371.1L388.9 365.1L390.7 370.0L392.3 368.8L393.2 380.2L385.3 399.0L375.3 409.2L370.1 421.8L367.5 420.9L368.6 417.4L365.9 414.4L358.8 416.4L354.9 423.8L347.7 428.2L338.8 418.1L340.2 424.7L336.3 430.8L333.9 430.6L332.4 437.0L326.3 436.1L324.3 449.1L316.7 450.6L312.2 446.7L307.1 452.4L294.0 456.5L294.8 460.8L290.9 465.9L283.1 465.6L274.5 455.7L271.7 459.2L270.6 454.6L268.5 454.9L270.6 458.1L267.4 458.3L263.8 464.9L259.7 458.3L257.2 460.0L260.2 464.8L256.2 471.4L251.2 463.9L244.1 465.5L242.4 472.5L238.3 474.6L243.3 480.1L246.0 492.6L239.3 496.5L234.8 495.2L225.5 508.2L219.9 508.8L212.4 514.6L209.7 512.6L208.5 520.3L201.2 523.9L196.6 531.9L199.8 531.2L199.9 535.6L196.2 532.9L201.4 536.0L196.2 545.2L178.3 547.3L177.1 542.9L169.1 539.1L166.6 534.1L161.0 544.4L158.4 541.7L156.0 543.4L158.8 544.7L153.6 550.1L141.3 556.5L137.3 562.4L131.2 562.8L127.4 561.2L117.3 541.4L102.9 540.7L108.5 548.9L104.8 568.6L107.2 584.8L115.9 601.1L115.1 604.8L117.7 604.0L122.4 611.5L130.5 633.4L140.1 635.1L140.2 631.9L151.5 625.6L140.1 632.5L140.3 636.2L134.5 634.2L132.2 637.4L134.9 648.4L136.0 645.7L138.9 647.0L140.9 659.7L135.9 671.2L142.9 684.3L147.8 679.6L150.6 681.9L147.2 683.4L147.7 691.6L154.6 698.1L150.6 715.2L146.9 713.4L145.3 719.6L136.1 722.3L136.2 726.6L131.1 726.5L134.3 730.6L123.8 728.1L123.3 731.7L117.1 734.0L122.7 732.0L124.3 733.9L120.9 736.7L118.6 734.2L120.7 737.9L118.4 735.7L119.5 747.1L116.2 741.1L113.4 742.3L114.6 739.8L111.8 743.8L112.7 739.0L111.3 743.3L111.4 738.5L104.0 738.7L102.2 742.7L99.6 739.2L81.0 761.7L64.7 759.6L61.6 762.7L65.1 759.8L73.1 761.0L74.6 776.9L69.6 773.1L69.2 775.1L69.6 772.5L63.9 772.5L63.9 767.4L66.7 767.1L57.3 767.0L55.5 777.4L57.8 775.5L61.0 781.5L55.5 782.5L55.5 789.0L62.5 789.0L64.0 779.5L67.1 784.0L68.6 779.6L69.6 790.9L67.5 789.4L67.4 793.3L68.7 795.1L70.2 792.3L70.4 795.8L74.6 797.1L72.7 799.1L68.5 796.6L64.6 799.5L64.1 795.9L60.3 802.2L55.7 800.9L48.1 805.7L50.4 802.8L48.9 806.4L56.0 812.3L54.7 813.8L63.4 816.5L62.8 818.7L59.9 817.1L61.4 820.3L51.5 812.0L49.3 813.0L51.2 811.5L45.1 811.2L39.5 806.2L27.3 818.4L29.3 818.9L28.6 822.7L21.2 823.0L20.1 819.8L16.4 820.0L17.5 841.3L14.4 842.2L17.5 841.5L18.0 856.3L21.7 856.2L22.6 853.2L21.4 827.0L27.7 825.3L22.9 828.9L30.6 841.0L31.1 853.5L26.7 856.8L29.6 859.1L39.5 856.9L43.9 859.2L35.5 858.4L35.8 864.3L39.8 864.1L41.6 867.8L36.6 867.8L36.9 870.0L41.1 868.6L41.5 871.4L32.8 875.5L34.3 882.8L36.7 882.3L37.4 874.1L48.3 872.6L57.8 884.3L35.1 892.5L38.4 905.2L36.5 907.1L40.2 914.5L38.0 914.5L43.6 913.9L40.8 904.5L48.1 902.6L48.9 905.7L45.3 908.6L47.2 909.8L57.1 906.7L56.8 911.2L55.5 907.8L50.6 911.2L51.2 915.5L57.9 915.7L49.9 921.8L57.6 920.3L56.8 922.9L56.4 920.8L49.3 923.2L48.0 927.2L52.7 929.2L47.4 940.8L44.8 956.9L46.8 969.4L62.2 972.2L66.5 976.8L88.7 961.6L99.3 958.2L106.5 961.6L116.9 958.0L119.9 950.3L127.2 947.5L132.5 935.1L141.9 923.7L150.1 922.9L153.3 917.7L157.1 918.6L154.5 917.8L157.6 915.2L162.5 915.2L163.1 909.1L170.8 904.8L182.8 908.1L189.1 905.2L199.8 890.9L204.5 887.6L204.5 892.0L208.3 888.5L205.8 884.9L209.6 880.8L217.6 877.5L224.9 867.7L229.8 868.2L230.7 854.7L224.7 849.9L226.2 852.1L221.0 850.7L219.7 837.3L191.5 844.2L184.5 859.7L188.7 856.4L187.0 861.6L183.9 862.3L181.5 858.3L180.7 860.6L173.7 860.1L174.5 851.6L171.6 851.1L172.8 848.3L175.9 850.1L175.3 846.9L171.9 838.8L169.8 839.8L165.8 836.1L164.7 827.5L150.1 823.5L152.2 818.2L163.1 810.0L166.0 810.9L167.9 808.1L170.3 809.8L173.9 805.4L174.4 808.1L175.1 805.1L171.5 802.4L175.0 804.6L180.5 796.5L183.8 796.5L189.9 804.8L183.9 796.4L186.5 791.8L184.3 790.0L186.0 770.1L191.6 764.9L190.4 762.2L192.2 764.9L190.2 761.4L195.6 747.8L206.9 738.0L211.3 742.5L210.3 739.0L214.4 735.2L215.1 720.6L208.6 716.4L209.5 708.7L214.5 702.2L227.0 704.0L228.4 692.7L245.4 692.1L240.1 690.9L240.9 689.2L247.9 690.7L247.6 686.1L241.2 684.4L241.1 681.1L240.3 683.5L237.0 679.9L234.4 681.8L235.5 678.1L239.0 679.7L234.1 677.4L238.5 670.3L254.5 658.4L266.3 656.1L274.3 675.0L273.2 671.2L279.0 675.9L296.9 698.0L309.1 705.3L307.5 709.2L310.1 705.3L313.4 707.2Z"/>
-<path d="M219.2 197.2L217.2 193.1L206.3 185.6L185.4 192.5L173.5 190.5L171.7 191.7L164.5 188.0L154.9 187.2L146.5 192.7L142.8 204.8L143.4 210.7L148.7 219.4L156.1 222.0L157.7 224.1L156.3 221.9L157.7 223.5L158.6 221.8L184.4 220.3L193.4 221.2L195.2 224.4L194.2 222.6L196.8 222.6L197.6 224.8L200.7 223.7L202.8 226.8L202.9 224.6L208.8 226.1L208.9 223.9L227.0 220.3L229.6 215.6L230.7 209.6L228.2 203.5L219.2 197.2Z"/>
-<path d="M444.8 280.8L439.9 277.9L434.2 268.7L431.6 255.2L431.6 256.7L428.5 258.0L420.7 256.8L419.6 262.2L416.8 261.1L416.9 263.0L414.2 262.9L413.7 260.2L411.1 262.4L409.1 261.6L408.9 266.4L404.7 267.0L406.2 269.7L403.4 279.5L407.2 284.2L414.1 284.0L414.9 288.1L420.8 291.2L421.2 285.5L423.8 283.2L428.0 283.3L432.6 287.8L444.4 293.1L445.0 297.3L442.7 299.1L445.8 297.4L446.1 292.0L448.1 290.8L446.9 284.5L445.0 283.2L446.1 280.9L444.8 280.8Z"/>
-<path d="M381.2 618.7L380.5 623.9L377.3 627.1L377.9 641.4L383.8 643.4L385.7 644.9L384.2 646.1L386.5 646.2L385.1 642.8L389.8 642.5L397.0 637.2L401.4 638.1L403.3 635.2L406.5 634.5L404.2 633.1L403.4 629.1L404.8 627.5L407.1 628.5L403.6 624.8L402.8 620.0L398.8 618.8L395.3 620.0L394.5 617.6L400.3 613.9L397.7 607.1L392.9 613.1L387.1 613.7L381.2 618.7Z"/>
-<path d="M358.3 639.9L351.1 641.1L351.2 634.4L350.1 635.4L349.4 632.6L350.9 641.6L349.8 643.9L355.0 653.8L353.1 659.2L346.1 665.8L353.3 661.2L361.7 660.8L362.4 664.5L365.1 665.7L362.9 664.5L363.8 661.5L367.0 662.8L365.7 666.4L368.7 661.4L382.9 648.7L383.1 644.0L377.9 642.5L376.4 633.6L362.2 641.6L358.3 639.9Z"/>
-<path d="M269.7 665.2L262.9 656.4L256.0 658.9L236.9 673.3L240.6 677.4L239.4 675.5L241.6 673.7L243.8 676.1L242.5 678.2L243.9 676.2L254.2 679.1L258.9 674.8L255.9 671.5L259.4 668.4L267.9 675.9L271.7 672.6L269.7 665.2Z"/>
-<path d="M420.4 219.2L419.9 227.3L426.8 239.2L426.4 236.4L431.5 237.3L431.5 239.3L435.7 237.6L439.5 231.8L439.3 219.0L427.9 214.8L423.5 215.3L420.4 219.2Z"/>
-<path d="M275.0 294.9L276.0 292.4L272.8 288.8L268.5 287.1L262.9 288.1L255.6 292.9L256.4 298.9L260.6 305.6L258.9 313.1L260.3 316.1L263.9 315.8L266.0 308.8L272.5 302.8L275.0 294.9Z"/>
-<path d="M358.1 675.4L357.6 682.1L359.3 684.4L359.6 690.5L366.8 698.1L369.0 694.5L367.9 689.7L369.6 691.9L368.2 688.8L374.9 686.7L377.3 680.4L375.1 682.4L375.1 680.5L364.6 673.9L358.8 673.5L360.6 674.9L362.8 674.2L362.6 675.4L358.1 675.4Z"/>
-<path d="M340.1 772.1L339.4 774.2L340.7 772.2L341.7 774.6L342.8 773.5L344.4 775.3L339.8 775.9L338.1 774.2L339.7 776.1L342.8 775.1L349.5 777.9L348.9 772.9L353.4 770.1L353.1 762.5L355.2 758.9L350.5 753.2L343.5 753.3L344.7 764.2L340.1 769.0L340.1 772.1Z"/>
-<path d="M408.9 608.2L414.7 590.0L410.2 588.3L405.3 589.6L403.7 594.5L398.2 597.6L401.2 602.5L398.3 605.8L400.1 607.2L402.2 605.1L401.3 607.1L402.6 609.0L401.2 609.6L404.8 608.7L408.3 610.7L408.9 608.2Z"/>
-<path d="M40.8 884.0L47.5 884.9L56.1 882.4L53.5 877.8L48.6 874.1L43.4 875.1L41.8 873.3L36.5 876.9L37.2 883.4L40.8 884.0Z"/>
-<path d="M295.0 877.9L311.1 866.1L314.9 861.1L312.5 860.9L308.8 865.2L301.6 866.3L299.7 869.3L286.6 874.8L289.0 875.0L285.8 879.4L288.4 882.4L291.4 881.9L295.0 877.9Z"/>
-<path d="M164.1 811.4L152.4 818.4L151.1 822.8L165.2 825.8L166.9 823.9L160.4 821.4L162.2 818.5L165.7 820.3L168.4 824.6L163.8 815.2L165.5 813.6L166.7 814.5L166.7 812.9L169.2 813.2L169.5 810.0L164.1 811.4Z"/>
-<path d="M232.7 702.0L238.6 709.8L239.9 707.2L245.1 707.4L246.1 709.0L243.4 709.6L244.9 709.7L248.1 708.4L247.1 706.0L249.7 706.5L249.7 705.1L247.0 705.1L248.2 699.5L236.1 699.4L232.7 702.0Z"/>
-<path d="M336.0 -7.9L330.7 -9.5L325.4 -8.4L327.1 -2.3L325.7 1.2L336.9 3.8L339.7 0.6L333.7 -0.2L331.9 -4.9L332.8 -7.0L336.0 -7.9Z"/>
-<path d="M329.0 687.9L335.8 692.9L335.6 689.7L330.6 683.7L328.8 678.5L328.7 680.4L322.1 682.8L325.0 687.6L329.0 687.9Z"/>
-<path d="M216.5 290.8L210.8 290.9L207.3 295.7L209.6 295.7L211.9 293.3L214.2 295.8L211.1 297.4L215.8 298.9L219.6 298.0L216.5 290.8Z"/>
-<path d="M405.8 706.8L402.0 702.9L397.7 706.4L400.6 710.2L405.8 706.8Z"/>
-<path d="M170.5 912.8L172.5 911.6L172.4 908.6L171.1 909.9L170.7 907.6L166.3 908.8L164.4 911.9L168.9 914.7L170.5 912.8Z"/>
-<path d="M446.7 301.8L443.7 300.9L442.4 309.0L443.8 310.4L444.4 307.8L446.9 307.5L448.1 304.8L446.7 301.8Z"/>
-<path d="M521.0 270.3L518.5 267.7L513.4 270.9L521.1 274.3L521.3 271.7L523.6 272.2L521.0 270.3Z"/>
-<path d="M352.4 649.8L349.6 654.7L353.2 658.5L354.6 652.7L352.4 649.8Z"/>
-<path d="M338.5 669.7L327.8 669.0L322.3 670.8L335.6 671.4L340.9 669.8L345.7 665.7L338.5 669.7Z"/>
-</g>
-<g class="routes">
-<path class="leg d1 bus" data-day="1" data-min="645" d="M37.3 831.1L37.4 832.8L47.0 832.6L47.6 835.6L63.7 826.7L65.5 831.8L70.3 833.8L87.6 834.9L95.7 837.3L103.3 832.8L106.9 826.1L112.8 823.8L116.2 812.6L125.4 811.9L131.3 809.1L131.7 793.6L136.4 778.2L143.3 770.9L153.7 767.6L166.4 754.7L172.5 742.5L181.9 729.9L188.8 711.7L188.9 707.1L184.3 695.9L185.8 683.2L180.5 672.6L180.6 668.9L193.0 661.9L199.7 649.5L204.2 634.0L214.8 622.2L215.4 619.1L216.6 620.6L218.9 619.3"/>
-<path class="leg d1 walk" data-day="1" data-min="660" d="M218.9 619.3L225.3 612.5"/>
-<path class="leg d1" data-day="1" data-min="715" d="M225.3 612.8L219.7 619.3L215.3 619.8L217.3 617.4L222.5 596.0L219.3 587.0L210.8 576.4L208.6 569.7L210.7 558.7L217.7 549.1L225.5 544.4L240.5 539.7L250.0 523.7L258.9 518.2L281.1 516.2L297.9 521.2L305.2 518.9L303.6 527.4L300.1 528.2L305.9 530.5L312.9 530.2L322.1 525.9"/>
-<path class="leg d1" data-day="1" data-min="785" d="M322.1 525.9L331.3 524.4L336.7 515.5L327.0 506.1L311.5 484.8L310.0 480.1L295.6 477.6L296.9 470.4L292.5 467.6L288.9 469.1L273.9 464.5L261.9 473.5L258.5 471.0L255.6 471.6L250.1 465.5"/>
-<path class="leg d1" data-day="1" data-min="885" d="M250.1 465.5L255.6 471.6L258.5 471.0L262.0 473.5L274.1 464.5L290.8 468.9L293.3 466.5L297.0 455.9L303.1 456.5L311.8 448.5L322.6 451.9L327.6 441.4L335.6 434.5L339.3 427.2L351.0 428.4L361.7 416.5L366.0 416.5L367.6 421.2L371.5 421.9L375.5 409.4L394.6 393.4L400.0 381.0L408.4 370.2L410.5 354.8L408.4 341.5L418.5 332.9L426.2 331.1L433.0 323.0L437.3 325.7L450.5 319.1L451.1 321.1L454.7 320.2L457.0 323.5L460.9 324.4L460.6 327.3L465.4 331.5L467.7 341.5"/>
-<path class="leg d1" data-day="1" data-min="965" d="M467.7 341.5L465.6 332.0L460.6 327.3L461.1 324.6L457.0 323.5L454.6 320.2L451.1 321.1L451.4 319.0L441.0 323.0L430.5 332.8L428.6 328.1L425.4 331.5L419.0 332.6L409.3 341.5L393.7 341.1L383.6 346.4L388.7 343.4"/>
-<path class="leg d1" data-day="1" data-min="1010" d="M388.7 343.4L394.1 340.9L409.0 341.4L418.5 332.9L426.5 330.8L432.5 323.4L447.6 311.3L445.0 305.3L445.5 294.2"/>
-<path class="leg d2" data-day="2" data-min="480" d="M445.5 294.2L445.0 305.3L447.6 311.3L432.5 323.4L426.5 330.8L418.5 332.9L409.3 341.5L392.9 341.3L376.2 350.7L360.5 342.6L346.6 348.1L340.3 346.3L330.0 339.4L324.7 340.4L321.3 346.9L317.5 349.4L300.0 343.8L298.5 333.6L290.2 321.2L289.3 313.7L284.1 304.0L283.3 291.1L269.7 294.9L264.5 301.2"/>
-<path class="leg d2 boat" data-day="2" data-min="540" d="M264.3 301.2L216.2 294.4"/>
-<path class="leg d2 boat" data-day="2" data-min="790" d="M216.2 294.4L264.3 301.2"/>
-<path class="leg d2" data-day="2" data-min="870" d="M371.1 326.5L372.9 327.5L374.1 324.9L377.6 331.4L379.3 338.9L378.3 341.5L381.8 344.8"/>
-<path class="leg d2" data-day="2" data-min="930" d="M381.8 344.8L383.5 346.3L388.7 343.4"/>
-<path class="leg d2" data-day="2" data-min="980" d="M388.7 343.4L394.1 340.9L409.0 341.4L418.5 332.9L426.5 330.8L432.5 323.4L447.6 311.3L445.0 305.3L445.5 294.2"/>
-<path class="leg d3" data-day="3" data-min="555" d="M445.5 294.2L445.0 305.3L447.6 311.3L432.5 323.4L426.5 330.8L418.5 332.9L408.6 341.7L410.5 355.7L407.9 371.2L400.0 381.0L394.6 393.4L375.5 409.5L372.6 421.0L365.3 421.1L362.3 424.0L364.3 428.9L378.8 431.6L386.4 439.1L388.2 454.7L393.2 468.4L391.6 474.7L387.1 479.8L366.1 484.1L355.1 495.7L343.0 499.9L335.9 510.5L318.2 513.9L305.0 520.3L294.9 521.0L280.5 516.3L256.6 519.0L249.6 524.4L242.6 538.1L228.8 543.9L228.4 548.0L220.9 546.4L213.2 549.5L203.5 543.4L196.7 546.6L189.7 544.9L185.0 547.9L179.6 548.0L175.7 544.9L162.2 543.0L137.6 562.4L130.6 562.9L122.9 560.5L119.6 550.9L115.9 548.8L110.0 549.6L105.1 542.1"/>
-<path class="leg d3" data-day="3" data-min="615" d="M105.1 542.1L110.0 549.6L115.7 548.7L118.9 550.3L122.9 560.3L126.7 561.2"/>
-<path class="leg d3" data-day="3" data-min="660" d="M126.7 561.2L123.3 560.2L121.1 566.1L107.2 566.3L105.8 568.3"/>
-<path class="leg d3" data-day="3" data-min="830" d="M105.8 568.3L111.6 568.9L112.2 588.2L116.4 595.8L118.0 594.9L123.6 604.0L139.2 610.0L139.8 624.1L143.2 635.6L139.1 642.2L140.9 653.0L145.2 662.8L146.0 673.7L153.5 684.0L158.8 699.2L153.3 717.5L134.0 731.8L125.9 734.4L119.4 739.8L119.0 747.7L107.2 748.4L101.3 758.2L77.9 781.4L75.4 787.4L75.5 795.7L71.7 803.7L64.9 811.5L62.3 820.7L58.6 822.4L53.1 820.5L50.6 823.0L47.0 838.4L43.8 843.5L38.9 867.4L46.0 881.7L57.0 924.7L56.5 935.3L52.9 939.1L55.1 942.7L51.4 955.8L54.5 964.0L52.9 969.1"/>
-<path class="leg d3" data-day="3" data-min="1005" d="M52.9 969.1L54.5 964.3L51.5 956.0L52.6 952.6L62.6 953.4L67.4 943.3L69.7 943.0L70.2 928.4L74.4 924.7L76.4 919.5L74.5 907.4L83.5 895.0L82.9 890.1L88.6 882.4L87.9 880.9L98.1 869.0L99.8 863.3L108.7 849.7L122.8 849.5L130.5 842.5L133.0 830.2L130.3 816.7L132.9 808.0L131.2 797.4L136.1 778.7L142.8 771.2L153.7 767.6L158.1 761.5L165.7 755.6L182.6 728.4L189.2 708.8L184.4 696.5L185.8 683.2L180.5 672.6L180.6 668.9L193.0 661.9L199.7 649.5L204.8 633.0L214.8 622.2L215.4 619.1L218.1 620.2L225.3 612.8"/>
-<path class="leg d3 walk" data-day="3" data-min="1025" d="M225.3 612.5L218.9 619.3"/>
-<path class="leg d3 bus" data-day="3" data-min="1105" d="M218.9 619.3L204.3 634.0L199.8 649.5L193.1 661.9L180.7 669.0L180.6 672.5L186.1 683.8L184.4 695.9L188.9 706.8L188.8 712.0L182.2 729.6L172.2 743.2L166.5 754.8L153.8 767.6L143.1 771.2L136.2 778.7L131.8 794.0L131.4 809.1L125.7 812.0L116.0 813.2L112.9 823.9L107.1 826.1L103.7 832.8L96.1 837.4L71.2 833.1L68.9 830.4L69.2 825.1L47.8 835.6L47.0 832.6L37.4 832.8L37.3 831.1"/>
-<path class="leg d2" data-day="2" data-min="790" d="M264.5 301.2L269.7 294.9L283.4 291.1L284.1 303.7L289.4 313.5L290.3 321.2L298.6 333.5L299.0 342.8L315.7 349.1L319.3 348.6L323.9 341.0L328.9 339.3L335.0 341.3L340.7 346.3L350.3 347.5L354.8 344.0L353.8 341.8L361.0 333.1L361.6 329.0L371.1 326.5"/>
-</g>
-<g class="cands">
-
-<g class="pin p-camp"><circle class="hit" cx="279.7" cy="677.0" r="22"/><circle class="ring" cx="279.7" cy="677.0" r="17"/><rect class="mk" x="274.2" y="671.5" width="11" height="11"/><text class="lab" x="279.7" y="677.0" data-en="Katsuren Beach">勝連ビーチ</text></g>
-<g class="pin p-camp"><circle class="hit" cx="310.5" cy="456.3" r="22"/><circle class="ring" cx="310.5" cy="456.3" r="17"/><rect class="mk" x="305.0" y="450.8" width="11" height="11"/><text class="lab" x="310.5" y="456.3" data-en="Okinawa Prefectural People's Forrest">沖縄県民の森</text></g>
-<g class="pin p-camp"><circle class="hit" cx="367.6" cy="418.3" r="22"/><circle class="ring" cx="367.6" cy="418.3" r="17"/><rect class="mk" x="362.1" y="412.8" width="11" height="11"/><text class="lab" text-anchor="end" x="367.6" y="418.3" data-en="Koki Camp Spot">幸喜の野営地</text></g>
-<g class="pin p-camp"><circle class="hit" cx="402.6" cy="366.8" r="22"/><circle class="ring" cx="402.6" cy="366.8" r="17"/><rect class="mk" x="397.1" y="361.3" width="11" height="11"/><text class="lab" text-anchor="end" x="402.6" y="366.8" data-en="Nago Castle Bridge Spot">名護城橋の野営地</text></g>
-<g class="pin p-camp"><circle class="hit" cx="201.3" cy="889.0" r="22"/><circle class="ring" cx="201.3" cy="889.0" r="17"/><rect class="mk" x="195.8" y="883.5" width="11" height="11"/><text class="lab" x="201.3" y="889.0" data-en="NEOS Outdoor Park">NEOSアウトドアパーク</text></g>
-<g class="pin p-camp"><circle class="hit" cx="228.3" cy="853.6" r="22"/><circle class="ring" cx="228.3" cy="853.6" r="17"/><rect class="mk" x="222.8" y="848.1" width="11" height="11"/><text class="lab" x="228.3" y="853.6" data-en="Azama Sun Beach Camping Ground">あざまサンサンビーチ</text></g>
-<g class="pin p-camp"><circle class="hit" cx="49.7" cy="936.9" r="22"/><circle class="ring" cx="49.7" cy="936.9" r="17"/><rect class="mk" x="44.2" y="931.4" width="11" height="11"/><text class="lab" x="49.7" y="936.9" data-en="Kita Nashiro Beach">北名城ビーチ</text></g>
-<g class="pin p-camp"><circle class="hit" cx="224.4" cy="867.6" r="22"/><circle class="ring" cx="224.4" cy="867.6" r="17"/><rect class="mk" x="218.9" y="862.1" width="11" height="11"/><text class="lab" x="224.4" y="867.6" data-en="Kudeken Beach">久手堅ビーチ</text></g>
-<g class="pin p-camp"><circle class="hit" cx="344.3" cy="331.2" r="22"/><circle class="ring" cx="344.3" cy="331.2" r="17"/><rect class="mk" x="338.8" y="325.7" width="11" height="11"/><text class="lab" x="344.3" y="331.2" data-en="Base Camp">ベースキャンプ</text></g>
-<g class="pin p-camp"><circle class="hit" cx="446.2" cy="293.8" r="22"/><circle class="ring" cx="446.2" cy="293.8" r="17"/><rect class="mk" x="440.7" y="288.3" width="11" height="11"/><text class="lab" text-anchor="end" x="446.2" y="293.8" data-en="Yagaji Beach Campsite">屋我地ビーチ キャンプ場</text></g>
-<g class="pin p-camp"><circle class="hit" cx="463.5" cy="310.0" r="22"/><circle class="ring" cx="463.5" cy="310.0" r="17"/><rect class="mk" x="458.0" y="304.5" width="11" height="11"/><text class="lab" text-anchor="end" x="463.5" y="310.0" data-en="Inamine Camp Spot">稲嶺の野営地</text></g>
-<g class="pin p-camp"><circle class="hit" cx="446.5" cy="286.0" r="22"/><circle class="ring" cx="446.5" cy="286.0" r="17"/><rect class="mk" x="441.0" y="280.5" width="11" height="11"/><text class="lab" text-anchor="end" x="446.5" y="286.0" data-en="Yagajima Spot">屋我地島の野営地</text></g>
-<g class="pin p-camp"><circle class="hit" cx="503.7" cy="291.8" r="22"/><circle class="ring" cx="503.7" cy="291.8" r="17"/><rect class="mk" x="498.2" y="286.3" width="11" height="11"/><text class="lab" text-anchor="end" x="503.7" y="291.8" data-en="Henan Bridge">平南橋</text></g>
-<g class="pin p-camp"><circle class="hit" cx="518.4" cy="278.0" r="22"/><circle class="ring" cx="518.4" cy="278.0" r="17"/><rect class="mk" x="512.9" y="272.5" width="11" height="11"/><text class="lab" text-anchor="end" x="518.4" y="278.0" data-en="Tsuha Beach Camp Spot">津波ビーチの野営地</text></g>
-<g class="pin p-camp"><circle class="hit" cx="526.1" cy="275.3" r="22"/><circle class="ring" cx="526.1" cy="275.3" r="17"/><rect class="mk" x="520.6" y="269.8" width="11" height="11"/><text class="lab" text-anchor="end" x="526.1" y="275.3" data-en="Tonokiya Campsite">渡野喜屋キャンプ場</text></g>
-<g class="pin p-camp"><circle class="hit" cx="429.4" cy="222.0" r="22"/><circle class="ring" cx="429.4" cy="222.0" r="17"/><rect class="mk" x="423.9" y="216.5" width="11" height="11"/><text class="lab" text-anchor="end" x="429.4" y="222.0" data-en="Kouri Island Camp Ground">古宇利島キャンプ場</text></g>
-<g class="pin p-camp"><circle class="hit" cx="563.0" cy="287.5" r="22"/><circle class="ring" cx="563.0" cy="287.5" r="17"/><rect class="mk" x="557.5" y="282.0" width="11" height="11"/><text class="lab" text-anchor="end" x="563.0" y="287.5" data-en="Daiboo River Camp">大保川キャンプ場</text></g>
-<g class="pin p-camp"><circle class="hit" cx="579.3" cy="313.6" r="22"/><circle class="ring" cx="579.3" cy="313.6" r="17"/><rect class="mk" x="573.8" y="308.1" width="11" height="11"/><text class="lab" text-anchor="end" x="579.3" y="313.6" data-en="Fukuchi River Seaside Park">福地川海浜公園</text></g>
-<g class="pin p-camp"><circle class="hit" cx="593.6" cy="176.7" r="22"/><circle class="ring" cx="593.6" cy="176.7" r="17"/><rect class="mk" x="588.1" y="171.2" width="11" height="11"/><text class="lab" text-anchor="end" x="593.6" y="176.7" data-en="Kokyono Beach">コキョウノビーチ</text></g>
-<g class="pin p-camp"><circle class="hit" cx="607.3" cy="171.9" r="22"/><circle class="ring" cx="607.3" cy="171.9" r="17"/><rect class="mk" x="601.8" y="166.4" width="11" height="11"/><text class="lab" text-anchor="end" x="607.3" y="171.9" data-en="Hentona Camp Spot">辺土名の野営地</text></g>
-<g class="pin p-camp"><circle class="hit" cx="613.2" cy="196.9" r="22"/><circle class="ring" cx="613.2" cy="196.9" r="17"/><rect class="mk" x="607.7" y="191.4" width="11" height="11"/><text class="lab" text-anchor="end" x="613.2" y="196.9" data-en="Okuma Mountains">奥間の山あい</text></g>
-<g class="pin p-camp"><circle class="hit" cx="657.6" cy="114.9" r="22"/><circle class="ring" cx="657.6" cy="114.9" r="17"/><rect class="mk" x="652.1" y="109.4" width="11" height="11"/><text class="lab" text-anchor="end" x="657.6" y="114.9" data-en="Benoki Camp Spot">辺野喜の野営地</text></g>
-<g class="pin p-camp"><circle class="hit" cx="692.6" cy="204.2" r="22"/><circle class="ring" cx="692.6" cy="204.2" r="17"/><rect class="mk" x="687.1" y="198.7" width="11" height="11"/><text class="lab" text-anchor="end" x="692.6" y="204.2" data-en="Yanbaru Discovery Forest">やんばる学びの森</text></g>
-<g class="pin p-camp"><circle class="hit" cx="723.5" cy="213.2" r="22"/><circle class="ring" cx="723.5" cy="213.2" r="17"/><rect class="mk" x="718.0" y="207.7" width="11" height="11"/><text class="lab" text-anchor="end" x="723.5" y="213.2" data-en="Aha, Yanbaru">安波（やんばる）</text></g>
-<g class="pin p-camp"><circle class="hit" cx="714.7" cy="58.1" r="22"/><circle class="ring" cx="714.7" cy="58.1" r="17"/><rect class="mk" x="709.2" y="52.6" width="11" height="11"/><text class="lab" text-anchor="end" x="714.7" y="58.1" data-en="Oku Beach Road">奥のビーチロード</text></g>
-<g class="pin p-camp"><circle class="hit" cx="744.3" cy="88.1" r="22"/><circle class="ring" cx="744.3" cy="88.1" r="17"/><rect class="mk" x="738.8" y="82.6" width="11" height="11"/><text class="lab" text-anchor="end" x="744.3" y="88.1" data-en="Adan Beach Campsite">アダンビーチ キャンプ場</text></g>
-
-<g class="pin p-nature"><circle class="hit" cx="609.1" cy="219.6" r="22"/><circle class="ring" cx="609.1" cy="219.6" r="17"/><path class="mk" d="M609.1 212.6L615.5 224.1L602.7 224.1Z"/><text class="lab" text-anchor="end" x="609.1" y="219.6" data-en="Hiji Falls">比地大滝</text></g>
-<g class="pin p-nature"><circle class="hit" cx="509.1" cy="313.9" r="22"/><circle class="ring" cx="509.1" cy="313.9" r="17"/><path class="mk" d="M509.1 306.9L515.5 318.4L502.7 318.4Z"/><text class="lab" text-anchor="end" x="509.1" y="313.9" data-en="Ta Falls">ター滝</text></g>
-<g class="pin p-nature"><circle class="hit" cx="676.4" cy="48.4" r="22"/><circle class="ring" cx="676.4" cy="48.4" r="17"/><path class="mk" d="M676.4 41.4L682.8 52.9L670.0 52.9Z"/><text class="lab" text-anchor="end" x="676.4" y="48.4" data-en="Kayauchi Banta">茅打バンタ</text></g>
-<g class="pin p-nature"><circle class="hit" cx="693.3" cy="27.4" r="22"/><circle class="ring" cx="693.3" cy="27.4" r="17"/><path class="mk" d="M693.3 20.4L699.7 31.9L686.9 31.9Z"/><text class="lab" text-anchor="end" x="693.3" y="27.4" data-en="Cape Hedo">辺戸岬</text></g>
-<g class="pin p-nature"><circle class="hit" cx="284.9" cy="307.1" r="22"/><circle class="ring" cx="284.9" cy="307.1" r="17"/><path class="mk" d="M284.9 300.1L291.3 311.6L278.5 311.6Z"/><text class="lab" x="284.9" y="307.1" data-en="Gorilla Chop">ゴリラチョップ</text></g>
-<g class="pin p-nature"><circle class="hit" cx="564.6" cy="346.4" r="22"/><circle class="ring" cx="564.6" cy="346.4" r="17"/><path class="mk" d="M564.6 339.4L571.0 350.9L558.2 350.9Z"/><text class="lab" text-anchor="end" x="564.6" y="346.4" data-en="Yagaji mangroves">ふれあいヒルギ公園</text></g>
-<g class="pin p-nature"><circle class="hit" cx="281.5" cy="462.2" r="22"/><circle class="ring" cx="281.5" cy="462.2" r="17"/><path class="mk" d="M281.5 455.2L287.9 466.7L275.1 466.7Z"/><text class="lab" x="281.5" y="462.2" data-en="Diamond Beach">ダイヤモンドビーチ</text></g>
-<g class="pin p-nature"><circle class="hit" cx="429.6" cy="223.5" r="22"/><circle class="ring" cx="429.6" cy="223.5" r="17"/><path class="mk" d="M429.6 216.5L436.0 228.0L423.2 228.0Z"/><text class="lab" text-anchor="end" x="429.6" y="223.5" data-en="Kouri Island">古宇利島</text></g>
-<g class="pin p-nature"><circle class="hit" cx="282.6" cy="230.3" r="22"/><circle class="ring" cx="282.6" cy="230.3" r="17"/><path class="mk" d="M282.6 223.3L289.0 234.8L276.2 234.8Z"/><text class="lab" x="282.6" y="230.3" data-en="Bise Fukugi tree road">備瀬のフクギ並木</text></g>
-
-<g class="pin p-food"><circle class="hit" cx="299.3" cy="279.0" r="22"/><circle class="ring" cx="299.3" cy="279.0" r="17"/><rect class="mk" x="-5" y="-5" width="10" height="10" transform="translate(299.3 279.0) rotate(45)"/><text class="lab" x="299.3" y="279.0" data-en="Aragaki Zenzai">新垣ぜんざい屋</text></g>
-<g class="pin p-food"><circle class="hit" cx="299.3" cy="279.4" r="22"/><circle class="ring" cx="299.3" cy="279.4" r="17"/><rect class="mk" x="-5" y="-5" width="10" height="10" transform="translate(299.3 279.4) rotate(45)"/><text class="lab" x="299.3" y="279.4" data-en="Kishimoto Shokudo">きしもと食堂</text></g>
-<g class="pin p-food"><circle class="hit" cx="398.2" cy="364.5" r="22"/><circle class="ring" cx="398.2" cy="364.5" r="17"/><rect class="mk" x="-5" y="-5" width="10" height="10" transform="translate(398.2 364.5) rotate(45)"/><text class="lab" text-anchor="end" x="398.2" y="364.5" data-en="Higashi Shokudo">ひがし食堂</text></g>
-<g class="pin p-food"><circle class="hit" cx="378.3" cy="408.3" r="22"/><circle class="ring" cx="378.3" cy="408.3" r="17"/><rect class="mk" x="-5" y="-5" width="10" height="10" transform="translate(378.3 408.3) rotate(45)"/><text class="lab" text-anchor="end" x="378.3" y="408.3" data-en="Mitsuya, Kyoda">三矢 道の駅許田店</text></g>
-<g class="pin p-food"><circle class="hit" cx="191.5" cy="546.1" r="22"/><circle class="ring" cx="191.5" cy="546.1" r="17"/><rect class="mk" x="-5" y="-5" width="10" height="10" transform="translate(191.5 546.1) rotate(45)"/><text class="lab" x="191.5" y="546.1" data-en="Ryupin, Onna">琉冰 おんなの駅</text></g>
-<g class="pin p-food"><circle class="hit" cx="135.6" cy="581.9" r="22"/><circle class="ring" cx="135.6" cy="581.9" r="17"/><rect class="mk" x="-5" y="-5" width="10" height="10" transform="translate(135.6 581.9) rotate(45)"/><text class="lab" x="135.6" y="581.9" data-en="Tsurukamedo">鶴亀堂ぜんざい</text></g>
-<g class="pin p-food"><circle class="hit" cx="145.7" cy="675.6" r="22"/><circle class="ring" cx="145.7" cy="675.6" r="17"/><rect class="mk" x="-5" y="-5" width="10" height="10" transform="translate(145.7 675.6) rotate(45)"/><text class="lab" x="145.7" y="675.6" data-en="Kori wo Kizame">氷ヲ刻メ</text></g>
-<g class="pin p-food"><circle class="hit" cx="304.6" cy="269.5" r="22"/><circle class="ring" cx="304.6" cy="269.5" r="17"/><rect class="mk" x="-5" y="-5" width="10" height="10" transform="translate(304.6 269.5) rotate(45)"/><text class="lab" x="304.6" y="269.5" data-en="Kajinho">花人逢</text></g>
-<g class="pin p-food"><circle class="hit" cx="282.3" cy="229.6" r="22"/><circle class="ring" cx="282.3" cy="229.6" r="17"/><rect class="mk" x="-5" y="-5" width="10" height="10" transform="translate(282.3 229.6) rotate(45)"/><text class="lab" x="282.3" y="229.6" data-en="Cafe Cahaya Bulan">cafe CAHAYA BULAN</text></g>
-<g class="pin p-food"><circle class="hit" cx="304.1" cy="271.3" r="22"/><circle class="ring" cx="304.1" cy="271.3" r="17"/><rect class="mk" x="-5" y="-5" width="10" height="10" transform="translate(304.1 271.3) rotate(45)"/><text class="lab" x="304.1" y="271.3" data-en="Anettai Chaya">亜熱帯茶屋</text></g>
-<g class="pin p-food"><circle class="hit" cx="105.5" cy="568.2" r="22"/><circle class="ring" cx="105.5" cy="568.2" r="17"/><rect class="mk" x="-5" y="-5" width="10" height="10" transform="translate(105.5 568.2) rotate(45)"/><text class="lab" x="105.5" y="568.2" data-en="Banta Cafe">バンタカフェ</text></g>
-
-</g>
-<g class="stops">
-<g class="pin stop d1" data-day="1" data-i="0" data-min="535"><circle class="hit" cx="36.2" cy="831.3" r="24"/><circle class="ring" cx="36.2" cy="831.3" r="20"/><circle class="mk" cx="36.2" cy="831.3" r="11"/><text class="lab" x="36.2" y="831.3" data-en="Naha Airport">那覇空港</text></g>
-<g class="pin stop d1" data-day="1" data-i="1" data-min="645"><circle class="hit" cx="218.9" cy="619.3" r="24"/><circle class="ring" cx="218.9" cy="619.3" r="20"/><circle class="mk" cx="218.9" cy="619.3" r="11"/><text class="lab" x="218.9" y="619.3" data-en="Okinawa Kita IC">沖縄北IC</text></g>
-<g class="pin stop d1" data-day="1" data-i="2" data-min="660"><circle class="hit" cx="225.3" cy="612.5" r="24"/><circle class="ring" cx="225.3" cy="612.5" r="20"/><circle class="mk" cx="225.3" cy="612.5" r="11"/><text class="lab" x="225.3" y="612.5" data-en="Evertrail office">Evertrail営業所</text></g>
-<g class="pin stop d1" data-day="1" data-i="3" data-min="715"><circle class="hit" cx="322.1" cy="525.9" r="24"/><circle class="ring" cx="322.1" cy="525.9" r="20"/><circle class="mk" cx="322.1" cy="525.9" r="11"/><text class="lab" x="322.1" y="525.9" data-en="King Tacos, Kin">キングタコス金武</text></g>
-<g class="pin stop d1" data-day="1" data-i="4" data-min="785"><circle class="hit" cx="250.7" cy="464.3" r="24"/><circle class="ring" cx="250.7" cy="464.3" r="20"/><circle class="mk" cx="250.7" cy="464.3" r="11"/><text class="lab" x="250.7" y="464.3" data-en="Cape Manzamo">万座毛</text></g>
-<g class="pin stop d1" data-day="1" data-i="5" data-min="885"><circle class="hit" cx="467.7" cy="341.5" r="24"/><circle class="ring" cx="467.7" cy="341.5" r="20"/><circle class="mk" cx="467.7" cy="341.5" r="11"/><text class="lab" text-anchor="end" x="467.7" y="341.5" data-en="Hunga Falls">フンガー滝</text></g>
-<g class="pin stop d1" data-day="1" data-i="6" data-min="965"><circle class="hit" cx="388.3" cy="342.9" r="24"/><circle class="ring" cx="388.3" cy="342.9" r="20"/><circle class="mk" cx="388.3" cy="342.9" r="11"/><text class="lab" text-anchor="end" x="388.3" y="342.9" data-en="Nago groceries">名護 買い出し</text></g>
-<g class="pin stop d1" data-day="1" data-i="7" data-min="1010"><circle class="hit" cx="446.2" cy="293.8" r="24"/><circle class="ring" cx="446.2" cy="293.8" r="20"/><circle class="mk" cx="446.2" cy="293.8" r="11"/><text class="lab" text-anchor="end" x="446.2" y="293.8" data-en="Camp, Yagaji">キャンプ 屋我地</text></g>
-<g class="pin stop d2" data-day="2" data-i="0" data-min="385"><circle class="hit" cx="446.2" cy="293.8" r="24"/><circle class="ring" cx="446.2" cy="293.8" r="20"/><circle class="mk" cx="446.2" cy="293.8" r="11"/><text class="lab" text-anchor="end" x="446.2" y="293.8" data-en="Camp, Yagaji">キャンプ 屋我地</text></g>
-<g class="pin stop d2" data-day="2" data-i="1" data-min="480"><circle class="hit" cx="264.3" cy="301.2" r="24"/><circle class="ring" cx="264.3" cy="301.2" r="20"/><circle class="mk" cx="264.3" cy="301.2" r="11"/><text class="lab" x="264.3" y="301.2" data-en="Dive Nuts, Sesoko">DIVENUTS 瀬底</text></g>
-<g class="pin stop d2" data-day="2" data-i="2" data-min="540"><circle class="hit" cx="216.2" cy="294.4" r="24"/><circle class="ring" cx="216.2" cy="294.4" r="20"/><circle class="mk" cx="216.2" cy="294.4" r="11"/><text class="lab" x="216.2" y="294.4" data-en="Minna Island, snorkel">水納島 シュノーケル</text></g>
-<g class="pin stop d2" data-day="2" data-i="3" data-min="790"><circle class="hit" cx="371.6" cy="326.2" r="24"/><circle class="ring" cx="371.6" cy="326.2" r="20"/><circle class="mk" cx="371.6" cy="326.2" r="11"/><text class="lab" text-anchor="end" x="371.6" y="326.2" data-en="Ufuya">百年古家 大家</text></g>
-<g class="pin stop d2" data-day="2" data-i="4" data-min="870"><circle class="hit" cx="381.8" cy="344.9" r="24"/><circle class="ring" cx="381.8" cy="344.9" r="20"/><circle class="mk" cx="381.8" cy="344.9" r="11"/><text class="lab" text-anchor="end" x="381.8" y="344.9" data-en="Okinawa Milk Farm Cafe">みるくふぁーむカフェ</text></g>
-<g class="pin stop d2" data-day="2" data-i="5" data-min="930"><circle class="hit" cx="388.3" cy="342.9" r="24"/><circle class="ring" cx="388.3" cy="342.9" r="20"/><circle class="mk" cx="388.3" cy="342.9" r="11"/><text class="lab" text-anchor="end" x="388.3" y="342.9" data-en="Nago groceries">名護 買い出し</text></g>
-<g class="pin stop d2" data-day="2" data-i="6" data-min="980"><circle class="hit" cx="446.2" cy="293.8" r="24"/><circle class="ring" cx="446.2" cy="293.8" r="20"/><circle class="mk" cx="446.2" cy="293.8" r="11"/><text class="lab" text-anchor="end" x="446.2" y="293.8" data-en="Camp, Yagaji">キャンプ 屋我地</text></g>
-<g class="pin stop d3" data-day="3" data-i="0" data-min="450"><circle class="hit" cx="446.2" cy="293.8" r="24"/><circle class="ring" cx="446.2" cy="293.8" r="20"/><circle class="mk" cx="446.2" cy="293.8" r="11"/><text class="lab" text-anchor="end" x="446.2" y="293.8" data-en="Camp, Yagaji">キャンプ 屋我地</text></g>
-<g class="pin stop d3" data-day="3" data-i="1" data-min="555"><circle class="hit" cx="103.3" cy="541.1" r="24"/><circle class="ring" cx="103.3" cy="541.1" r="20"/><circle class="mk" cx="103.3" cy="541.1" r="11"/><text class="lab" x="103.3" y="541.1" data-en="Cape Zanpa">残波岬</text></g>
-<g class="pin stop d3" data-day="3" data-i="2" data-min="615"><circle class="hit" cx="126.7" cy="559.9" r="24"/><circle class="ring" cx="126.7" cy="559.9" r="20"/><circle class="mk" cx="126.7" cy="559.9" r="11"/><text class="lab" x="126.7" y="559.9" data-en="Senaha Beach">瀬名波ビーチ</text></g>
-<g class="pin stop d3" data-day="3" data-i="3" data-min="660"><circle class="hit" cx="105.5" cy="568.2" r="24"/><circle class="ring" cx="105.5" cy="568.2" r="20"/><circle class="mk" cx="105.5" cy="568.2" r="11"/><text class="lab" x="105.5" y="568.2" data-en="Banta Cafe">バンタカフェ</text></g>
-<g class="pin stop d3" data-day="3" data-i="4" data-min="830"><circle class="hit" cx="52.8" cy="969.8" r="24"/><circle class="ring" cx="52.8" cy="969.8" r="20"/><circle class="mk" cx="52.8" cy="969.8" r="11"/><text class="lab" x="52.8" y="969.8" data-en="Gushikawa tide pool">具志川城跡 秘境プール</text></g>
-<g class="pin stop d3" data-day="3" data-i="5" data-min="1005"><circle class="hit" cx="225.3" cy="612.5" r="24"/><circle class="ring" cx="225.3" cy="612.5" r="20"/><circle class="mk" cx="225.3" cy="612.5" r="11"/><text class="lab" x="225.3" y="612.5" data-en="Evertrail office, car back">Evertrail営業所 返却</text></g>
-<g class="pin stop d3" data-day="3" data-i="6" data-min="1025"><circle class="hit" cx="218.9" cy="619.3" r="24"/><circle class="ring" cx="218.9" cy="619.3" r="20"/><circle class="mk" cx="218.9" cy="619.3" r="11"/><text class="lab" x="218.9" y="619.3" data-en="Okinawa Kita IC">沖縄北IC</text></g>
-<g class="pin stop d3" data-day="3" data-i="7" data-min="1105"><circle class="hit" cx="36.2" cy="831.3" r="24"/><circle class="ring" cx="36.2" cy="831.3" r="20"/><circle class="mk" cx="36.2" cy="831.3" r="11"/><text class="lab" x="36.2" y="831.3" data-en="Naha Airport">那覇空港</text></g>
-</g>
-</svg></div>
     </div>
     <div class="group stopcard">
 <ul class="tl stoplist d1" data-day="1">
@@ -1455,7 +1481,6 @@ var LS={
         <li data-i="7" data-min="1105" tabindex="0" role="button"><span class="time">18:25</span><span class="dot"></span><span class="txt" data-en="Naha Airport">那覇空港</span></li>
       </ul>
     </div>
-    <div class="footer" data-en="Road routes from OSRM, coastline from OpenStreetMap">ルートはOSRM、海岸線はOpenStreetMap</div>
   </section>
 
   <section class="view v-camps">
@@ -1990,9 +2015,6 @@ var LS={
 
   <section class="view v-packing">
     <h2 class="section"><svg class="ic" aria-hidden="true"><use href="#i-backpack"/></svg><span data-en="Packing">持ち物</span></h2>
-    <p class="intro" data-en="One backpack each. Bedding and the BBQ set come with the rental, so this is what we carry plus
-      what we buy on landing. Tap a row to check it off, or <strong>Edit list</strong> to change it.">ひとりバックパック1つ。寝具とバーベキューセットはレンタルに付いてくるので、ここにあるのは持参する物と
-      現地で買う物だけ。行をタップするとチェックが付き、<strong>リスト編集</strong>で内容を変えられます。</p>
     <div class="toolbar jsonly">
       <button class="btn-sm pack-edit"  type="button"><svg class="ic" aria-hidden="true"><use href="#i-pencil"/></svg><span data-en="Edit list">リスト編集</span></button>
       <div class="spacer"></div>
@@ -2084,17 +2106,6 @@ var LS={
       </div>
     </header>
 
-    <div class="toolbar">
-      <div class="seg unit-toggle jsonly" role="group" aria-label="Units">
-        <button type="button" data-unit="metric" class="active">KM</button>
-        <button type="button" data-unit="imperial">MI</button>
-      </div>
-      <div class="spacer"></div>
-      <button class="btn-sm jsonly expand-all"  type="button">
-        <svg class="ic" aria-hidden="true"><use href="#i-chevrons-up-down"/></svg>
-        <span>Expand all</span>
-      </button>
-    </div>
 
     <div class="spine days">
 
@@ -2597,7 +2608,6 @@ var LS={
 
   <section class="view v-packing">
     <h2 class="section"><svg class="ic" aria-hidden="true"><use href="#i-backpack"/></svg>Packing</h2>
-    <p class="intro">Tap a row to check it off. Tap <strong>Edit list</strong> to add, rename, reorder, or remove items and categories. Everything saves on your phone (in Safari).</p>
     <div class="toolbar jsonly">
       <button class="btn-sm pack-edit"  type="button"><svg class="ic" aria-hidden="true"><use href="#i-pencil"/></svg><span>Edit list</span></button>
       <div class="spacer"></div>
@@ -2665,17 +2675,6 @@ var LS={
       </div>
     </header>
 
-    <div class="toolbar">
-      <div class="seg unit-toggle jsonly" role="group" aria-label="Units">
-        <button type="button" data-unit="metric" class="active">KM</button>
-        <button type="button" data-unit="imperial">MI</button>
-      </div>
-      <div class="spacer"></div>
-      <button class="btn-sm jsonly expand-all" type="button">
-        <svg class="ic" aria-hidden="true"><use href="#i-chevrons-up-down"/></svg>
-        <span>Expand all</span>
-      </button>
-    </div>
 
     <div class="spine days">
       <details class="card day" open>
@@ -2700,7 +2699,7 @@ var LS={
         </div>
       </details>
 
-      <details class="card day">
+      <details class="card day" open>
         <summary class="head">
           <span class="node"></span>
           <div class="lead-chip"><div class="d">12</div><div class="m">FEB</div><div class="wd">Fri</div></div>
@@ -2722,7 +2721,7 @@ var LS={
         </div>
       </details>
 
-      <details class="card day">
+      <details class="card day" open>
         <summary class="head">
           <span class="node"></span>
           <div class="lead-chip"><div class="d">13</div><div class="m">FEB</div><div class="wd">Sat</div></div>
@@ -2743,7 +2742,7 @@ var LS={
         </div>
       </details>
 
-      <details class="card day">
+      <details class="card day" open>
         <summary class="head">
           <span class="node"></span>
           <div class="lead-chip"><div class="d">14</div><div class="m">FEB</div><div class="wd">Sun</div></div>
@@ -2768,7 +2767,7 @@ var LS={
         </div>
       </details>
 
-      <details class="card day">
+      <details class="card day" open>
         <summary class="head">
           <span class="node"></span>
           <div class="lead-chip"><div class="d">15</div><div class="m">FEB</div><div class="wd">Mon</div></div>
@@ -2789,7 +2788,7 @@ var LS={
         </div>
       </details>
 
-      <details class="card day">
+      <details class="card day" open>
         <summary class="head">
           <span class="node"></span>
           <div class="lead-chip"><div class="d">16</div><div class="m">FEB</div><div class="wd">Tue</div></div>
@@ -2907,15 +2906,6 @@ var LS={
   </section>
 
   <section class="view v-map" data-fit>
-    <h2 class="section"><svg class="ic" aria-hidden="true"><use href="#i-map"/></svg><span>Map</span></h2>
-    <div class="filters jsonly map-days" role="group" aria-label="Show one day">
-      <button type="button" data-day="1" class="active" aria-pressed="true">Day 1</button>
-      <button type="button" data-day="2" aria-pressed="false">Day 2</button>
-      <button type="button" data-day="3" aria-pressed="false">Day 3</button>
-      <button type="button" data-day="4" aria-pressed="false">Day 4</button>
-      <button type="button" data-day="5" aria-pressed="false">Day 5</button>
-      <button type="button" data-day="6" aria-pressed="false">Day 6</button>
-    </div>
     <div class="mapstick">
     <div class="mapcard">
       <div class="mapzoom jsonly">
@@ -3072,6 +3062,15 @@ var LS={
 </g>
 </svg>
     </div></div>
+    <div class="filters jsonly map-days" role="group" aria-label="Show one day">
+      <button type="button" data-day="1" class="active" aria-pressed="true"><span class="sw d1"></span>Day 1</button>
+      <button type="button" data-day="2" aria-pressed="false"><span class="sw d2"></span>Day 2</button>
+      <button type="button" data-day="3" aria-pressed="false"><span class="sw d3"></span>Day 3</button>
+      <button type="button" data-day="4" aria-pressed="false"><span class="sw d4"></span>Day 4</button>
+      <button type="button" data-day="5" aria-pressed="false"><span class="sw d5"></span>Day 5</button>
+      <button type="button" data-day="6" aria-pressed="false"><span class="sw d6"></span>Day 6</button>
+      <button type="button" data-day="all" aria-pressed="false">All 6 days</button>
+    </div>
     <div class="card stopcard">
       <ul class="tl stoplist d1" data-day="1">
         <li data-i="0" data-min="540" tabindex="0" role="button"><span class="time">09:00</span><span class="dot"></span><span class="txt">Auckland Airport</span></li>
@@ -3124,13 +3123,10 @@ var LS={
         <li data-i="5" data-min="1065" tabindex="0" role="button"><span class="time">17:45</span><span class="dot"></span><span class="txt">Auckland Airport</span></li>
       </ul>
     </div>
-    <div class="footer">Road routes from OSRM, coastline from OpenStreetMap</div>
   </section>
 
   <section class="view v-packing">
     <h2 class="section"><svg class="ic" aria-hidden="true"><use href="#i-backpack"/></svg><span>Packing</span></h2>
-    <p class="intro">One bag each, as usual. Everything here either has to clear biosecurity, fit a Type I socket, or
-      keep us warm above the bushline. Tap a row to check it off, or <strong>Edit list</strong> to change it.</p>
     <div class="toolbar jsonly">
       <button class="btn-sm pack-edit" type="button"><svg class="ic" aria-hidden="true"><use href="#i-pencil"/></svg><span>Edit list</span></button>
       <div class="spacer"></div>
@@ -3213,8 +3209,6 @@ var LS={
 /* UI strings JS sets at runtime. Static markup is translated via data-en — see language(). */
 var T=(function(){
   var S={
-    expandAll:['Expand all','すべて開く'],
-    collapseAll:['Collapse all','すべて閉じる'],
     editList:['Edit list','リスト編集'],
     done:['Done','完了'],
     addItem:['Add item','項目を追加'],
@@ -3289,6 +3283,11 @@ var T=(function(){
     history.pushState({place:book.dataset.guide},'');
     open(book.dataset.guide,book);
   });
+  var setBtn=document.querySelector('.setbtn'), panel=document.getElementById('settings');
+  if(setBtn) setBtn.addEventListener('click',function(){
+    panel.hidden=!panel.hidden;
+    setBtn.setAttribute('aria-expanded',String(!panel.hidden));
+  });
   document.querySelectorAll('.backbtn').forEach(function(b){
     b.addEventListener('click',function(){history.back();});
   });
@@ -3307,14 +3306,13 @@ var T=(function(){
   document.querySelectorAll('.guide').forEach(function(g){
     /* Every string JS sets reads the guide's current language at call time. */
     var t=function(k,a){return T(k,g.dataset.lang,a);};
-    language(g); expandAll(g,t); today(g); tabScroll(g); campFilter(g); packing(g,t); map(g);
+    language(g); today(g); tabScroll(g); campFilter(g); packing(g,t); map(g);
   });
 
   /* LANGUAGE — Japanese is the markup; data-en holds the English, data-ja caches the Japanese.
      The packing list renders from its own bilingual model, so it is skipped. */
   function language(g){
     if(!g.hasAttribute('data-bilingual')) return;
-    var toggle=g.querySelector('.lang-toggle'); if(!toggle) return;
     function nodes(){
       return Array.prototype.filter.call(g.querySelectorAll('[data-en]'),function(el){
         return !el.closest('.packlist');
@@ -3327,30 +3325,16 @@ var T=(function(){
         if(el.dataset.ja===undefined) el.dataset.ja=el.innerHTML;
         el.innerHTML=lang==='en'?el.dataset.en:el.dataset.ja;
       });
-      toggle.querySelectorAll('button').forEach(function(b){
+      document.querySelectorAll('.lang-toggle button').forEach(function(b){
         b.classList.toggle('active',b.dataset.lang===lang);
       });
       g.dispatchEvent(new CustomEvent('langchange',{bubbles:true,detail:lang}));
     }
-    toggle.addEventListener('click',function(e){
-      var b=e.target.closest('button'); if(!b) return;
+    document.addEventListener('click',function(e){
+      var b=e.target.closest('.lang-toggle button'); if(!b) return;
       LS.set('lang',b.dataset.lang); apply(b.dataset.lang);
     });
     if(LS.get('lang')==='en') apply('en');     /* Japanese is already in the markup */
-  }
-
-  /* Expand all / collapse all, itinerary cards only. */
-  function expandAll(g,t){
-    var btn=g.querySelector('.expand-all'); if(!btn) return;
-    var open=false;
-    function label(){var lb=btn.querySelector('span'); if(lb) lb.textContent=t(open?'collapseAll':'expandAll');}
-    btn.addEventListener('click',function(){
-      open=!open;
-      g.querySelectorAll('.v-itinerary details.card').forEach(function(d){d.open=open;});
-      label();
-    });
-    g.addEventListener('langchange',label);
-    label();
   }
 
   /* "Today" — light the matching date's spine node while the trip is running. */
@@ -3629,6 +3613,7 @@ var T=(function(){
     }
     /* Fit the view to one day's pins, which is how a city day and an island day share a frame. */
     function fitDay(d){
+      if(d==='all'){ box(base[0],base[1],base[2]); return; }
       var xs=[], ys=[];
       view.querySelectorAll('.stop.d'+d+' .mk').forEach(function(m){
         xs.push(+m.getAttribute('cx')); ys.push(+m.getAttribute('cy'));

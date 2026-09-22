@@ -22,10 +22,12 @@ three <ul class="tl stoplist"> blocks. Bump CACHE in sw.js afterwards.
 """
 import json, math
 
+# The lon window is widened past what the island needs so the frame comes out 692x824, the same
+# shape as the New Zealand map — both map cards then sit the same height on screen.
 LAT0,LAT1 = 26.055, 26.895
-LON0,LON1 = 127.615, 128.345
+LON0,LON1 = 127.586, 128.374
 K  = math.cos(math.radians((LAT0+LAT1)/2))
-H  = 1000.0
+H  = 824.0
 SC = H/(LAT1-LAT0)
 W  = round((LON1-LON0)*K*SC)
 def prj(lat,lon): return ((lon-LON0)*K*SC, (LAT1-lat)*SC)

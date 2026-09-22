@@ -24,9 +24,9 @@ Three books:
   to whichever day you pick. No tiles, no network.
 - **Campsites tab (Okinawa)** — 26 sites with photos, ordered by road time from the office where the
   car is collected, filterable by free / paid / beach / toilet / shower.
+- **Settings on the shelf** — metric ⇄ imperial and English ⇄ 日本語, applied to every book.
 - **Editable packing list** per book — add, rename, reorder and delete categories and items; saved on
   the device.
-- **Metric ⇄ imperial** everywhere, and **English ⇄ 日本語** in the Okinawa book; both choices persist.
 - Degrades gracefully: with JavaScript off (a plain file preview) every book still shows, stacked
   instead of tabbed.
 
