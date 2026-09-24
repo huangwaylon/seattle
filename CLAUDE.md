@@ -20,9 +20,10 @@ Live: https://huangwaylon.github.io/seattle/ — still named `seattle` from the 
 | File | Role |
 |------|------|
 | `index.html` | The entire app. **Source of truth — edit directly.** |
-| `images/okinawa-hero.jpg`, `mount-rainier.jpg`, `nz-hero.jpg` | The three book covers, which are also the heroes. |
+| `images/okinawa-hero.jpg`, `mount-rainier.jpg`, `nz-hero.jpg` | The three heroes. |
+| `images/covers/*.jpg` | The shelf's covers: 560×760 crops of the heroes, so the shelf decodes a fifth of the pixels it would otherwise. |
 | `images/camps/*`, `tidepool/*`, `dive/*`, `cafe/*` | Okinawa card photos, 720 px (`dive/boat.jpg` is 442). `*.webp` are Seattle's hikes. |
-| `sw.js` | Cache-first service worker, precaching the shell and every image. A new worker waits for the refresh banner (or a full app close). |
+| `sw.js` | Cache-first service worker: a versioned `SHELL` cache for the app, a fixed-name `media` cache for the photos. A new worker waits for the refresh banner (or a full app close). |
 | `manifest.webmanifest`, `icon-180.png`, `icon-512.png` | PWA manifest and icons. |
 | `.map/build.py`, `.map/nz.py` | Generators for the two maps. **Not shipped** — see "The maps". |
 | `.i18n/` | Translation tooling and source. **Not shipped** — see "The Japanese layer". |
@@ -39,8 +40,10 @@ Google Maps, Evertrail and trail maps — they open externally and fail graceful
   into `history`. The bootstrap does not know which books exist — a slug with no book is corrected
   to `shelf` by the navigation module, which does.
 - **Opening a book** zooms `#turner` (a fixed overlay holding the cover) from the book's rect to full
-  screen, then rotates its inner page off the spine. The zoom's scale is **uniform** and a `clip-path`
-  trims the overhang to the book's rect, because scaling a viewport-shaped overlay down to a
+  screen, then rotates its inner page off the spine. The shelf's small cover is the bottom layer and
+  the guide's hero goes over it as `--hero` only once `decode()` resolves, so no frame of the zoom
+  waits on a decode; the shelf's animations pause (`html.turning`) while it runs. The zoom's scale
+  is **uniform** and a `clip-path` trims the overhang to the book's rect, because scaling a viewport-shaped overlay down to a
   book-shaped one non-uniformly squeezed the photograph by half its width. One transition at a time,
   and a counter every navigation bumps lets a stale animation know not to finish. Reduced motion
   skips it.
@@ -95,7 +98,8 @@ Google Maps, Evertrail and trail maps — they open externally and fail graceful
   re-renders. **Edit list** renames, adds, deletes and reorders; blanks are pruned on exit. Saved per
   book as `localStorage['packingData:<slug>']` =
   `{v:2, cats:[{id,name,nameJa,icon,items:[{id,text,textJa,note,noteJa,done}]}]}`, and a saved model
-  wins over the seed, so editing the defaults only reaches a fresh install. Ids come from `uid()`,
+  wins over the seed. The seed itself is never saved — the first check or edit does that — so
+  editing the defaults reaches every phone that has not touched that list. Ids come from `uid()`,
   and the DOM id carries the book because two guides seed a millisecond apart. Typing coalesces its
   writes; leaving edit mode flushes them. Okinawa also reads the pre-shelf `packingData` key, so old
   phones keep their list.
@@ -157,7 +161,7 @@ day and pin shows. Shared conventions, in the CSS and in the one `map(g)` module
 - **Pins are not focusable** — the SVG is one `role="img"` named by its `<title>`, the stop rows are
   the keyboard path, and each pin carries a wide invisible `circle.hit` so a small dot stays hittable.
 - **Regenerating** either map writes `.html` fragments next to the generator; splice them over the
-  `<svg class="map">` and `<ul class="tl stoplist">` blocks, then bump `CACHE` in `sw.js`. Edit the
+  `<svg class="map">` and `<ul class="tl stoplist">` blocks, then bump `SHELL` in `sw.js`. Edit the
   place tables, never the generated coordinates. Each script documents its fetched inputs in its
   header; those are gitignored and come from an in-page `fetch()` in the chrome-devtools MCP, because
   `curl` and `WebFetch` reach neither Overpass nor OSRM from here. OSRM does answer that in-page
@@ -180,6 +184,10 @@ the island whole it stitches into a single closed ring, clipped to the frame. A 
 closed along the frame edge instead, and which way round is decided by testing known land and sea
 points, because OSM's winding is not to be trusted. Simplified to 0.16 user units (about 130 m) —
 far finer than the overview needs, because a day fit zooms to roughly 12×.
+
+Both emit paths as one absolute `M` and then relative `l` steps in whole tenths, each point rounded
+*before* differencing so the steps sum back to exactly the `%.1f` coordinates — half the bytes of
+absolute `L` commands for the same geometry.
 
 ## The Japanese layer
 
@@ -242,7 +250,10 @@ predate this tool and are keyed the same way but were built by hand; `strings-nz
 5. **A private home address never goes in the markup** — the Pages site is public. Name the suburb.
 6. **Every gap in a timeline must clear its drive** by the margin `TRIPS.md` records for that trip.
    Quote **per-leg** OSRM minutes, which is what the map draws.
-7. **Bump `CACHE` in `sw.js` after any change**, or installed phones keep serving the old copy.
+7. **Bump `SHELL` in `sw.js` after any change**, or installed phones keep serving the old copy.
+   Photos live in the `media` cache, whose name never changes, so a deploy does not re-send 5 MB of
+   pictures. The price is one rule: **never change a photo in place** — a changed photo gets a new
+   filename, and `PHOTOS` lists the new one. A photo that leaves the list leaves the cache.
 
 **Place links** — resolving and verifying a Google Maps link: see `TRIPS.md`.
 
@@ -266,7 +277,7 @@ with the `Co-Authored-By` trailer); Pages rebuilds in about a minute. Asset path
 the project site works under `/seattle/`.
 
 **On iPhone:** open the live URL in Safari on Wi-Fi, let it load, Share → Add to Home Screen, then
-open once from the icon while online. After a `CACHE` bump an installed app shows the refresh banner
+open once from the icon while online. After a `SHELL` bump an installed app shows the refresh banner
 on its next online launch. Installed PWAs escape Safari's 7-day storage cap — install a week or two
 ahead.
 

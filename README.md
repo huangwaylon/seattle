@@ -40,7 +40,7 @@ its own language and carries the other alongside.
 | File | Purpose |
 |------|---------|
 | `index.html` | The entire app — content + inline CSS + inline JS. |
-| `images/` | Book covers and card photos, all precached for offline use. |
+| `images/` | Heroes, shelf covers (`covers/`) and card photos, all precached for offline use. |
 | `sw.js` | Service worker — caches the app shell and every image. |
 | `manifest.webmanifest`, `icon-180.png`, `icon-512.png` | PWA manifest and icons. |
 | `.i18n/` | Translation tooling, glossary and Japanese. Not shipped — see CLAUDE.md. |
@@ -55,7 +55,7 @@ its own language and carries the other alongside.
 ## Editing
 
 `index.html` is the source of truth; itineraries, campsites and the packing seed rows are static HTML,
-so edit them directly. After any change, bump `CACHE` in `sw.js` so installed phones pick up the new
+so edit them directly. After any change, bump `SHELL` in `sw.js` so installed phones pick up the new
 version. If you edit a translated book, run `python3 .i18n/i18n.py check <guide>` — it names every
 string whose translation your edit orphaned. See `CLAUDE.md` for the architecture and conventions.
 

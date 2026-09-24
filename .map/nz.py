@@ -76,8 +76,24 @@ def dp(pts, tol):
     return [p for p, k in zip(pts, keep) if k]
 
 
-def path(pts, close=False):
-    return 'M' + 'L'.join('%.1f %.1f' % p for p in pts) + ('Z' if close else '')
+def num(t):
+    """Whole tenths as the shortest SVG number: 12 -> 1.2, -3 -> -.3, 40 -> 4."""
+    s = ('%.1f' % (t / 10.0)).rstrip('0').rstrip('.')
+    return s.replace('0.', '.', 1) if s.lstrip('-').startswith('0.') else s
+def path(pts,close=False):
+    """Absolute first point, then relative steps in whole tenths — rounding each point before
+    differencing, so the steps add back up to exactly the %.1f coordinates, with no drift.
+    That is about half the bytes of absolute L commands, for the same geometry."""
+    q=[(int(round(x*10)),int(round(y*10))) for x,y in pts]
+    out=['M'+num(q[0][0])+' '+num(q[0][1])]
+    steps=[]
+    for (x0,y0),(x1,y1) in zip(q,q[1:]):
+        steps+= [num(x1-x0), num(y1-y0)]
+    s=''
+    for v in steps:
+        s+= v if (not s or v[0]=='-') else ' '+v
+    if steps: out.append('l'+s)
+    return ''.join(out)+('Z' if close else '')
 
 
 def area(ring):

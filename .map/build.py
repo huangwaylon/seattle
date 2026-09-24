@@ -43,8 +43,24 @@ def dp(pts,tol):
             if d>md: mi,md=i,d
         return rec(a,mi)[:-1]+rec(mi,b) if md>tol else [pts[a],pts[b]]
     return rec(0,len(pts)-1)
+def num(t):
+    """Whole tenths as the shortest SVG number: 12 -> 1.2, -3 -> -.3, 40 -> 4."""
+    s = ('%.1f' % (t / 10.0)).rstrip('0').rstrip('.')
+    return s.replace('0.', '.', 1) if s.lstrip('-').startswith('0.') else s
 def path(pts,close=False):
-    return 'M'+'L'.join('%.1f %.1f'%p for p in pts)+('Z' if close else '')
+    """Absolute first point, then relative steps in whole tenths — rounding each point before
+    differencing, so the steps add back up to exactly the %.1f coordinates, with no drift.
+    That is about half the bytes of absolute L commands, for the same geometry."""
+    q=[(int(round(x*10)),int(round(y*10))) for x,y in pts]
+    out=['M'+num(q[0][0])+' '+num(q[0][1])]
+    steps=[]
+    for (x0,y0),(x1,y1) in zip(q,q[1:]):
+        steps+= [num(x1-x0), num(y1-y0)]
+    s=''
+    for v in steps:
+        s+= v if (not s or v[0]=='-') else ' '+v
+    if steps: out.append('l'+s)
+    return ''.join(out)+('Z' if close else '')
 
 # ---------------------------------------------------------------- land
 ways=json.load(open('.map/coast.json'))
@@ -213,9 +229,9 @@ def cand(items,cls,shape):
     return '\n'.join(g)+'\n'
 # Each candidate marker is drawn about its own origin and placed by a translate, so CSS can hold it
 # at a constant size on screen with one scale(1/--z) — a shape cannot do what `r` does for a circle.
-sq   =lambda x,y:'<g class="mk-at" transform="translate(%.1f %.1f)"><rect class="mk" x="-5.5" y="-5.5" width="11" height="11"/></g>'%(x,y)
-tri  =lambda x,y:'<g class="mk-at" transform="translate(%.1f %.1f)"><path class="mk" d="M0 -7L6.4 4.5L-6.4 4.5Z"/></g>'%(x,y)
-di   =lambda x,y:'<g class="mk-at" transform="translate(%.1f %.1f)"><rect class="mk turn45" x="-5" y="-5" width="10" height="10"/></g>'%(x,y)
+sq   =lambda x,y:'<g transform="translate(%.1f %.1f)"><rect class="mk" x="-5.5" y="-5.5" width="11" height="11"/></g>'%(x,y)
+tri  =lambda x,y:'<g transform="translate(%.1f %.1f)"><path class="mk" d="M0 -7L6.4 4.5L-6.4 4.5Z"/></g>'%(x,y)
+di   =lambda x,y:'<g transform="translate(%.1f %.1f)"><rect class="mk turn45" x="-5" y="-5" width="10" height="10"/></g>'%(x,y)
 out.append('<g class="cands">\n')
 out.append(cand(CAMPS,'p-camp',sq))
 out.append(cand(NATURE,'p-nature',tri))
