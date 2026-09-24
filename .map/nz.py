@@ -3,8 +3,8 @@
 routes and every pin. index.html stays the source of truth: this writes markup you paste into it,
 there is no build step at runtime.
 
-Days 1-4 all happen inside Auckland and days 5-6 cross the island, so the map is one frame that
-pinch-zooms (picking a day fits the view to that day's stops) rather than a set of fixed frames.
+Days 3-4 cross the island to Taranaki and back; the other four happen inside Auckland, so the
+map is one frame that pinch-zooms (picking a day fits the view to that day's stops) rather than a set of fixed frames.
 That is why the coastline is simplified far finer than the overview needs.
 
 The window stops at lat -40.45, just north of Cook Strait: the trip never goes further south, and
@@ -26,7 +26,7 @@ in-page fetch() in the chrome-devtools MCP:
 
 Then:  python3 .map/nz.py   ->  .map/nz.svg.html and .map/nz.lists.html
 and splice those into index.html, over the <svg class="map"> block and the six
-<ul class="tl stoplist"> blocks in the New Zealand guide. Bump CACHE in sw.js afterwards.
+<ul class="tl stoplist"> blocks in the New Zealand guide. Bump SHELL in sw.js afterwards.
 """
 import json, math
 
@@ -317,14 +317,17 @@ DAYS = {
      ('13:00', 'MIBO', 'MIBO', -36.86918, 174.76319),
      ('14:30', 'Outdoors Society', 'Outdoors Society', -36.87069, 174.76106),
      ('16:00',) + NL],
- 3: [('08:15',) + NL,
-     ('08:40', "Parnell Farmers' Market", 'パーネル・ファーマーズマーケット', -36.86331, 174.78006),
-     ('10:00', 'Domain Wintergardens', 'ドメイン・ウィンターガーデン', -36.86024, 174.77409),
-     ('11:45', 'Kauri Glen Reserve', 'カウリ・グレン保護区', -36.80625, 174.73482),
-     ('13:15', 'Daily Bread, Belmont', 'Daily Bread ベルモント店', -36.80381, 174.78347),
-     ('15:00', 'Takarunga / Mount Victoria', 'タカルンガ／マウント・ビクトリア', -36.82638, 174.79902),
-     ('17:30',) + NL],
- 4: [('08:30',) + NL,
+ 3: [('07:35',) + NL,
+     ('08:00', "Parnell Farmers' Market", 'パーネル・ファーマーズマーケット', -36.86331, 174.78006),
+     ('11:55', 'Waitomo Glowworm Caves', 'ワイトモ鍾乳洞', -38.26070, 175.10361),
+     ('16:10',) + NP],
+ 4: [('03:10',) + NP,
+     ('03:30',) + MANG,
+     ('06:30', 'Pouākai Tarns', 'ポウアカイ・ターン', -39.24930, 174.05300),
+     ('10:15',) + MANG,
+     ('10:35',) + NP,
+     ('18:00',) + NL],
+ 5: [('08:30',) + NL,
      ('09:00',) + FERR,
      ('10:15',) + MATI,
      ('10:45', 'Allpress Olive Groves', 'Allpress オリーブ農園', -36.80943, 175.06142),
@@ -333,22 +336,19 @@ DAYS = {
      ('16:30',) + FERR,
      ('17:30', 'Amano, Britomart', 'Amano ブリトマート店', -36.84441, 174.77046),
      ('19:45',) + NL],
- 5: [('07:00',) + NL,
-     ('09:45', 'Waitomo Glowworm Caves', 'ワイトモ鍾乳洞', -38.26070, 175.10361),
-     ('15:15',) + NP],
- 6: [('03:15',) + NP,
-     ('03:35',) + MANG,
-     ('06:35', 'Pouākai Tarns', 'ポウアカイ・ターン', -39.24930, 174.05300),
-     ('10:15',) + MANG,
-     ('10:35',) + NP,
-     ('17:45',) + AKL],
+ 6: [('09:15',) + NL,
+     ('09:45', 'Domain Wintergardens', 'ドメイン・ウィンターガーデン', -36.86024, 174.77409),
+     ('11:45', 'Kauri Glen Reserve', 'カウリ・グレン保護区', -36.80625, 174.73482),
+     ('13:15', 'Daily Bread, Belmont', 'Daily Bread ベルモント店', -36.80381, 174.78347),
+     ('15:00', 'Takarunga / Mount Victoria', 'タカルンガ／マウント・ビクトリア', -36.82638, 174.79902),
+     ('17:30',) + NL,
+     ('20:30',) + AKL],
 }
 # leg kinds by (day, destination index) — everything else is a driving route from OSRM
 KIND = {(1, 4): 'walk',
         (2, 2): 'walk', (2, 3): 'walk', (2, 4): 'walk', (2, 5): 'walk',
-        (3, 2): 'walk',
-        (4, 2): 'boat', (4, 6): 'boat', (4, 7): 'walk',
-        (6, 2): 'walk', (6, 3): 'walk'}
+        (4, 2): 'walk', (4, 3): 'walk',
+        (5, 2): 'boat', (5, 6): 'boat', (5, 7): 'walk'}
 
 
 # ---------------------------------------------------------------- output

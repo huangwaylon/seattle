@@ -108,20 +108,25 @@ Nine ferry-only outer-island sites are deliberately excluded.
 - **The base is the host mother's home in New Lynn, west Auckland.** The exact street address is
   deliberately **not** in `index.html` — the Pages site is public and it is someone else's home. The
   map pin and every "New Lynn" reference use the suburb centre (−36.90939, 174.68405).
-- **Days 1–4 are Auckland, days 5–6 are the drive south.** That split is why the map zooms: at island
-  scale the Auckland week is a 25 px blob, so picking a day fits the view to it.
-- **Taranaki and Taupō do not both fit into Feb 15–16.** The itinerary takes Taranaki (Waitomo caves,
+- **Taranaki is days 3–4 (Feb 13–14), in the middle, on purpose.** It was days 5–6, and that put a
+  03:10 climb and a 362 km drive on the day of the flight, with no slack for weather on the
+  mountain or a slow road. Days 1–2 and 5–6 are Auckland. Day 3 still starts at Parnell Farmers'
+  Market, because it is **Saturday-only** and Feb 13 is the trip's one Saturday; the Wintergardens
+  moved to day 6 with the North Shore. The split is why the map zooms: at island scale an Auckland
+  day is a 25 px blob, so picking a day fits the view to it.
+- **Taranaki and Taupō do not both fit into Feb 13–14.** The itinerary takes Taranaki (Waitomo caves,
   then sunrise at the Pouākai Tarns, which is the hero photo); the Taupō loop — Tīrau, Orakei Korako,
   Huka Falls — is listed in the "Not Scheduled Yet" card with its real drive times, as the
   alternative. Don't try to merge them.
-- **Sunrise at the tarns drives Day 6, and the climb is 2 h 45, not 2 h.** DOC gives the Mangorei
+- **Sunrise at the tarns drives Day 4, and the climb is 2 h 45, not 2 h.** DOC gives the Mangorei
   Track 2 h 30 to Pouākai Hut and the tarns sit past it, so the day is built backwards from a
-  **06:52** New Plymouth sunrise (Feb 16 2027, NOAA): leave 03:15, trailhead 03:35, climbing from
-  03:50, tarns 06:35. An 04:45 start reached them *after* the sun. The descent is allowed 2 h. Doing
+  **06:49** New Plymouth sunrise (Feb 14 2027, NOAA; sunset the evening before 20:28): leave 03:10,
+  trailhead 03:30, climbing from 03:45, tarns 06:30. An 04:45 start reached them *after* the sun. The descent is allowed 2 h. Doing
   it the other way round — sunset the evening before — means coming down by headlamp after a 5 h drive.
-- **Drive times are OSRM free-flow**, fetched per leg: AKL → New Lynn 20 km / 22 min, New Lynn →
-  Waitomo 197 km / 2 h 36, Waitomo → New Plymouth 181 km / 2 h 30, New Plymouth → AKL 349 km /
-  4 h 41. Auckland at peak adds 20–40 min, and Feb 16 arrives into Auckland at exactly that.
+- **Drive times are OSRM free-flow**, fetched per leg: AKL ↔ New Lynn 20 km / 22 min, Parnell →
+  Waitomo 193 km / 2 h 31, Waitomo → New Plymouth 181 km / 2 h 30, New Plymouth → New Lynn 362 km /
+  4 h 49, New Lynn → Wintergardens 14 km / 20 min. Auckland at peak adds 20–40 min; the Feb 14
+  return lands on a Sunday evening instead.
 - **Orakei Korako keeps the operator's own unmacronised spelling**, unlike every other Māori name in
   the book — it is the trading name. Don't "fix" it.
 - **Pouākai Tarns has no Google place.** The coordinate (−39.24930, 174.05300) is the centroid of the
@@ -135,9 +140,10 @@ Nine ferry-only outer-island sites are deliberately excluded.
 - **Still unverified:** the Waitomo tour times and price, the Waiheke ferry timetable, how to get
   around Waiheke without a car, the Mangorei Track's length and climb (DOC's figures — and whether
   the track is open), Parnell Farmers' Market hours, and the opening hours of every shop and cafe on
-  days 1–4. The One Tree Hill (182 m) and Mount Victoria (87 m) heights are the commonly published
+  the Auckland days — and now that Waiheke is a Monday and the Wintergardens a Tuesday, whether
+  Allpress, Batch and Amano open on a Monday. The One Tree Hill (182 m) and Mount Victoria (87 m) heights are the commonly published
   ones, not checked against LINZ.
-- **Still to book:** the rental car, the cave tour, a bed in New Plymouth for Feb 15, the ferry, and
+- **Still to book:** the rental car, the cave tour, a bed in New Plymouth for Feb 13, the ferry, and
   seats on both flights.
 - **Border facts worth keeping:** both passports need an **NZeTA** plus the visitor levy before
   boarding. Biosecurity is strict — no food, seeds, honey or plants, and hiking boots must be

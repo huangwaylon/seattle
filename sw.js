@@ -2,7 +2,7 @@
    name that never changes, so a deploy that only touched index.html does not send each phone 5 MB
    of pictures it already has. That rests on one rule: a photo is never changed in place — a changed
    photo gets a new filename, and the old one leaves the list below. */
-const SHELL = 'shell-v19';
+const SHELL = 'shell-v20';
 const MEDIA = 'media';
 /* icon-512 is not here: iOS installs from the 180 apple-touch-icon and never asks for it. */
 const APP = ['./', './index.html', './manifest.webmanifest', './icon-180.png'];
