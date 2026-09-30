@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """Generates the static inline-SVG map (#view-map in index.html) — the island, the road
-routes and all 70 pins. index.html stays the source of truth: this writes markup you paste
+routes and all 69 pins. index.html stays the source of truth: this writes markup you paste
 into it, there is no build step at runtime.
 
 It needs two fetched inputs next to it. Neither ships to the browser, and both come from an
@@ -99,11 +99,10 @@ DAYS={
     ('10:45','沖縄北IC','Okinawa Kita IC',26.37480,127.82040),
     ('11:00','Evertrail営業所','Evertrail office',26.38051,127.82639),
     ('11:55','キングタコス金武','King Tacos, Kin',26.45328,127.91728),
-    ('13:05','万座毛','Cape Manzamo',26.50501,127.85026),
-    ('14:20','みるくふぁーむカフェ','Okinawa Milk Farm Cafe',26.60526,127.97327),
-    ('15:25','フンガー滝','Hunga Falls',26.60810,128.05392),
-    ('16:35','名護 買い出し','Nago groceries',26.60700,127.97942),
-    ('17:15','キャンプ 屋我地','Camp, Yagaji',26.64820,128.03368)],
+    ('12:45','万座毛','Cape Manzamo',26.50501,127.85026),
+    ('13:50','みるくふぁーむカフェ','Okinawa Milk Farm Cafe',26.60526,127.97327),
+    ('14:20','名護 買い出し','Nago groceries',26.60700,127.97942),
+    ('15:00','キャンプ 屋我地','Camp, Yagaji',26.64820,128.03368)],
  2:[('06:25','キャンプ 屋我地','Camp, Yagaji',26.64820,128.03368),
     ('08:00','DIVENUTS 瀬底','Dive Nuts, Sesoko',26.64200,127.86300),
     ('09:00','水納島 シュノーケル','Minna Island, snorkel',26.64767,127.81791),

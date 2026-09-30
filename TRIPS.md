@@ -43,9 +43,8 @@ Cave were removed. Don't reintroduce them.
   it is the one fixed point in the week.
 - **Ufuya (百年古家 大家) and Okinawa Milk Farm Cafe are both required, so they are split across two
   days** — a soba lunch and a kakigori 80 minutes apart was too much food in one afternoon. The cafe
-  moved to **Day 1**, where it costs only 3 extra minutes of driving: Manzamo → cafe → Hunga Falls is
-  36 + 20 min against 53 min direct, because the cafe sits almost exactly on that line. Ufuya stays on
-  Day 2 as the meal after the boat.
+  is on **Day 1**, 1 min from the Nago MaxValu, so it runs straight into the grocery stop. Ufuya stays
+  on Day 2 as the meal after the boat.
 - **Day 3 runs west along the south coast**, because night 2 is in the south: Chinen Misaki Park
   (4 min from the campsite) → 浜辺の茶屋 at Mibaru → Odohama Beach → Cape Kyan → the Gushikawa tide
   pool, which is 3 min from Cape Kyan. The old west-coast trio (Cape Zanpa, Senaha Beach, Banta Cafe)
@@ -56,12 +55,9 @@ Cave were removed. Don't reintroduce them.
   Ryujin-no-yu came out because the car goes back to Okinawa City, 41 min *north* of it, before the
   office shuts at 18:00. Access to the pool was closed in 2020 with no published end date — check for
   a notice. Day 3 has no snorkelling.
-- **The Day 1 waterfall is フンガー滝**, 名護市真喜屋 (26.60810, 128.05392, FID
-  `0x34e4570022eb29ff:0xfbbd1edacdb1b196`). It has been wrongly called 福川の滝 and 普久川の滝: OSM
-  has a 普久川滝 node 400 m away with no Google place, and OSRM snaps both to the same road point, so
-  the drive times "confirm" either name. **Don't rename it without a Google place id.** It is not a
-  managed site — a local operator has publicly asked for the pin's removal, and there is no phone
-  signal further in.
+- **Day 1 reaches camp by 15:00**, so the BBQ starts at 17:00 and runs into the 18:05 sunset at Yagaji
+  (computed for the campsite; NAOJ's Naha table gives 18:07 the same day). フンガー滝 (Hunga Falls,
+  Makiya) came off the day to make that — don't put it back without moving the arrival.
 
 **Drive times** are OSRM free-flow, fetched per leg, and every gap in the itinerary clears its drive
 by **26 min or more** (the tightest is Odohama → Cape Kyan). Quote **per-leg** figures, which is what

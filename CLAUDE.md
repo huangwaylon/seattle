@@ -22,7 +22,7 @@ Live: https://huangwaylon.github.io/seattle/ — still named `seattle` from the 
 | `index.html` | The entire app. **Source of truth — edit directly.** |
 | `images/okinawa-hero.jpg`, `mount-rainier.jpg`, `nz-hero.jpg` | The three heroes. |
 | `images/covers/*.jpg` | The shelf's covers: 560×760 crops of the heroes, so the shelf decodes a fifth of the pixels it would otherwise. |
-| `images/camps/*`, `tidepool/*`, `dive/*`, `cafe/*` | Okinawa card photos, 720 px (`dive/boat.jpg` is 442). `*.webp` are Seattle's hikes. |
+| `images/camps/*`, `dive/*` | Okinawa card photos, 720 px (`dive/boat.jpg` is 442). `*.webp` are Seattle's hikes. |
 | `sw.js` | Cache-first service worker: a versioned `SHELL` cache for the app, a fixed-name `media` cache for the photos. A new worker waits for the refresh banner (or a full app close). |
 | `manifest.webmanifest`, `icon-180.png`, `icon-512.png` | PWA manifest and icons. |
 | `.map/build.py`, `.map/nz.py` | Generators for the two maps. **Not shipped** — see "The maps". |
@@ -171,7 +171,7 @@ day and pin shows. Shared conventions, in the CSS and in the one `map(g)` module
 Both project equirectangular with a `cos(lat)` correction, from OSM `natural=coastline` ways stitched
 end to end.
 
-`.map/build.py` — **Okinawa**: 70 pins over 3 days plus campsite / nature / food candidate layers,
+`.map/build.py` — **Okinawa**: 69 pins over 3 days plus campsite / nature / food candidate layers,
 told apart by shape (■ ▲ ◆). Window `lat 26.055–26.895 / lon 127.586–128.374`, keeping the 24 closed
 rings with area ≥ 18 px²; the lon window is wider than the island needs so the frame comes out
 692×824. Colour = day, from `--d1..--d3`.
