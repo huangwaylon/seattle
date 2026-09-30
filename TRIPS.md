@@ -48,7 +48,7 @@ Cave were removed. Don't reintroduce them.
   one fixed point in the week.
 - **Ufuya (百年古家 大家) and Okinawa Milk Farm Cafe are both required, so they are split across two
   days** — a soba lunch and a kakigori 80 minutes apart was too much food in one afternoon. The cafe
-  is on **Day 1**, 1 min from the Nago MaxValu, so it runs straight into the grocery stop. Ufuya stays
+  is on **Day 1**, 1 min from タウンプラザかねひで大宮市場 (07:00–23:00), so it runs straight into the grocery stop. Ufuya stays
   on Day 2 as the meal after the boat.
 - **Day 3 runs west along the south coast**, because night 2 is in the south: Chinen Misaki Park
   (4 min from the campsite) → 浜辺の茶屋 at Mibaru → Odohama Beach → Cape Kyan → the Gushikawa tide
