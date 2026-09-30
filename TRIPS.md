@@ -31,16 +31,21 @@ Cave were removed. Don't reintroduce them.
 
 **The three days, and why they are shaped that way.**
 
-- **Night 1 is Yagaji Beach Campsite** in the north; **night 2 is あざまサンサンビーチ (Azama Sun Sun
-  Beach) in Nanjo**, in the deep south — FID `0x34e571f35ecd6173:0x79be19cfdb7ae1e4`,
+- **Night 1 is 津波の浜 (Tsuha Beach), Ogimi** in the north — Google FID
+  `0x34e451fcff4be511:0xb14dc065a51cd933`, (26.65669, 128.09269), which is what the itinerary and
+  map use. Evertrail's "Tsuha Beach Camp Spot" (26.6615, 128.1015, by the michi-no-eki, in 宮城)
+  is ~1 km north-east of that pin and carries the 「1泊目」 chip as the nearest listing; confirm the
+  pitch with Evertrail. Wild camp — toilets, no showers.
+- **Night 2 is あざまサンサンビーチ (Azama Sun Sun Beach) in Nanjo**, in the deep south — FID `0x34e571f35ecd6173:0x79be19cfdb7ae1e4`,
   (26.17810, 127.82925), which OSM independently puts within 7 m. Paid, toilets, showers, six BBQ
   pavilions, mown lawn, sunrise over Kudaka Island, 47 min from the office. Both campsites carry a
   「1泊目」/「2泊目」 chip in the campsite list, so it is obvious which two of the 26 are the plan.
-- **Day 2 is snorkelling and then the drive south.** Dive Nuts' ボートシュノーケル morning boat
-  (08:00 meet, 12:00 back at the port), ¥9,900 each at 2+ people for one drop and ¥2,750 for the
-  second — ¥25,300 for two doing both. Phone bookings are suspended: email or LINE only. The
-  no-fly-after-diving constraint does not apply to snorkelling. **Snorkelling stays on Day 2** —
-  it is the one fixed point in the week.
+- **Day 2 is two scuba dives and then the drive south.** Dive Nuts' ボート体験ダイビング＆
+  シュノーケルセット with the snorkel swapped for a second dive — 08:00 at the shop, done 13:00,
+  30–40 min under each. ¥17,000 each, ¥34,000 for two. Leave Tsuha by 06:50 — 44 min to the shop.
+  Phone bookings are suspended: email or LINE only. The flight home is ~32 h after the second dive, past
+  the usual 18 h after more than one dive. **The dive stays on Day 2** — it is the
+  one fixed point in the week.
 - **Ufuya (百年古家 大家) and Okinawa Milk Farm Cafe are both required, so they are split across two
   days** — a soba lunch and a kakigori 80 minutes apart was too much food in one afternoon. The cafe
   is on **Day 1**, 1 min from the Nago MaxValu, so it runs straight into the grocery stop. Ufuya stays
@@ -54,14 +59,15 @@ Cave were removed. Don't reintroduce them.
   Oct 12 2026's afternoon low at Naha is **14:53** (JMA), which is what the 13:50 arrival is built on.
   Ryujin-no-yu came out because the car goes back to Okinawa City, 41 min *north* of it, before the
   office shuts at 18:00. Access to the pool was closed in 2020 with no published end date — check for
-  a notice. Day 3 has no snorkelling.
-- **Day 1 reaches camp by 15:00**, so the BBQ starts at 17:00 and runs into the 18:05 sunset at Yagaji
-  (computed for the campsite; NAOJ's Naha table gives 18:07 the same day). フンガー滝 (Hunga Falls,
+  a notice. Day 3 has no diving.
+- **Day 1 reaches camp by 15:00**, so the BBQ starts at 17:00 and runs into the 18:05 sunset at Tsuha
+  (computed for the beach; NAOJ's Naha table gives 18:07 the same day). フンガー滝 (Hunga Falls,
   Makiya) came off the day to make that — don't put it back without moving the arrival.
 
 **Drive times** are OSRM free-flow, fetched per leg, and every gap in the itinerary clears its drive
-by **26 min or more** (the tightest is Odohama → Cape Kyan). Quote **per-leg** figures, which is what
-the map draws. The long one is Nago → Azama, 80.5 km / 89 min down the length of the island on the
+by **26 min or more** (several Day 1 and Day 2 gaps sit at exactly 26). Quote **per-leg** figures, which is what
+the map draws. The long one is Ufuya → タウンプラザかねひで佐敷店 (07:00–23:00, the Day 2 grocery stop),
+73.6 km / 81 min down the length of the island on the
 Sunday of a three-day weekend — the row says to add 20–40 min. Campsite-list times are free-flow too;
 Koki's coordinate snaps to the expressway, so its figure is unreliable.
 
